@@ -1,0 +1,272 @@
+<!-- ====== FORMULARIO DE CITAS ====== -->
+<section class="band band--pros" id="reservas" style="background:transparent;padding:40px 0">
+  <div class="container">
+    <div class="card" style="max-width:880px;margin:0 auto;background:#fff;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,.08);padding:24px">
+      <h3 style="margin:0 0 12px">Reserva tu cita</h3>
+      <p class="desc" style="margin:0 0 16px">Selecciona servicio, profesional y fecha. Te diremos si hay huecos.</p>
+
+      <form id="booking-form" class="booking-grid" onsubmit="event.preventDefault()">
+        <label class="field">
+          <span>Servicio</span>
+          <select id="serviceSelect" required></select>
+        </label>
+
+        <label class="field">
+          <span>Profesional</span>
+          <select id="proSelect" required></select>
+        </label>
+
+        <label class="field">
+          <span>Fecha</span>
+          <input type="date" id="dateInput" required min="">
+        </label>
+
+        <button class="cta" id="checkBtn" type="button">Comprobar disponibilidad</button>
+      </form>
+
+      <div id="availability" class="availability">
+        <p class="ghost">Elige opciones y pulsa “Comprobar disponibilidad”.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ===== Estilos mínimos del formulario ===== */
+  #reservas .booking-grid{
+    display:grid; gap:14px; grid-template-columns:1fr 1fr 1fr auto; align-items:end;
+  }
+  #reservas .field{ display:flex; flex-direction:column; gap:6px; }
+  #reservas .field > span{ font-weight:600; font-size:14px; color:#334155; }
+  #reservas select, #reservas input[type="date"]{
+    padding:10px 12px; border:1px solid #d1d5db; border-radius:12px; background:#fff; font:inherit;
+  }
+
+  /* Botón redondo principal */
+  #reservas .cta{
+    background:#8b5cf6;
+    color:#fff;
+    font-weight:600;
+    padding:12px 20px;
+    border:none;
+    border-radius:999px; /* redondeado total */
+    cursor:pointer;
+    transition:.25s;
+    white-space:nowrap;
+  }
+  #reservas .cta:hover{
+    background:#7c3aed;
+    box-shadow:0 4px 10px rgba(139,92,246,.3);
+  }
+
+  #reservas .availability{ margin-top:16px; }
+  #reservas .slots{ display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+  #reservas .slot{
+    padding:8px 12px; border:1px solid #e5e7eb; border-radius:999px; background:#f9fafb; cursor:pointer;
+  }
+  #reservas .slot:hover{ border-color:#d1d5db; background:#fff; }
+  #reservas .ok{ color:#065f46; background:#ecfdf5; border-color:#a7f3d0; }
+  #reservas .warn{ color:#92400e; background:#fffbeb; border-color:#fde68a; }
+
+  @media(max-width:860px){ 
+    #reservas .booking-grid{ grid-template-columns:1fr; }
+    #reservas .cta{ width:100%; justify-self:center; }
+  }
+</style>
+
+
+<script>
+    /* ========= Catálogo de servicios y mapeo a profesionales ========= */
+    const SERVICES = {
+        "Uñas": ["Regina"],
+        "Pedicura": ["Regina"],
+        "Pestañas": ["Regina", "Lola"],
+        "Cejas": ["Lola"],
+        "Tratamientos faciales": ["Lola"],
+        "Depilación": ["Lola"],
+        "Aparatología": ["Lola"],
+        "Masajes": ["Yerai"],
+        "Láser": ["Marina"],
+    };
+
+    /* ========= Agenda simulada ========= */
+    const WORKING_HOURS = {
+        "Regina": { start: "10:00", end: "18:00", stepMin: 30 },
+        "Lola": { start: "10:00", end: "18:00", stepMin: 30 },
+        "Yerai": { start: "10:00", end: "18:00", stepMin: 60 },
+        "Marina": { start: "11:00", end: "19:00", stepMin: 30 },
+    };
+
+    /* ====== Ejemplos de ocupación (puedes editar) ====== */
+    const BOOKED = {
+        "2025-09-20": { "Regina": ["10:00", "10:30", "12:00", "15:30"], "Lola": ["11:00", "12:00", "17:00"] },
+        "2025-09-21": { "Yerai": ["10:00", "11:00", "12:00", "16:00"] },
+        "2025-09-22": { "Marina": ["11:00", "11:30", "12:00", "12:30", "17:00", "17:30"], "Regina": ["14:00"] },
+        "2025-09-23": { "Lola": ["10:00", "13:30", "15:00"], "Yerai": ["11:00", "12:00", "13:00", "18:00"] },
+        "2025-09-24": { "Regina": ["10:00", "11:30", "16:00"], "Lola": ["12:00", "12:30", "13:00"], "Yerai": ["14:00", "15:00"], "Marina": ["17:00", "17:30", "18:00"] }
+    };
+
+    /* ========= Helpers de tiempo ========= */
+    const toMinutes = hhmm => { const [h, m] = hhmm.split(":").map(Number); return h * 60 + m; };
+    const toHHMM = min => `${String(Math.floor(min / 60)).padStart(2, "0")}:${String(min % 60).padStart(2, "0")}`;
+    function generateSlots({ start, end, stepMin }) {
+        const slots = []; for (let t = toMinutes(start); t <= toMinutes(end) - stepMin; t += stepMin) { slots.push(toHHMM(t)); }
+        return slots;
+    }
+
+    /* ========= UI setup ========= */
+    const serviceSelect = document.getElementById("serviceSelect");
+    const proSelect = document.getElementById("proSelect");
+    const dateInput = document.getElementById("dateInput");
+    const checkBtn = document.getElementById("checkBtn");
+    const availability = document.getElementById("availability");
+
+    // min: hoy
+    const todayISO = new Date().toISOString().slice(0, 10);
+    dateInput.min = todayISO;
+
+    // Populate servicios
+    serviceSelect.innerHTML = `<option value="" disabled selected>Elige un servicio…</option>` +
+        Object.keys(SERVICES).map(s => `<option value="${s}">${s}</option>`).join("");
+
+    // Al cambiar servicio, filtra profesionales
+    serviceSelect.addEventListener("change", () => {
+        const pros = SERVICES[serviceSelect.value] || [];
+        proSelect.innerHTML = pros.length
+            ? pros.map(p => `<option value="${p}">${p}</option>`).join("")
+            : `<option value="" disabled selected>No disponible</option>`;
+    });
+
+    // Comprobación de disponibilidad
+    checkBtn.addEventListener("click", () => {
+        const service = serviceSelect.value;
+        const pro = proSelect.value;
+        const date = dateInput.value;
+
+        if (!service || !pro || !date) {
+            availability.innerHTML = `<p class="warn" style="padding:8px 12px;border-radius:12px;border:1px solid #fde68a;">Completa servicio, profesional y fecha.</p>`;
+            return;
+        }
+
+        const config = WORKING_HOURS[pro];
+        if (!config) {
+            availability.innerHTML = `<p class="warn" style="padding:8px 12px;border-radius:12px;border:1px solid #fde68a;">No hay horario configurado para ${pro}.</p>`;
+            return;
+        }
+
+        const allSlots = generateSlots(config);
+        const booked = (BOOKED[date] && BOOKED[date][pro]) ? BOOKED[date][pro] : [];
+        const free = allSlots.filter(t => !booked.includes(t));
+
+        if (free.length === 0) {
+            // sugerimos el siguiente día con huecos (hasta +7 días)
+            let suggestion = "";
+            for (let i = 1; i <= 7; i++) {
+                const d = new Date(date); d.setDate(d.getDate() + i);
+                const dISO = d.toISOString().slice(0, 10);
+                const b = (BOOKED[dISO] && BOOKED[dISO][pro]) ? BOOKED[dISO][pro] : [];
+                const f = allSlots.filter(t => !b.includes(t));
+                if (f.length) { suggestion = `${d.toLocaleDateString()} (${f[0]} disponible)`; break; }
+            }
+            availability.innerHTML = `
+        <div class="warn" style="padding:10px 12px;border-radius:14px;border:1px solid #fde68a;">
+          <strong>Sin huecos</strong> para <em>${service}</em> con <em>${pro}</em> el <em>${new Date(date).toLocaleDateString()}</em>.
+          ${suggestion ? `<br/>Siguiente opción: <strong>${suggestion}</strong>` : ""}
+        </div>`;
+            return;
+        }
+
+        // Pintamos slots libres
+        availability.innerHTML = `
+      <div class="ok" style="padding:10px 12px;border-radius:14px;border:1px solid #a7f3d0;">
+        <strong>¡Hay huecos!</strong> Elige una hora para <em>${service}</em> con <em>${pro}</em> el <em>${new Date(date).toLocaleDateString()}</em>.
+      </div>
+      <div class="slots" id="slots"></div>
+    `;
+        const slotsDiv = document.getElementById("slots");
+        free.slice(0, 10).forEach(time => {
+            const b = document.createElement("button");
+            b.type = "button";
+            b.className = "slot";
+            b.textContent = time;
+            b.addEventListener("click", () => confirmSlot({ service, pro, date, time }));
+            slotsDiv.appendChild(b);
+        });
+        if (free.length > 10) {
+            const more = document.createElement("span");
+            more.className = "ghost"; more.style.marginLeft = "6px";
+            more.textContent = `… y ${free.length - 10} más`;
+            slotsDiv.appendChild(more);
+        }
+    });
+
+    /* ===== Ripple en chips de horas ===== */
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.slot');
+        if (!btn) return;
+        const r = document.createElement('span');
+        const rect = btn.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        Object.assign(r.style, {
+            width: size + 'px', height: size + 'px', position: 'absolute',
+            left: (e.clientX - rect.left - size / 2) + 'px', top: (e.clientY - rect.top - size / 2) + 'px',
+            background: 'rgba(139,92,246,.18)', borderRadius: '50%', transform: 'scale(0)', opacity: '1',
+            pointerEvents: 'none', transition: 'transform .4s ease, opacity .6s ease'
+        });
+        btn.appendChild(r);
+        requestAnimationFrame(() => { r.style.transform = 'scale(1.6)'; r.style.opacity = '.0'; });
+        setTimeout(() => r.remove(), 650);
+    });
+
+    /* ===== Confeti al solicitar cita ===== */
+    function boomConfetti() {
+        const c = document.createElement('canvas');
+        c.width = innerWidth; c.height = innerHeight; c.style.position = 'fixed'; c.style.inset = '0';
+        c.style.pointerEvents = 'none'; c.style.zIndex = '9999';
+        document.body.appendChild(c);
+        const ctx = c.getContext('2d');
+        const parts = Array.from({ length: 140 }, () => ({
+            x: Math.random() * c.width, y: -20 - Math.random() * 50,
+            vx: (Math.random() - .5) * 4, vy: Math.random() * 3 + 2,
+            s: Math.random() * 6 + 3, a: 1, col: `hsl(${Math.random() * 360}, 90%, 60%)`
+        }));
+        let t = 0;
+        (function loop() {
+            ctx.clearRect(0, 0, c.width, c.height);
+            parts.forEach(p => {
+                p.vy += .05; p.x += p.vx; p.y += p.vy; p.a -= .007;
+                ctx.globalAlpha = Math.max(p.a, 0); ctx.fillStyle = p.col;
+                ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(((t + p.x) * .02) % 6.28);
+                ctx.fillRect(-p.s / 2, -p.s / 2, p.s, p.s); ctx.restore();
+            });
+            t++; if (t < 400) requestAnimationFrame(loop); else document.body.removeChild(c);
+        })();
+    }
+
+    /* ===== Confirmación de slot + envío simulado ===== */
+    function confirmSlot({ service, pro, date, time }) {
+        const payload = { service, professional: pro, date, time };
+        const resumen = `
+      <div class="card" style="margin-top:12px">
+        <h4 style="margin:0 0 8px;font-size:16px">Solicitud de reserva</h4>
+        <p class="desc" style="margin:0">
+          <strong>${service}</strong> con <strong>${pro}</strong><br/>
+          Fecha: <strong>${new Date(date).toLocaleDateString()}</strong> · Hora: <strong>${time}</strong>
+        </p>
+        <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+          <button class="cta" type="button" id="sendRequest">Solicitar cita</button>
+          <button class="tag" type="button" onclick="document.getElementById('availability').scrollIntoView({behavior:'smooth'})">Cambiar hora</button>
+        </div>
+      </div>`;
+        availability.insertAdjacentHTML("beforeend", resumen);
+
+        const btn = document.getElementById("sendRequest");
+        btn.onclick = () => {
+            boomConfetti(); // 🎉
+            // TODO: Sustituir por tu fetch real
+            // fetch('/api/reservas', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) })
+            //   .then(r=>r.json()).then(()=>{ ... });
+            alert("Solicitud enviada ✅\n\n" + JSON.stringify(payload, null, 2));
+        };
+    }
+</script>

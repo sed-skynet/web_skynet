@@ -1,0 +1,187 @@
+<style>
+    /* Base robusto */
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    body {
+        min-height: 100dvh;
+        /* viewports iOS/Android */
+        display: flex;
+        flex-direction: column;
+        font-family: Arial, sans-serif;
+        background-color: #0b1220;
+        /* define el color que faltaba */
+    }
+
+    /* ===== Footer KitDigital (mobile-first) ===== */
+    .kitdigital-footer {
+        margin-top: auto;
+        /* empuja el footer al final */
+        width: 100%;
+        background: transparent;
+
+    }
+
+    .kitdigital-footer .container {
+        padding-block: 16px;
+        /* espacio vertical base */
+    }
+
+    .logo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Logo: ancho fluido sin desbordes */
+    .kitdigital-logos {
+        width: 135%;
+        max-width: clamp(220px, 65vw, 820px);
+        height: auto;
+        display: block;
+    }
+
+    /* Texto: tamaño fluido y centrado */
+    .copyright-text {
+        margin-top: 12px;
+        text-align: center;
+        font-weight: 700 !important;
+        color: black;
+        font-size: clamp(12px, 1.8vw, 16px);
+    }
+
+    /* ===== Tablets retrato y paisaje (>=768px & <=1024px) ===== */
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .kitdigital-footer .container {
+            padding-block: 20px;
+            /* un poco más de aire */
+        }
+
+        .kitdigital-logos {
+            max-width: clamp(360px, 55vw, 720px);
+        }
+
+        .copyright-text {
+            font-size: clamp(13px, 1.4vw, 16px);
+        }
+    }
+
+    /* ===== Desktop (opcional) ===== */
+    @media (min-width: 1025px) {
+        .kitdigital-footer .container {
+            padding-block: 24px;
+        }
+
+        .kitdigital-logos {
+            max-width: 820px;
+        }
+    }
+
+    /* Accesibilidad: si el usuario prefiere menos movimiento, sin transiciones */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            scroll-behavior: auto !important;
+        }
+    }
+
+    /* ===== Ajuste de posición del footer ===== */
+    .kitdigital-footer {
+        margin-top: auto;
+        width: 100%;
+        background: transparent;
+    }
+
+    /* Móvil: muévelo un poco a la derecha sin crear overflow */
+    /* ===== SOLO MÓVIL ===== */
+    /* ===== SOLO MÓVIL ===== */
+    @media (max-width: 576px) {
+        .kitdigital-footer {
+            margin-left: 20px;
+            /* desplazado un poco a la derecha */
+            width: calc(100% - 40px);
+            /* ajusta para no romper viewport */
+            padding-block: 48px;
+            /* más alto todavía */
+        }
+
+        .kitdigital-logos {
+                    margin-top: -11px;
+
+            max-width: 380px;
+            /* logo más grande en móvil */
+        }
+
+        .copyright-text {
+            font-size: 16px;
+            /* más legible */
+            margin-top: 20px;
+            line-height: 1.6;
+            /* más espacio vertical */
+        }
+    }
+
+
+
+    /* Escritorio: margen fijo de 180px a la izquierda */
+    @media (min-width: 1025px) {
+        .kitdigital-footer {
+            margin-left: 180px;
+            width: calc(100% - 180px);
+            padding-block: 48px;
+            /* un poco más grande también aquí */
+        }
+
+        .kitdigital-logos {
+            max-width: 820px;
+        }
+    }
+
+    /* (Opcional) Tablets: sin desplazamiento, centrado por defecto */
+    @media (min-width: 577px) and (max-width: 1024px) {
+        .kitdigital-footer {
+            margin-left: 30px;
+            /* margen lateral más suave */
+            width: calc(100% - 80px);
+            padding-block: 40px;
+            /* más altura */
+        }
+
+        .kitdigital-logos {
+            max-width: 640px;
+            /* logo más grande en tablets */
+        }
+
+        .copyright-text {
+            font-size: 15px;
+            margin-top: 20px;
+        }
+    }
+</style>
+
+<!-- Footer KitDigital Adaptado -->
+<footer class="kitdigital-footer" role="contentinfo">
+    <div class="container py-3">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="logo-container">
+                    <img class="kitdigital-logos"
+                        src="https://palazonyvigueras.es/wp-content/uploads/2024/01/logos-kit-digital-web-negro-1024x63.png"
+                        alt="Logos del programa Kit Digital y entidades colaboradoras" loading="lazy" decoding="async"
+                        width="1024" height="63" />
+                </div>
+                <div class="copyright-text mt-3">
+                    <p class="text-center mb-0">2025 © Skynet Systems S.L.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

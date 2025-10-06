@@ -1,0 +1,182 @@
+<!-- ESPACIO SUPERIOR PARA DEJAR CABECERA FIJA -->
+<div class="header-spacing"> </div>
+<!-- CABECERA FIJA, CON CONTENIDO CENTRADO -->
+<div class="header-wrapper"><header class="header-fixed"><!-- Topbar -->
+<div class="topbar">
+<div class="container">
+<div class="topbar-left"><a href="#">Nosotros</a> <a href="#">Actualidad</a> <a href="#">Contáctanos</a></div>
+<div class="topbar-right"><span class="telefono">Tel. 900 35 00 11</span> <i class="fab fa-facebook-f"></i> <i class="fab fa-linkedin-in"></i> <i class="fab fa-instagram"></i> <i class="fab fa-youtube"></i></div>
+</div>
+</div>
+<!-- Navbar -->
+<div class="navbar">
+<div class="container navbar-inner">
+<div class="logo"><img src="https://localhost/mi_web/wp-content/uploads/2025/10/SKYNETpng.png" alt="Logo Skynet" /></div>
+<nav class="nav-links"><a class="active" href="#">Inicio</a> <a href="#">Servicios IT</a> <a href="#">Comunicación WEB</a> <a href="#">Ciberseguridad</a> <a href="#">RGPD</a></nav></div>
+</div>
+</header></div>
+<p><style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: radial-gradient(circle, #247ba0 0%, #1b4f72 100%);
+            color: white;
+        }
+
+        .header-spacing {
+            height: 160px;
+            /* antes estaba en 116px */
+        }
+
+        .header-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background: transparent;
+        }
+
+        .header-fixed {
+            width: 100%;
+            margin: 0;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+            border-radius: 0;
+            overflow: hidden;
+        }
+
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .topbar {
+            background-color: #126b97;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .topbar-left a {
+            color: white;
+            text-decoration: none;
+            margin-right: 16px;
+            font-weight: 500;
+            position: relative;
+            display: inline-block;
+        }
+
+        .topbar-left a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+
+        .topbar-left a:hover::after {
+            width: 100%;
+        }
+
+        .topbar-right span {
+            margin-right: 12px;
+            font-weight: 500;
+            color: white;
+        }
+
+        .topbar-right i {
+            color: white !important;
+            margin-right: 12px;
+            font-size: 14px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .topbar-right i:hover {
+            transform: scale(1.1);
+            opacity: 0.85;
+            cursor: pointer;
+        }
+
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(6px);
+        }
+
+        .navbar-inner {
+            height: 76px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 54px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1a1a1a;
+            font-weight: 500;
+            font-size: 15px;
+            position: relative;
+            padding: 8px 0;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 0;
+            background-color: #0077c2;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active,
+        .nav-links a:hover {
+            color: #0077c2;
+        }
+
+        .telefono {
+            color: white;
+            margin-right: 12px;
+            font-weight: 500;
+        }
+
+
+        @media (max-width: 960px) {
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 16px;
+            }
+
+            .topbar .container,
+            .navbar-inner {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .header-fixed {
+                border-radius: 0;
+            }
+        }
+    </style></p>

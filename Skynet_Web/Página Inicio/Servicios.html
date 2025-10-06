@@ -1,0 +1,90 @@
+<style>
+    @keyframes flotacion {
+        0% {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+
+        100% {
+            transform: translateY(0px);
+        }
+    }
+
+    .estructura-arco.flotante {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+        animation: flotacion 5s ease-in-out infinite;
+    }
+
+    .estructura-arco.flotante .card-anim {
+        flex: 1 1 calc(25% - 2rem);
+        max-width: calc(25% - 2rem);
+        min-width: 240px;
+        /* para que se adapte bien en móviles */
+        box-sizing: border-box;
+    }
+
+    @media (max-width: 992px) {
+        .estructura-arco.flotante .card-anim {
+            flex: 1 1 calc(50% - 2rem);
+            max-width: calc(50% - 2rem);
+        }
+    }
+
+    @media (max-width: 576px) {
+        .estructura-arco.flotante .card-anim {
+            flex: 1 1 100%;
+            max-width: 100%;
+        }
+    }
+</style>
+
+<section id="servicios" class="zona-nosotros">
+    <h2>Servicios que ofrecemos</h2>
+    <p>Ofrecemos soluciones integrales en tecnología, comunicación y cumplimiento legal para impulsar tu negocio.</p>
+
+    <div class="estructura-arco flotante" style="flex-wrap: wrap; justify-content: center; gap: 2rem;">
+
+        <article class="card-anim">
+            <h3>💻 Servicios IT</h3>
+            <p>Gestión de infraestructuras, soporte técnico y soluciones a medida para tu entorno tecnológico.</p>
+            <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_3vbOcw.json" background="transparent"
+                speed="1" loop autoplay style="height: 160px; margin-top: 1rem;">
+            </lottie-player>
+        </article>
+        <article class="card-anim">
+            <h3>🌐 Comunicación WEB</h3>
+            <p>Diseño, desarrollo y posicionamiento web para que tu empresa tenga presencia digital efectiva.</p>
+            <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_0yfsb3a1.json" background="transparent"
+                speed="1" loop autoplay style="height: 160px; margin-top: 1rem;">
+            </lottie-player>
+        </article>
+
+
+        <article class="card-anim">
+            <h3>🛡️ Ciberseguridad</h3>
+            <p>Protección activa contra amenazas, auditorías de seguridad y planes de contingencia.</p>
+            <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_jcikwtux.json" background="transparent"
+                speed="1" loop autoplay style="height: 160px; margin-top: 1rem;">
+            </lottie-player>
+        </article>
+
+        <article class="card-anim">
+            <h3>📋 RGPD</h3>
+            <p>Adaptamos tu empresa al Reglamento General de Protección de Datos con asesoría legal y técnica.</p>
+            <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_49rdyysj.json" background="transparent"
+                speed="1" loop autoplay style="height: 160px; margin-top: 1rem;">
+            </lottie-player>
+        </article>
+
+    </div>
+
+    <div class="boton-cta">
+        <a href="#contacto">Solicita una consultoría gratuita</a>
+    </div>
+</section>

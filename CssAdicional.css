@@ -1,0 +1,111 @@
+/* 🧵 CONTAINER WRAPPER → se mantiene intacto */
+.ti-reviews-container-wrapper {
+    padding: 2rem 0 !important;
+}
+
+/* 🧊 TARJETA → sin flex, sin layout forzado */
+.ti-review-item {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.08) !important;
+    padding: 1.5rem !important;
+    font-family: 'Segoe UI', sans-serif !important;
+    transition: transform 0.3s ease !important;
+}
+
+.ti-review-item:hover {
+    transform: scale(1.015) !important;
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.2) !important;
+}
+
+/* 👤 PERFIL + DETALLES */
+.ti-review-header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+.ti-profile-img img {
+    border-radius: 50% !important;
+    width: 48px !important;
+    height: 48px !important;
+    object-fit: cover !important;
+    box-shadow: 0 0 6px rgba(0, 255, 255, 0.3) !important;
+}
+
+.ti-name {
+    font-weight: bold !important;
+    font-size: 0.9rem !important;
+}
+
+.ti-date {
+    font-size: 0.85rem !important;
+    opacity: 0.6 !important;
+}
+
+/* ⭐ ESTRELLAS */
+.ti-stars {
+    margin: 0.5rem 0 !important;
+}
+
+.ti-star {
+    width: 18px !important;
+    height: 18px !important;
+    filter: drop-shadow(0 0 2px #00ffff66) !important;
+}
+
+
+
+/* 🛑 ELIMINA BOTONES INÚTILES PERO MANTIENE SLIDER */
+.ti-verified-tooltip,
+.ti-read-more,
+.ti-platform-icon {
+    display: none !important;
+}
+
+/* ✅ VERIFICACIÓN */
+.ti-verified-review {
+    margin-left: 0.4rem !important;
+    font-size: 0.85rem !important;
+    color: #00cfff !important;
+}
+
+/* 📱 MOBILE FIX */
+@media (max-width: 768px) {
+    .ti-review-item {
+        padding: 1.2rem !important;
+    }
+
+    .ti-review-header {
+        flex-direction: row !important;
+        gap: 0.8rem !important;
+    }
+
+    .ti-profile-img img {
+        width: 42px !important;
+        height: 42px !important;
+    }
+
+    .ti-review-text-container {
+        font-size: 0.95rem !important;
+    }
+}
+
+
+.ti-widget.ti-goog .ti-widget-container .ti-date {
+    color: #ffffff !important;
+}
+
+.ti-widget.ti-goog .ti-widget-container .ti-name {
+color:#ffffff !important;
+}
+
+[data-footer*="type-1"] .ct-footer {
+    background-color: transparent !important;
+	    position: relative;
+    top: 48px;
+}
+}
+
+

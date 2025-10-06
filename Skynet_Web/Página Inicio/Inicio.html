@@ -1,0 +1,253 @@
+<style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        height: auto;
+        min-height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+        /* Asegura el scroll vertical */
+    }
+
+    body {
+        position: relative;
+    }
+
+    .zona-nosotros {
+        padding: 6vh 5vw;
+        font-family: 'Segoe UI', sans-serif;
+        color: #eaf6ff;
+        position: relative;
+        z-index: 2;
+        overflow-x: auto;
+    }
+
+    .zona-nosotros h2 {
+        font-size: 3rem;
+        color: #00cfff;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .zona-nosotros p {
+        font-size: 1.1rem;
+        color: #cdefff;
+        opacity: 0.9;
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto 3rem auto;
+    }
+
+    .estructura-arco {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        flex-wrap: nowrap;
+    }
+
+    .columna {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .card-anim {
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 16px;
+        padding: 0.75rem 1rem;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.08);
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeUp 0.6s ease-out forwards;
+        width: 280px;
+        max-width: 100%;
+        min-height: 100px;
+    }
+
+    .card-anim h3 {
+        font-size: 1.2rem;
+        white-space: nowrap;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 0;
+        /* Quitamos margen inferior */
+    }
+
+    .card-anim p {
+        font-size: 1rem;
+        color: #cdefff;
+        line-height: 1.4;
+        margin-top: 1.2rem;
+        /* Aquí bajamos el párrafo */
+    }
+
+    .icono-central {
+        flex: 0 0 340px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .icono-central lottie-player {
+        width: 100%;
+        max-width: 340px;
+        height: auto;
+        animation: fadeUp 0.6s ease-out forwards;
+        animation-delay: 1.4s;
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    @keyframes fadeUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .fila-1 .card-anim:nth-child(1) {
+        animation-delay: 0.2s;
+    }
+
+    .fila-1 .card-anim:nth-child(2) {
+        animation-delay: 0.6s;
+        position: relative;
+        left: -150px;
+    }
+
+    .fila-1 .card-anim:nth-child(3) {
+        animation-delay: 1s;
+    }
+
+    .fila-2 .card-anim:nth-child(1) {
+        animation-delay: 0.4s;
+    }
+
+    .fila-2 .card-anim:nth-child(2) {
+        animation-delay: 0.8s;
+        position: relative;
+        right: -150px;
+    }
+
+    .fila-2 .card-anim:nth-child(3) {
+        animation-delay: 1.2s;
+    }
+
+    .boton-cta {
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    .boton-cta a {
+        display: inline-block;
+        background: linear-gradient(135deg, #00f2ff, #00cfff);
+        color: #0a0f2c;
+        padding: 14px 32px;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 1.05rem;
+        text-decoration: none;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .boton-cta a:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 255, 255, 0.2);
+    }
+
+    @media (max-width: 1030px) {
+        .estructura-arco {
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: nowrap;
+            width: 100%;
+        }
+
+        .columna {
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .card-anim {
+            width: 90%;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        .fila-1 .card-anim:nth-child(2),
+        .fila-2 .card-anim:nth-child(2) {
+            position: static;
+            left: auto;
+            right: auto;
+        }
+
+        .icono-central {
+            order: -1;
+            margin-bottom: 1.5rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .icono-central lottie-player {
+            max-width: 240px;
+        }
+    }
+</style>
+
+<section id="nosotros" class="zona-nosotros">
+    <h2>Expertos en Tecnología y Comunicación Digital</h2>
+    <p>En Skynet Systems ayudamos a empresas a crecer con soluciones TIC innovadoras, seguras y orientadas a resultados.
+    </p>
+
+    <div class="estructura-arco">
+        <div class="columna fila-1">
+            <article class="card-anim">
+                <h3>🔍 Diagnóstico inteligente</h3>
+                <p>Identificamos oportunidades tecnológicas reales en tu empresa.</p>
+            </article>
+            <article class="card-anim">
+                <h3>💡 Implementación ágil</h3>
+                <p>Creamos e iteramos soluciones contigo desde el día uno.</p>
+            </article>
+            <article class="card-anim">
+                <h3>🤝 Soporte cercano</h3>
+                <p>Acompañamos tu crecimiento con asesoría constante y humana.</p>
+            </article>
+        </div>
+
+        <div class="icono-central">
+            <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_k86wxpgr.json" background="transparent"
+                speed="1" loop autoplay>
+            </lottie-player>
+        </div>
+
+        <div class="columna fila-2">
+            <article class="card-anim">
+                <h3>🚀 Escalabilidad</h3>
+                <p>Diseño preparado para acompañar tu crecimiento.</p>
+            </article>
+            <article class="card-anim">
+                <h3>🔐 Seguridad</h3>
+                <p>Protegemos tus activos con medidas robustas.</p>
+            </article>
+            <article class="card-anim">
+                <h3>📊 Inteligencia de datos</h3>
+                <p>Convertimos información en decisiones estratégicas.</p>
+            </article>
+        </div>
+    </div>
+
+    <div class="boton-cta">
+        <a href="#contacto">Hablemos de tu proyecto</a>
+    </div>
+</section>
+
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
