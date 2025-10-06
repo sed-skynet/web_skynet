@@ -1,4 +1,4 @@
-<!-- ===================== FOOTER UNIFICADO (Compact + KitDigital) ===================== -->
+ <!-- ===================== FOOTER UNIFICADO (Compact + KitDigital) ===================== -->
  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
@@ -90,20 +90,7 @@
         display: flex;
         flex-direction: column;
         gap: 0;
-          position: fixed;
-  inset: auto 50% 0 50%;  /* bottom:0; centrado */
-  transform: translateX(-50%);
-  width: 100vw;
-  z-index: 50;
     }
-    /* Reserva espacio al final del documento para que no tape el contenido */
-:root { --footer-height: 260px; } /* ajusta según tu alto real */
-body { padding-bottom: var(--footer-height); }
-
-/* Puedes reducir en móviles si tu footer se hace más bajo */
-@media (max-width: 640px) {
-  :root { --footer-height: 220px; }
-}
 
     .fc-inner {
         max-width: 1200px;
@@ -150,7 +137,7 @@ body { padding-bottom: var(--footer-height); }
     }
 
     .fc-col a:hover {
-        color: var(--fc-accent);
+        color: #4873c1 !important;
     }
 
     .fc-brand {
@@ -198,6 +185,7 @@ body { padding-bottom: var(--footer-height); }
 
     .fc-contact li {
         color: var(--fc-muted);
+        white-space: nowrap;
     }
 
     .fc-contact a {
@@ -253,7 +241,7 @@ body { padding-bottom: var(--footer-height); }
         /* centrado y limitado */
         max-width: 960px;
         /* más estrecho que antes */
-          margin: 16px auto 24px auto;   /* antes: -28px auto 32px */
+        margin: -28px auto 32px auto;
         /* menos separación */
         border-radius: 10px;
         /* bordes más sutiles */
