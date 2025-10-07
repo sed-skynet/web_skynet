@@ -1,0 +1,103 @@
+<!-- ====== SOBRE NOSOTROS (limpio) ====== -->
+<section id="equipo" class="sn-teamwide" aria-label="Sobre nosotros">
+  <div class="container-wide">
+    <header class="teamwide-head">
+      <h2 class="sn-h2">Sobre nosotros</h2>
+      <p class="sub">Perfiles profesionales. Iremos añadiendo cada ficha.</p>
+    </header>
+
+    <!-- Perfil: Rafa -->
+    <article class="profile-row" itemscope itemtype="https://schema.org/Person">
+      <div class="profile-col profile-text">
+        <h3 class="profile-name" itemprop="name">Rafa</h3>
+        <p class="profile-role" itemprop="jobTitle">Tech Lead · Arquitectura Cloud</p>
+        <div class="profile-bio" itemprop="description">
+          <p>
+            Diseña arquitecturas seguras y escalables en AWS/Azure con foco en automatización y
+            observabilidad. Le gusta simplificar lo complejo y documentar los flujos críticos.
+            Transforma “funciona en mi máquina” en pipelines reproducibles.
+          </p>
+        </div>
+      </div>
+
+      <figure class="profile-col profile-media">
+        <img
+          src="https://localhost/mi_web/wp-content/uploads/2025/10/Rafa-1.png"
+          alt="Rafa, Tech Lead de Arquitectura Cloud"
+          loading="lazy" decoding="async" itemprop="image"
+          width="1280" height="1600"
+        />
+        <figcaption class="sr-only">Retrato de Rafa</figcaption>
+      </figure>
+    </article>
+  </div>
+</section>
+
+<style>
+  /* ===== Variables y base mínimas ===== */
+  :root{
+    --color-primary:#00cfff;
+    --color-light:#eaf6ff;
+    --color-text-muted:#cdefff;
+    --font-main:'Poppins','Segoe UI',sans-serif;
+  }
+  body{ font-family:var(--font-main); background:#050e18; color:var(--color-light); }
+
+  /* Contenedor ancho para esta sección */
+  .container-wide{ max-width:1160px; margin:0 auto; padding:0 20px; }
+
+  /* Títulos y subtítulo usados aquí */
+  .sn-h2{ font-size:2rem; font-weight:700; margin:0 0 .5rem; color:var(--color-primary); }
+  .sub{ color:var(--color-text-muted); opacity:.95; margin:0 0 1.5rem; }
+
+  /* ===== Perfil (layout y estética) ===== */
+  .profile-row{
+    display:grid;
+    grid-template-columns:1fr auto;   /* texto + foto */
+    gap:2rem;
+    align-items:center;
+    background:rgba(255,255,255,0.04);
+    backdrop-filter:blur(10px);
+    border-radius:16px;
+    padding:2rem;
+    box-shadow:0 4px 20px rgba(0,255,255,0.06);
+  }
+  .profile-col{ min-width:0; }        /* evita overflow de texto */
+
+  .profile-name{ margin:0 0 .25rem; font-size:1.75rem; }
+  .profile-role{ color:var(--color-text-muted); margin:0 0 1rem; }
+
+  .profile-media{
+    width:clamp(260px,28vw,420px);
+    max-width:100%;
+    overflow:hidden;
+    border-radius:12px;
+    box-shadow:0 4px 16px rgba(0,207,255,0.10);
+  }
+  .profile-media img{
+    display:block;
+    max-width:100%;
+    height:auto;           /* respeta proporción */
+    image-rendering:auto;  /* sin reescalado artificial */
+    /* Nota: no usamos object-fit para no recortar */
+  }
+
+  /* Accesibilidad: ocultar solo visualmente */
+  .sr-only{
+    position:absolute!important; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+
+  /* ===== Hover sutil ===== */
+  .profile-row:hover{ background:rgba(255,255,255,0.06); }
+
+  /* ===== Responsive ===== */
+  @media (max-width:900px){
+    .profile-row{ grid-template-columns:1fr; text-align:left; }
+    .profile-media{ width:min(100%,420px); margin-inline:auto; }
+  }
+  @media (max-width:560px){
+    .profile-row{ padding:1.25rem; gap:1.25rem; }
+    .profile-name{ font-size:1.5rem; }
+  }
+</style>

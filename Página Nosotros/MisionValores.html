@@ -1,0 +1,209 @@
+<!-- MISIÓN, VISIÓN Y VALORES (header justo arriba de las cards) -->
+<section id="mvv" class="zona-glass sn-mvv" aria-label="Misión, Visión y Valores">
+  <div class="container">
+
+    <!-- Bloque de encabezado -->
+    <header class="sn-mvv__header">
+      <h2 class="sn-h2 center">Misión, Visión y Valores</h2>
+      <p class="center sub">Nuestra razón de ser, hacia dónde vamos y cómo lo hacemos posible.</p>
+    </header>
+
+    <!-- Bloque de tarjetas -->
+    <div class="estructura-arco flotante" role="list" aria-label="Tarjetas de Misión, Visión y Valores">
+
+      <article class="card-anim sn-card" role="listitem" aria-labelledby="mvv-vision">
+        <h3 id="mvv-vision">🔭 Visión</h3>
+        <p>Ser el referente en soluciones IT seguras y sostenibles, fomentando la confianza digital de empresas
+          y usuarios.</p>
+      </article>
+
+      <article class="card-anim sn-card" role="listitem" aria-labelledby="mvv-mision">
+        <h3 id="mvv-mision">🎯 Misión</h3>
+        <p>Ayudar a las organizaciones a optimizar sus procesos mediante innovación, soporte humano y tecnología
+          responsable.</p>
+      </article>
+
+      <article class="card-anim sn-card" role="listitem" aria-labelledby="mvv-valores">
+        <h3 id="mvv-valores">💡 Valores</h3>
+        <ul class="sn-list" aria-label="Lista de valores">
+          <li>Transparencia y ética profesional</li>
+          <li>Seguridad y protección de datos</li>
+          <li>Innovación constante</li>
+          <li>Trabajo colaborativo</li>
+          <li>Responsabilidad social</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<style>
+/* ===== Variables base ===== */
+  :root{
+    --color-primary:#00cfff;
+    --color-light:#eaf6ff;
+    --color-text-muted:#cdefff;
+    --color-bg-glass:rgba(255,255,255,0.06);
+    --blur-glass:blur(12px);
+    --radius-soft:16px;
+    --shadow-glow:0 8px 32px rgba(0,207,255,0.25);
+    --font-main:'Poppins','Segoe UI',sans-serif;
+  }
+
+  body{ font-family:var(--font-main); background:#050e18; color:var(--color-light); }
+  .container{ max-width:980px; margin:0 auto; padding:0 20px; }
+  .center{text-align:center;}
+
+  /* ===== Sección general ===== */
+.zona-glass {
+  padding: 6vh 4vw; /* antes 8vh 5vw */
+}
+
+.estructura-arco.flotante {
+  gap: 1.5rem; /* antes 2rem */
+}
+
+
+  /* ===== Header (título + subtítulo) ===== */
+  .sn-mvv__header{
+    max-width:800px;
+    margin:0 auto 2rem; /* margen inferior ajustado: justo encima de las cards */
+    text-align:center;
+  }
+  .sn-h2{
+    font-size:2rem;
+    font-weight:700;
+    margin-bottom:.75rem;
+    color:var(--color-primary);
+    white-space:nowrap; /* mantiene el título en una sola línea */
+  }
+  .sub{
+    color:var(--color-text-muted);
+    opacity:.9;
+    font-size:1.05rem;
+    line-height:1.5;
+    margin:0;
+    white-space:normal; /* el subtítulo sí puede romper línea */
+  }
+
+  /* ===== Tarjetas ===== */
+  .sn-card{
+    background:var(--color-bg-glass);
+    backdrop-filter:var(--blur-glass);
+    border-radius:var(--radius-soft);
+    box-shadow:var(--shadow-glow);
+    padding:1.75rem 2rem;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    text-align:left;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .sn-card h3{
+    margin:0 0 .75rem;
+    font-size:1.3rem;
+    color:var(--color-primary);
+  }
+  .sn-card:hover,
+  .sn-card:focus-within{
+    transform:translateY(-4px);
+    box-shadow:0 10px 36px rgba(0,207,255,.35);
+  }
+
+  .sn-list{
+    margin:.5rem 0 0;
+    padding-left:1rem;
+    list-style:none;
+  }
+  .sn-list li{
+    margin-bottom:.35rem;
+    position:relative;
+    padding-left:1.2rem;
+  }
+  .sn-list li::before{
+    content:"✓";
+    position:absolute;
+    left:0;
+    color:var(--color-primary);
+  }
+
+  /* ===== Layout flotante ===== */
+  @keyframes flotacion {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+  }
+  .estructura-arco.flotante{
+    display:flex;
+    justify-content:center;
+    align-items:stretch;
+    gap:2rem;
+    flex-wrap:wrap;
+    animation: flotacion 5s ease-in-out infinite;
+  }
+
+  /* Desktop: 3 tarjetas en línea */
+  @media (min-width: 992px){
+    .estructura-arco.flotante{ flex-wrap:nowrap; }
+    .estructura-arco.flotante .card-anim{ flex:1 1 33%; max-width:33%; }
+  }
+
+  /* Tablet: 2 tarjetas por fila */
+  @media (max-width: 991.98px){
+    .estructura-arco.flotante .card-anim{ flex:1 1 calc(50% - 1rem); max-width:calc(50% - 1rem); }
+  }
+
+  /* Móvil: 1 tarjeta por fila */
+  @media (max-width: 575.98px){
+    .estructura-arco.flotante .card-anim{ flex:1 1 100%; max-width:100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .estructura-arco.flotante{ animation:none; }
+  }
+  /* --- FIX MVV: header arriba, cards debajo --- */
+#mvv > .container{
+  display: flex;           /* anulamos posibles estilos globales */
+  flex-direction: column;  /* apilar verticalmente */
+  gap: 2rem;               /* espacio entre header y cards */
+}
+
+#mvv .sn-mvv__header{
+  order: 0;
+  width: 100%;
+  margin: 0 auto;          /* centrado */
+  text-align: center;
+  /* si quieres el h2 en una sola línea: */
+  /* white-space: nowrap; */
+}
+
+#mvv .estructura-arco{
+  order: 1;
+  width: 100%;
+}
+
+#mvv .sn-mvv__header,
+#mvv .estructura-arco{
+  float: none;             /* por si hay floats heredados */
+  clear: both;
+}
+/* === MVV: cards totalmente transparentes === */
+#mvv .sn-card{
+  background: rgba(255,255,255,0.02);      /* casi transparente */
+  backdrop-filter: blur(0px);              /* leve difuminado para mantener lectura */
+  -webkit-backdrop-filter: blur(0px);
+  border: 1px solid rgba(255,255,255,0.08);/* fino borde para separarlas del fondo */
+  box-shadow: 0 4px 16px rgba(0,207,255,0.08); /* sombra muy suave */
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+
+/* Hover/focus con un poco más de luz */
+#mvv .sn-card:hover,
+#mvv .sn-card:focus-within{
+  background: rgba(255,255,255,0.05);
+  box-shadow: 0 8px 24px rgba(0,207,255,0.18);
+  transform: translateY(-3px);
+}
+
+</style>

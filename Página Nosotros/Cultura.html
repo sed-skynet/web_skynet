@@ -1,0 +1,193 @@
+<!-- CULTURA Y AMBIENTE · layout en arco v5 -->
+<section id="cultura" class="sn-cultureBalanced v5" aria-labelledby="cultura-title">
+  <div class="container">
+    <div class="grid-cultura" role="region" aria-label="Cultura, metodología y servicios">
+      <header class="intro" aria-labelledby="cultura-title">
+        <h2 id="cultura-title" class="sn-h2">Cultura y ambiente</h2>
+        <p class="lead">Personas primero, procesos claros y excelencia técnica. Buscamos soluciones útiles, mantenibles y seguras.</p>
+      </header>
+
+      <!-- Col 1 (se queda donde estaba) -->
+      <section class="how card-anim sn-card" aria-labelledby="how-title">
+        <h3 id="how-title" class="sn-h3">Cómo trabajamos</h3>
+        <ul class="list glass">
+          <li><span aria-hidden="true">🧩</span> Análisis inicial y plan de implantación a medida.</li>
+          <li><span aria-hidden="true">🔁</span> Metodología ágil: entregas iterativas y feedback continuo.</li>
+          <li><span aria-hidden="true">🛡️</span> Seguridad por defecto (hardening, backups y controles RGPD).</li>
+          <li><span aria-hidden="true">🧰</span> Mantenimiento preventivo y soporte cercano tras la puesta en marcha.</li>
+        </ul>
+      </section>
+
+      <!-- Centro: imagen cuadrada y centrada -->
+      <figure class="media">
+        <img src="https://picsum.photos/1000/1000?random=18" alt="Equipo colaborando y revisando entregables" loading="lazy" decoding="async" width="1000" height="1000" />
+        <figcaption class="visually-hidden">Trabajo colaborativo y foco en calidad</figcaption>
+      </figure>
+
+      <!-- Derecha (antes Servicios): ahora Pilares -->
+      <section class="pillars card-anim sn-card" aria-labelledby="pillars-title">
+        <h3 id="pillars-title" class="sn-h3">Nuestros pilares</h3>
+        <ul class="list">
+          <li><span aria-hidden="true">💡</span> Creatividad responsable: impacto real y medible.</li>
+          <li><span aria-hidden="true">🧭</span> Transparencia: decisiones trazables y comunicación abierta.</li>
+          <li><span aria-hidden="true">🤝</span> Colaboración: equipos mixtos técnicos/creativos con clientes.</li>
+          <li><span aria-hidden="true">📚</span> Aprendizaje continuo y revisión entre pares.</li>
+        </ul>
+      </section>
+
+      <!-- Debajo de la imagen: Servicios -->
+      <nav class="services card-anim sn-card" aria-label="Servicios clave">
+        <h3 class="sn-h3">Servicios</h3>
+        <ul class="list" aria-label="Listado de servicios">
+          <li><span aria-hidden="true">📡</span> Tecnología y Comunicación</li>
+          <li><span aria-hidden="true">🧭</span> Metodología y Consultoría</li>
+          <li><span aria-hidden="true">🛠️</span> Mantenimiento y Soporte</li>
+          <li><span aria-hidden="true">📘</span> Formación y Auditoría</li>
+        </ul>
+      </nav>
+
+      <div class="cta-wrap">
+        <a class="btn-cta" href="#contacto">Conversemos</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ===== Overrides para compactar y equilibrar ===== */
+.sn-cultureBalanced.v5 { padding-block: clamp(40px, 7vh, 80px); }
+.sn-cultureBalanced.v5 .container { max-width: 1200px; }
+
+.sn-cultureBalanced.v5 .intro{ text-align:center; }
+.sn-cultureBalanced.v5 .intro .lead{ margin-inline:auto; }
+.sn-cultureBalanced.v5 #cultura-title{ margin:0 auto; }
+.sn-cultureBalanced.v5 .lead{ max-width: 72ch; margin-top: .25rem; color: var(--color-text-muted); }
+
+/* Rejilla por áreas con estructura en arco */
+.grid-cultura{
+  display:grid;
+  grid-template-columns:1.1fr 1fr 1.1fr; /* más ancho en extremos para texto */
+  grid-template-areas:
+    "intro   intro    intro"
+    "how     media    pillars"   /* fila superior del arco */
+    ".       services cta";      /* base del arco: servicios bajo la imagen */
+  gap:clamp(14px,2vw,22px);
+  align-items:start;
+}
+
+/* Áreas */
+.intro{grid-area:intro;}
+.how{grid-area:how;}
+.media{margin:0; border-radius:18px; overflow:hidden; box-shadow:0 6px 16px rgba(0,0,0,.25); place-self:center;}
+.services{grid-area:services;}
+.pillars{grid-area:pillars;}
+.cta-wrap{grid-area:cta; display:flex; align-items:flex-start; justify-content:center;}
+
+/* Tarjetas más densas */
+.list{list-style:none; padding:0; margin:.4rem 0 0; display:grid; gap:.55rem;}
+.list li{display:grid; grid-template-columns:1.5rem 1fr; gap:.55rem; align-items:start;}
+.glass li{padding:.7rem .85rem; border-radius:14px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); backdrop-filter:blur(6px);} 
+
+/* Dos columnas para ocupar huecos */
+.two-cols{ 
+  display:grid; 
+  grid-template-columns:repeat(2, minmax(0,1fr)); 
+  gap:.55rem .7rem;
+}
+.chips.two-cols{grid-auto-rows:1fr;}            /* chips con alturas homogéneas */
+.pillars .two-cols, .list.two-cols{grid-auto-rows:auto;}
+
+/* Imagen: cuadrada y centrada */
+.media{margin:0; border-radius:18px; overflow:hidden; box-shadow:0 10px 28px rgba(0,0,0,.35); place-self:center;}
+.media img{
+  display:block; width:100%; aspect-ratio: 1 / 1; object-fit:cover; object-position:center; 
+  max-width:min(520px, 100%); margin-inline:auto;
+}
+
+/* Chips */
+.chip{
+  display:inline-flex; align-items:center; gap:.5rem; width:100%;
+  padding:.6rem .85rem; border-radius:999px;
+  background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1);
+  color:var(--color-light); text-decoration:none;
+}
+
+/* CTA alineado con la imagen (misma altura de tarjeta) */
+.btn-cta{
+  display:inline-block; padding:.9rem 1.2rem; border-radius:999px; font-weight:700;
+  color:#031b20; background:linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  text-decoration:none; box-shadow:0 6px 16px rgba(0,207,255,.18);
+}
+
+/* Responsivo: mantiene la idea de arco */
+@media (max-width: 1024px){
+  .grid-cultura{
+    grid-template-columns:1fr 1fr;
+    grid-template-areas:
+      "intro    intro"
+      "media    media"     /* imagen centrada arriba */
+      "how      pillars"   /* brazos del arco */
+      "services cta";      /* base del arco */
+  }
+  .two-cols{grid-template-columns:1fr 1fr;}
+}
+@media (max-width: 680px){
+  .grid-cultura{
+    grid-template-columns:1fr;
+    grid-template-areas:
+      "intro"
+      "media"
+      "how"
+      "pillars"
+      "services"
+      "cta";
+  }
+  .two-cols{grid-template-columns:1fr;}
+}
+
+/* Card envolvente por sección (no por item) */
+.sn-cultureBalanced.v5 :is(.how, .pillars, .services){
+  padding:1rem; border-radius:18px; background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08); backdrop-filter: blur(6px);
+  box-shadow:0 6px 18px rgba(0,207,255,.16);
+}
+
+/* Los items dejan de ser cards individuales */
+.sn-cultureBalanced.v5 .glass li{
+  background:transparent; border:0; backdrop-filter:none; box-shadow:none;
+  padding:.2rem 0; /* compensa el padding perdido */
+}
+
+/* ===== Cards estilo MVV dentro de Cultura (v5) ===== */
+.sn-cultureBalanced.v5 .sn-card{
+  background:rgba(255,255,255,0.04);
+  backdrop-filter:blur(0px);
+  -webkit-backdrop-filter:blur(0px);
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 6px 18px rgba(0,207,255,0.16);
+  padding:1.1rem 1.25rem;
+  transition:transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+}
+.sn-cultureBalanced.v5 .sn-card:hover,
+.sn-cultureBalanced.v5 .sn-card:focus-within{
+  transform:translateY(-2px);
+  box-shadow:0 10px 28px rgba(0,207,255,0.22);
+  background:rgba(255,255,255,0.065);
+  border-color:rgba(0,207,255,0.18);
+}
+.sn-cultureBalanced.v5 .sn-card h3{ color:var(--color-primary); margin-top:0; }
+
+/* Los <li> se quedan planos para no duplicar la tarjeta */
+.sn-cultureBalanced.v5 .list li{ padding:.25rem 0; }
+
+/* Estructura coherente de listas dentro de las cards (igual que "Cómo trabajamos") */
+.sn-cultureBalanced.v5 .sn-card .list{ display:grid; gap:.55rem; margin:.5rem 0 0; padding:0; list-style:none; }
+.sn-cultureBalanced.v5 .sn-card .list li{ display:grid; grid-template-columns:1.5rem 1fr; gap:.55rem; align-items:start; }
+.sn-cultureBalanced.v5 .sn-card .list li span[aria-hidden="true"]{ line-height:1.4; }
+
+/* Ajuste vertical: baja ligeramente la foto para centrarla mejor en desktop */
+@media (min-width: 1025px){
+  .sn-cultureBalanced.v5 .media{ margin-top: clamp(12px, 2vh, 28px); }
+}
+</style>
