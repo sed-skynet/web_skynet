@@ -1,142 +1,99 @@
-<section id="certificacion-iso" class="zona-nosotros">
-    <div class="header-iso">
-        ¿Por qué somos la mejor opción?
+<section id="iso" class="zona-nosotros" aria-labelledby="iso-title">
+  <style>
+    /* === ISO (clean) === */
+    #iso{
+      --cian:#00cfff; --txt:#eaf6ff; --soft:#cdefff; --glass:rgba(255,255,255,.04);
+      --ring:rgba(0,207,255,.18);
+      font-family:'Segoe UI',sans-serif; color:var(--txt);
+      padding: 6vh 5vw 7vh;
+    }
+
+    #iso .title{
+      font-size: clamp(1.8rem,2.8vw,2.4rem);
+      font-weight: 800;
+      color: var(--cian);
+      text-align:center;
+      margin: 0 0 1.25rem;
+    }
+    #iso .lead{
+      text-align:center; color:var(--soft); max-width:900px; margin:0 auto 2.2rem;
+    }
+
+    /* Contenedor */
+    #iso .wrap{
+      display:grid; gap:1.8rem; align-items:center;
+      grid-template-columns: minmax(160px,220px) 1fr;
+      max-width: 1100px; margin: 0 auto;
+      background: var(--glass);
+      border: 1px solid var(--ring);
+      border-radius: 16px;
+      padding: clamp(16px,2vw,24px);
+      backdrop-filter: blur(0px) saturate(110%);
+    }
+
+    /* Logo */
+    #iso .logo{
+      display:grid; place-items:center; aspect-ratio: 3/4;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+    }
+    #iso .logo img{
+      max-width: 70%; height:auto; opacity:.95;
+      transition: transform .25s ease;
+    }
+    #iso .logo:hover img{ transform: translateY(-2px) scale(1.02); }
+
+    /* Texto */
+    #iso .content h3{
+      font-size: clamp(1.05rem,1.6vw,1.25rem);
+      color: var(--cian); margin: .25rem 0 .5rem; font-weight:700;
+    }
+    #iso .content p{ color:var(--soft); margin: 0 0 .75rem; line-height:1.6; }
+
+    /* Lista simple con marcadores cian */
+    #iso .list{
+      margin:.4rem 0 1rem; padding-left:1.1rem; color:var(--txt);
+    }
+    #iso .list li{ margin:.35rem 0; }
+    #iso .list li::marker{ color: var(--cian); }
+
+    /* Nota final sutil */
+    #iso .note{
+      margin-top:.8rem; font-weight:600; color:var(--txt);
+    }
+
+    /* Responsive */
+    @media (max-width: 860px){
+      #iso .wrap{ grid-template-columns: 1fr; }
+      #iso .logo{ aspect-ratio:auto; padding:10px; }
+      #iso .logo img{ max-width:140px; }
+      #iso .lead{ margin-bottom:1.6rem; }
+    }
+    @media (prefers-reduced-motion:reduce){
+      #iso .logo img{ transition:none !important; }
+    }
+  </style>
+
+  <h2 id="iso-title" class="title">¿Por qué somos tu mejor opción?</h2>
+  <div class="wrap">
+    <figure class="logo" aria-hidden="true">
+      <img src="https://39944653.servicio-online.net/wp-content/uploads/2025/10/Iso-2.png" alt="ISO 27001">
+    </figure>
+
+    <div class="content">
+      <h3>🔒 Seguridad certificada internacionalmente</h3>
+      <p>Trabajamos bajo el estándar <strong>ISO&nbsp;27001</strong>, con controles y auditorías continuas.</p>
+
+      <h3>✅ Beneficios para ti</h3>
+      <ul class="list">
+        <li><strong>Protección de datos</strong> con prácticas de alto nivel.</li>
+        <li><strong>Cumplimiento</strong> con normativas internacionales.</li>
+        <li><strong>Confianza</strong> avalada por auditorías externas.</li>
+        <li><strong>Menos riesgos</strong> de filtraciones y pérdidas.</li>
+      </ul>
+
+      <p class="note">Tu tranquilidad es nuestra prioridad.</p>
     </div>
-    <div class="card-iso-animada">
-        <div class="contenido-iso">
-            <div class="texto-iso">
-                <p>
-                    La <strong>ISO/IEC 27001</strong> es una norma internacional que define los requisitos para
-                    establecer, implementar, mantener y mejorar un Sistema de Gestión de Seguridad de la Información
-                    (SGSI). Está diseñada para proteger activos informativos frente a amenazas como el acceso no
-                    autorizado, la pérdida de datos o ciberataques.
-                </p>
-                <p>
-                    Esta certificación garantiza que una organización gestiona sus datos sensibles de forma segura y
-                    estructurada, cumpliendo buenas prácticas y controles rigurosos definidos por la norma ISO. Además,
-                    demuestra el compromiso de la empresa con la confidencialidad, integridad y disponibilidad de la
-                    información, generando confianza en clientes y socios.
-                </p>
-                <p>
-                    En nuestra empresa, la obtención de la certificación ISO 27001 refleja nuestro esfuerzo por proteger
-                    tus datos en todos los procesos internos, cumpliendo con estándares reconocidos internacionalmente.
-                </p>
-            </div>
-            <div class="logo-iso">
-                <img src="http://localhost/mi_web/wp-content/uploads/2025/09/Iso-2.png" alt="Logo ISO 27001">
-            </div>
-        </div>
-    </div>
+  </div>
 </section>
-<style>
-    .card-iso-animada {
-        max-width: 1160px;
-        margin: 0 auto;
-        border-radius: 16px;
-        background: rgba(255, 255, 255, 0.04);
-        box-shadow: 0 0 12px rgba(0, 255, 255, 0.08);
-        padding: 2rem;
-        font-family: 'Segoe UI', sans-serif;
-        animation: fadeUp 0.6s ease-out forwards;
-        transform: translateY(30px);
-        opacity: 0;
-    }
-
-    .header-iso {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: #00cfff;
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-        justify-content: center;
-        text-align: center;
-        margin-bottom: 1.5rem;
-    }
-
-
-    .contenido-iso {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 2rem;
-    }
-
-    .texto-iso {
-        flex: 1 1 60%;
-        min-width: 280px;
-        text-align: justify;
-        color: #cdefff;
-    }
-
-    .texto-iso p {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        margin-bottom: 1.4rem;
-    }
-
-    .texto-iso p:last-child {
-        margin-bottom: 0;
-    }
-
-    .logo-iso {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1;
-    }
-
-    /* ❌ Elimina el círculo animado detrás */
-    .logo-iso::before {
-        display: none;
-    }
-
-    .logo-iso img {
-        width: 100%;
-        max-width: 180px;
-        height: auto;
-        /* ❌ Quitar sombra */
-        filter: none;
-        transition: transform 0.3s ease;
-            margin-right: 60px;
-
-    }
-
-    .logo-iso img:hover {
-        transform: scale(1.05);
-    }
-
-
-
-    @media (max-width: 768px) {
-        .contenido-iso {
-            flex-direction: column;
-            text-align: center;
-            padding: 1rem;
-        }
-
-        .logo-iso {
-            margin-top: 1.5rem;
-        }
-
-        .logo-iso img {
-            width: 85%;
-        }
-    }
-
-    @keyframes pulseGlow {
-
-        0%,
-        100% {
-            transform: scale(1);
-            opacity: 0.7;
-        }
-
-        50% {
-            transform: scale(1.08);
-            opacity: 1;
-        }
-    }
-</style>

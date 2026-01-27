@@ -1,30 +1,49 @@
 <!-- ESPACIO SUPERIOR PARA DEJAR CABECERA FIJA -->
 <div class="header-spacing"> </div>
 <!-- CABECERA FIJA, CON CONTENIDO CENTRADO -->
-<div class="header-wrapper"><header class="header-fixed"><!-- Topbar -->
-<div class="topbar">
-<div class="container">
-<div class="topbar-left"><a href="#">Nosotros</a> <a href="#">Actualidad</a> <a href="#">Contáctanos</a></div>
-<div class="topbar-right"><span class="telefono">Tel. 900 35 00 11</span> <i class="fab fa-facebook-f"></i> <i class="fab fa-linkedin-in"></i> <i class="fab fa-instagram"></i> <i class="fab fa-youtube"></i></div>
+<div class="header-wrapper">
+    <header class="header-fixed"><!-- Topbar -->
+        <div class="topbar">
+            <div class="container">
+                <div class="topbar-left"><a href="/nosotros">Nosotros</a> <a href="#">Actualidad</a> <a
+                        href="/contacto">Contáctanos</a></div>
+                <div class="topbar-right"> </div>
+            </div>
+        </div>
+        <!-- Navbar -->
+        <div class="navbar">
+            <div class="container navbar-inner">
+                <div class="logo"><a href="/"> <img
+                            src="https://39944653.servicio-online.net/wp-content/uploads/2025/10/SKYNETpng.png"
+                            alt="Logo Skynet" /> </a></div>
+                <nav class="nav-links">
+                    <a href="/">Inicio</a>
+                    <a href="/nosotros" class="nav-nosotros">Nosotros</a>
+                    <a href="/servicios-it">Servicios IT</a>
+                    <a href="/comunicacion-web">Comunicación WEB</a>
+                    <a href="/ciberseguridad">Ciberseguridad</a>
+                    <a href="/normativa">Normativa</a>
+                </nav>
+
+            </div>
+        </div>
+    </header>
 </div>
-</div>
-<!-- Navbar -->
-<div class="navbar">
-<div class="container navbar-inner">
-<div class="logo"><img src="https://localhost/mi_web/wp-content/uploads/2025/10/SKYNETpng.png" alt="Logo Skynet" /></div>
-<nav class="nav-links"><a class="active" href="https://localhost/mi_web/">Inicio</a> <a href="https://localhost/mi_web/nosotros">Nosotros</a> <a href="#">Servicios IT</a> <a href="#">Comunicación WEB</a> <a href="#">Ciberseguridad</a> <a href="#">RGPD</a></nav></div>
-</div>
-</header></div>
-<p><style>
+<p>
+    <style>
         body {
             font-family: 'Segoe UI', sans-serif;
             background: radial-gradient(circle, #247ba0 0%, #1b4f72 100%);
             color: white;
         }
 
+        /* =========================
+		 BASE HEADER
+		 ========================= */
         .header-spacing {
-            height: 160px;
-            /* antes estaba en 116px */
+            height: 112px;
+            transition: height .6s cubic-bezier(.16, 1, .3, 1);
+            will-change: height;
         }
 
         .header-wrapper {
@@ -34,6 +53,10 @@
             width: 100%;
             z-index: 100;
             background: transparent;
+
+            transform: translateY(0);
+            transition: transform .7s cubic-bezier(.16, 1, .3, 1);
+            will-change: transform;
         }
 
         .header-fixed {
@@ -44,7 +67,6 @@
             overflow: hidden;
         }
 
-
         .container {
             max-width: 1280px;
             margin: 0 auto;
@@ -54,10 +76,24 @@
             align-items: center;
         }
 
+        /* =========================
+		 TOPBAR (MEGA SUAVE)
+		 ========================= */
         .topbar {
             background-color: #126b97;
             padding: 8px 0;
             font-size: 14px;
+
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+
+            transition:
+                opacity .55s cubic-bezier(.16, 1, .3, 1),
+                transform .65s cubic-bezier(.16, 1, .3, 1),
+                filter .55s cubic-bezier(.16, 1, .3, 1),
+                padding .55s cubic-bezier(.16, 1, .3, 1);
+            will-change: opacity, transform, filter;
         }
 
         .topbar-left a {
@@ -84,28 +120,26 @@
             width: 100%;
         }
 
-        .topbar-right span {
-            margin-right: 12px;
-            font-weight: 500;
-            color: white;
+        /* Estado colapsado SIN max-height (evita salto) */
+        .header-wrapper.is-scrolled .topbar,
+        .header-wrapper.is-leaving .topbar {
+            opacity: 0;
+            transform: translateY(-10px);
+            filter: blur(2px);
+            padding: 0 !important;
+            pointer-events: none;
         }
 
-        .topbar-right i {
-            color: white !important;
-            margin-right: 12px;
-            font-size: 14px;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-
-        .topbar-right i:hover {
-            transform: scale(1.1);
-            opacity: 0.85;
-            cursor: pointer;
-        }
-
+        /* =========================
+		 NAVBAR NORMAL
+		 ========================= */
         .navbar {
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(6px);
+            transition:
+                background-color .6s cubic-bezier(.16, 1, .3, 1),
+                backdrop-filter .6s cubic-bezier(.16, 1, .3, 1),
+                padding .6s cubic-bezier(.16, 1, .3, 1);
         }
 
         .navbar-inner {
@@ -113,10 +147,21 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+
+            transition:
+                transform .75s cubic-bezier(.16, 1, .3, 1),
+                width .75s cubic-bezier(.16, 1, .3, 1),
+                height .6s cubic-bezier(.16, 1, .3, 1),
+                border-radius .75s cubic-bezier(.16, 1, .3, 1),
+                box-shadow .75s cubic-bezier(.16, 1, .3, 1),
+                background .75s cubic-bezier(.16, 1, .3, 1),
+                padding .6s cubic-bezier(.16, 1, .3, 1);
+            will-change: transform;
         }
 
         .logo img {
             height: 54px;
+            transition: height .6s cubic-bezier(.16, 1, .3, 1), filter .6s cubic-bezier(.16, 1, .3, 1);
         }
 
         .nav-links {
@@ -131,7 +176,12 @@
             font-size: 15px;
             position: relative;
             padding: 8px 0;
-            transition: color 0.3s;
+
+            transition:
+                color .35s ease,
+                background .35s ease,
+                transform .35s ease,
+                padding .6s cubic-bezier(.16, 1, .3, 1);
         }
 
         .nav-links a::after {
@@ -142,7 +192,7 @@
             height: 2px;
             width: 0;
             background-color: #0077c2;
-            transition: width 0.3s;
+            transition: width 0.3s ease;
         }
 
         .nav-links a:hover::after,
@@ -155,13 +205,155 @@
             color: #0077c2;
         }
 
-        .telefono {
-            color: white;
-            margin-right: 12px;
-            font-weight: 500;
+        /* =========================
+	   FLOATING BAR (MISMA ALTURA QUE NAVBAR NORMAL)
+	   ========================= */
+        :root {
+            --nav-radius: 18px;
+            --nav-shadow: 0 14px 34px rgba(0, 0, 0, .16);
+            --nav-glass: rgba(255, 255, 255, .82);
+            --nav-glass-strong: rgba(255, 255, 255, .94);
+            --nav-accent: #0077c2;
+            --nav-h: 76px;
+            /* <- igual que .navbar-inner normal */
+            --nav-top-offset: 0px;
+            /* <- cuánto baja el flotante (antes 10px + padding) */
         }
 
+        /* wrapper: menos “bajada” */
+        .header-wrapper.is-scrolled {
+            transform: translateY(0) !important;
+        }
 
+        /* navbar exterior: sin padding extra (esto era lo que lo separaba) */
+        .header-wrapper.is-scrolled .navbar {
+            background: transparent;
+            backdrop-filter: none;
+            padding: 0;
+            /* <- antes 10px 0 14px */
+            transition-delay: .08s;
+        }
+
+        /* UNA sola definición del flotante (quita duplicados) */
+        .header-wrapper.is-scrolled .navbar-inner {
+            position: relative;
+            height: var(--nav-h);
+            /* <- 76px */
+            width: min(1120px, calc(100% - 28px));
+            margin: 0 auto;
+
+            background: rgba(255, 255, 255, .90);
+            backdrop-filter: blur(14px);
+
+            border-radius: var(--nav-radius);
+            border: 1px solid rgba(15, 23, 42, .10);
+            box-shadow: var(--nav-shadow);
+
+            padding: 0 18px;
+            gap: 16px;
+
+            transform: translateY(0) scale(1);
+        }
+
+        /* Halo sutil (si lo quieres, que sea “fino”) */
+        .header-wrapper.is-scrolled .navbar-inner::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            border-radius: var(--nav-radius);
+            padding: 1px;
+            background: linear-gradient(90deg,
+                    rgba(0, 119, 194, .20),
+                    rgba(10, 162, 165, .12),
+                    rgba(0, 119, 194, .08));
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: .22;
+        }
+
+        /* Logo: para que encaje en 76px sin “aplastar” */
+        .header-wrapper.is-scrolled .logo img {
+            height: 46px;
+            /* antes 40px */
+            filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .15));
+        }
+
+        /* Links: ajusta padding para que no aumenten “altura visual” */
+        .header-wrapper.is-scrolled .nav-links {
+            gap: 10px;
+            align-items: center;
+            position: relative;
+        }
+
+        .header-wrapper.is-scrolled .nav-links a {
+            font-size: 14px;
+            padding: 9px 12px;
+            /* antes 10px 12px */
+            border-radius: 999px;
+            color: #0f172a;
+        }
+
+        /* =========================
+	   HOVER / ACTIVE en modo is-scrolled (faltaba)
+	   ========================= */
+
+        /* Hover */
+        .header-wrapper.is-scrolled .nav-links a:hover {
+            background: rgba(0, 119, 194, .10);
+            color: var(--nav-accent);
+            transform: translateY(-1px);
+            box-shadow: inset 0 0 0 1px rgba(0, 119, 194, .14);
+        }
+
+        /* Active (link actual) */
+        .header-wrapper.is-scrolled .nav-links a.active {
+            background: rgba(0, 119, 194, .14);
+            color: var(--nav-accent);
+            box-shadow: inset 0 0 0 1px rgba(0, 119, 194, .20);
+        }
+
+        /* Focus accesible (teclado) */
+        .header-wrapper.is-scrolled .nav-links a:focus-visible {
+            outline: 2px solid rgba(0, 119, 194, .45);
+            outline-offset: 2px;
+            border-radius: 999px;
+        }
+
+        .header-wrapper.is-scrolled .nav-links a::after {
+            display: none;
+        }
+
+        /* ============ FASES (ENTER / SETTLE / LEAVE) ============ */
+        /* Enter: aparece con “glide” */
+        .header-wrapper.is-scrolled.is-entering .navbar-inner {
+            transform: translateY(-10px) scale(.982);
+            box-shadow: 0 10px 26px rgba(0, 0, 0, .12);
+            transition-timing-function: cubic-bezier(.16, 1, .3, 1);
+        }
+
+        .header-wrapper.is-scrolled.is-entering .navbar-inner::before {
+            opacity: .55;
+        }
+
+        /* Leave: vuelve arriba sin golpe */
+        .header-wrapper.is-leaving {
+            transform: translateY(0);
+        }
+
+        .header-wrapper.is-leaving .navbar {
+            transition-delay: 0s;
+        }
+
+        .header-wrapper.is-leaving .navbar-inner {
+            transform: translateY(6px) scale(.992);
+            box-shadow: 0 10px 22px rgba(0, 0, 0, .10);
+        }
+
+        /* =========================
+		 Responsive
+		 ========================= */
         @media (max-width: 960px) {
             .nav-links {
                 flex-wrap: wrap;
@@ -175,8 +367,180 @@
                 gap: 10px;
             }
 
-            .header-fixed {
+            /* En móvil: sin pastilla */
+            .header-wrapper.is-scrolled {
+                transform: translateY(0);
+            }
+
+            .header-wrapper.is-scrolled .navbar {
+                background: rgba(255, 255, 255, .95);
+                backdrop-filter: blur(0px);
+                padding: 0;
+            }
+
+            .header-wrapper.is-scrolled .navbar-inner {
+                width: 100%;
+                margin: 0;
                 border-radius: 0;
+                box-shadow: 0 10px 24px rgba(0, 0, 0, .12);
+                padding: 10px 16px;
+                height: auto;
+            }
+
+            .header-wrapper.is-scrolled .navbar-inner::before {
+                display: none;
+            }
+
+            /* Separador vertical suele sobrar cuando ya no es “pill” */
+            .header-wrapper.is-scrolled .nav-links::before {
+                opacity: .55;
+                /* o directamente display:none; */
             }
         }
-    </style></p>
+
+        /* ======= ENTER (BAJADA) MÁS SUAVE ======= */
+
+        /* Cuando entra en scroll, que el wrapper baje un poco más "mantequilla" */
+        .header-wrapper.is-scrolled {
+            transition-duration: .92s;
+            /* antes .7s */
+            transition-timing-function: cubic-bezier(.12, 1, .22, 1);
+        }
+
+        /* Topbar: al entrar, que se vaya con un pelín de delay */
+        .header-wrapper.is-scrolled .topbar {
+            transition-delay: .06s, .06s, .06s, .06s;
+            /* aplica a opacity/transform/filter/padding */
+        }
+
+        /* Pastilla: entrada menos agresiva */
+        .header-wrapper.is-scrolled.is-entering .navbar-inner {
+            transform: translateY(-6px) scale(.990);
+            /* antes -10px scale .982 */
+            box-shadow: 0 12px 30px rgba(0, 0, 0, .13);
+        }
+
+        /* Halo: también más suave */
+        .header-wrapper.is-scrolled.is-entering .navbar-inner::before {
+            opacity: .62;
+            /* antes .55 */
+        }
+
+        /* Opcional: al entrar, que el navbar "aire" no cambie tan rápido */
+        .header-wrapper.is-scrolled .navbar {
+            transition-duration: .75s;
+            /* antes .6s */
+            transition-timing-function: cubic-bezier(.12, 1, .22, 1);
+        }
+
+        .nav-nosotros {
+            display: none;
+        }
+
+        .header-wrapper.is-scrolled .nav-nosotros {
+            display: inline-flex;
+        }
+
+        body {
+            overflow-y: scroll;
+        }
+
+        /* Chrome / Edge / Safari */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.25);
+            border-radius: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(255, 255, 255, 0.45);
+        }
+
+        .topbar-left a.active::after {
+            width: 100%;
+        }
+    </style>
+    <script>
+        // Active link (tu lógica, intacta)
+        document.addEventListener("DOMContentLoaded", function () {
+            const links = document.querySelectorAll(".nav-links a, .topbar-left a");
+            const currentPath = window.location.pathname.replace(/\/$/, "");
+            links.forEach(link => {
+                const linkPath = link.getAttribute("href").replace(/\/$/, "");
+                if (linkPath === currentPath || (linkPath === "/" && currentPath === "")) {
+                    link.classList.add("active");
+                }
+            });
+        });
+    </script>
+    <script>
+        // Scroll ultra suave: hysteresis + entering/leaving + RAF (sin tirones)
+        document.addEventListener("DOMContentLoaded", function () {
+            const headerWrap = document.querySelector(".header-wrapper");
+            const spacing = document.querySelector(".header-spacing");
+            if (!headerWrap) return;
+
+            const ENTER_Y = 26;   // antes 22 (entra un poco más tarde)
+            const EXIT_Y = 8;    // igual
+            const ENTER_MS = 420; // antes 320 (fase entering más larga)
+            const LEAVE_MS = 260; // igual
+
+            let isScrolled = false;
+            let enterTimer = null;
+            let leaveTimer = null;
+            let raf = null;
+
+            function setSpacing(h) {
+                if (!spacing) return;
+                if (raf) cancelAnimationFrame(raf);
+                raf = requestAnimationFrame(() => {
+                    spacing.style.height = h;
+                });
+            }
+
+            function beginEnter() {
+                headerWrap.classList.add("is-entering");
+                clearTimeout(enterTimer);
+                enterTimer = setTimeout(() => {
+                    headerWrap.classList.remove("is-entering");
+                }, ENTER_MS);
+            }
+
+            function beginLeave() {
+                headerWrap.classList.add("is-leaving");
+                clearTimeout(leaveTimer);
+                leaveTimer = setTimeout(() => {
+                    headerWrap.classList.remove("is-leaving");
+                }, LEAVE_MS);
+            }
+
+            function onScroll() {
+                const y = window.scrollY || 0;
+
+                if (!isScrolled && y > ENTER_Y) {
+                    isScrolled = true;
+                    headerWrap.classList.remove("is-leaving");
+                    headerWrap.classList.add("is-scrolled");
+                    beginEnter();
+                    setSpacing("76px");
+                } else if (isScrolled && y < EXIT_Y) {
+                    isScrolled = false;
+                    headerWrap.classList.remove("is-entering");
+                    headerWrap.classList.remove("is-scrolled");
+                    beginLeave();
+                    setSpacing("160px");
+                }
+            }
+
+            onScroll();
+            window.addEventListener("scroll", onScroll, { passive: true });
+        });
+    </script>
+</p>

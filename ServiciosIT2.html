@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seguridad IT - Servicios</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #2b90e3;
+      --muted: #6b7280;
+      --card: rgba(255, 255, 255, 0.22);
+      --container: 1100px;
+      font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #126b97 0%, #3bc6e7 100%);
+      color: #111;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    #tech-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .wrap {
+      max-width: var(--container);
+      margin: 48px auto;
+      padding: 32px 24px 24px 24px;
+      position: relative;
+      z-index: 2;
+      background: var(--card);
+      backdrop-filter: blur(0px);
+      box-shadow: 0 8px 32px rgba(44, 70, 130, 0.12);
+      border-radius: 24px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #eef6ff;
+      color: var(--accent);
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 15px;
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+      box-shadow: 0 2px 12px rgba(43, 144, 227, 0.08);
+    }
+
+    .headline-block {
+      max-width: 870px;
+      padding-left: 10px;
+      padding-right: 10px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .headline-block h1 {
+      font-size: 60px;
+      font-weight: 900;
+      margin: 10px 0 24px 0;
+      line-height: 1.05;
+      letter-spacing: -1px;
+      background: linear-gradient(90deg, #ffffff 0%, #e0f2ff 70%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .headline-block .divider {
+      display: block;
+      height: 4px;
+      width: 280px;
+      margin: 0 auto 18px;
+      background: linear-gradient(90deg, #18476b 0%, #2b90e3 100%);
+      opacity: 0.95;
+      border-radius: 8px;
+      box-shadow: 0 1px 8px rgba(40, 64, 105, 0.18);
+    }
+
+    .headline-block .lead {
+      color: #cdefff;
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 1.6;
+      margin-bottom: 18px;
+      margin-top: 6px;
+      text-shadow: 0 2px 12px rgba(43, 144, 227, 0.07);
+      letter-spacing: 0.01em;
+      max-width: 720px;
+    }
+
+    @media (max-width:700px){
+      .headline-block {
+        max-width: 100%;
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+      .headline-block h1 { font-size: 36px; }
+      .headline-block .lead { font-size: 18px; }
+    }
+
+    @media (max-width:500px){
+      .headline-block {
+        padding-left: 2px;
+        padding-right: 2px;
+      }
+      .headline-block h1 { font-size: 28px; }
+      .headline-block .lead { font-size: 16px; }
+    }
+
+    .security-list {
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .security-item {
+      background: linear-gradient(180deg, #fafbfc 0%, #f5f7fa 100%);
+      border-radius: 18px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      transition: box-shadow .25s, transform .25s;
+      border: 1px solid rgba(43, 144, 227, 0.11);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .security-item:hover {
+      box-shadow: 0 12px 36px rgba(44, 70, 130, 0.16);
+      transform: translateX(8px);
+      border-color: var(--accent);
+    }
+
+    .security-item .icon {
+      width: 56px;
+      height: 56px;
+      min-width: 56px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid #eef2ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 28px;
+      box-shadow: 0 4px 16px rgba(43, 144, 227, 0.13);
+    }
+
+    .security-item .content {
+      flex: 1;
+    }
+
+    .security-item h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+      color: #17446a;
+      letter-spacing: 0.01em;
+    }
+
+    .security-item .description {
+      color: #556677;
+      font-size: 0.95rem;
+      margin: 0;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    @media (max-width:700px) {
+      .wrap {
+        padding: 20px 16px;
+      }
+
+      .security-item {
+        padding: 20px 18px;
+        gap: 16px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .security-item:hover {
+        transform: translateY(-4px);
+      }
+
+      .security-item h3 {
+        font-size: 1.2rem;
+      }
+
+      .security-item .description {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width:500px) {
+      .tag {
+        font-size: 12px;
+      }
+
+      .security-item {
+        padding: 18px 16px;
+      }
+
+      .security-item .icon {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        font-size: 24px;
+      }
+
+      .security-item h3 {
+        font-size: 1.1rem;
+      }
+
+      .security-item .description {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="tech-bg"></canvas>
+  <div class="wrap">
+    <span class="tag">Servicios IT</span>
+    <div class="headline-block">
+      <h1>Seguridad en Tecnologías<br>de la Información</h1>
+      <div class="divider"></div>
+      <p class="lead">Protegemos todos los aspectos críticos de tu negocio con medidas de seguridad integrales que cubren sistemas, infraestructuras y aplicaciones.</p>
+    </div>
+
+    <div class="security-list">
+      <div class="security-item">
+        <div class="icon">🛡️</div>
+        <div class="content">
+          <h3>Seguridad Perimetral Lógica</h3>
+          <p class="description">Firewall, Unified Threat Management (UTM), Next Generation Firewall (NGFW), Intrusion Detection Systems (IDS), Intrusion Protection Systems (IPS), Sistemas anti Distributed Deny of Service (DDoS)</p>
+        </div>
+      </div>
+
+      <div class="security-item">
+        <div class="icon">💻</div>
+        <div class="content">
+          <h3>Seguridad para puesto de trabajo</h3>
+          <p class="description">Antivirus, AntiSPAM, AntiMalware, Control de Aplicaciones</p>
+        </div>
+      </div>
+
+      <div class="security-item">
+        <div class="icon">🌐</div>
+        <div class="content">
+          <h3>Control de Navegación WEB</h3>
+          <p class="description">Control de contenidos, Políticas de navegación, Gestión de ancho de banda</p>
+        </div>
+      </div>
+
+      <div class="security-item">
+        <div class="icon">📱</div>
+        <div class="content">
+          <h3>Seguridad para dispositivos móviles</h3>
+          <p class="description">Mobile Device Management, Network Access Control (NAC)</p>
+        </div>
+      </div>
+
+      <div class="security-item">
+        <div class="icon">📧</div>
+        <div class="content">
+          <h3>Seguridad en Correo Electrónico</h3>
+          <p class="description">Protección integral para comunicaciones corporativas y prevención de amenazas</p>
+        </div>
+      </div>
+
+      <div class="security-item">
+        <div class="icon">🔒</div>
+        <div class="content">
+          <h3>Seguridad en Sistemas WEB</h3>
+          <p class="description">Web Application Firewall (WAF)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Fondo de partículas
+    const canvas = document.getElementById('tech-bg');
+    const ctx = canvas.getContext('2d');
+    let width, height, time = 0;
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    const particles = [];
+    const particleCount = 52;
+
+    function resetParticles() {
+      particles.length = 0;
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          size: Math.random() * 2 + 1.6
+        });
+      }
+    }
+    resetParticles();
+    window.addEventListener('resize', resetParticles);
+
+    function drawParticles() {
+      particles.forEach((p, i) => {
+        const pulse = Math.sin(time + i) * 0.6 + 1.1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size * pulse, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(144,224,239,0.72)';
+        ctx.shadowColor = 'rgba(144,224,239,0.7)';
+        ctx.shadowBlur = 10 * pulse;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 130) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(144,224,239,${(1 - dist / 130) * 0.17})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) p.x = width;
+        if (p.x > width) p.x = 0;
+        if (p.y < 0) p.y = height;
+        if (p.y > height) p.y = 0;
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      drawParticles();
+      time += 0.014;
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>

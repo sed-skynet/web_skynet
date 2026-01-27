@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Soluciones TIC & Seguridad | Infraestructura y Ciberseguridad</title>
+
+  <meta name="description" content="Soluciones TIC, infraestructura IT y ciberseguridad para empresas. Redes, cloud, sistemas y protección avanzada.">
+  <meta name="keywords" content="servicios IT, ciberseguridad, infraestructura, redes, cloud, sistemas">
+  <meta name="author" content="Soluciones TIC & Seguridad">
+
+  <meta property="og:title" content="Soluciones TIC & Seguridad">
+  <meta property="og:description" content="Infraestructura IT y ciberseguridad empresarial">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    /* PARTNERS TITLE PROTAGONISMO */
+    .partners-title {
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 14px;
+    }
+
+    .partners-line {
+      width: 90px;
+      height: 4px;
+      margin: -15px auto 0;
+      background: linear-gradient(90deg, #2b90e3, #7dd3fc);
+      border-radius: 999px;
+      box-shadow: 0 4px 14px rgba(43, 144, 227, 0.6);
+    }
+
+    .partner-logo {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 12px 18px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    .partner-logo:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+    }
+
+    .partner-logo img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    .logo-watchguard {
+      transform: scale(1.25);
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 8px 32px rgba(44, 70, 130, 0.18);
+    }
+
+    /* ANIMACIÓN SCROLL INDICATOR */
+    @keyframes bounce-slow {
+      0%, 100% { transform: translateY(0); opacity: 0.6; }
+      50% { transform: translateY(10px); opacity: 1; }
+    }
+
+    .animate-bounce-slow {
+      animation: bounce-slow 2s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-[#126b97] to-[#3bc6e7] relative overflow-x-hidden py-12 px-4 text-white">
+
+  <canvas id="tech-bg" class="fixed inset-0 z-0 pointer-events-none"></canvas>
+
+  <main class="relative z-10 max-w-[1100px] mx-auto space-y-16">
+
+    <section class="glass-card rounded-[32px] p-10 md:p-16">
+
+      <div class="grid lg:grid-cols-2 gap-12 items-center -mt-16">
+        <div class="flex flex-col justify-center">
+          <span class="inline-block w-fit mb-6 px-6 py-2.5 text-sm font-bold bg-blue-50 text-blue-600 rounded-full">
+            Servicios IT Profesionales
+          </span>
+
+          <h1 class="text-4xl sm:text-5xl xl:text-6xl font-black leading-tight text-white my-6">
+            Soluciones TIC<br>para empresas
+          </h1>
+
+          <p class="text-lg text-sky-100 max-w-xl leading-relaxed">
+            Diseñamos, protegemos y optimizamos infraestructuras tecnológicas modernas
+            para garantizar continuidad, seguridad y crecimiento.
+          </p>
+        </div>
+
+        <div class="flex items-center justify-center lg:justify-end h-full">
+          <div id="lottie-animation" class="w-full max-w-[450px] aspect-square lg:h-auto"></div>
+        </div>
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-white/10 text-center">
+        <h3 class="partners-title">Partners tecnológicos</h3>
+        <div class="partners-line"></div>
+
+        <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20 mt-10">
+          <div class="partner-logo h-20 w-40 flex items-center justify-center">
+            <img src="https://darknet-sys.com/wp-content/uploads/2026/01/bp-del-e1769514187514.png" alt="Dell Partner" />
+          </div>
+          <div class="partner-logo h-20 w-40 flex items-center justify-center">
+            <img src="https://darknet-sys.com/wp-content/uploads/2026/01/wg1-Gold-Reseller-logo.png" alt="WatchGuard Partner" class="logo-watchguard" />
+          </div>
+          <div class="partner-logo h-20 w-40 flex items-center justify-center">
+            <img src="https://darknet-sys.com/wp-content/uploads/2026/01/acens-logo-2.webp" alt="Acens Partner" />
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 flex flex-col items-center gap-2 animate-bounce-slow opacity-80">
+        <span class="text-[10px] uppercase tracking-[0.3em] font-bold text-sky-200">Explorar servicios</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+        </svg>
+      </div>
+
+    </section>
+
+    </main>
+</body>
+</html>

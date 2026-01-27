@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servicios IT - RGPD</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #2b90e3;
+      --muted: #6b7280;
+      --card: rgba(255, 255, 255, 0.22);
+      --container: 1100px;
+      font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #126b97 0%, #3bc6e7 100%);
+      color: #111;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    #tech-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .wrap {
+      max-width: var(--container);
+      margin: 48px auto;
+      padding: 32px 24px 24px 24px;
+      position: relative;
+      z-index: 2;
+      background: var(--card);
+      backdrop-filter: blur(0px);
+      box-shadow: 0 8px 32px rgba(44, 70, 130, 0.12);
+      border-radius: 24px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #eef6ff;
+      color: var(--accent);
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 15px;
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+      box-shadow: 0 2px 12px rgba(43, 144, 227, 0.08);
+    }
+
+    .headline-block {
+      max-width: 600px;
+      padding-left: 10px;
+      padding-right: 10px;
+      margin-bottom: 36px;
+    }
+
+    .headline-block h1 {
+      font-size: 52px;
+      font-weight: 900;
+      margin: 10px 0 20px 0;
+      line-height: 1.05;
+      letter-spacing: -1px;
+      background: linear-gradient(90deg, #ffffff 0%, #e0f2ff 70%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .headline-block .divider {
+      display: block;
+      height: 4px;
+      width: 100%;
+      margin-bottom: 18px;
+      background: linear-gradient(90deg, #18476b 0%, #2b90e3 100%);
+      opacity: 0.95;
+      border-radius: 8px;
+      box-shadow: 0 1px 8px rgba(40, 64, 105, 0.18);
+    }
+
+    .headline-block .lead {
+      color: #cdefff;
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 1.6;
+      text-align: justify;
+      margin-bottom: 18px;
+    }
+
+    .video-container {
+      width: 100%;
+      max-width: 600px;
+      margin: 20px 0;
+    }
+
+    video {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+    }
+
+    .rgpd-content {
+      background: linear-gradient(135deg, rgba(43, 144, 227, 0.75) 0%, rgba(27, 118, 191, 0.8) 100%);
+      padding: 28px;
+      border-radius: 18px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+      color: #fff;
+      line-height: 1.6;
+      font-size: 17px;
+      text-align: justify;
+    }
+
+    @media (max-width:700px) {
+      .headline-block h1 {
+        font-size: 36px;
+      }
+
+      .headline-block .lead {
+        font-size: 18px;
+      }
+
+      .rgpd-content {
+        font-size: 16px;
+        padding: 20px;
+      }
+    }
+
+    @media (max-width:500px) {
+      .headline-block h1 {
+        font-size: 28px;
+      }
+
+      .headline-block .lead {
+        font-size: 16px;
+      }
+
+      .rgpd-content {
+        font-size: 15px;
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="tech-bg"></canvas>
+  <div class="wrap">
+    <span class="tag">Servicios IT</span>
+    <div class="headline-block">
+      <h1>Confidencialidad y privacidad asegurada para empresas</h1>
+      <div class="divider"></div>
+      <p class="lead">Cumplimos con el Reglamento General de Protección de Datos (RGPD) para garantizar la seguridad de la información de tu empresa y proteger los datos de tus clientes.</p>
+    </div>
+    <div class="rgpd-content">
+      <p>El Reglamento General de Protección de Datos o RGPD es la norma obligatoria que afecta por igual a las grandes corporaciones y a las micropymes. El nuevo RGPD entró en vigor en mayo de 2016 y es de obligado cumplimiento para todas las empresas de la Unión Europea desde el 25 de mayo de 2018.</p>
+      <p>El reglamento otorga un mayor control y seguridad a los ciudadanos sobre su información personal en el mundo 2.0, y otorga a cada individuo el derecho a que sus datos sean utilizados o no por cualquier entidad, pública o privada, así como la manera en la que se accede a ellos y la posibilidad de retirar dicho acceso en cualquier momento.</p>
+    </div>
+  </div>
+
+  <!-- Librería Lottie y Fondo de Partículas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <script>
+    const canvas = document.getElementById('tech-bg');
+    const ctx = canvas.getContext('2d');
+    let width, height, time = 0;
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    const particles = [];
+    const particleCount = 52;
+
+    function resetParticles() {
+      particles.length = 0;
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          size: Math.random() * 2 + 1.6
+        });
+      }
+    }
+    resetParticles();
+    window.addEventListener('resize', resetParticles);
+
+    function drawParticles() {
+      particles.forEach((p, i) => {
+        const pulse = Math.sin(time + i) * 0.6 + 1.1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size * pulse, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(144,224,239,0.72)';
+        ctx.shadowColor = 'rgba(144,224,239,0.7)';
+        ctx.shadowBlur = 10 * pulse;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 130) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(144,224,239,${(1 - dist / 130) * 0.17})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) p.x = width;
+        if (p.x > width) p.x = 0;
+        if (p.y < 0) p.y = height;
+        if (p.y > height) p.y = 0;
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      drawParticles();
+      time += 0.014;
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+
+</html>

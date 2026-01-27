@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Servicios IT</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --accent: #2b90e3;
+            --muted: #6b7280;
+            --card: rgba(255, 255, 255, 0.22);
+            --container: 1100px;
+            font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #126b97;
+            color: #111;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        #tech-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .wrap {
+            max-width: var(--container);
+            margin: 48px auto;
+            padding: 32px 24px 24px 24px;
+            position: relative;
+            z-index: 2;
+            background: var(--card);
+            backdrop-filter: blur(0px);
+            box-shadow: 0 8px 32px rgba(44, 70, 130, 0.12);
+            border-radius: 24px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #eef6ff;
+            color: var(--accent);
+            font-weight: 700;
+            padding: 7px 14px;
+            border-radius: 999px;
+            font-size: 15px;
+            margin-bottom: 8px;
+            letter-spacing: 0.02em;
+            box-shadow: 0 2px 12px rgba(43, 144, 227, 0.08);
+        }
+
+        .headline-block {
+            max-width: 600px;
+            margin-bottom: 36px;
+        }
+
+        .headline-block h1 {
+            font-size: 52px;
+            font-weight: 900;
+            margin: 10px 0 20px 0;
+            line-height: 1.05;
+            letter-spacing: -1px;
+            background: linear-gradient(90deg, #ffffff 0%, #e0f2ff 70%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .headline-block .divider {
+            display: block;
+            height: 4px;
+            width: 100%;
+            margin-bottom: 18px;
+            background: linear-gradient(90deg, #18476b 0%, #2b90e3 100%);
+            opacity: 0.95;
+            border-radius: 8px;
+            box-shadow: 0 1px 8px rgba(40, 64, 105, 0.18);
+        }
+
+        .headline-block .lead {
+            color: #cdefff;
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 1.6;
+            text-align: justify;
+            margin-bottom: 18px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 36px;
+            margin-top: 32px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        label {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 16px;
+            margin-left: 4px;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            font-size: 16px;
+            outline: none;
+            transition: all 0.25s;
+            background: rgba(255, 255, 255, 0.9);
+            color: #111;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 4px 16px rgba(43, 144, 227, 0.2);
+        }
+
+        button {
+            background: var(--accent);
+            color: #fff;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s;
+            margin-top: 12px;
+        }
+
+        button:hover {
+            background: #18476b;
+            box-shadow: 0 6px 20px rgba(24, 71, 107, 0.4);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.85) 100%);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .info-card h3 {
+            margin: 0 0 8px 0;
+            color: var(--accent);
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .info-card p {
+            margin: 0;
+            font-size: 15px;
+            color: #333;
+        }
+
+        /* --- Estilos para el Mapa y el Horario --- */
+        .map-section {
+            grid-column: 1 / -1;
+            /* Ocupa todo el ancho en el grid */
+            margin-top: 24px;
+        }
+
+        .map-container {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 350px;
+            border: 0;
+        }
+
+        .address-and-direction {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .address-card {
+            flex-grow: 1;
+        }
+
+        .address-card p {
+            font-weight: 600;
+            color: #cdefff;
+            margin: 0;
+            font-size: 16px;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .get-directions-btn {
+            background: #18476b;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.25s, box-shadow 0.25s;
+            white-space: nowrap;
+        }
+
+        .get-directions-btn:hover {
+            background: var(--accent);
+            box-shadow: 0 4px 12px rgba(43, 144, 227, 0.4);
+        }
+
+        .icon {
+            /* Icono de coche para el botón de cómo llegar */
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .info-card h3.schedule-title {
+            color: #18476b;
+            font-size: 20px;
+        }
+
+        .info-card p.schedule-text {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        /* Mantenemos el input/textarea color en el wrap */
+.wrap input, .wrap textarea {
+    color: #cdefff !important;
+}
+
+        /* --- Media Queries --- */
+        @media (max-width: 900px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .map-section {
+                grid-column: 1 / 1;
+            }
+
+            .address-and-direction {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .address-card p {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            .get-directions-btn {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .headline-block h1 {
+                font-size: 28px;
+            }
+
+            .headline-block .lead {
+                font-size: 16px;
+            }
+        }
+        /* --- REGLAS AÑADIDAS PARA EL COLOR DEL PLACEHOLDER --- */
+input::placeholder,
+textarea::placeholder {
+    color: white; /* Color blanco */
+    opacity: 1; /* Asegura que el color se vea bien, ya que algunos navegadores aplican una opacidad por defecto */
+}
+
+/* Para navegadores antiguos (si es necesario) */
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+    color: white;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+    color: white;
+}
+    </style>
+</head>
+
+<body>
+    <canvas id="tech-bg"></canvas>
+    <div class="wrap">
+        <span class="tag">Contacto</span>
+        <div class="headline-block">
+            <h1>Contacto</h1>
+            <div class="divider"></div>
+            <p class="lead">¿Tienes dudas o quieres solicitar información sobre nuestros servicios? Rellena el
+                formulario o utiliza nuestros datos de contacto.</p>
+        </div>
+
+        <div class="contact-grid">
+            <form>
+                <div class="form-field">
+                    <label for="nombreCompleto">Nombre completo</label>
+                    <input type="text" id="nombreCompleto" name="nombreCompleto" placeholder="Ej: Juan Pérez" style="color: white;"
+                        autocomplete="name" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="correo">Correo electrónico</label>
+                    <input type="email" id="correo" name="correo" placeholder="ejemplo@dominio.com" autocomplete="email"
+                        required>
+                </div>
+
+                <div class="form-field">
+                    <label for="asunto">Asunto</label>
+                    <input type="text" id="asunto" name="asunto" placeholder="Motivo de tu consulta" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="mensaje">Mensaje</label>
+                    <textarea style="background-color: transparent !important;" id="mensaje" name="mensaje" rows="6"
+                        placeholder="Escribe aquí tu mensaje o solicitud de información detallada..."
+                        required></textarea>
+                </div>
+
+                <button type="submit">Enviar mensaje</button>
+            </form>
+
+            <div class="contact-info">
+                <div class="info-card">
+                    <h3 class="schedule-title">⏰ Horario de atención</h3>
+                    <p class="schedule-text">Lunes a Viernes: 9:00 - 18:00</p>
+                </div>
+                <div class="info-card">
+                    <h3>Teléfono</h3>
+                    <p>+34 968 679 290</p>
+                </div>
+                <div class="info-card">
+                    <h3>Email</h3>
+                    <p>info@skynet-sys.es</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="map-section">
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3167.3197116515865!2d-1.12741548469375!3d37.99479367972052!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd63f237f37435f7%3A0xb3634020a59a9e33!2sCarril%20de%20la%20Condomina%2C%203%2C%2030006%20Murcia!5e0!3m2!1ses!2ses!4v1678897000000!5m2!1ses!2ses"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
+            <div class="address-and-direction">
+                <div class="address-card">
+                    <p>📍 Carril de la Condomina 3, 7ºC 30006 Murcia</p>
+                </div>
+                <a href="https://www.google.com/maps/dir/?api=1&destination=Carril+de+la+Condomina+3,+7%C2%BAC+30006+Murcia"
+                    target="_blank" class="get-directions-btn" rel="noopener noreferrer">
+                    <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                    </svg>
+                    Cómo llegar
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('tech-bg');
+        const ctx = canvas.getContext('2d');
+        let width, height, time = 0;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        const particles = [];
+        const particleCount = 52;
+
+        function resetParticles() {
+            particles.length = 0;
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    size: Math.random() * 2 + 1.6
+                });
+            }
+        }
+        resetParticles();
+        window.addEventListener('resize', resetParticles);
+
+        function drawParticles() {
+            particles.forEach((p, i) => {
+                const pulse = Math.sin(time + i) * 0.6 + 1.1;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size * pulse, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(144,224,239,0.72)';
+                ctx.shadowColor = 'rgba(144,224,239,0.7)';
+                ctx.shadowBlur = 10 * pulse;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const dx = p.x - p2.x;
+                    const dy = p.y - p2.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 130) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(144,224,239,${(1 - dist / 130) * 0.17})`;
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                    }
+                }
+
+                p.x += p.vx;
+                p.y += p.vy;
+                if (p.x < 0) p.x = width;
+                if (p.x > width) p.x = 0;
+                if (p.y < 0) p.y = height;
+                if (p.y > height) p.y = 0;
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            drawParticles();
+            time += 0.014;
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+
+</html>

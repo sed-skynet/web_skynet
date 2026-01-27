@@ -5,15 +5,16 @@
  *   [opiniones_y_sellos ti_sc='[trustindex no-registration=google]']
  */
 function skynet_opiniones_y_sellos_shortcode( $atts = [] ) {
+
   $atts = shortcode_atts([
-    'ti_sc'       => '[trustindex no-registration=google]', // shortcode interno
-    'title'       => '',               // título grande (fuera de la card)
-    'subtitle'    => '',               // subtítulo opcional
-    'accent'      => '#00cfff',        // color acento
-    'icon_height' => '60',             // alto base de iconos (px)
-    'gap'         => '40',             // separación entre iconos (px)
-    'speed'       => '30',             // segundos por ciclo (menor = más rápido)
-    'class'       => '',               // clases extra en el wrapper
+    'ti_sc'       => '[trustindex no-registration=google]',
+    'title'       => '',
+    'subtitle'    => '',
+    'accent'      => '#00cfff',
+    'icon_height' => '60',
+    'gap'         => '40',
+    'speed'       => '30',
+    'class'       => '',
   ], $atts, 'opiniones_y_sellos');
 
   // Saneos
@@ -27,11 +28,11 @@ function skynet_opiniones_y_sellos_shortcode( $atts = [] ) {
   $trustindex_html = do_shortcode( $atts['ti_sc'] );
 
   ob_start(); ?>
+
   <section id="<?php echo esc_attr($uid); ?>" class="ti-pack <?php echo esc_attr($atts['class']); ?>" style="--ti-accent: <?php echo esc_attr($accent); ?>;">
     <?php if ( !empty($atts['title']) ): ?>
       <div class="ti-pack__header">
         <h2 class="ti-pack__title"><?php echo esc_html($atts['title']); ?></h2>
-
         <?php if ( !empty($atts['subtitle']) ): ?>
           <p class="ti-pack__subtitle"><?php echo esc_html($atts['subtitle']); ?></p>
         <?php endif; ?>
@@ -46,26 +47,35 @@ function skynet_opiniones_y_sellos_shortcode( $atts = [] ) {
       <!-- ======= Tira de sellos ======= -->
       <section class="ti-pack__tira" aria-label="Tira de sellos y partners (iconos)">
         <div class="sellos-track">
+
           <!-- Tanda 1 -->
           <img class="sello" src="https://skynet-sys.es/wp-content/uploads/2020/04/google-partner.png" alt="Google Partner">
           <img class="sello" src="https://skynet-sys.es/wp-content/uploads/2022/06/microsoft-gris.png" alt="Microsoft Partner">
           <img class="sello" src="https://skynet-sys.es/wp-content/uploads/2021/03/silver-partner-synology-2.png" alt="Synology Silver Partner">
-          <img class="sello" src="https://skynet-sys.es/wp-content/uploads/2020/06/panda-partner.png" alt="Panda Security">
-          <img class="sello" src="https://skynet-sys.es/wp-content/uploads/2021/03/WatchGuardONE_Silver.png" alt="WatchGuardONE">
+
+          <img class="sello sello-grande"
+               src="https://darknet-sys.com/wp-content/uploads/2026/01/WatchGuardONE_Gold.png"
+               alt="WatchGuard ONE Gold Partner">
+
           <img class="sello sello-grande" src="https://skynet-sys.es/wp-content/uploads/2022/03/Registered-Logo.png" alt="TP-LINK Partner">
           <img class="sello sello-grande" src="https://skynet-sys.es/wp-content/uploads/2021/03/incibe-partner2.png" alt="INCIBE">
           <img class="sello" src="https://skynet-sys.es/wp-content/uploads/2021/02/pacto_entidad_adscrita_color.png" alt="Pacto Digital">
           <img class="sello sello-grande" src="https://skynet-sys.es/wp-content/uploads/2020/06/petec-partner.jpg" alt="PETEC">
-          <!-- Tanda 2 duplicada para loop continuo -->
+
+          <!-- Tanda 2 (duplicada para loop continuo) -->
           <img class="sello" src="https://skynet-sys.es/wp-content/uploads/2020/04/google-partner.png" alt="Google Partner">
           <img class="sello" src="https://skynet-sys.es/wp-content/uploads/2022/06/microsoft-gris.png" alt="Microsoft Partner">
           <img class="sello" src="https://skynet-sys.es/wp-content/uploads/2021/03/silver-partner-synology-2.png" alt="Synology Silver Partner">
-          <img class="sello" src="https://skynet-sys.es/wp-content/uploads/2020/06/panda-partner.png" alt="Panda Security">
-          <img class="sello" src="https://skynet-sys.es/wp-content/uploads/2021/03/WatchGuardONE_Silver.png" alt="WatchGuardONE">
+
+          <img class="sello sello-grande"
+               src="https://darknet-sys.com/wp-content/uploads/2026/01/WatchGuardONE_Gold.png"
+               alt="WatchGuard ONE Gold Partner">
+
           <img class="sello sello-grande" src="https://skynet-sys.es/wp-content/uploads/2022/03/Registered-Logo.png" alt="TP-LINK Partner">
           <img class="sello sello-grande" src="https://skynet-sys.es/wp-content/uploads/2021/03/incibe-partner2.png" alt="INCIBE">
           <img class="sello" src="https://skynet-sys.es/wp-content/uploads/2021/02/pacto_entidad_adscrita_color.png" alt="Pacto Digital">
           <img class="sello sello-grande" src="https://skynet-sys.es/wp-content/uploads/2020/06/petec-partner.jpg" alt="PETEC">
+
         </div>
       </section>
     </div>
