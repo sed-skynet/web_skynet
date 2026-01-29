@@ -58,9 +58,9 @@ function skynet_opiniones_y_sellos_shortcode( $atts = [] ) {
                alt="WatchGuard ONE Gold Partner">
 
           <img class="sello sello-grande" src="https://skynet-sys.es/wp-content/uploads/2022/03/Registered-Logo.png" alt="TP-LINK Partner">
-          <img class="sello sello-grande" src="https://skynet-sys.es/wp-content/uploads/2021/03/incibe-partner2.png" alt="INCIBE">
+          <img class="sello sello-grande" src="https://darknet-sys.com/wp-content/uploads/2026/01/incibe.webp" alt="INCIBE">
           <img class="sello" src="https://skynet-sys.es/wp-content/uploads/2021/02/pacto_entidad_adscrita_color.png" alt="Pacto Digital">
-          <img class="sello sello-grande" src="https://skynet-sys.es/wp-content/uploads/2020/06/petec-partner.jpg" alt="PETEC">
+          <img class="sello sello-grande" src="https://darknet-sys.com/wp-content/uploads/2026/01/PETEC.webp" alt="PETEC">
 
           <!-- Tanda 2 (duplicada para loop continuo) -->
           <img class="sello" src="https://skynet-sys.es/wp-content/uploads/2020/04/google-partner.png" alt="Google Partner">
@@ -72,9 +72,9 @@ function skynet_opiniones_y_sellos_shortcode( $atts = [] ) {
                alt="WatchGuard ONE Gold Partner">
 
           <img class="sello sello-grande" src="https://skynet-sys.es/wp-content/uploads/2022/03/Registered-Logo.png" alt="TP-LINK Partner">
-          <img class="sello sello-grande" src="https://skynet-sys.es/wp-content/uploads/2021/03/incibe-partner2.png" alt="INCIBE">
+          <img class="sello sello-grande" src="https://darknet-sys.com/wp-content/uploads/2026/01/incibe.webp" alt="INCIBE">
           <img class="sello" src="https://skynet-sys.es/wp-content/uploads/2021/02/pacto_entidad_adscrita_color.png" alt="Pacto Digital">
-          <img class="sello sello-grande" src="https://skynet-sys.es/wp-content/uploads/2020/06/petec-partner.jpg" alt="PETEC">
+          <img class="sello sello-grande" src="https://darknet-sys.com/wp-content/uploads/2026/01/PETEC.webp" alt="PETEC">
 
         </div>
       </section>
@@ -161,6 +161,13 @@ function skynet_opiniones_y_sellos_shortcode( $atts = [] ) {
     max-height: <?php echo $icon_height + 24; ?>px !important;
   }
   #<?php echo $uid; ?> .ti-pack__tira:hover .sellos-track{ animation-play-state: paused; }
+
+  /* Aumentar solo el logo de INCIBE */
+/* INCIBE más grande SIN romper el carrusel */
+#<?php echo $uid; ?> .ti-pack__tira img[alt="INCIBE"]{
+  transform: scale(1.35);
+  transform-origin: center;
+}
 
   
   @keyframes ti-sellos-scroll-<?php echo $uid; ?>{

@@ -2,281 +2,347 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión Corporativa IT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+    <style>
+        :root {
+            --accent: #2b90e3;
+            --text-light: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.85);
+            --container-width: 1050px;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
 
-  <title>Soluciones TIC & Seguridad | Infraestructura y Ciberseguridad</title>
+        /* === RECUADRO TIPO GLASS (EL MISMO DE LA OTRA SECCIÓN) === */
+        .glass-box {
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 40px 30px;
+            overflow: hidden;
+            /* ← ESTO */
+        }
 
-  <!-- SEO -->
-  <meta name="description"
-    content="Soluciones TIC, infraestructura IT y ciberseguridad para empresas. Redes, cloud, sistemas y protección avanzada.">
-  <meta name="keywords" content="servicios IT, ciberseguridad, infraestructura, redes, cloud, sistemas">
-  <meta name="author" content="Soluciones TIC & Seguridad">
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100vh;
+        }
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Soluciones TIC & Seguridad">
-  <meta property="og:description" content="Infraestructura IT y ciberseguridad empresarial">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="es_ES">
+        body {
+            background: linear-gradient(135deg, #0e6592 0%, #29b6d9 100%);
+            overflow-x: hidden;
+        }
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+        #tech-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
 
-  <style>
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-    }
+        .wrap {
+            max-width: var(--container-width);
+            margin: 40px auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
 
-    .glass-card {
-      background: rgba(255, 255, 255, 0.22);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      box-shadow: 0 8px 32px rgba(44, 70, 130, 0.18);
-    }
+        /* --- HEADER CON CONEXIÓN VISUAL --- */
+        .headline-block {
+            margin-bottom: 25px;
+            padding-left: 80px;
+            position: relative;
+        }
 
-    .text-gradient {
-      background: linear-gradient(90deg, #ffffff 0%, #e0f2ff 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+        .headline-content {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 25px;
+        }
 
-    @keyframes float {
+        .tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            color: #fff;
+            font-weight: 700;
+            padding: 6px 15px;
+            border-radius: 50px;
+            font-size: 14px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
 
-      0%,
-      100% {
-        transform: translateY(0);
-      }
+        h1 {
+            font-size: 52px;
+            font-weight: 800;
+            margin: 0;
+            color: #fff;
+            line-height: 1.1;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
 
-      50% {
-        transform: translateY(-10px);
-      }
-    }
+        #lottie-animation {
+            width: 320px;
+            height: 200px;
+            flex-shrink: 0;
+        }
 
-    .animate-float {
-      animation: float 3s ease-in-out infinite;
-    }
-  </style>
+        /* --- TIMELINE --- */
+        .timeline-container {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .timeline-row {
+            display: flex;
+            gap: 35px;
+            position: relative;
+            padding-bottom: 40px;
+        }
+
+        .timeline-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 70px;
+            position: relative;
+        }
+
+        .timeline-row:first-child .timeline-left::before {
+            content: "";
+            position: absolute;
+            top: -60px;
+            width: 2px;
+            height: 60px;
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.35), transparent);
+        }
+
+        /* Línea normal */
+        .line-connector {
+            position: absolute;
+            top: 25px;
+            bottom: 0;
+            /* NO sale del contenedor */
+            width: 2px;
+            z-index: 0;
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        /* Degradado SOLO en la última fila, pero DENTRO */
+        .timeline-row:last-child .line-connector {
+            background: linear-gradient(to bottom,
+                    rgba(255, 255, 255, 0.35) 0%,
+                    rgba(255, 255, 255, 0.35) 70%,
+                    rgba(255, 255, 255, 0) 100%);
+        }
+
+
+        .icon-bubble {
+            width: 62px;
+            height: 62px;
+            background: #fff;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            z-index: 1;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .timeline-panel {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border-radius: 22px;
+            padding: 30px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .timeline-panel h3 {
+            margin: 0 0 10px 0;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .timeline-panel p {
+            margin: 0;
+            color: var(--text-dim);
+            font-size: 16px;
+            line-height: 1.5;
+            max-width: 550px;
+        }
+
+        .btn-ghost {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 12px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .btn-ghost:hover {
+            background: #fff;
+            color: var(--accent);
+        }
+
+        @media (max-width: 800px) {
+            .headline-content {
+                flex-direction: column;
+                text-align: left;
+            }
+
+            .headline-block {
+                padding-left: 0;
+            }
+
+            .timeline-panel {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
 </head>
 
-<body class="min-h-screen bg-gradient-to-br from-[#126b97] to-[#3bc6e7] relative overflow-x-hidden py-12 px-4">
+<body>
+    <canvas id="tech-bg"></canvas>
 
-  <canvas id="tech-bg" class="fixed inset-0 z-0 pointer-events-none"></canvas>
+    <div class="wrap glass-box">
+        <header class="headline-block">
+            <div class="headline-content">
+                <div class="title-group">
+                    <span class="tag">Servicios Digitales</span>
+                    <h1>Gestion informacion</h1>
+                </div>
+                <div id="lottie-animation"></div>
+            </div>
+        </header>
 
-  <main class="relative z-10 max-w-[1100px] mx-auto space-y-16">
+        <main class="timeline-container">
+            <div class="timeline-row">
+                <div class="timeline-left">
+                    <div class="icon-bubble">📊</div>
+                    <div class="line-connector"></div>
+                </div>
+                <div class="timeline-panel">
+                    <div class="panel-content">
+                        <h3>Redes Sociales</h3>
+                        <p>Estrategias de contenido orientadas a atraer, fidelizar y reforzar la imagen de marca de tu
+                            empresa en plataformas clave.</p>
+                    </div>
+                    <a href="/contacto" class="btn-ghost">Ver estrategia →</a>
+                </div>
+            </div>
 
-    <!-- HERO -->
-    <section class="glass-card rounded-[32px] p-10 md:p-16">
+            <div class="timeline-row">
+                <div class="timeline-left">
+                    <div class="icon-bubble">💻</div>
+                    <div class="line-connector"></div>
+                </div>
+                <div class="timeline-panel">
+                    <div class="panel-content">
+                        <h3>Diseño Web</h3>
+                        <p>Desarrollo de sitios web modernos, funcionales y adaptados a cualquier dispositivo, enfocados
+                            a la conversión.</p>
+                    </div>
+                    <a href="/contacto" class="btn-ghost">Más información →</a>
+                </div>
+            </div>
 
-      <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="timeline-row">
+                <div class="timeline-left">
+                    <div class="icon-bubble">🔍</div>
+                    <div class="line-connector"></div>
+                </div>
+                <div class="timeline-panel">
+                    <div class="panel-content">
+                        <h3>SEO / SEM</h3>
+                        <p>Mejoramos tu visibilidad en buscadores mediante SEO orgánico y campañas SEM para aumentar
+                            oportunidades de negocio.</p>
+                    </div>
+                    <a href="/contacto" class="btn-ghost">Auditoría gratis →</a>
+                </div>
+            </div>
+        </main>
+    </div>
 
-        <div class="flex flex-col justify-center -mt-28">
-          <span class="inline-block w-fit mb-6 px-6 py-2.5 text-sm font-bold bg-blue-50 text-blue-600 rounded-full">
-            Servicios IT Profesionales
-          </span>
+    <script>
+        lottie.loadAnimation({
+            container: document.getElementById('lottie-animation'),
+            renderer: 'svg', loop: true, autoplay: true,
+            path: 'https://lottie.host/f9d30b01-c69f-4dd2-90d8-cf41cf567190/wnAvprEHXG.json'
+        });
 
-          <h1 class="text-4xl sm:text-5xl xl:text-6xl font-black leading-tight text-white my-6">
-            Soluciones TIC<br>para empresas
-          </h1>
+        const canvas = document.getElementById('tech-bg');
+        const ctx = canvas.getContext('2d');
+        let width, height;
 
-          <p class="text-lg text-sky-100 max-w-xl leading-relaxed">
-            Diseñamos, protegemos y optimizamos infraestructuras tecnológicas modernas
-            para garantizar continuidad, seguridad y crecimiento.
-          </p>
-        </div>
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
 
-        <div class="flex items-center justify-center lg:justify-end h-full">
-          <div id="lottie-animation" class="w-full max-w-[450px] aspect-square lg:h-auto"></div>
-        </div>
+        // AJUSTES DE PARTÍCULAS: Más cantidad (100) y mayor tamaño (hasta 4px)
+        const particles = Array.from({ length: 400 }, () => ({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
+            size: Math.random() * 3 + 1.5, // Partículas más grandes y visibles
+            opacity: Math.random() * 0.4 + 0.1
+        }));
 
-      </div>
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
 
-      <div class="-mt-4 pt-8 border-t border-white/10 text-center">
-        <p class="text-xs uppercase tracking-widest text-sky-100/70 font-bold mb-8">
-          Partners tecnológicos
-        </p>
+                p.x += p.vx;
+                p.y += p.vy;
 
-        <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20">
-          <div class="h-16 w-40 flex items-center justify-center">
-            <img src="https://darknet-sys.com/wp-content/uploads/2026/01/bp-del-e1769514187514.png" alt="Dell Partner"
-              class="max-h-full max-w-full object-contain brightness-110 hover:scale-105 transition-transform"
-              loading="lazy" />
-          </div>
-
-          <div class="h-24 w-64 flex items-center justify-center">
-            <img src="https://darknet-sys.com/wp-content/uploads/2026/01/wg1-Gold-Reseller-logo.webp"
-              alt="WatchGuard Partner" class="max-h-full max-w-full object-contain hover:scale-105 transition-transform"
-              loading="lazy" />
-          </div>
-
-          <div class="h-16 w-44 flex items-center justify-center">
-            <img src="https://darknet-sys.com/wp-content/uploads/2026/01/acens-logo-2.webp" alt="Acens Partner"
-              class="max-h-full max-w-full object-contain rounded-sm hover:scale-105 transition-transform"
-              loading="lazy" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="glass-card rounded-[32px] p-10 md:p-14 relative overflow-hidden">
-
-      <!-- DECORACIÓN SUAVE -->
-      <div class="absolute -top-32 -right-32 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl pointer-events-none"></div>
-
-      <!-- CABECERA -->
-      <div class="text-center mb-16 relative z-10">
-        <h2 class="text-3xl md:text-4xl font-black text-gradient">
-          Infraestructura IT
-        </h2>
-        <div class="h-1.5 w-36 bg-gradient-to-r from-[#18476b] to-[#2b90e3] mx-auto mt-4 rounded-full"></div>
-        <p class="text-sky-100/85 mt-6 max-w-2xl mx-auto text-lg leading-relaxed">
-          Diseñamos, implantamos y mantenemos infraestructuras tecnológicas
-          fiables, escalables y alineadas con los objetivos de tu negocio.
-        </p>
-      </div>
-
-      <!-- GRID -->
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 relative z-10">
-
-        <!-- CARD -->
-        <div class="group relative rounded-3xl p-8 bg-white/20 backdrop-blur-xl border border-white/20
-             hover:bg-white/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
-
-          <div class="w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br from-[#2b90e3] to-[#18476b]
-               flex items-center justify-center text-2xl text-white shadow-lg
-               group-hover:scale-110 transition">
-            🖥️
-          </div>
-
-          <h3 class="text-xl font-bold text-white mb-3">
-            Hardware
-          </h3>
-
-          <p class="text-sky-100/85 text-sm leading-relaxed">
-            Equipos propios y primeras marcas optimizados para entornos
-            empresariales exigentes.
-          </p>
-        </div>
-
-        <!-- CARD -->
-        <div class="group relative rounded-3xl p-8 bg-white/20 backdrop-blur-xl border border-white/20
-             hover:bg-white/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
-
-          <div class="w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br from-[#2b90e3] to-[#18476b]
-               flex items-center justify-center text-2xl text-white shadow-lg
-               group-hover:scale-110 transition">
-            ☁️
-          </div>
-
-          <h3 class="text-xl font-bold text-white mb-3">
-            Sistemas informáticos
-          </h3>
-
-          <p class="text-sky-100/85 text-sm leading-relaxed">
-            Infraestructuras on-premise y soluciones Cloud híbridas
-            diseñadas para crecer contigo.
-          </p>
-        </div>
-
-        <!-- CARD -->
-        <div class="group relative rounded-3xl p-8 bg-white/20 backdrop-blur-xl border border-white/20
-             hover:bg-white/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
-
-          <div class="w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br from-[#2b90e3] to-[#18476b]
-               flex items-center justify-center text-2xl text-white shadow-lg
-               group-hover:scale-110 transition">
-            🌐
-          </div>
-
-          <h3 class="text-xl font-bold text-white mb-3">
-            Soluciones de Red
-          </h3>
-
-          <p class="text-sky-100/85 text-sm leading-relaxed">
-            Redes WAN / LAN, VPN seguras y entornos WIFI
-            profesionales de alto rendimiento.
-          </p>
-        </div>
-
-        <!-- CARD -->
-        <div class="group relative rounded-3xl p-8 bg-white/20 backdrop-blur-xl border border-white/20
-             hover:bg-white/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
-
-          <div class="w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br from-[#2b90e3] to-[#18476b]
-               flex items-center justify-center text-2xl text-white shadow-lg
-               group-hover:scale-110 transition">
-            💻
-          </div>
-
-          <h3 class="text-xl font-bold text-white mb-3">
-            Diseño y mantenimiento
-          </h3>
-
-          <p class="text-sky-100/85 text-sm leading-relaxed">
-            Diseño, soporte y mantenimiento continuo de sistemas
-            cloud y on-premise.
-          </p>
-        </div>
-
-      </div>
-    </section>
-
-
-  </main>
-
-  <!-- SCRIPTS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-  <script>
-    lottie.loadAnimation({
-      container: document.getElementById('lottie-animation'),
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      path: 'https://lottie.host/403ec8a2-128c-4913-a82d-4d8afa8c06a3/KT3lgBmLHA.json'
-    });
-
-    const canvas = document.getElementById('tech-bg');
-    const ctx = canvas.getContext('2d');
-    let w, h, animId;
-
-    function resize() {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    const PARTICLE_COUNT = window.innerWidth > 1024 ? 120 : 70;
-
-    const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      r: Math.random() * 4.2 + 2.2   // 🔥 partículas grandes (2–6px)
-    }));
-
-
-    function animate() {
-      ctx.clearRect(0, 0, w, h);
-      particles.forEach(p => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-ctx.fillStyle = 'rgba(255,255,255,0.3)';
-ctx.fill();
-
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0) p.x = w;
-        if (p.x > w) p.x = 0;
-        if (p.y < 0) p.y = h;
-        if (p.y > h) p.y = 0;
-      });
-      animId = requestAnimationFrame(animate);
-    }
-    animate();
-  </script>
-
+                if (p.x < 0) p.x = width;
+                if (p.x > width) p.x = 0;
+                if (p.y < 0) p.y = height;
+                if (p.y > height) p.y = 0;
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
 </body>
 
 </html>

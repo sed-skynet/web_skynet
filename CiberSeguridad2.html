@@ -1,380 +1,332 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servicios de Seguridad</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Servicios de Seguridad | Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+
     <style>
         :root {
-            --accent: #2b90e3;
-            --card: rgba(255, 255, 255, 0.22);
+            --accent: #00d4ff;
+            --accent-dark: #2b90e3;
+            --text-light: #ffffff;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
             --container: 1100px;
-            font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            font-family: 'Inter', sans-serif;
         }
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
+
+        * {
             box-sizing: border-box;
         }
+
         body {
+            margin: 0;
             min-height: 100vh;
-            background: linear-gradient(135deg, #126b97 0%, #3bc6e7 100%);
-            color: #111;
-            position: relative;
+            background: radial-gradient(circle at top left, #0a2e4e 0%, #126b97 50%, #061a2b 100%);
+            color: var(--text-light);
             overflow-x: hidden;
+            line-height: 1.6;
         }
+
         #tech-bg {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             z-index: 0;
-            pointer-events: none;
+            opacity: 0.6;
         }
+
         .wrap {
             max-width: var(--container);
-            margin: 48px auto;
-            padding: 32px 24px 24px 24px;
+            margin: 60px auto;
+            padding: 0 24px;
             position: relative;
             z-index: 2;
-            background: var(--card);
-            backdrop-filter: blur(0px);
-            box-shadow: 0 8px 32px rgba(44, 70, 130, 0.12);
-            border-radius: 24px;
         }
+
+        .header-tag {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
         .tag {
-            display: inline-block;
-            background: #eef6ff;
+            background: rgba(0, 212, 255, 0.15);
             color: var(--accent);
-            font-weight: 700;
-            padding: 7px 14px;
-            border-radius: 999px;
-            font-size: 15px;
-            margin-bottom: 32px;
-            letter-spacing: 0.02em;
-            box-shadow: 0 2px 12px rgba(43, 144, 227, 0.08);
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid var(--accent);
+            font-size: 14px;
         }
-        .services-container {
+
+        .services-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 32px;
-            margin-top: 20px;
+            gap: 24px;
         }
-        .service-section {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
-            border-radius: 20px;
-            padding: 36px;
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
-            transition: all 0.3s ease;
+
+        /* Estilo de la "Tarjeta de Cristal" */
+        .service-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
         }
-        .service-section:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
-        .icon-wrapper {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--accent) 0%, #1b76bf 100%);
-            border-radius: 16px;
+
+        .icon-box {
+            width: 54px;
+            height: 54px;
+            background: var(--accent);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 16px rgba(43, 144, 227, 0.3);
-        }
-        .icon-wrapper svg {
-            width: 32px;
-            height: 32px;
-            fill: white;
-        }
-        .service-section h2 {
-            font-size: 26px;
-            font-weight: 800;
-            color: #1a1a1a;
-            margin: 0 0 16px 0;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .service-section .description {
-            color: #555;
-            font-size: 16px;
-            line-height: 1.7;
             margin-bottom: 24px;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
         }
-        .items-list {
-            display: flex;
-            flex-direction: column;
+
+        .icon-box svg {
+            width: 28px;
+            height: 28px;
+            fill: #061a2b;
+        }
+
+        h2 {
+            font-size: 28px;
+            margin: 0 0 16px 0;
+            font-weight: 800;
+            background: #fff;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        /* Rejilla interna para detalles */
+        .feature-subgrid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 12px;
         }
-        .item {
-            background: rgba(43, 144, 227, 0.08);
-            border: 2px solid rgba(43, 144, 227, 0.2);
+
+        .feature-item {
+            font-family: 'Poppins', sans-serif;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
             border-radius: 12px;
-            padding: 16px 20px;
-            font-weight: 600;
-            color: var(--accent);
-            text-transform: uppercase;
-            font-size: 14px;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .item:hover {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-            transform: translateX(4px);
-        }
-        .item-explanation {
-            display: none;
-            background: rgba(43, 144, 227, 0.95);
-            color: white;
-            padding: 16px;
-            border-radius: 10px;
-            margin-top: 10px;
-            font-size: 14px;
-            line-height: 1.6;
-            text-transform: none;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-            animation: slideDown 0.3s ease;
-        }
-        .item-explanation.active {
-            display: block;
-        }
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .sub-items {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .sub-item {
-            background: white;
-            border: 2px solid rgba(43, 144, 227, 0.15);
-            border-radius: 10px;
-            padding: 14px 18px;
-            font-weight: 600;
+
+        .feature-item h4 {
+            margin: 0 0 5px 0;
             color: var(--accent);
             font-size: 13px;
-            letter-spacing: 0.3px;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            text-transform: uppercase;
         }
-        .sub-item:hover {
-            background: rgba(43, 144, 227, 0.1);
-            border-color: var(--accent);
-            transform: translateX(4px);
+
+        .feature-item p {
+            margin: 0;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.4;
         }
-        .note {
-            font-size: 14px;
-            color: #666;
-            font-style: italic;
-            margin-top: 16px;
-            padding: 12px;
-            background: rgba(43, 144, 227, 0.05);
-            border-radius: 8px;
-        }
-        @media (max-width: 900px) {
-            .services-container {
+
+        /* Responsivo */
+        @media (max-width: 960px) {
+            .services-grid {
                 grid-template-columns: 1fr;
             }
         }
-        @media (max-width: 700px) {
-            .wrap {
-                padding: 20px 16px;
-                margin: 24px 16px;
+
+        @media (max-width: 600px) {
+            .feature-subgrid {
+                grid-template-columns: 1fr;
             }
-            .service-section {
-                padding: 28px 24px;
-            }
-            .service-section h2 {
-                font-size: 22px;
-            }
-            .icon-wrapper {
-                width: 50px;
-                height: 50px;
-            }
-            .icon-wrapper svg {
-                width: 26px;
-                height: 26px;
-            }
-        }
-        @media (max-width: 500px) {
-            .service-section {
-                padding: 24px 20px;
-            }
-            .service-section h2 {
-                font-size: 20px;
-            }
-            .service-section .description {
-                font-size: 15px;
-            }
-            .item {
-                font-size: 13px;
-                padding: 14px 16px;
-            }
-            .sub-item {
-                font-size: 12px;
-                padding: 12px 16px;
+
+            .service-card {
+                padding: 25px;
             }
         }
     </style>
 </head>
+
 <body>
     <canvas id="tech-bg"></canvas>
+
     <div class="wrap">
-        <span class="tag">Servicios de Seguridad</span>
-        
-        <div class="services-container">
-            <!-- AUDITORÍAS -->
-            <div class="service-section">
-                <div class="icon-wrapper">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
+        <div class="header-tag">
+            <span class="tag">Ciberseguridad Avanzada</span>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z" />
                     </svg>
                 </div>
                 <h2>Auditorías</h2>
-                <p class="description">Disponemos de 4 tipos de auditorías diferentes para adaptarnos a las necesidades específicas de su empresa.</p>
-                <div class="items-list">
-                    <div class="item">Blackhat</div>
-                    <div class="item">Whitehat</div>
-                    <div class="item">Interna</div>
-                    <div class="item">360</div>
+                <p class="description">Análisis exhaustivos adaptados a la infraestructura y necesidades de su
+                    organización.</p>
+                <div class="feature-subgrid">
+                    <div class="feature-item">
+                        <h4>Black Hat</h4>
+                        <p>Simulación de ataque externo sin datos previos.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>White Hat</h4>
+                        <p>Evaluación profunda con acceso total a sistemas.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Interna</h4>
+                        <p>Cumplimiento normativo y seguridad de red local.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>360°</h4>
+                        <p>Visión global: factor humano, técnico y legal.</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- MONITORIZACIÓN -->
-            <div class="service-section">
-                <div class="icon-wrapper">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h3l-1 1v2h12v-2l-1-1h3c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 13H4V5h16v11z"/>
+            <div class="service-card">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
                     </svg>
                 </div>
-                <h2>Monitorización</h2>
-                <p class="description">Nuestro sistema de monitorización detecta posibles fallos de seguridad antes de que puedan ser utilizados por terceros.</p>
+                <h2>Prevención DLP</h2>
+                <p class="description">Protegemos su activo más valioso: la información. Evite fugas accidentales o
+                    malintencionadas.</p>
+                <div class="feature-subgrid">
+                    <div class="feature-item">
+                        <h4>Dispositivos</h4>
+                        <p>Control estricto de USB y periféricos.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Email</h4>
+                        <p>Monitorización de adjuntos sensibles.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Web & App</h4>
+                        <p>Filtrado por contenido y palabras clave.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Print</h4>
+                        <p>Control de trazabilidad en impresoras.</p>
+                    </div>
+                </div>
             </div>
 
-            <!-- FUGAS DE INFORMACIÓN -->
-            <div class="service-section">
-                <div class="icon-wrapper">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+            <div class="service-card">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M20 3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h3l-1 1v2h12v-2l-1-1h3c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 13H4V5h16v11z" />
                     </svg>
                 </div>
-                <h2>Fugas de Información</h2>
-                <p class="description">El sistema DLP permite reconocer comportamientos extraños como envío de información a dispositivos externos de su red.</p>
-                <div class="sub-items">
-                    <div class="sub-item">Control de Dispositivo</div>
-                    <div class="sub-item">Revisión Email</div>
-                    <div class="sub-item">Control de Aplicaciones</div>
-                    <div class="sub-item">Filtro Web</div>
-                </div>
-                <p class="note">Bloquea categorías y filtra por palabras clave.</p>
-                <div class="sub-items" style="margin-top: 12px;">
-                    <div class="sub-item">Control de Impresión</div>
-                </div>
+                <h2>Monitorización 24/7</h2>
+                <p class="description">Vigilancia proactiva. Detectamos vulnerabilidades antes de que se conviertan en
+                    incidentes reales.</p>
             </div>
 
-            <!-- BACKUP REMOTO -->
-            <div class="service-section">
-                <div class="icon-wrapper">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/>
+            <div class="service-card">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z" />
                     </svg>
                 </div>
                 <h2>Backup Remoto</h2>
-                <p class="description">Copias de seguridad de datos críticos de su empresa para recuperar información por fallos o borrado de terceros.</p>
+                <p class="description">Garantizamos la continuidad de su negocio con copias cifradas y recuperación
+                    instantánea.</p>
             </div>
         </div>
     </div>
 
     <script>
-        // Canvas Background
         const canvas = document.getElementById('tech-bg');
         const ctx = canvas.getContext('2d');
         let width, height, time = 0;
+        const particles = [];
 
         function resize() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
         }
+
         window.addEventListener('resize', resize);
         resize();
 
-        const particles = [];
-        const particleCount = 52;
-
-        function resetParticles() {
-            particles.length = 0;
-            for (let i = 0; i < particleCount; i++) {
-                particles.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5,
-                    size: Math.random() * 2 + 1.6
-                });
-            }
-        }
-        resetParticles();
-        window.addEventListener('resize', resetParticles);
-
-        function drawParticles() {
-            particles.forEach((p, i) => {
-                const pulse = Math.sin(time + i) * 0.6 + 1.1;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size * pulse, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(144,224,239,0.72)';
-                ctx.shadowColor = 'rgba(144,224,239,0.7)';
-                ctx.shadowBlur = 10 * pulse;
-                ctx.fill();
-                ctx.shadowBlur = 0;
-                for (let j = i + 1; j < particles.length; j++) {
-                    const p2 = particles[j];
-                    const dx = p.x - p2.x;
-                    const dy = p.y - p2.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 130) {
-                        ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.strokeStyle = `rgba(144,224,239,${(1 - dist / 130) * 0.17})`;
-                        ctx.lineWidth = 1;
-                        ctx.stroke();
-                    }
-                }
-                p.x += p.vx;
-                p.y += p.vy;
-                if (p.x < 0) p.x = width;
-                if (p.x > width) p.x = 0;
-                if (p.y < 0) p.y = height;
-                if (p.y > height) p.y = 0;
+        for (let i = 0; i < 60; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: (Math.random() - 0.5) * 0.4,
+                size: Math.random() * 2 + 1
             });
         }
 
         function animate() {
             ctx.clearRect(0, 0, width, height);
-            drawParticles();
-            time += 0.014;
+            time += 0.01;
+
+            particles.forEach((p, i) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                if (p.x < 0) p.x = width; if (p.x > width) p.x = 0;
+                if (p.y < 0) p.y = height; if (p.y > height) p.y = 0;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(0, 212, 255, 0.5)';
+                ctx.fill();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                    if (dist < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(0, 212, 255, ${0.15 * (1 - dist / 150)})`;
+                        ctx.stroke();
+                    }
+                }
+            });
             requestAnimationFrame(animate);
         }
         animate();
     </script>
 </body>
+
 </html>

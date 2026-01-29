@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios IT - RGPD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #00d4ff;
+            --text-light: #ffffff;
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --container: 1100px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: radial-gradient(circle at top left, #0a2e4e 0%, #126b97 50%, #061a2b 100%);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        #tech-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            opacity: 0.8;
+        }
+
+        .wrap {
+            max-width: var(--container);
+            margin: 60px auto;
+            padding: 40px;
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-section {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .headline-block { flex: 1; }
+
+        .lottie-container {
+            flex: 0 0 350px;
+            width: 350px;
+            height: 200px;
+            margin-top:-120px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(0, 212, 255, 0.15);
+            color: var(--accent);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid var(--accent);
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin: 0 0 20px 0;
+            background: linear-gradient(to right, #fff, #a5d8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .divider {
+            height: 4px;
+            width: 100px;
+            background: var(--accent);
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .lead {
+            font-size: 20px;
+            color: #cdefff;
+            font-weight: 500;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.02);
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 6px; height: 100%;
+            background: var(--accent);
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        .info-card p {
+            margin: 0;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        @media (max-width: 960px) {
+            .hero-section { flex-direction: column; text-align: center; }
+            .lottie-container { flex: none; width: 280px; height: 280px; order: -1; margin-top: 0; }
+            h1 { font-size: 34px; }
+            .divider { margin: 0 auto 25px auto; }
+            .info-card { padding: 25px; }
+            .info-card p { font-size: 16px; }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="tech-bg"></canvas>
+
+    <div class="wrap">
+        <span class="tag">Servicios IT</span>
+        
+        <div class="hero-section">
+            <div class="headline-block">
+                <h1>Confidencialidad y privacidad asegurada</h1>
+                <div class="divider"></div>
+                <p class="lead">Garantizamos la seguridad de su infraestructura y la protección de los datos de sus clientes mediante el cumplimiento estricto del RGPD.</p>
+            </div>
+            <div class="lottie-container" id="lottie-anim"></div>
+        </div>
+
+        <div class="info-card">
+            <p>
+                El <strong>RGPD</strong> es la normativa de obligado cumplimiento en la Unión Europea que unifica la protección de datos para todas las empresas. Este reglamento otorga a los ciudadanos un control total sobre su información personal en el entorno digital, permitiéndoles decidir quién accede a sus datos, cómo se utilizan y garantizando su derecho a retirar dicho acceso en cualquier momento.
+            </p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    <script>
+        lottie.loadAnimation({
+            container: document.getElementById('lottie-anim'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: 'https://lottie.host/3186b6d1-ae2d-44c0-a447-41a46e75894a/1WKy5UtCU1.json'
+        });
+
+        const canvas = document.getElementById('tech-bg');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        const particles = [];
+        const particleCount = 100; // Reducido un poco para no saturar al ser más grandes
+        const connectionDist = 150; // Líneas de conexión más largas
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: (Math.random() - 0.5) * 0.4,
+                size: Math.random() * 3 + 2 // Partículas más grandes (2px a 5px)
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
+                p.x += p.vx; p.y += p.vy;
+                
+                if (p.x < 0) p.x = width; if (p.x > width) p.x = 0;
+                if (p.y < 0) p.y = height; if (p.y > height) p.y = 0;
+                
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(0, 212, 255, 0.5)'; // Un poco más opacas
+                ctx.fill();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    let p2 = particles[j];
+                    let dx = p.x - p2.x;
+                    let dy = p.y - p2.y;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < connectionDist) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(0, 212, 255, ${0.15 * (1 - dist/connectionDist)})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>

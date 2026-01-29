@@ -6,32 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto - Servicios IT</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <style>
         :root {
             --accent: #2b90e3;
+            --accent-dark: #1a6bb8;
+            --accent-light: #3bc6e7;
+            --dark-blue: #18476b;
             --muted: #6b7280;
-            --card: rgba(255, 255, 255, 0.22);
-            --container: 1100px;
+            --card: rgba(255, 255, 255, 0.15);
+            --card-hover: rgba(255, 255, 255, 0.22);
+            --container: 1200px;
             font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         html,
         body {
-            height: 100%;
+            min-height: 100%;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         body {
             min-height: 100vh;
-            background: #126b97;
+            background: linear-gradient(135deg, #0a2540 0%, #126b97 50%, #3bc6e7 100%);
             color: #111;
             position: relative;
             overflow-x: hidden;
         }
+
+        .headline-block h1 {
+            white-space: nowrap;
+            font-size: clamp(36px, 5vw, 64px);
+        }
+
+        @media (max-width: 900px) {
+            .headline-block h1 {
+                white-space: normal;
+            }
+        }
+
+
 
         #tech-bg {
             position: fixed;
@@ -45,183 +66,405 @@
 
         .wrap {
             max-width: var(--container);
-            margin: 48px auto;
-            padding: 32px 24px 24px 24px;
+            margin: 60px auto;
+            padding: 48px 40px;
             position: relative;
             z-index: 2;
-            background: var(--card);
-            backdrop-filter: blur(0px);
-            box-shadow: 0 8px 32px rgba(44, 70, 130, 0.12);
-            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
         }
 
         .tag {
-            display: inline-block;
-            background: #eef6ff;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
             color: var(--accent);
             font-weight: 700;
-            padding: 7px 14px;
+            padding: 10px 20px;
             border-radius: 999px;
-            font-size: 15px;
-            margin-bottom: 8px;
-            letter-spacing: 0.02em;
-            box-shadow: 0 2px 12px rgba(43, 144, 227, 0.08);
+            font-size: 14px;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 16px rgba(43, 144, 227, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(43, 144, 227, 0.2);
+        }
+
+        .tag::before {
+            content: "●";
+            font-size: 8px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
         }
 
         .headline-block {
-            max-width: 600px;
-            margin-bottom: 36px;
+            max-width: 1000px;
+            margin-bottom: 50px;
         }
 
         .headline-block h1 {
-            font-size: 52px;
+            font-size: 64px;
             font-weight: 900;
-            margin: 10px 0 20px 0;
-            line-height: 1.05;
-            letter-spacing: -1px;
-            background: linear-gradient(90deg, #ffffff 0%, #e0f2ff 70%);
+            margin: -14px 0 10px 0;
+            line-height: 1.8;
+            letter-spacing: -2px;
+            background: linear-gradient(135deg, #ffffff 0%, #e0f2ff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            background-clip: text;
+            filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.2));
+            position: relative;
         }
 
         .headline-block .divider {
             display: block;
-            height: 4px;
+            height: 5px;
+            width: 120px;
+            margin-bottom: 24px;
+            background: linear-gradient(90deg, var(--accent-light) 0%, var(--accent) 100%);
+            border-radius: 999px;
+            box-shadow: 0 2px 12px rgba(43, 144, 227, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .headline-block .divider::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
             width: 100%;
-            margin-bottom: 18px;
-            background: linear-gradient(90deg, #18476b 0%, #2b90e3 100%);
-            opacity: 0.95;
-            border-radius: 8px;
-            box-shadow: 0 1px 8px rgba(40, 64, 105, 0.18);
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 100%;
+            }
         }
 
         .headline-block .lead {
-            color: #cdefff;
-            font-size: 20px;
+            color: #e0f2ff;
+            font-size: 19px;
             font-weight: 500;
-            line-height: 1.6;
-            text-align: justify;
-            margin-bottom: 18px;
+            line-height: 1.7;
+            margin-bottom: 0;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .contact-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 36px;
-            margin-top: 32px;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
         }
 
         form {
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 24px;
         }
 
         .form-field {
             display: flex;
             flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-field label {
+            font-size: 18px;
+            font-weight: 600;
+            color: rgba(230, 240, 255, 0.85);
+            margin-left: 6px;
+            margin-bottom: 4px;
+            letter-spacing: 0.2px;
+
+            display: inline-flex;
+            align-items: center;
             gap: 6px;
         }
 
-        label {
-            color: #ffffff;
-            font-weight: 600;
-            font-size: 16px;
-            margin-left: 4px;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        .form-field {
+            position: relative;
         }
+
+        .form-field::after {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 100%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg,
+                    var(--accent-light),
+                    var(--accent));
+            border-radius: 2px;
+            transition: width 0.35s ease;
+        }
+
 
         input,
         textarea {
             width: 100%;
-            padding: 14px 16px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            font-size: 16px;
+            padding: 20px 24px;
+            /* MÁS ALTURA */
+            min-height: 56px;
+            /* Presencia clara */
+            border-radius: 16px;
+            /* Más suave */
+
+            background: #f9fbfd;
+            color: #1f2937;
+
+            border: 1.5px solid #e3eaf2;
+
+            font-size: 12px;
+            /* Mejor legibilidad */
+            font-family: inherit;
+            font-weight: 500;
+
             outline: none;
-            transition: all 0.25s;
-            background: rgba(255, 255, 255, 0.9);
-            color: #111;
+            transition:
+                border-color 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease;
+
+
+
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #94a3b8;
+            font-weight: 400;
         }
 
         input:focus,
         textarea:focus {
-            border-color: var(--accent);
-            box-shadow: 0 4px 16px rgba(43, 144, 227, 0.2);
+            background: #ffffff;
+            border-color: #c7d2fe;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
         }
 
-        button {
-            background: var(--accent);
+        textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        /* === BOTÓN PREMIUM REDONDEADO === */
+        form button {
+            align-self: center;
+            width: auto;
+
+            padding: 24px 56px;
+            /* MÁS GRANDE */
+            min-height: 64px;
+            /* Altura clara */
+
+            border-radius: 9999px;
+            /* Capsule real */
+
+            background: linear-gradient(135deg,
+                    var(--accent-light) 0%,
+                    var(--accent) 50%,
+                    var(--accent-dark) 100%);
+            background-size: 200% auto;
+
             color: #fff;
-            padding: 14px;
+            font-size: 19px;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+
             border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 700;
             cursor: pointer;
-            transition: all 0.25s;
-            margin-top: 12px;
+            position: relative;
+            overflow: hidden;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+
+            box-shadow:
+                0 18px 36px rgba(43, 144, 227, 0.45),
+                inset 0 1px 1px rgba(255, 255, 255, 0.5);
+
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+
+        /* Efecto de destello (Glimmer) */
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.4),
+                    transparent);
+            transform: skewX(-20deg);
+            transition: none;
         }
 
         button:hover {
-            background: #18476b;
-            box-shadow: 0 6px 20px rgba(24, 71, 107, 0.4);
+            transform: translateY(-5px) scale(1.02);
+            background-position: right center;
+            /* Mueve el degradado */
+            box-shadow:
+                0 20px 35px rgba(43, 144, 227, 0.4),
+                0 12px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover::before {
+            left: 150%;
+            transition: all 0.8s ease;
+        }
+
+        button:active {
+            transform: translateY(-2px) scale(0.98);
+            box-shadow: 0 5px 15px rgba(43, 144, 227, 0.4);
+        }
+
+        /* Opcional: Añadir un pequeño icono al botón en el HTML */
+        button::after {
+            content: '→';
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        button:hover::after {
+            transform: translateX(5px);
         }
 
         .contact-info {
             display: flex;
             flex-direction: column;
             gap: 20px;
+            margin-top: 100px;
         }
 
         .info-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.85) 100%);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.12) 100%);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-light), var(--accent));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .info-card:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.18) 100%);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        .info-card:hover::before {
+            opacity: 1;
         }
 
         .info-card h3 {
-            margin: 0 0 8px 0;
-            color: var(--accent);
-            font-size: 18px;
-            font-weight: 700;
+            margin: 0 0 12px 0;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-card h3 .icon-emoji {
+            font-size: 24px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
         }
 
         .info-card p {
             margin: 0;
-            font-size: 15px;
-            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+            color: #e0f2ff;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+            line-height: 1.6;
         }
 
-        /* --- Estilos para el Mapa y el Horario --- */
         .map-section {
             grid-column: 1 / -1;
-            /* Ocupa todo el ancho en el grid */
-            margin-top: 24px;
+            margin-top: 40px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.08) 100%);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         .map-container {
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-            margin-bottom: 15px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+            margin-bottom: 24px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
 
         .map-container iframe {
             width: 100%;
-            height: 350px;
+            height: 400px;
             border: 0;
+            display: block;
         }
 
         .address-and-direction {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 20px;
-            margin-top: 10px;
+            gap: 24px;
         }
 
         .address-card {
@@ -229,65 +472,136 @@
         }
 
         .address-card p {
-            font-weight: 600;
-            color: #cdefff;
+            font-weight: 700;
+            color: #ffffff;
             margin: 0;
-            font-size: 16px;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+            font-size: 18px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
+        .address-card p::before {
+            content: "📍";
+            font-size: 24px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
 
         .get-directions-btn {
-            background: #18476b;
+            background: linear-gradient(135deg, var(--dark-blue) 0%, #0d3450 100%);
             color: #fff;
-            padding: 10px 20px;
-            border-radius: 12px;
+            padding: 16px 28px;
+            border-radius: 16px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            transition: background 0.25s, box-shadow 0.25s;
+            gap: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
+            box-shadow: 0 6px 20px rgba(24, 71, 107, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .get-directions-btn:hover {
-            background: var(--accent);
-            box-shadow: 0 4px 12px rgba(43, 144, 227, 0.4);
+            background: linear-gradient(135deg, var(--dark-blue) 0%, #0d3450 100%);
+            box-shadow:
+                0 10px 28px rgba(24, 71, 107, 0.45),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+
+        .get-directions-btn {
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .get-directions-btn {
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .get-directions-btn:active {
+            transform: translateY(-1px);
         }
 
         .icon {
-            /* Icono de coche para el botón de cómo llegar */
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             fill: currentColor;
         }
 
-        .info-card h3.schedule-title {
-            color: #18476b;
-            font-size: 20px;
+        /* === BLOQUEAR COLOR DEL BOTÓN "CÓMO LLEGAR" === */
+        .get-directions-btn,
+        .get-directions-btn:hover,
+        .get-directions-btn:focus,
+        .get-directions-btn:active,
+        .get-directions-btn:visited {
+            color: #ffffff !important;
         }
 
-        .info-card p.schedule-text {
-            color: var(--accent);
-            font-weight: 700;
-            font-size: 16px;
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        /* Mantenemos el input/textarea color en el wrap */
-.wrap input, .wrap textarea {
-    color: #cdefff !important;
-}
+        .wrap {
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-        /* --- Media Queries --- */
-        @media (max-width: 900px) {
+        /* Media Queries */
+        @media (max-width: 1024px) {
+            .wrap {
+                margin: 40px 20px;
+                padding: 40px 32px;
+            }
+
             .contact-grid {
                 grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .headline-block h1 {
+                font-size: 48px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .wrap {
+                margin: 24px 16px;
+                padding: 32px 24px;
+                border-radius: 24px;
+            }
+
+            .headline-block h1 {
+                font-size: 40px;
+                letter-spacing: -1px;
+            }
+
+            .headline-block .lead {
+                font-size: 17px;
             }
 
             .map-section {
-                grid-column: 1 / 1;
+                padding: 24px;
+            }
+
+            .map-container iframe {
+                height: 320px;
             }
 
             .address-and-direction {
@@ -296,8 +610,8 @@
             }
 
             .address-card p {
-                text-align: center;
-                margin-bottom: 10px;
+                justify-content: center;
+                margin-bottom: 12px;
             }
 
             .get-directions-btn {
@@ -307,30 +621,203 @@
 
         @media (max-width: 500px) {
             .headline-block h1 {
-                font-size: 28px;
+                font-size: 32px;
             }
 
             .headline-block .lead {
                 font-size: 16px;
             }
+
+            .tag {
+                font-size: 12px;
+                padding: 8px 16px;
+            }
+
+            input,
+            textarea {
+                padding: 14px 16px;
+                font-size: 15px;
+            }
+
+            button {
+                padding: 16px 24px;
+                font-size: 16px;
+            }
+
+            button {
+                border-radius: 2000px;
+            }
+
+
+            .info-card {
+                padding: 24px;
+            }
         }
-        /* --- REGLAS AÑADIDAS PARA EL COLOR DEL PLACEHOLDER --- */
-input::placeholder,
-textarea::placeholder {
-    color: white; /* Color blanco */
-    opacity: 1; /* Asegura que el color se vea bien, ya que algunos navegadores aplican una opacidad por defecto */
-}
 
-/* Para navegadores antiguos (si es necesario) */
-input::-webkit-input-placeholder,
-textarea::-webkit-input-placeholder {
-    color: white;
-}
+        /* Enhanced particle styles */
+        .particle {
+            filter: blur(0.5px);
+        }
 
-input:-ms-input-placeholder,
-textarea:-ms-input-placeholder {
-    color: white;
-}
+        /* === INPUT LIMPIO Y MODERNO (SOLO RECUADRO) === */
+        /* === INPUT PREMIUM CON PRESENCIA === */
+        .form-field input,
+        .form-field textarea {
+            background: linear-gradient(180deg,
+                    rgba(255, 255, 255, 0.95) 0%,
+                    rgba(245, 248, 252, 0.95) 100%);
+
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.55);
+
+            color: #1f2937;
+            font-weight: 500;
+
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.9),
+                0 8px 20px rgba(0, 0, 0, 0.12);
+
+            transition:
+                border-color 0.3s ease,
+                box-shadow 0.3s ease,
+                transform 0.25s ease,
+                background 0.3s ease;
+            font-size: 16px;
+        }
+
+        /* Placeholder más suave */
+        .form-field input::placeholder,
+        .form-field textarea::placeholder {
+            color: #9aa8bb;
+            font-weight: 400;
+        }
+
+        .form-field input:hover,
+        .form-field textarea:hover {
+            transform: translateY(-1px);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.9),
+                0 12px 28px rgba(0, 0, 0, 0.18);
+        }
+
+        /* Focus limpio (clave) */
+        .form-field input:focus,
+        .form-field textarea:focus {
+            background: #ffffff;
+            border-color: var(--accent-light);
+
+            box-shadow:
+                0 0 0 3px rgba(59, 198, 231, 0.35),
+                0 16px 36px rgba(0, 0, 0, 0.25);
+
+            transform: translateY(-2px);
+        }
+
+        button,
+        button::before,
+        button::after {
+            border-radius: 9999px;
+        }
+
+        form button {
+            align-self: center;
+            width: auto;
+        }
+
+        form button:hover {
+            transform: translateY(-6px) scale(1.04);
+            background-position: right center;
+            box-shadow:
+                0 28px 48px rgba(43, 144, 227, 0.55),
+                inset 0 1px 1px rgba(255, 255, 255, 0.6);
+        }
+
+        form button:active {
+            transform: translateY(-2px) scale(0.98);
+        }
+
+        /* === CTA PILL DEFINITIVO (override WP / Elementor) === */
+        /* === CTA FORM FULL-WIDTH (alineado con inputs) === */
+        .btn-pill-cta {
+            display: flex !important;
+            width: 100% !important;
+            /* MISMO ancho que inputs */
+            align-self: stretch !important;
+
+            padding: 16px 22px !important;
+            /* Igual que input */
+            min-height: 52px !important;
+            /* Más bajo */
+
+            border-radius: 9999px !important;
+            /* Pill suave */
+
+            font-size: 16px !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.8px !important;
+            text-transform: uppercase !important;
+
+            background: linear-gradient(135deg,
+                    #2b90e3 0%,
+                    #1f7fcc 50%,
+                    #1a6bb8 100%) !important;
+            background-size: 200% auto !important;
+
+            color: #fff !important;
+            border: none !important;
+
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 10px !important;
+
+            box-shadow:
+                0 8px 18px rgba(0, 0, 0, 0.25) !important;
+            cursor: pointer !important;
+            position: relative !important;
+            overflow: hidden !important;
+
+            transition: all 0.25s ease !important;
+        }
+
+        .btn-pill-cta:hover {
+            transform: translateY(-2px) !important;
+            background-position: right center !important;
+            box-shadow:
+                0 10px 22px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .btn-pill-cta:active {
+            transform: translateY(0) scale(0.98) !important;
+        }
+
+        /* === TEXTAREA MENSAJE (DESTACADO) === */
+        .textarea-message {
+            min-height: 180px;
+            font-size: 16px;
+            line-height: 1.6;
+
+            background: linear-gradient(180deg,
+                    rgba(255, 255, 255, 0.98) 0%,
+                    rgba(240, 246, 252, 0.98) 100%);
+
+            border: 2px solid rgba(59, 198, 231, 0.45);
+
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.9),
+                0 12px 28px rgba(0, 0, 0, 0.18);
+
+            resize: vertical;
+        }
+
+        .textarea-message:focus {
+            border-color: var(--accent);
+            box-shadow:
+                0 0 0 4px rgba(59, 198, 231, 0.35),
+                0 18px 40px rgba(0, 0, 0, 0.28);
+
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 
@@ -339,17 +826,17 @@ textarea:-ms-input-placeholder {
     <div class="wrap">
         <span class="tag">Contacto</span>
         <div class="headline-block">
-            <h1>Contacto</h1>
+            <h1>Hablemos de tu proyecto</h1>
             <div class="divider"></div>
-            <p class="lead">¿Tienes dudas o quieres solicitar información sobre nuestros servicios? Rellena el
-                formulario o utiliza nuestros datos de contacto.</p>
+            <p class="lead">¿Tienes dudas o necesitas información sobre nuestros servicios? Estamos aquí para ayudarte.
+                Rellena el formulario y te responderemos lo antes posible.</p>
         </div>
 
         <div class="contact-grid">
             <form>
                 <div class="form-field">
                     <label for="nombreCompleto">Nombre completo</label>
-                    <input type="text" id="nombreCompleto" name="nombreCompleto" placeholder="Ej: Juan Pérez" style="color: white;"
+                    <input type="text" id="nombreCompleto" name="nombreCompleto" placeholder="Ej: Juan Pérez García"
                         autocomplete="name" required>
                 </div>
 
@@ -361,30 +848,29 @@ textarea:-ms-input-placeholder {
 
                 <div class="form-field">
                     <label for="asunto">Asunto</label>
-                    <input type="text" id="asunto" name="asunto" placeholder="Motivo de tu consulta" required>
+                    <input type="text" id="asunto" name="asunto" placeholder="¿En qué podemos ayudarte?" required>
                 </div>
 
                 <div class="form-field">
                     <label for="mensaje">Mensaje</label>
-                    <textarea style="background-color: transparent !important;" id="mensaje" name="mensaje" rows="6"
-                        placeholder="Escribe aquí tu mensaje o solicitud de información detallada..."
-                        required></textarea>
+                    <textarea id="mensaje" name="mensaje" rows="6" class="textarea-message"
+                        placeholder="Cuéntanos más detalles sobre tu consulta o proyecto..." required></textarea>
                 </div>
 
-                <button type="submit">Enviar mensaje</button>
+                <button type="submit" class="btn-pill-cta">Enviar mensaje</button>
             </form>
 
             <div class="contact-info">
                 <div class="info-card">
-                    <h3 class="schedule-title">⏰ Horario de atención</h3>
-                    <p class="schedule-text">Lunes a Viernes: 9:00 - 18:00</p>
+                    <h3><span class="icon-emoji">⏰</span> Horario de atención</h3>
+                    <p>Lunes a Viernes: 9:00 - 18:00</p>
                 </div>
                 <div class="info-card">
-                    <h3>Teléfono</h3>
+                    <h3><span class="icon-emoji">📞</span> Teléfono</h3>
                     <p>+34 968 679 290</p>
                 </div>
                 <div class="info-card">
-                    <h3>Email</h3>
+                    <h3><span class="icon-emoji">✉️</span> Email</h3>
                     <p>info@skynet-sys.es</p>
                 </div>
             </div>
@@ -399,12 +885,12 @@ textarea:-ms-input-placeholder {
 
             <div class="address-and-direction">
                 <div class="address-card">
-                    <p>📍 Carril de la Condomina 3, 7ºC 30006 Murcia</p>
+                    <p>Carril de la Condomina 3, 7ºC 30006 Murcia</p>
                 </div>
                 <a href="https://www.google.com/maps/dir/?api=1&destination=Carril+de+la+Condomina+3,+7%C2%BAC+30006+Murcia"
                     target="_blank" class="get-directions-btn" rel="noopener noreferrer">
                     <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                        <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z" />
                     </svg>
                     Cómo llegar
                 </a>
@@ -425,7 +911,7 @@ textarea:-ms-input-placeholder {
         resize();
 
         const particles = [];
-        const particleCount = 52;
+        const particleCount = 100;
 
         function resetParticles() {
             particles.length = 0;
@@ -433,9 +919,9 @@ textarea:-ms-input-placeholder {
                 particles.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5,
-                    size: Math.random() * 2 + 1.6
+                    vx: (Math.random() - 0.5) * 0.6,
+                    vy: (Math.random() - 0.5) * 0.6,
+                    size: Math.random() * 2.5 + 1.5
                 });
             }
         }
@@ -444,26 +930,46 @@ textarea:-ms-input-placeholder {
 
         function drawParticles() {
             particles.forEach((p, i) => {
-                const pulse = Math.sin(time + i) * 0.6 + 1.1;
+                const pulse = Math.sin(time * 0.8 + i * 0.5) * 0.4 + 1;
+
+                // Glow effect
+                const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * pulse * 3);
+                gradient.addColorStop(0, 'rgba(144,224,239,0.8)');
+                gradient.addColorStop(0.5, 'rgba(144,224,239,0.3)');
+                gradient.addColorStop(1, 'rgba(144,224,239,0)');
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size * pulse * 3, 0, Math.PI * 2);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+
+                // Core particle
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.size * pulse, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(144,224,239,0.72)';
-                ctx.shadowColor = 'rgba(144,224,239,0.7)';
-                ctx.shadowBlur = 10 * pulse;
+                ctx.fillStyle = 'rgba(255,255,255,0.9)';
+                ctx.shadowColor = 'rgba(144,224,239,0.8)';
+                ctx.shadowBlur = 15 * pulse;
                 ctx.fill();
                 ctx.shadowBlur = 0;
 
+                // Connections
                 for (let j = i + 1; j < particles.length; j++) {
                     const p2 = particles[j];
                     const dx = p.x - p2.x;
                     const dy = p.y - p2.y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 130) {
+                    if (dist < 150) {
+                        const opacity = (1 - dist / 150) * 0.3;
+                        const gradient = ctx.createLinearGradient(p.x, p.y, p2.x, p2.y);
+                        gradient.addColorStop(0, `rgba(144,224,239,${opacity})`);
+                        gradient.addColorStop(0.5, `rgba(255,255,255,${opacity * 0.5})`);
+                        gradient.addColorStop(1, `rgba(144,224,239,${opacity})`);
+
                         ctx.beginPath();
                         ctx.moveTo(p.x, p.y);
                         ctx.lineTo(p2.x, p2.y);
-                        ctx.strokeStyle = `rgba(144,224,239,${(1 - dist / 130) * 0.17})`;
-                        ctx.lineWidth = 1;
+                        ctx.strokeStyle = gradient;
+                        ctx.lineWidth = 1.5;
                         ctx.stroke();
                     }
                 }
@@ -480,7 +986,7 @@ textarea:-ms-input-placeholder {
         function animate() {
             ctx.clearRect(0, 0, width, height);
             drawParticles();
-            time += 0.014;
+            time += 0.01;
             requestAnimationFrame(animate);
         }
         animate();

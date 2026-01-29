@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servicios de Ciberseguridad</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
     <style>
         :root {
             --accent: #2b90e3;
-            --card: rgba(255, 255, 255, 0.22);
-            --container: 1100px;
-            font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            --bg-gradient-start: #126b97;
+            --bg-gradient-end: #3bc6e7;
+            --text-white: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.9);
         }
+
         html,
         body {
-            height: 100%;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-        body {
             min-height: 100vh;
-            background: linear-gradient(135deg, #126b97 0%, #3bc6e7 100%);
-            color: #111;
-            position: relative;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
+
         #tech-bg {
             position: fixed;
             top: 0;
@@ -36,342 +37,544 @@
             z-index: 0;
             pointer-events: none;
         }
-        .wrap {
-            max-width: var(--container);
-            margin: 48px auto;
-            padding: 32px 24px 24px 24px;
-            position: relative;
-            z-index: 2;
-            background: var(--card);
-            backdrop-filter: blur(0px);
-            box-shadow: 0 8px 32px rgba(44, 70, 130, 0.12);
-            border-radius: 24px;
+
+        .defense-section {
+            margin-top: -90px;
         }
-        .tag {
-            display: inline-block;
-            background: #eef6ff;
-            color: var(--accent);
-            font-weight: 700;
-            padding: 7px 14px;
-            border-radius: 999px;
-            font-size: 15px;
-            margin-bottom: 8px;
-            letter-spacing: 0.02em;
-            box-shadow: 0 2px 12px rgba(43, 144, 227, 0.08);
-        }
-        .headline-block {
-            max-width: 1000px;
-            padding: 0 10px;
-            margin: 0 auto 48px auto;
-            position: relative;
-        }
-        .headline-content {
-            position: relative;
-        }
-        #lottie-animation {
-            width: 280px;
-    height: 180px;
-    position: absolute;
-    top: -60px !important;
-    right: 0;
-    opacity: 0.95;
-    background: transparent !important;
-    z-index: 1;
-        }
-        .headline-block h1 {
-            font-size: 52px;
-            font-weight: 900;
-            margin: 0 0 24px 0;
-            padding-top: 10px;
-            line-height: 1.1;
-            letter-spacing: -1px;
-            background: linear-gradient(90deg, #ffffff 0%, #e0f2ff 70%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            color: #ffffff;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-            max-width: 680px;
-            position: relative;
-            z-index: 2;
-        }
-        .headline-block .divider {
-            display: block;
-            height: 4px;
-            width: 100%;
-            max-width: 980px;
-            margin: 0 0 18px 0;
-            background: linear-gradient(90deg, #18476b 0%, #2b90e3 100%);
-            opacity: 0.95;
-            border-radius: 8px;
-            box-shadow: 0 1px 8px rgba(40, 64, 105, 0.18);
-        }
-        .intro-text {
-            color: #ffffff;
-            font-size: 18px;
-            line-height: 1.8;
-            margin: 30px 0 40px 0;
-            background: linear-gradient(135deg, rgba(43, 144, 227, 0.75) 0%, rgba(27, 118, 191, 0.8) 100%);
-            padding: 32px;
-            border-radius: 18px;
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
-        }
-        .section-title {
+
+        .defense-title,
+        .cia-title {
             font-size: 32px;
             font-weight: 800;
             color: #ffffff;
-            margin: 40px 0 24px 0;
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+            margin-bottom: 22px;
         }
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin: 30px 0;
-        }
-        .tool-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.85) 100%);
-            border-radius: 16px;
-            padding: 28px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        .tool-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        }
-        .tool-card h3 {
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--accent);
-            margin: 0 0 12px 0;
-        }
-        .tool-card p {
-            color: #333;
-            font-size: 16px;
-            line-height: 1.6;
-            margin: 0;
-        }
-        .security-principles {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-            margin: 30px 0 40px 0;
-        }
-        .principle-card {
-            background: linear-gradient(135deg, rgba(43, 144, 227, 0.85) 0%, rgba(27, 118, 191, 0.9) 100%);
-            border-radius: 18px;
-            padding: 32px 28px;
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
-            transition: all 0.3s ease;
+
+
+        .defense-title span {
             position: relative;
-            overflow: hidden;
+            display: inline-block;
+            padding-bottom: 14px;
         }
-        .principle-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+
+        .defense-title span::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
         }
-        .principle-card h3 {
-            font-size: 24px;
+
+        .defense-intro {
+            max-width: 720px;
+            margin-bottom: 50px;
+            font-size: 18px;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .defense-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            row-gap: 40px;
+        }
+
+        .cia-section {
+            margin-top: 25px;
+        }
+
+
+        .cia-title span {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .defense-title span::after,
+        .cia-title span::after {
+            height: 4px;
+        }
+
+
+        .cia-title span::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 70%;
+            height: 4px;
+            background: rgba(43, 144, 227, 0.6);
+            border-radius: 2px;
+        }
+
+        .cia-intro {
+            max-width: 720px;
+            font-size: 20px;
+            line-height: 1.65;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+
+        .cia-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 36px;
+        }
+
+        .wrap {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 80px 60px;
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.035);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 28px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Header */
+        .header-grid {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            align-items: start;
+            /* 🔥 clave */
+        }
+
+        #lottie-animation {
+            width: 260px;
+            height: 175px;
+            max-width: 100%;
+            margin-left: auto;
+            margin-top: 20px;
+        }
+
+
+        .tag {
+            display: inline-block;
+            background: rgba(43, 144, 227, 0.2);
+            color: #fff;
+            border: 1px solid rgba(43, 144, 227, 0.5);
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            margin-top: 15px;
+        }
+
+        h1 {
+            font-size: clamp(44px, 5vw, 60px);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+            line-height: 1.05;
+            white-space: nowrap;
+            /* 🔒 fuerza una sola línea */
+        }
+
+
+        .divider {
+            height: 4px;
+            width: 60px;
+            background: var(--accent);
+            margin-bottom: 25px;
+            border-radius: 2px;
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        .intro-text {
+            font-size: 16px;
+            line-height: 1.7;
+            max-width: 520px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .intro-text strong {
+            display: block;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+
+        .section-title {
+            font-size: 28px;
             font-weight: 700;
             color: #ffffff;
-            margin: 0 0 12px 0;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            margin: 80px 0 18px 0;
         }
-        .principle-card p {
-            color: rgba(255, 255, 255, 0.92);
-            font-size: 16px;
+
+        .section-title span {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 14px;
+        }
+
+        .section-title span::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            /* 🔥 exactamente el ancho del texto */
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* Grid y Cards Mejoradas */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.22);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 18px;
+            padding: 32px;
+            transition: border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: none;
+            background: rgba(0, 0, 0, 0.28);
+        }
+
+        .card-icon {
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+
+        .principle-card {
+            background: rgba(0, 0, 0, 0.22);
+            border: none;
+            border-left: 5px solid var(--accent);
+            padding: 30px 30px 30px 34px;
+            border-radius: 14px;
+
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.25);
+
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .principle-card:hover {
+            transform: translateY(-6px);
+            box-shadow:
+                0 28px 55px rgba(0, 0, 0, 0.35);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .card:hover .card-icon {
+            background: var(--accent);
+            box-shadow: 0 0 20px rgba(43, 144, 227, 0.4);
+        }
+
+        .card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card p {
+            color: var(--text-dim);
+            font-size: 15px;
             line-height: 1.6;
             margin: 0;
         }
+
+        /* Estilo para Principios C.I.A */
+        .principle-card {
+            border-left: 4px solid var(--accent);
+        }
+
+        .principle-card h3 {
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .principle-card p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .grid-container {
+            row-gap: 40px;
+            margin-top: 40px;
+        }
+
+
+        /* Conclusión */
         .conclusion {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
-            border-radius: 18px;
-            padding: 32px;
-            margin: 30px 0 20px 0;
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+            margin-top: 60px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 50px 60px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
             border-left: 6px solid var(--accent);
         }
+
         .conclusion p {
-            color: #333;
-            font-size: 18px;
-            line-height: 1.8;
+            font-size: 20px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.95);
             margin: 0;
+            line-height: 1.6;
             font-weight: 500;
         }
-        @media (max-width:900px) {
-            .headline-block h1 {
-                font-size: 44px;
-                max-width: 600px;
-            }
-            #lottie-animation {
-                width: 240px;
-                height: 150px;
-                top: -10px;
-            }
-            .tools-grid,
-            .security-principles {
-                grid-template-columns: 1fr;
-            }
+
+        svg {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2;
         }
-        @media (max-width:700px) {
-            .headline-block {
-                max-width: 100%;
-                padding: 0 4px;
-            }
-            .headline-content {
+
+        @media (max-width: 900px) {
+            .header-grid {
+                grid-template-columns: 1fr;
                 text-align: center;
             }
-            .headline-block .divider {
-                margin: 0 auto 18px;
+
+            .divider {
+                margin: 20px auto;
             }
-            #lottie-animation {
-                position: static;
-                width: 200px;
-                height: 150px;
-                margin: 0 auto 20px;
-            }
-            .headline-block h1 {
-                font-size: 36px;
-                max-width: 100%;
-            }
-            .intro-text {
-                font-size: 16px;
-                padding: 24px;
-            }
+
             .section-title {
-                font-size: 28px;
+                justify-content: center;
             }
-            .tool-card,
-            .principle-card {
-                padding: 24px;
-            }
-            .conclusion {
-                padding: 24px;
-            }
-            .conclusion p {
-                font-size: 16px;
+
+            .card {
+                align-items: center;
+                text-align: center;
             }
         }
-        @media (max-width:500px) {
-            .headline-block {
-                padding: 0 2px;
-            }
-            #lottie-animation {
-                width: 150px;
-                height: 120px;
-            }
-            .headline-block h1 {
-                font-size: 28px;
-            }
-            .intro-text {
-                font-size: 15px;
-                padding: 20px;
-            }
-            .section-title {
-                font-size: 24px;
-            }
-            .tool-card h3,
-            .principle-card h3 {
-                font-size: 20px;
-            }
-            .tool-card p,
-            .principle-card p {
-                font-size: 15px;
-            }
+
+        .section-intro {
+            max-width: 720px;
+            margin-bottom: 50px;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .hero-subtitle {
+            font-size: 22px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 10px 0 22px 0;
+            max-width: 520px;
+        }
+
+        /* Cards grandes para C.I.A. */
+        .cia-section .principle-card {
+            padding: 42px 40px;
+            border-radius: 18px;
+            min-height: 180px;
+        }
+
+        .cia-section .principle-card h3 {
+            font-size: 18px;
+            /* antes 15px */
+            letter-spacing: 2.5px;
+            margin-bottom: 14px;
+        }
+
+        .cia-section .principle-card p {
+            font-size: 16px;
+            /* antes 14px */
+            line-height: 1.75;
+            color: rgba(255, 255, 255, 0.95);
         }
     </style>
 </head>
+
 <body>
     <canvas id="tech-bg"></canvas>
+
     <div class="wrap">
-        <span class="tag">Servicios IT</span>
-        <div class="headline-block">
-            <div class="headline-content">
+        <div class="header-grid">
+            <div class="header-content">
+                <span class="tag">Cyber Defense</span>
                 <h1>Seguridad Informática</h1>
-                <div id="lottie-animation"></div>
-                <div class="divider"></div>
+
             </div>
+            <div id="lottie-animation"></div>
         </div>
 
-        <div class="intro-text">
-            Es una disciplina que se encarga de proteger la integridad y la privacidad de los datos almacenados en un sistema informático. Un sistema informático puede ser protegido desde un punto de vista lógico (con el desarrollo de software) o físico (vinculado al mantenimiento eléctrico, por ejemplo). Por otra parte, las amenazas pueden proceder desde programas dañinos que se instalan en la computadora del usuario (como un virus) o llegar por vía remota (los delincuentes que se conectan a Internet e ingresan a distintos sistemas).
-        </div>
+        <section class="defense-section">
+            <h2 class="defense-title">
+                <span>Herramientas de Defensa</span>
+            </h2>
 
-        <h2 class="section-title">Herramientas de Seguridad</h2>
-        
-        <div class="tools-grid">
-            <div class="tool-card">
-                <h3>Antivirus</h3>
-                <p>Programas diseñados para detectar, prevenir y eliminar software malicioso que puede comprometer la seguridad del sistema.</p>
+            <div class="defense-intro">
+                Protección integral de activos digitales mediante controles de seguridad
+                diseñados para prevenir, detectar y responder ante amenazas.
             </div>
-            <div class="tool-card">
-                <h3>Cortafuegos (Firewalls)</h3>
-                <p>Sistemas de protección que controlan el tráfico de red entrante y saliente basándose en reglas de seguridad predeterminadas.</p>
-            </div>
-            <div class="tool-card">
-                <h3>Encriptación</h3>
-                <p>Técnicas de cifrado que protegen la información convirtiéndola en un formato ilegible para usuarios no autorizados.</p>
-            </div>
-            <div class="tool-card">
-                <h3>Contraseñas Seguras</h3>
-                <p>Sistemas de autenticación que verifican la identidad del usuario mediante combinaciones únicas de caracteres.</p>
-            </div>
-            <div class="tool-card">
-                <h3>Detección de Intrusos</h3>
-                <p>Sistemas que monitorean la actividad de la red y del sistema para detectar comportamientos sospechosos o ataques.</p>
-            </div>
-            <div class="tool-card">
-                <h3>Anti-Spyware</h3>
-                <p>Programas que detectan y eliminan software espía que recopila información sin autorización del usuario.</p>
-            </div>
-        </div>
 
-        <h2 class="section-title">Principios de un Sistema Seguro</h2>
-        
-        <div class="security-principles">
-            <div class="principle-card">
-                <h3>Integridad</h3>
-                <p>La información sólo puede ser modificada por las personas autorizadas, garantizando que los datos permanezcan exactos y completos.</p>
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <h3>Antivirus</h3>
+                    <p>Motores de detección heurística que previenen y eliminan software malicioso antes de comprometer
+                        el
+                        sistema.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="3" y1="9" x2="21" y2="9"></line>
+                            <line x1="9" y1="21" x2="9" y2="9"></line>
+                        </svg>
+                    </div>
+                    <h3>Firewalls</h3>
+                    <p>Barreras perimetrales que filtran el tráfico de red basándose en protocolos de seguridad
+                        estrictos.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                    </div>
+                    <h3>Encriptación</h3>
+                    <p>Algoritmos de cifrado que transforman información sensible en datos ilegibles para terceros.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+                    <h3>Autenticación</h3>
+                    <p>Verificación de identidad multifactorial para garantizar el acceso únicamente a personal
+                        autorizado.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </div>
+                    <h3>Monitorización</h3>
+                    <p>Escaneo continuo de la red (IDS/IPS) para detectar comportamientos anómalos en tiempo real.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </div>
+                    <h3>Anti-Spyware</h3>
+                    <p>Neutralización de agentes espía diseñados para la exfiltración silenciosa de datos privados.</p>
+                </div>
             </div>
-            <div class="principle-card">
-                <h3>Confidencialidad</h3>
-                <p>Los datos deben ser legibles únicamente para los usuarios autorizados, protegiendo la privacidad de la información sensible.</p>
-            </div>
-            <div class="principle-card">
-                <h3>Irrefutabilidad</h3>
-                <p>El usuario no debe poder negar las acciones que realizó, proporcionando trazabilidad y responsabilidad en el sistema.</p>
-            </div>
-            <div class="principle-card">
-                <h3>Disponibilidad</h3>
-                <p>El sistema debe ser estable y accesible cuando se necesite, garantizando continuidad en las operaciones.</p>
-            </div>
-        </div>
 
-        <div class="conclusion">
-            <p>Como en la mayoría de los ámbitos de la seguridad, lo esencial sigue siendo la capacitación de los usuarios. La tecnología más avanzada pierde efectividad si los usuarios no están debidamente formados en las mejores prácticas de seguridad informática.</p>
-        </div>
+            <section class="cia-section">
+                <h2 class="cia-title">
+                    <span>Principios C.I.A.</span>
+                </h2>
+
+                <div class="cia-intro">
+                    Los principios fundamentales que garantizan la protección,
+                    confiabilidad y continuidad de la información en cualquier entorno.
+                </div>
+
+                <div class="grid-container">
+                    <div class="card principle-card">
+                        <h3>Integridad</h3>
+                        <p>Garantía de exactitud: La información permanece inalterada y fiable durante todo su ciclo de
+                            vida.
+                        </p>
+                    </div>
+                    <div class="card principle-card">
+                        <h3>Confidencialidad</h3>
+                        <p>Privacidad absoluta: Acceso restringido estrictamente a entidades con los permisos adecuados.
+                        </p>
+                    </div>
+                    <div class="card principle-card">
+                        <h3>Disponibilidad</h3>
+                        <p>Continuidad del servicio: Acceso a la información y recursos en el momento exacto que se
+                            requiere.
+                        </p>
+                    </div>
+                    <div class="card principle-card">
+                        <h3>Irrefutabilidad</h3>
+                        <p>Trazabilidad forense: Imposibilidad de negar la autoría de acciones realizadas en el sistema.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="conclusion">
+                    <p>La ciberseguridad no es un producto, es un proceso. <strong>El factor humano sigue siendo la
+                            primera
+                            y
+                            última línea de defensa.</strong></p>
+                </div>
+            </section>
+        </section>
     </div>
 
     <script>
-        // Lottie Animation - Security themed
-const animation = lottie.loadAnimation({
-    container: document.getElementById('lottie-animation'),
-    renderer: 'svg',
-    loop: true,
-    autoplay: true,
-    path: 'https://lottie.host/381f254a-8c8b-427c-8bdc-dde1857bc080/G9qVfcoBa2.json',
-    rendererSettings: {
-        preserveAspectRatio: 'xMidYMid meet',
-        clearCanvas: true,
-        progressiveLoad: true,
-        hideOnTransparent: true, // esta línea ayuda
-        background: 'transparent' // fuerza fondo transparente
-    }
-});
+        // Lottie
+        lottie.loadAnimation({
+            container: document.getElementById('lottie-animation'),
+            renderer: 'svg', loop: true, autoplay: true,
+            path: 'https://lottie.host/9732053b-6258-4213-8c11-22540d94ea30/WYHDfvwhqc.json'
+        });
 
-
-        // Canvas Background
+        // Partículas de fondo
         const canvas = document.getElementById('tech-bg');
         const ctx = canvas.getContext('2d');
         let width, height, time = 0;
@@ -384,63 +587,30 @@ const animation = lottie.loadAnimation({
         resize();
 
         const particles = [];
-        const particleCount = 52;
-
-        function resetParticles() {
-            particles.length = 0;
-            for (let i = 0; i < particleCount; i++) {
-                particles.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5,
-                    size: Math.random() * 2 + 1.6
-                });
-            }
-        }
-        resetParticles();
-        window.addEventListener('resize', resetParticles);
-
-        function drawParticles() {
-            particles.forEach((p, i) => {
-                const pulse = Math.sin(time + i) * 0.6 + 1.1;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size * pulse, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(144,224,239,0.72)';
-                ctx.shadowColor = 'rgba(144,224,239,0.7)';
-                ctx.shadowBlur = 10 * pulse;
-                ctx.fill();
-                ctx.shadowBlur = 0;
-                for (let j = i + 1; j < particles.length; j++) {
-                    const p2 = particles[j];
-                    const dx = p.x - p2.x;
-                    const dy = p.y - p2.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 130) {
-                        ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.strokeStyle = `rgba(144,224,239,${(1 - dist / 130) * 0.17})`;
-                        ctx.lineWidth = 1;
-                        ctx.stroke();
-                    }
-                }
-                p.x += p.vx;
-                p.y += p.vy;
-                if (p.x < 0) p.x = width;
-                if (p.x > width) p.x = 0;
-                if (p.y < 0) p.y = height;
-                if (p.y > height) p.y = 0;
+        for (let i = 0; i < 120; i++) {
+            particles.push({
+                x: Math.random() * width, y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                size: Math.random() * 3 + 2
             });
         }
 
         function animate() {
             ctx.clearRect(0, 0, width, height);
-            drawParticles();
-            time += 0.014;
+            ctx.fillStyle = 'rgba(144, 224, 239, 0.4)';
+            particles.forEach((p, i) => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0 || p.x > width) p.vx *= -1;
+                if (p.y < 0 || p.y > height) p.vy *= -1;
+            });
             requestAnimationFrame(animate);
         }
         animate();
     </script>
 </body>
+
 </html>

@@ -1,193 +1,487 @@
-<!-- CULTURA Y AMBIENTE · layout en arco v5 -->
-<section id="cultura" class="sn-cultureBalanced v5" aria-labelledby="cultura-title">
-  <div class="container">
-    <div class="grid-cultura" role="region" aria-label="Cultura, metodología y servicios">
-      <header class="intro" aria-labelledby="cultura-title">
-        <h2 id="cultura-title" class="sn-h2">Cultura y ambiente</h2>
-        <p class="lead">Personas primero, procesos claros y excelencia técnica. Buscamos soluciones útiles, mantenibles y seguras.</p>
-      </header>
+<!-- ==========================================
+     CULTURA Y AMBIENTE (Glass/Cian · 3 pilares + chips)
+     + Partículas “bailando” por toda la sección (Canvas)
+     ========================================== -->
 
-      <!-- Col 1 (se queda donde estaba) -->
-      <section class="how card-anim sn-card" aria-labelledby="how-title">
-        <h3 id="how-title" class="sn-h3">Cómo trabajamos</h3>
-        <ul class="list glass">
+<section id="cultura" class="sn-cultureBalanced v6" aria-labelledby="cultura-title">
+  <canvas id="culturaParticles" class="sn-particles-canvas" aria-hidden="true"></canvas>
+
+  <div class="sn-container">
+    <header class="intro" aria-labelledby="cultura-title">
+      <span class="kicker" aria-hidden="true">Nuestro ADN</span>
+      <h2 id="cultura-title" class="sn-h2">Cultura y ambiente</h2>
+      <p class="lead">
+        Personas primero, procesos claros y excelencia técnica. Buscamos soluciones útiles, mantenibles y seguras.
+      </p>
+    </header>
+    <div class="grid-cultura" role="region" aria-label="Cultura, metodología y servicios">
+      <!-- Intro -->
+
+
+      <!-- Col 1 -->
+      <section class="card how card-anim" aria-labelledby="how-title">
+        <div class="card-head">
+          <span class="mini">Metodología</span>
+        </div>
+
+        <ul class="list" aria-label="Metodología de trabajo">
           <li><span aria-hidden="true">🧩</span> Análisis inicial y plan de implantación a medida.</li>
           <li><span aria-hidden="true">🔁</span> Metodología ágil: entregas iterativas y feedback continuo.</li>
-          <li><span aria-hidden="true">🛡️</span> Seguridad por defecto (hardening, backups y controles RGPD).</li>
-          <li><span aria-hidden="true">🧰</span> Mantenimiento preventivo y soporte cercano tras la puesta en marcha.</li>
+          <li><span aria-hidden="true">✅</span> Documentación clara y traspaso sin fricción.</li>
         </ul>
       </section>
 
-      <!-- Centro: imagen cuadrada y centrada -->
-      <figure class="media">
-        <img src="https://picsum.photos/1000/1000?random=18" alt="Equipo colaborando y revisando entregables" loading="lazy" decoding="async" width="1000" height="1000" />
-        <figcaption class="visually-hidden">Trabajo colaborativo y foco en calidad</figcaption>
-      </figure>
+      <!-- Col 2 -->
+      <section class="card pillars card-anim" aria-labelledby="pillars-title">
+        <div class="card-head">
+          <span class="mini">Cultura</span>
 
-      <!-- Derecha (antes Servicios): ahora Pilares -->
-      <section class="pillars card-anim sn-card" aria-labelledby="pillars-title">
-        <h3 id="pillars-title" class="sn-h3">Nuestros pilares</h3>
-        <ul class="list">
-          <li><span aria-hidden="true">💡</span> Creatividad responsable: impacto real y medible.</li>
+        </div>
+
+        <ul class="list" aria-label="Pilares de cultura">
           <li><span aria-hidden="true">🧭</span> Transparencia: decisiones trazables y comunicación abierta.</li>
           <li><span aria-hidden="true">🤝</span> Colaboración: equipos mixtos técnicos/creativos con clientes.</li>
           <li><span aria-hidden="true">📚</span> Aprendizaje continuo y revisión entre pares.</li>
         </ul>
       </section>
 
-      <!-- Debajo de la imagen: Servicios -->
-      <nav class="services card-anim sn-card" aria-label="Servicios clave">
-        <h3 class="sn-h3">Servicios</h3>
-        <ul class="list" aria-label="Listado de servicios">
-          <li><span aria-hidden="true">📡</span> Tecnología y Comunicación</li>
-          <li><span aria-hidden="true">🧭</span> Metodología y Consultoría</li>
-          <li><span aria-hidden="true">🛠️</span> Mantenimiento y Soporte</li>
-          <li><span aria-hidden="true">📘</span> Formación y Auditoría</li>
-        </ul>
-      </nav>
+      <!-- Col 3 -->
+      <section class="card quality card-anim" aria-labelledby="quality-title">
+        <div class="card-head">
+          <span class="mini">Garantías</span>
+        </div>
 
-      <div class="cta-wrap">
-        <a class="btn-cta" href="#contacto">Conversemos</a>
-      </div>
+        <ul class="list" aria-label="Garantías de calidad y seguridad">
+          <li><span aria-hidden="true">🛡️</span> Seguridad por defecto (hardening, copias y controles RGPD).</li>
+          <li><span aria-hidden="true">🧪</span> Validación: pruebas, checklist y control de cambios.</li>
+          <li><span aria-hidden="true">📈</span> Monitorización y mejora continua orientada a resultados.</li>
+        </ul>
+      </section>
+
     </div>
   </div>
+
+  <style>
+    /* =========================
+       SCOPE: solo #cultura
+       ========================= */
+    #cultura.sn-cultureBalanced.v6 {
+      --color-primary: #00cfff;
+      --color-accent: #00f2ff;
+      --color-light: #eaf6ff;
+      --color-text-muted: #cdefff;
+
+      --glass-bg: rgba(255, 255, 255, .045);
+      --glass-border: rgba(255, 255, 255, .10);
+      --glass-shadow: 0 10px 26px rgba(0, 207, 255, .14);
+
+      padding-block: clamp(56px, 8.5vh, 100px);
+      padding-inline: 5vw;
+
+      font-family: 'Segoe UI', sans-serif;
+      color: var(--color-light);
+      position: relative;
+      overflow: hidden;
+      isolation: auto;
+    }
+
+    /* Canvas FULL viewport */
+    #cultura .sn-particles-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none;
+      opacity: .9;
+      mix-blend-mode: screen;
+    }
+
+    /* Contenido por encima */
+    #cultura .sn-container {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Intro */
+    #cultura .intro {
+      text-align: center;
+      margin-bottom: clamp(10px, 1.5vw, 16px);
+    }
+
+    #cultura .kicker {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: .85rem;
+      padding: .55rem 1.05rem;
+      border-radius: 999px;
+      font-size: .98rem;
+      font-weight: 850;
+      color: var(--color-primary);
+      background: rgba(0, 207, 255, .10);
+      border: 1px solid rgba(0, 207, 255, .22);
+      letter-spacing: .2px;
+    }
+
+    #cultura .sn-h2 {
+      color: var(--color-primary) !important;
+      font-weight: 900;
+      font-size: clamp(2.15rem, 3.35vw, 2.85rem);
+      margin: 0 0 .5rem;
+      text-align: center;
+    }
+
+    #cultura .lead {
+      max-width: 74ch;
+      margin: 0 auto;
+      color: var(--color-text-muted);
+      opacity: .92;
+      line-height: 1.65;
+      font-size: 1.12rem;
+      text-align: center;
+    }
+
+    /* Grid */
+    #cultura .grid-cultura {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-areas:
+        "intro intro intro"
+        "how   pillars quality"
+        "services services services";
+      gap: clamp(14px, 2vw, 22px);
+      align-items: stretch;
+    }
+
+    #cultura .how {
+      grid-area: how;
+    }
+
+    #cultura .pillars {
+      grid-area: pillars;
+    }
+
+    #cultura .quality {
+      grid-area: quality;
+    }
+
+    /* Cards base */
+    #cultura .card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      box-shadow: var(--glass-shadow);
+      padding: 1.25rem 1.35rem;
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Cabecera de card (mini + título) */
+    #cultura .card-head {
+      display: grid;
+      gap: .2rem;
+      margin-bottom: .35rem;
+    }
+
+    #cultura .mini {
+      font-size: .9rem;
+      font-weight: 850;
+      color: rgba(234, 246, 255, .82);
+      letter-spacing: .16px;
+      text-transform: uppercase;
+    }
+
+    #cultura .sn-h3 {
+      color: var(--color-primary);
+      font-weight: 900;
+      font-size: 1.22rem;
+      margin: 0;
+    }
+
+    /* List */
+    #cultura .list {
+      list-style: none;
+      padding: 0;
+      margin: .7rem 0 0;
+      display: grid;
+      gap: .7rem;
+    }
+
+    #cultura .list li {
+      display: grid;
+      grid-template-columns: 1.55rem 1fr;
+      gap: .65rem;
+      align-items: start;
+      color: var(--color-text-muted);
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+
+    /* Servicios chips */
+    #cultura .services-chips {
+      grid-area: services;
+      text-align: center;
+      margin-top: clamp(4px, 1vw, 10px);
+      padding-top: clamp(2px, .8vw, 6px);
+    }
+
+    #cultura .services-chips .sn-h3 {
+      margin-bottom: .75rem;
+      font-size: 1.2rem;
+    }
+
+    #cultura .chip-row {
+      display: flex;
+      gap: .7rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    #cultura .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      padding: .7rem 1rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .14);
+      color: rgba(234, 246, 255, .92);
+      box-shadow: 0 12px 26px rgba(0, 207, 255, .10);
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+
+    #cultura .chip span[aria-hidden="true"] {
+      width: 1.45rem;
+      display: inline-flex;
+      justify-content: center;
+      flex: 0 0 1.45rem;
+    }
+
+    #cultura .chip:hover {
+      transform: translateY(-1px);
+      background: rgba(0, 207, 255, .10);
+      border-color: rgba(0, 207, 255, .26);
+      box-shadow: 0 16px 34px rgba(0, 207, 255, .14);
+    }
+
+    #cultura .chip--ghost {
+      background: rgba(255, 255, 255, .04);
+      border-color: rgba(255, 255, 255, .12);
+      opacity: .95;
+    }
+
+    /* Animación cards */
+    #cultura .card-anim {
+      will-change: transform, box-shadow;
+      animation: snFadeInUp .45s ease both, snFloatCard 6.5s ease-in-out .45s infinite alternate;
+    }
+
+    @keyframes snFadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes snFloatCard {
+      0% {
+        transform: translateY(0);
+      }
+
+      100% {
+        transform: translateY(-8px);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      #cultura .grid-cultura {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "intro intro"
+          "how pillars"
+          "quality quality"
+          "services services";
+      }
+    }
+
+    @media (max-width: 680px) {
+      #cultura .grid-cultura {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "intro"
+          "how"
+          "pillars"
+          "quality"
+          "services";
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #cultura .sn-particles-canvas {
+        display: none !important;
+      }
+
+      #cultura .card-anim {
+        animation: none !important;
+      }
+
+      #cultura .card,
+      #cultura .chip {
+        transition: none !important;
+      }
+    }
+  </style>
+
+
+  <script>
+    (function () {
+      const canvas = document.getElementById('culturaParticles');
+      if (!canvas) return;
+
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) return;
+
+      const ctx = canvas.getContext('2d', { alpha: true });
+      let w = 0, h = 0, dpr = 1;
+      let particles = [];
+      let rafId = null;
+      let t = 0;
+
+      const CFG = {
+        density: 0.00018,
+        minR: 1.2,
+        maxR: 3.2,
+        minV: 0.12,
+        maxV: 0.40,
+        linkDist: 130,
+        linkAlpha: 0.16,
+        glow: 14,
+        drift: 0.02
+      };
+
+      const rand = (min, max) => Math.random() * (max - min) + min;
+
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = Math.max(320, Math.floor(window.innerWidth));
+        h = Math.max(240, Math.floor(window.innerHeight));
+
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        const target = Math.round(w * h * CFG.density);
+        if (!particles.length) {
+          particles = Array.from({ length: target }, () => makeParticle(true));
+        } else {
+          if (target > particles.length) {
+            for (let i = 0; i < target - particles.length; i++) particles.push(makeParticle(true));
+          } else if (target < particles.length) {
+            particles.length = target;
+          }
+        }
+      }
+
+      function makeParticle(randomPos) {
+        const a = rand(0, Math.PI * 2);
+        const s = rand(CFG.minV, CFG.maxV);
+        return {
+          x: randomPos ? rand(0, w) : w / 2,
+          y: randomPos ? rand(0, h) : h / 2,
+          vx: Math.cos(a) * s,
+          vy: Math.sin(a) * s,
+          r: rand(CFG.minR, CFG.maxR),
+          a: rand(0.35, 0.85),
+          wobble: rand(0, 6.28)
+        };
+      }
+
+      function step() {
+        t += 0.01;
+        ctx.clearRect(0, 0, w, h);
+
+        const g = ctx.createRadialGradient(w * 0.5, h * 0.35, 10, w * 0.5, h * 0.35, Math.max(w, h));
+        g.addColorStop(0, 'rgba(0,242,255,0.12)');
+        g.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, w, h);
+
+        for (const p of particles) {
+          const wobX = Math.sin(t + p.wobble) * CFG.drift;
+          const wobY = Math.cos(t + p.wobble) * CFG.drift;
+
+          p.x += p.vx + wobX;
+          p.y += p.vy + wobY;
+
+          if (p.x < -10) p.x = w + 10;
+          if (p.x > w + 10) p.x = -10;
+          if (p.y < -10) p.y = h + 10;
+          if (p.y > h + 10) p.y = -10;
+        }
+
+        if (CFG.linkDist > 0) {
+          ctx.save();
+          ctx.lineWidth = 1;
+          for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+              const a = particles[i], b = particles[j];
+              const dx = a.x - b.x, dy = a.y - b.y;
+              const dist = Math.hypot(dx, dy);
+              if (dist < CFG.linkDist) {
+                const alpha = (1 - dist / CFG.linkDist) * CFG.linkAlpha;
+                ctx.strokeStyle = `rgba(0,242,255,${alpha})`;
+                ctx.beginPath();
+                ctx.moveTo(a.x, a.y);
+                ctx.lineTo(b.x, b.y);
+                ctx.stroke();
+              }
+            }
+          }
+          ctx.restore();
+        }
+
+        ctx.save();
+        ctx.shadowColor = 'rgba(0,242,255,0.65)';
+        ctx.shadowBlur = CFG.glow;
+
+        for (const p of particles) {
+          ctx.fillStyle = `rgba(0,242,255,${p.a})`;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+
+        rafId = requestAnimationFrame(step);
+      }
+
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(resize, 150);
+      });
+
+      resize();
+      step();
+
+      window.addEventListener('beforeunload', () => cancelAnimationFrame(rafId));
+    })();
+  </script>
 </section>
-
-<style>
-  /* ===== Overrides para compactar y equilibrar ===== */
-.sn-cultureBalanced.v5 { padding-block: clamp(40px, 7vh, 80px); }
-.sn-cultureBalanced.v5 .container { max-width: 1200px; }
-
-.sn-cultureBalanced.v5 .intro{ text-align:center; }
-.sn-cultureBalanced.v5 .intro .lead{ margin-inline:auto; }
-.sn-cultureBalanced.v5 #cultura-title{ margin:0 auto; }
-.sn-cultureBalanced.v5 .lead{ max-width: 72ch; margin-top: .25rem; color: var(--color-text-muted); }
-
-/* Rejilla por áreas con estructura en arco */
-.grid-cultura{
-  display:grid;
-  grid-template-columns:1.1fr 1fr 1.1fr; /* más ancho en extremos para texto */
-  grid-template-areas:
-    "intro   intro    intro"
-    "how     media    pillars"   /* fila superior del arco */
-    ".       services cta";      /* base del arco: servicios bajo la imagen */
-  gap:clamp(14px,2vw,22px);
-  align-items:start;
-}
-
-/* Áreas */
-.intro{grid-area:intro;}
-.how{grid-area:how;}
-.media{margin:0; border-radius:18px; overflow:hidden; box-shadow:0 6px 16px rgba(0,0,0,.25); place-self:center;}
-.services{grid-area:services;}
-.pillars{grid-area:pillars;}
-.cta-wrap{grid-area:cta; display:flex; align-items:flex-start; justify-content:center;}
-
-/* Tarjetas más densas */
-.list{list-style:none; padding:0; margin:.4rem 0 0; display:grid; gap:.55rem;}
-.list li{display:grid; grid-template-columns:1.5rem 1fr; gap:.55rem; align-items:start;}
-.glass li{padding:.7rem .85rem; border-radius:14px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); backdrop-filter:blur(6px);} 
-
-/* Dos columnas para ocupar huecos */
-.two-cols{ 
-  display:grid; 
-  grid-template-columns:repeat(2, minmax(0,1fr)); 
-  gap:.55rem .7rem;
-}
-.chips.two-cols{grid-auto-rows:1fr;}            /* chips con alturas homogéneas */
-.pillars .two-cols, .list.two-cols{grid-auto-rows:auto;}
-
-/* Imagen: cuadrada y centrada */
-.media{margin:0; border-radius:18px; overflow:hidden; box-shadow:0 10px 28px rgba(0,0,0,.35); place-self:center;}
-.media img{
-  display:block; width:100%; aspect-ratio: 1 / 1; object-fit:cover; object-position:center; 
-  max-width:min(520px, 100%); margin-inline:auto;
-}
-
-/* Chips */
-.chip{
-  display:inline-flex; align-items:center; gap:.5rem; width:100%;
-  padding:.6rem .85rem; border-radius:999px;
-  background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1);
-  color:var(--color-light); text-decoration:none;
-}
-
-/* CTA alineado con la imagen (misma altura de tarjeta) */
-.btn-cta{
-  display:inline-block; padding:.9rem 1.2rem; border-radius:999px; font-weight:700;
-  color:#031b20; background:linear-gradient(90deg, var(--color-primary), var(--color-accent));
-  text-decoration:none; box-shadow:0 6px 16px rgba(0,207,255,.18);
-}
-
-/* Responsivo: mantiene la idea de arco */
-@media (max-width: 1024px){
-  .grid-cultura{
-    grid-template-columns:1fr 1fr;
-    grid-template-areas:
-      "intro    intro"
-      "media    media"     /* imagen centrada arriba */
-      "how      pillars"   /* brazos del arco */
-      "services cta";      /* base del arco */
-  }
-  .two-cols{grid-template-columns:1fr 1fr;}
-}
-@media (max-width: 680px){
-  .grid-cultura{
-    grid-template-columns:1fr;
-    grid-template-areas:
-      "intro"
-      "media"
-      "how"
-      "pillars"
-      "services"
-      "cta";
-  }
-  .two-cols{grid-template-columns:1fr;}
-}
-
-/* Card envolvente por sección (no por item) */
-.sn-cultureBalanced.v5 :is(.how, .pillars, .services){
-  padding:1rem; border-radius:18px; background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08); backdrop-filter: blur(6px);
-  box-shadow:0 6px 18px rgba(0,207,255,.16);
-}
-
-/* Los items dejan de ser cards individuales */
-.sn-cultureBalanced.v5 .glass li{
-  background:transparent; border:0; backdrop-filter:none; box-shadow:none;
-  padding:.2rem 0; /* compensa el padding perdido */
-}
-
-/* ===== Cards estilo MVV dentro de Cultura (v5) ===== */
-.sn-cultureBalanced.v5 .sn-card{
-  background:rgba(255,255,255,0.04);
-  backdrop-filter:blur(0px);
-  -webkit-backdrop-filter:blur(0px);
-  border-radius:16px;
-  border:1px solid rgba(255,255,255,0.08);
-  box-shadow:0 6px 18px rgba(0,207,255,0.16);
-  padding:1.1rem 1.25rem;
-  transition:transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
-}
-.sn-cultureBalanced.v5 .sn-card:hover,
-.sn-cultureBalanced.v5 .sn-card:focus-within{
-  transform:translateY(-2px);
-  box-shadow:0 10px 28px rgba(0,207,255,0.22);
-  background:rgba(255,255,255,0.065);
-  border-color:rgba(0,207,255,0.18);
-}
-.sn-cultureBalanced.v5 .sn-card h3{ color:var(--color-primary); margin-top:0; }
-
-/* Los <li> se quedan planos para no duplicar la tarjeta */
-.sn-cultureBalanced.v5 .list li{ padding:.25rem 0; }
-
-/* Estructura coherente de listas dentro de las cards (igual que "Cómo trabajamos") */
-.sn-cultureBalanced.v5 .sn-card .list{ display:grid; gap:.55rem; margin:.5rem 0 0; padding:0; list-style:none; }
-.sn-cultureBalanced.v5 .sn-card .list li{ display:grid; grid-template-columns:1.5rem 1fr; gap:.55rem; align-items:start; }
-.sn-cultureBalanced.v5 .sn-card .list li span[aria-hidden="true"]{ line-height:1.4; }
-
-/* Ajuste vertical: baja ligeramente la foto para centrarla mejor en desktop */
-@media (min-width: 1025px){
-  .sn-cultureBalanced.v5 .media{ margin-top: clamp(12px, 2vh, 28px); }
-}
-</style>
