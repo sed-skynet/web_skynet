@@ -230,6 +230,21 @@
                 align-items: flex-start;
             }
         }
+
+        /* Reducir margen inferior en móvil */
+        @media (max-width: 576px) {
+            .wrap {
+                margin: 20px auto 10px;
+            }
+        }
+
+        /* ===== Ajuste headline-block en móviles ===== */
+        @media (max-width: 576px) {
+            .headline-block {
+                margin-bottom: -170px;
+                /* antes 25px */
+            }
+        }
     </style>
 </head>
 

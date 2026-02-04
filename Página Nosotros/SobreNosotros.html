@@ -21,6 +21,16 @@
       backface-visibility: hidden;
     }
 
+    .card-item {
+      position: absolute;
+      inset: 0;
+    }
+
+    .card-item.is-active {
+      position: relative;
+    }
+
+
     /* Header glow background */
     .header-glow {
       background: radial-gradient(closest-side at 50% 40%, rgba(0, 242, 255, .18), transparent 70%),
@@ -56,50 +66,47 @@
     .cards-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 24px;
-      max-width: 1300px;
+      gap: 32px;
+      max-width: 1480px;
       margin: 0 auto;
       position: relative;
       padding-bottom: 16px;
+      min-height: 600px;
+      /* ⬅️ ALTURA MÍNIMA FIJA */
+      transition: min-height 0.6s ease-in-out;
+      /* ⬅️ TRANSICIÓN SUAVE */
     }
+
 
     @media (min-width: 992px) {
       .cards-grid {
         grid-template-columns: repeat(4, 1fr);
+        gap: 36px;
         padding-bottom: 24px;
+        min-height: 620px;
+        /* ⬅️ ALTURA MÍNIMA EN DESKTOP */
       }
     }
 
-    /* Card positioning - Mobile (stacked) */
+    /* Asegura transición suave en la sección completa */
+    #equipo {
+      transition: all 0.6s ease-in-out;
+    }
+
     .card-item {
-      grid-column: 1;
       opacity: 0;
-      transform: scale(0.96) translateY(12px);
       pointer-events: none;
       visibility: hidden;
-      transition:
-        opacity 0.6s cubic-bezier(.22, .61, .36, 1),
-        transform 0.6s cubic-bezier(.22, .61, .36, 1),
-        visibility 0s linear 0.6s;
     }
 
     .card-item.is-active {
       opacity: 1;
-      transform: scale(1) translateY(0);
       pointer-events: auto;
       visibility: visible;
-      transition:
-        opacity 0.6s cubic-bezier(.22, .61, .36, 1),
-        transform 0.6s cubic-bezier(.22, .61, .36, 1);
     }
 
 
-    /* Active state */
-    .card-item.is-active {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-      pointer-events: auto;
-    }
+
 
     @media (min-width: 992px) {
       .card-item {
@@ -141,12 +148,7 @@
       }
 
       .card-item {
-        display: none;
         height: 100%;
-      }
-
-      .card-item.is-active {
-        display: flex;
       }
 
       .card-item>.relative.group {
@@ -163,21 +165,66 @@
       }
     }
 
+    .cards-grid {
+      align-self: center;
+    }
+
+    .cards-grid-wrapper {
+      align-items: center;
+    }
+
     /* Navigation button positioning */
     @media (min-width: 992px) {
       .btn-nav-desktop-prev {
         position: absolute;
         top: 50%;
-        left: -70px;
+        left: -64px;
         transform: translateY(-50%);
       }
 
       .btn-nav-desktop-next {
         position: absolute;
         top: 50%;
-        right: -70px;
+        right: -64px;
         transform: translateY(-50%);
       }
+    }
+
+    @media (min-width: 992px) {
+      .cards-grid-wrapper {
+        justify-content: center;
+        /* volvemos a centrar correctamente */
+      }
+
+      .cards-grid {
+        transform: translateX(30px);
+        /* ajuste fino hacia la derecha */
+      }
+    }
+
+    .team-container {
+      transition: height 0.5s ease-in-out;
+      overflow: hidden;
+    }
+
+    .team-grid {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease-in-out;
+    }
+
+    .team-grid.active {
+      max-height: 5000px;
+      /* Un valor suficientemente grande */
+    }
+
+    .team-section {
+      transition: all 0.5s ease-in-out;
+      margin-bottom: 0;
+    }
+
+    .team-section.expanded {
+      margin-bottom: 4rem;
     }
   </style>
 </head>
@@ -235,18 +282,24 @@
       </header>
 
       <!-- Cards Grid Container -->
-      <div class="cards-grid-wrapper relative flex items-start justify-center gap-4">
-        <!-- Prev Button -->
-        <button id="btn-prev"
-          class="hidden lg:flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.15)] hover:bg-[rgba(0,207,255,0.15)] hover:border-[rgba(0,207,255,0.4)] transition-all duration-300 flex-shrink-0 cursor-pointer "
-          aria-label="Grupo anterior">
-          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-
-        <div class="cards-grid">
-
+      <div class="cards-grid-wrapper relative flex justify-center gap-4">
+        <div class="cards-grid relative">
+          <!-- Prev Button -->
+          <button id="btn-prev"
+            class="btn-nav-desktop-prev hidden lg:flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.15)] hover:bg-[rgba(0,207,255,0.15)] hover:border-[rgba(0,207,255,0.4)] transition-all duration-300 cursor-pointer"
+            aria-label="Grupo anterior">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <!-- Next Button -->
+          <button id="btn-next"
+            class="btn-nav-desktop-next hidden lg:flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.15)] hover:bg-[rgba(0,207,255,0.15)] hover:border-[rgba(0,207,255,0.4)] transition-all duration-300 cursor-pointer"
+            aria-label="Grupo siguiente">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
           <!-- Card: Manolo -->
           <article class="card-item" data-group="direccion">
             <div class="relative group">
@@ -257,16 +310,15 @@
 
               <!-- Card Inner -->
               <div
-                class="relative bg-[rgba(255,255,255,0.045)] rounded-[21px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center h-full z-[2] flex-1"
-                style="padding: 26px 22px; gap: 10px;">
+                class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center h-full z-[2] flex-1"
+                style="padding: 34px 28px; gap: 14px; min-height: 560px;">
 
                 <!-- Avatar -->
                 <div
                   class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px] bg-gradient-to-br from-cyan-400/90 to-cyan-400/20 shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.08)]">
                   <div class="w-full h-full rounded-full overflow-hidden">
                     <img src="https://darknet-sys.com/wp-content/uploads/2026/02/ChatGPT-Image-2-feb-2026-13_03_14.png"
-                      alt="Manolo CEO" class="w-full h-full object-cover object-center" loading="lazy" style="    transform: scale(1.5) translateY(1%) translateX(3%);
-">
+                      alt="Manolo CEO" class="w-full h-full object-cover object-center" loading="lazy" style="    transform: scale(1.5) translateY(1%) translateX(3%);">
                   </div>
                 </div>
 
@@ -277,7 +329,7 @@
                     style="letter-spacing: 1.5px;">
                     Chief Executive Officer
                   </div>
-                  <h3 class="text-[1.55rem] font-black mt-[5px] mb-0 text-white">Manolo</h3>
+                  <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">Manolo</h3>
 
                   <!-- Features -->
                   <ul class="list-none p-0 my-[10px_0_14px] w-full text-left flex flex-col gap-2"
@@ -320,8 +372,9 @@
                 class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
               </div>
               <div
-                class="relative bg-[rgba(255,255,255,0.045)] rounded-[21px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center h-full z-[2] flex-1"
-                style="padding: 26px 22px; gap: 10px;">
+                class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center h-full z-[2] flex-1"
+                style="padding: 34px 28px; gap: 14px; min-height: 560px;">
+
                 <div
                   class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px] bg-gradient-to-br from-cyan-400/90 to-cyan-400/20 shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.10)]">
                   <div class="w-full h-full rounded-full overflow-hidden">
@@ -336,7 +389,7 @@
                     style="letter-spacing: 1.5px;">
                     Director General
                   </div>
-                  <h3 class="text-[1.55rem] font-black mt-[5px] mb-0 text-white">Juan Jesús</h3>
+                  <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">Juan Jesús</h3>
                   <ul class="list-none p-0 w-full text-left flex flex-col gap-2" style="margin: 10px 0 14px;">
                     <li
                       class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
@@ -366,6 +419,75 @@
               </div>
             </div>
           </article>
+          <!-- Card: Mónica -->
+          <article class="card-item" data-group="direccion">
+            <div class="relative group">
+              <div
+                class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
+              </div>
+
+              <div class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)]
+             flex flex-col items-center text-center h-full z-[2] flex-1"
+                style="padding: 34px 28px; gap: 14px; min-height: 560px;">
+
+                <!-- Avatar -->
+                <div class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px]
+               bg-gradient-to-br from-cyan-400/90 to-cyan-400/20
+               shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.08)]">
+                  <div class="w-full h-full rounded-full overflow-hidden">
+                    <img src="https://darknet-sys.com/wp-content/uploads/2026/02/MO1.png"
+                      alt="Mónica - Jefa de Administración" class="w-full h-full object-cover object-center"
+                      loading="lazy" style="transform: scale(1.35) translateY(-8%) translateX(-14px);
+">
+                  </div>
+                </div>
+
+                <!-- Content -->
+                <div class="w-full">
+                  <div class="inline-block text-[11px] font-black text-[rgba(0,207,255,0.95)] uppercase
+                 bg-[rgba(0,207,255,0.10)] border border-[rgba(0,207,255,0.18)]
+                 px-3 py-[5px] rounded-full" style="letter-spacing: 1.5px;">
+                    Jefa de Administración
+                  </div>
+
+                  <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">Mónica</h3>
+
+                  <ul class="list-none p-0 w-full text-left flex flex-col gap-2" style="margin: 10px 0 14px;">
+                    <li
+                      class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                      <span class="text-[#00cfff] font-black">▹</span>
+                      <span>Coordinación administrativa y financiera</span>
+                    </li>
+                    <li
+                      class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                      <span class="text-[#00cfff] font-black">▹</span>
+                      <span>Supervisión de facturación y control interno</span>
+                    </li>
+                    <li
+                      class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                      <span class="text-[#00cfff] font-black">▹</span>
+                      <span>Apoyo estratégico a dirección</span>
+                    </li>
+                  </ul>
+
+                  <div class="flex gap-2 flex-wrap justify-center mt-auto">
+                    <span class="text-xs text-[rgba(255,255,255,0.70)]
+                   bg-[rgba(255,255,255,0.05)]
+                   border border-[rgba(255,255,255,0.08)]
+                   px-2.5 py-1 rounded-full">#Administración</span>
+                    <span class="text-xs text-[rgba(255,255,255,0.70)]
+                   bg-[rgba(255,255,255,0.05)]
+                   border border-[rgba(255,255,255,0.08)]
+                   px-2.5 py-1 rounded-full">#Gestión</span>
+                    <span class="text-xs text-[rgba(255,255,255,0.70)]
+                   bg-[rgba(255,255,255,0.05)]
+                   border border-[rgba(255,255,255,0.08)]
+                   px-2.5 py-1 rounded-full">#Finanzas</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
 
           <!-- Card: Jose Ángel -->
           <article class="card-item" data-group="direccion">
@@ -374,8 +496,9 @@
                 class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
               </div>
               <div
-                class="relative bg-[rgba(255,255,255,0.045)] rounded-[21px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center h-full z-[2] flex-1"
-                style="padding: 26px 22px; gap: 10px;">
+                class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center h-full z-[2] flex-1"
+                style="padding: 34px 28px; gap: 14px; min-height: 560px;">
+
                 <div
                   class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px] bg-gradient-to-br from-cyan-400/90 to-cyan-400/20 shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.08)]">
                   <div class="w-full h-full rounded-full overflow-hidden">
@@ -388,9 +511,9 @@
                   <div
                     class="inline-block text-[11px] font-black text-[rgba(0,207,255,0.95)] uppercase bg-[rgba(0,207,255,0.10)] border border-[rgba(0,207,255,0.18)] px-3 py-[5px] rounded-full"
                     style="letter-spacing: 1.5px;">
-                    CIO/CIS
+                    CIO/CISO
                   </div>
-                  <h3 class="text-[1.55rem] font-black mt-[5px] mb-0 text-white">Jose Ángel</h3>
+                  <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">Jose Ángel</h3>
                   <ul class="list-none p-0 w-full text-left flex flex-col gap-2" style="margin: 10px 0 14px;">
                     <li
                       class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
@@ -428,8 +551,9 @@
                 class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
               </div>
               <div
-                class="relative bg-[rgba(255,255,255,0.045)] rounded-[21px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center h-full z-[2] flex-1"
-                style="padding: 26px 22px; gap: 10px;">
+                class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center h-full z-[2] flex-1"
+                style="padding: 34px 28px; gap: 14px; min-height: 560px;">
+
                 <div
                   class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px] bg-gradient-to-br from-cyan-400/90 to-cyan-400/20 shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.08)]">
                   <div class="w-full h-full rounded-full overflow-hidden">
@@ -443,7 +567,7 @@
                     style="letter-spacing: 1.5px;">
                     Desarrollador Senior
                   </div>
-                  <h3 class="text-[1.55rem] font-black mt-[5px] mb-0 text-white">Javier</h3>
+                  <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">Javier</h3>
                   <ul class="list-none p-0 w-full text-left flex flex-col gap-2" style="margin: 10px 0 14px;">
                     <li
                       class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
@@ -481,8 +605,9 @@
                 class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
               </div>
               <div
-                class="relative bg-[rgba(255,255,255,0.045)] rounded-[21px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center h-full z-[2] flex-1"
-                style="padding: 26px 22px; gap: 10px;">
+                class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center h-full z-[2] flex-1"
+                style="padding: 34px 28px; gap: 14px; min-height: 560px;">
+
                 <div
                   class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px] bg-gradient-to-br from-cyan-400/90 to-cyan-400/20 shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.08)]">
                   <div class="w-full h-full rounded-full overflow-hidden">
@@ -497,7 +622,7 @@
                     style="letter-spacing: 1.5px;">
                     Administración
                   </div>
-                  <h3 class="text-[1.55rem] font-black mt-[5px] mb-0 text-white">María Fe</h3>
+                  <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">María Fe</h3>
                   <ul class="list-none p-0 w-full text-left flex flex-col gap-2" style="margin: 10px 0 14px;">
                     <li
                       class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
@@ -535,8 +660,9 @@
                 class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
               </div>
               <div
-                class="relative bg-[rgba(255,255,255,0.045)] rounded-[21px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center h-full z-[2] flex-1"
-                style="padding: 26px 22px; gap: 10px;">
+                class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center h-full z-[2] flex-1"
+                style="padding: 34px 28px; gap: 14px; min-height: 560px;">
+
                 <div
                   class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px] bg-gradient-to-br from-cyan-400/90 to-cyan-400/20 shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.08)]">
                   <div class="w-full h-full rounded-full overflow-hidden">
@@ -550,7 +676,7 @@
                     style="letter-spacing: 1.5px;">
                     Desarrollador Backend
                   </div>
-                  <h3 class="text-[1.55rem] font-black mt-[5px] mb-0 text-white">Luis Miguel</h3>
+                  <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">Luis Miguel</h3>
                   <ul class="list-none p-0 w-full text-left flex flex-col gap-2" style="margin: 10px 0 14px;">
                     <li
                       class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
@@ -588,8 +714,9 @@
                 class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
               </div>
               <div
-                class="relative bg-[rgba(255,255,255,0.045)] rounded-[21px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center h-full z-[2] flex-1"
-                style="padding: 26px 22px; gap: 10px;">
+                class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center h-full z-[2] flex-1"
+                style="padding: 34px 28px; gap: 14px; min-height: 560px;">
+
                 <div
                   class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px] bg-gradient-to-br from-cyan-400/90 to-cyan-400/20 shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.08)]">
                   <div class="w-full h-full rounded-full overflow-hidden">
@@ -603,7 +730,7 @@
                     style="letter-spacing: 1.5px;">
                     Desarrollador Frontend
                   </div>
-                  <h3 class="text-[1.55rem] font-black mt-[5px] mb-0 text-white">Suhail</h3>
+                  <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">Suhail</h3>
                   <ul class="list-none p-0 w-full text-left flex flex-col gap-2" style="margin: 10px 0 14px;">
                     <li
                       class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
@@ -641,8 +768,9 @@
                 class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
               </div>
               <div
-                class="relative bg-[rgba(255,255,255,0.045)] rounded-[21px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center h-full z-[2] flex-1"
-                style="padding: 26px 22px; gap: 10px;">
+                class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center h-full z-[2] flex-1"
+                style="padding: 34px 28px; gap: 14px; min-height: 560px;">
+
                 <div
                   class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px] bg-gradient-to-br from-cyan-400/90 to-cyan-400/20 shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.08)]">
                   <div class="w-full h-full rounded-full overflow-hidden">
@@ -656,7 +784,7 @@
                     style="letter-spacing: 1.5px;">
                     Soporte y Sistemas
                   </div>
-                  <h3 class="text-[1.55rem] font-black mt-[5px] mb-0 text-white">Eduardo</h3>
+                  <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">Eduardo</h3>
                   <ul class="list-none p-0 w-full text-left flex flex-col gap-2" style="margin: 10px 0 14px;">
                     <li
                       class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
@@ -694,11 +822,13 @@
                 class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
               </div>
               <div
-                class="relative bg-[rgba(255,255,255,0.045)] rounded-[21px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center h-full z-[2] flex-1"
-                style="padding: 26px 22px; gap: 10px;">
-                <div class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px]
-bg-gradient-to-br from-cyan-400/90 to-cyan-400/20
-shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.10)]">
+                class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center h-full z-[2] flex-1"
+                style="padding: 34px 28px; gap: 14px; min-height: 560px;">
+
+                <div class="relative mb-3 w-[138px] h-[138px] rounded-full p-[4px]
+     bg-gradient-to-br from-cyan-400/90 to-cyan-400/20
+     shadow-[0_14px_36px_rgba(0,0,0,.28),0_0_0_5px_rgba(0,207,255,.10)]">
+
 
                   <div class="w-full h-full rounded-full overflow-hidden">
                     <img src="https://darknet-sys.com/wp-content/uploads/2026/01/Carmen3-e1769773583574.png"
@@ -713,7 +843,7 @@ shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.10)]">
                     style="letter-spacing: 1.5px;">
                     Soporte y Sistemas
                   </div>
-                  <h3 class="text-[1.55rem] font-black mt-[5px] mb-0 text-white">Carmen</h3>
+                  <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">Carmen</h3>
                   <ul class="list-none p-0 w-full text-left flex flex-col gap-2" style="margin: 10px 0 14px;">
                     <li
                       class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
@@ -751,8 +881,9 @@ shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.10)]">
                 class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
               </div>
               <div
-                class="relative bg-[rgba(255,255,255,0.045)] rounded-[21px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center h-full z-[2] flex-1"
-                style="padding: 26px 22px; gap: 10px;">
+                class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center h-full z-[2] flex-1"
+                style="padding: 34px 28px; gap: 14px; min-height: 560px;">
+
                 <div
                   class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px] bg-gradient-to-br from-cyan-400/90 to-cyan-400/20 shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.08)]">
                   <div class="w-full h-full rounded-full overflow-hidden">
@@ -768,7 +899,7 @@ shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.10)]">
                     style="letter-spacing: 1.5px;">
                     Soporte y Sistemas
                   </div>
-                  <h3 class="text-[1.55rem] font-black mt-[5px] mb-0 text-white">Corinne</h3>
+                  <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">Corinne</h3>
                   <ul class="list-none p-0 w-full text-left flex flex-col gap-2" style="margin: 10px 0 14px;">
                     <li
                       class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
@@ -806,8 +937,9 @@ shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.10)]">
                 class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
               </div>
               <div
-                class="relative bg-[rgba(255,255,255,0.045)] rounded-[21px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center h-full z-[2] flex-1"
-                style="padding: 26px 22px; gap: 10px;">
+                class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center h-full z-[2] flex-1"
+                style="padding: 34px 28px; gap: 14px; min-height: 560px;">
+
                 <div
                   class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px] bg-gradient-to-br from-cyan-400/90 to-cyan-400/20 shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.08)]">
                   <div class="w-full h-full rounded-full overflow-hidden">
@@ -822,7 +954,7 @@ shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.10)]">
                     style="letter-spacing: 1.5px;">
                     Recursos Humanos
                   </div>
-                  <h3 class="text-[1.55rem] font-black mt-[5px] mb-0 text-white">Janisse</h3>
+                  <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">Janisse</h3>
                   <ul class="list-none p-0 w-full text-left flex flex-col gap-2" style="margin: 10px 0 14px;">
                     <li
                       class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
@@ -854,14 +986,8 @@ shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.10)]">
           </article>
         </div>
 
-        <!-- Next Button -->
-        <button id="btn-next"
-          class="hidden lg:flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.15)] hover:bg-[rgba(0,207,255,0.15)] hover:border-[rgba(0,207,255,0.4)] transition-all duration-300 flex-shrink-0 cursor-pointer "
-          aria-label="Grupo siguiente">
-          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
+
+
       </div>
 
       <!-- Mobile Navigation -->
@@ -887,6 +1013,9 @@ shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.10)]">
     (() => {
       const GROUPS = ["direccion", "desarrollo", "soporte"];
       const INTERVAL = 8000;
+      const GROUP_VISIBLE_TIME = 8200;
+      const TRANSITION_TIME = 2100;
+
 
       const cards = [...document.querySelectorAll(".card-item")];
       const grouped = GROUPS.map(g => cards.filter(c => c.dataset.group === g));
@@ -900,91 +1029,84 @@ shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.10)]">
       const nextBtnMobile = document.querySelector("#btn-next-mobile");
 
       function renderGroup(groupIndex) {
-        // Fase de salida
-        cards.forEach(c => {
-          c.classList.remove("is-active");
-          c.classList.add("is-leaving");
-          c.removeAttribute("data-slot");
-        });
+        const outgoing = document.querySelectorAll(".card-item.is-active");
 
-        // Espera a que termine la animación de salida
+        // salida suave
+        outgoing.forEach(c => c.classList.remove("is-active"));
+
+        // entrada con solape real + stagger
         setTimeout(() => {
-          cards.forEach(c => c.classList.remove("is-leaving"));
-
           grouped[groupIndex].forEach((card, slotIndex) => {
             card.dataset.slot = slotIndex;
+            card.style.setProperty("--i", slotIndex);
             card.classList.add("is-active");
           });
-
-          centerButtons();
-        }, 600); // ⬅️ debe coincidir con el transition
+        }, 180); // solape suave (antes 300)
       }
 
       function startAuto() {
-        timer = setInterval(() => {
-          index = (index + 1) % GROUPS.length;
-          renderGroup(index);
-        }, INTERVAL);
+        stopAuto();
+
+        timer = setTimeout(() => {
+          goNextGroup();
+        }, GROUP_VISIBLE_TIME);
       }
 
       function stopAuto() {
-        clearInterval(timer);
+        clearTimeout(timer);
       }
+
+      function goNextGroup() {
+        index = (index + 1) % GROUPS.length;
+        renderGroup(index);
+
+        timer = setTimeout(() => {
+          startAuto();
+        }, TRANSITION_TIME);
+      }
+
+      function goPrevGroup() {
+        index = (index - 1 + GROUPS.length) % GROUPS.length;
+        renderGroup(index);
+
+        timer = setTimeout(() => {
+          startAuto();
+        }, TRANSITION_TIME);
+      }
+
 
       // Botones de navegación
       if (prevBtn) {
-        prevBtn.addEventListener("click", () => {
+        prevBtn?.addEventListener("click", () => {
           stopAuto();
-          index = (index - 1 + GROUPS.length) % GROUPS.length;
-          renderGroup(index);
-          startAuto();
+          goPrevGroup();
         });
+
       }
 
       if (nextBtn) {
         nextBtn.addEventListener("click", () => {
           stopAuto();
-          index = (index + 1) % GROUPS.length;
-          renderGroup(index);
-          startAuto();
+          goNextGroup();
         });
       }
 
       // Botones móviles
       if (prevBtnMobile) {
-        prevBtnMobile.addEventListener("click", () => {
+        prevBtnMobile?.addEventListener("click", () => {
           stopAuto();
-          index = (index - 1 + GROUPS.length) % GROUPS.length;
-          renderGroup(index);
-          startAuto();
+          goPrevGroup();
         });
       }
 
       if (nextBtnMobile) {
-        nextBtnMobile.addEventListener("click", () => {
+        nextBtnMobile?.addEventListener("click", () => {
           stopAuto();
-          index = (index + 1) % GROUPS.length;
-          renderGroup(index);
-          startAuto();
+          goNextGroup();
         });
       }
-
-      // Centrar botones verticalmente con las cards
-      function centerButtons() {
-        const activeCard = document.querySelector(".card-item.is-active");
-        if (activeCard && prevBtn && nextBtn) {
-          const cardHeight = activeCard.offsetHeight;
-          const btnHeight = prevBtn.offsetHeight;
-          const mt = (cardHeight - btnHeight) / 2;
-          prevBtn.style.marginTop = mt + "px";
-          nextBtn.style.marginTop = mt + "px";
-        }
-      }
-
       // Inicialización
       renderGroup(index);
-      setTimeout(centerButtons, 50);
-      window.addEventListener("resize", centerButtons);
       startAuto();
     })();
   </script>

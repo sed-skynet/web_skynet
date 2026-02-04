@@ -419,6 +419,38 @@
             line-height: 1.75;
             color: rgba(255, 255, 255, 0.95);
         }
+
+        /* ===== Ajuste de .tag en móviles ===== */
+        @media (max-width: 576px) {
+            .tag {
+                margin-top: 6px;
+                /* antes 15px */
+                margin-bottom: 10px;
+                /* antes 20px */
+                font-size: 11px;
+                /* ligeramente más compacto */
+                letter-spacing: 1.5px;
+                padding: 5px 12px;
+                margin-left: -24px;
+            }
+        }
+
+        /* ===== Ajuste de h1 en móviles ===== */
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 32px;
+                /* más compacto en móvil */
+                line-height: 1.15;
+                /* respira mejor al partir líneas */
+                white-space: normal;
+                /* 🔓 permite salto de línea */
+                text-align: center;
+                /* coherente con layout móvil */
+                letter-spacing: -0.3px;
+                /* ajusta tracking al reducir tamaño */
+                margin-bottom: -85px !important;
+            }
+        }
     </style>
 </head>
 

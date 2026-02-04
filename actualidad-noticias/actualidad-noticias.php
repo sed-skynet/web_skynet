@@ -14,12 +14,87 @@ class Actualidad_Noticias_Ultra
 
     public function __construct()
     {
+        add_action('after_setup_theme', [$this, 'enable_thumbnails']);
         add_action('init', [$this, 'register_cpt']);
         add_action('add_meta_boxes', [$this, 'register_meta_boxes']);
         add_action('save_post_noticia', [$this, 'save_meta']);
         add_shortcode('actualidad_noticias', [$this, 'render_noticias']);
         add_action('admin_menu', [$this, 'register_admin_page']);
         add_action('wp_head', [$this, 'inject_frontend_styles']);
+        add_action('admin_enqueue_scripts', [$this, 'admin_assets']);
+        add_action('admin_head', [$this, 'inject_admin_block_styles']);
+    }
+
+    public function enable_thumbnails()
+    {
+        add_theme_support('post-thumbnails');
+        add_theme_support('post-thumbnails', ['noticia']);
+    }
+    // 1) En el constructor (dentro de __construct) añade:
+// add_action('admin_enqueue_scripts', [$this, 'admin_assets']);
+
+    // 2) Añade este método dentro de la clase Actualidad_Noticias_Ultra:
+    public function admin_assets()
+    {
+        // Solo en nuestra página de editor personalizado
+        if (!isset($_GET['page']) || $_GET['page'] !== 'crear-noticia-pro') {
+            return;
+        }
+
+        // URL base del plugin (asegúrate de que los archivos woff2 estén en assets/fonts/)
+        $base = plugin_dir_url(__FILE__) . 'assets/fonts/';
+
+        // Registrar handle vacío para añadir CSS inline
+        wp_register_style('actualidad-admin-inline', false);
+        wp_enqueue_style('actualidad-admin-inline');
+
+        $css = "
+    /* Self-hosted Inter (WOFF2) */
+    @font-face {
+        font-family: 'InterCustom';
+        src: url('{$base}Inter-Regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'InterCustom';
+        src: url('{$base}Inter-SemiBold.woff2') format('woff2');
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    /* Forzar Inter en nuestra UI admin y mejorar suavizado */
+    #wpbody-content .ultra-wrap,
+    #wpbody-content .ultra-wrap * ,
+    #wpbody-content .ultra-wrap input,
+    #wpbody-content .ultra-wrap textarea,
+    #wpbody-content .ultra-wrap select,
+    #wpbody-content .ultra-wrap .ultra-input {
+        font-family: 'InterCustom', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif !important;
+        -webkit-font-smoothing: antialiased !important;
+        -moz-osx-font-smoothing: grayscale !important;
+        text-rendering: optimizeLegibility !important;
+        font-weight: 600 !important; /* más legible en Windows */
+        text-shadow: none !important;
+    }
+
+    /* Quitar efectos que rompen el antialiasing sobre inputs */
+    #wpbody-content .glass-form {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+
+    /* Forzar color y eliminar sombras internas en los inputs */
+    #wpbody-content .ultra-wrap input.ultra-input,
+    #wpbody-content .ultra-wrap textarea.ultra-input {
+        text-shadow: none !important;
+        box-shadow: none !important;
+    }
+    ";
+
+        wp_add_inline_style('actualidad-admin-inline', $css);
     }
 
     public function register_cpt()
@@ -46,6 +121,7 @@ class Actualidad_Noticias_Ultra
         if ($_SERVER['REQUEST_METHOD'] === 'POST')
             $this->handle_admin_create();
         ?>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
         <style>
             :root {
                 --accent-cyan: #00d4ff;
@@ -53,7 +129,7 @@ class Actualidad_Noticias_Ultra
                 --secondary-blue: #126b97;
                 --dark-navy: #061a2b;
                 --glass-border: rgba(255, 255, 255, 0.2);
-                --text-main: rgba(255, 255, 255, 0.85);
+                --text-main: #ffffff;
                 --text-muted: #cdefff;
                 --text-accent: #a5d8ff;
             }
@@ -232,28 +308,14 @@ class Actualidad_Noticias_Ultra
 
             /* Título grande */
             .ultra-title {
-                font-size: 2.5rem !important;
+                font-size: 2.7rem !important;
                 font-weight: 700 !important;
+                letter-spacing: -0.6px;
                 background: transparent !important;
                 border: none !important;
                 border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
                 padding-bottom: 12px !important;
             }
-
-            /* Texto del título: máxima legibilidad */
-            /* Título principal – blanco suavizado */
-            /* Título principal – mismo blanco que el contenido editorial */
-            .ultra-title {
-                color: rgba(255, 255, 255, 0.85) !important;
-                -webkit-text-fill-color: rgba(255, 255, 255, 0.85);
-                text-shadow: 0 1px 1px rgba(0, 0, 0, 0.18);
-            }
-
-            .ultra-title::placeholder {
-                color: rgba(255, 255, 255, 0.4);
-                font-weight: 400;
-            }
-
 
             /* Textarea */
             textarea.ultra-input {
@@ -263,8 +325,8 @@ class Actualidad_Noticias_Ultra
             }
 
             /* =========================
-                                                                                                                                       SELECT CYBER STYLE
-                                                                                                                                       ========================= */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                               SELECT CYBER STYLE
+                                                                                                                                                                                                                                                                                                                                                                                                                                                               ========================= */
             .select-wrapper {
                 position: relative;
                 width: 100%;
@@ -323,8 +385,8 @@ class Actualidad_Noticias_Ultra
             }
 
             /* =========================
-                                                                                                                                       FILE INPUT CYBER
-                                                                                                                                       ========================= */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                               FILE INPUT CYBER
+                                                                                                                                                                                                                                                                                                                                                                                                                                                               ========================= */
             .file-ultra input[type="file"] {
                 display: none;
             }
@@ -358,7 +420,7 @@ class Actualidad_Noticias_Ultra
                 font-weight: 400;
             }
 
-            /* Botón Publicar – limpio, sin glow */
+            /* Botón Publicar Cyber Glow */
             .btn-publish {
                 background: linear-gradient(135deg, var(--accent-cyan) 0%, #0099cc 100%);
                 border: none;
@@ -369,18 +431,17 @@ class Actualidad_Noticias_Ultra
                 letter-spacing: 2px;
                 text-transform: uppercase;
                 cursor: pointer;
-                transition: background 0.25s ease, transform 0.2s ease;
+                transition: all .35s ease;
                 margin-top: 20px;
                 width: 100%;
-                box-shadow: none;
-                /* ❌ sin brillo */
+                box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4), 0 0 30px rgba(0, 212, 255, 0.2);
                 font-size: 0.95rem;
             }
 
             .btn-publish:hover {
-                transform: translateY(-1px);
-                background: linear-gradient(135deg, var(--accent-cyan) 0%, #0099cc 100%);
-
+                transform: translateY(-3px);
+                box-shadow: 0 15px 35px rgba(0, 212, 255, 0.5), 0 0 50px rgba(0, 212, 255, 0.3);
+                background: linear-gradient(135deg, #00e5ff 0%, var(--accent-cyan) 100%);
             }
 
             .btn-publish:active {
@@ -438,61 +499,110 @@ class Actualidad_Noticias_Ultra
                 width: 100%;
             }
 
-            /* =========================
-                                                                                                           AJUSTE VERTICAL SIDEBAR
-                                                                                                           ========================= */
-            .sidebar-editor {
-                margin-top: 120px;
-                /* baja el sidebar */
+            :root {
+                --premium-white: #F7FBFF;
+                /* blanco premium */
             }
 
-            /* Quitar fondo blanco forzado por WP en inputs */
-            input[type="text"].ultra-input,
-            input.ultra-input {
-                background: transparent !important;
-                background-color: transparent !important;
-                box-shadow: none !important;
+            /* Forzar blanco premium en todo el UI del editor personalizado */
+            #wpbody-content .ultra-wrap,
+            #wpbody-content .ultra-wrap *,
+            #wpbody-content .ultra-wrap input,
+            #wpbody-content .ultra-wrap textarea,
+            #wpbody-content .ultra-wrap select,
+            #wpbody-content .ultra-wrap .ultra-input {
+                color: var(--premium-white) !important;
+                -webkit-text-fill-color: var(--premium-white) !important;
+                /* for WebKit-based browsers */
+                caret-color: var(--premium-white) !important;
+                -webkit-font-smoothing: antialiased !important;
+                -moz-osx-font-smoothing: grayscale !important;
             }
 
-            /* Evitar autofill blanco/amarillo del navegador */
-            input.ultra-input:-webkit-autofill,
-            input.ultra-input:-webkit-autofill:hover,
-            input.ultra-input:-webkit-autofill:focus {
-                -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.05) inset !important;
-                -webkit-text-fill-color: rgba(255, 255, 255, 0.85) !important;
+            /* Placeholder ligeramente atenuado pero premium */
+            #wpbody-content .ultra-wrap input::placeholder,
+            #wpbody-content .ultra-wrap textarea::placeholder {
+                color: rgba(247, 251, 255, 0.65) !important;
             }
 
-            /* TITULAR PRINCIPAL – tipografía editorial premium */
-            input.ultra-input[name="titulo"] {
-                font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-                font-size: 1.8rem !important;
-                font-weight: 800 !important;
-                letter-spacing: -0.03em;
-                line-height: 1.2;
-
-                color: rgba(255, 255, 255, 0.92) !important;
-                -webkit-text-fill-color: rgba(255, 255, 255, 0.92);
-
-                background: transparent !important;
-                border: none !important;
-                border-bottom: 2px solid rgba(0, 212, 255, 0.45) !important;
-
-                padding: 8px 4px 14px 4px !important;
-                text-shadow:
-                    0 1px 1px rgba(0, 0, 0, 0.25),
-                    0 0 18px rgba(0, 212, 255, 0.12);
-
-                transition: border-color .3s ease, text-shadow .3s ease;
+            /* Asegurar contraste cuando el input está enfocado */
+            #wpbody-content .ultra-wrap input.ultra-input:focus,
+            #wpbody-content .ultra-wrap textarea.ultra-input:focus {
+                color: var(--premium-white) !important;
+                -webkit-text-fill-color: var(--premium-white) !important;
             }
 
-            /* Placeholder del título igual al contenido editorial */
-            input.ultra-input[name="titulo"]::placeholder {
-                color: rgba(255, 255, 255, 0.4) !important;
+            /* Opcional: añadir un ligero sombreado al texto para más presencia sobre fondos blur/gradiente */
+            #wpbody-content .ultra-wrap input,
+            #wpbody-content .ultra-wrap textarea {
+                text-shadow: 0 1px 0 rgba(0, 0, 0, 0.18) !important;
+            }
+
+            /* Placeholder difuminado y sutil para el input .ultra-title */
+            .ultra-title::placeholder,
+            .ultra-title::-webkit-input-placeholder,
+            .ultra-title::-moz-placeholder,
+            .ultra-title:-ms-input-placeholder,
+            .ultra-title::-ms-input-placeholder {
+                color: rgba(247, 251, 255, 0.32) !important;
+                /* muy atenuado */
                 font-weight: 400 !important;
-                letter-spacing: normal !important;
+                /* más ligero que el texto real */
+                font-style: italic !important;
+                /* opcional: hacer itálica para indicar "placeholder" */
                 text-shadow: none !important;
-                -webkit-text-fill-color: rgba(255, 255, 255, 0.4) !important;
+                /* quitar sombras que aumentan contraste */
+                opacity: 1 !important;
+                /* usar color RGBA, no opacity global (compatibilidad) */
+                transition: color .18s ease-in-out !important;
             }
+
+            /* Aún más sutil cuando el campo pierde foco (opcional) */
+            .ultra-title:not(:focus)::placeholder {
+                color: rgba(247, 251, 255, 0.24) !important;
+            }
+
+            /* Asegura que el input con texto real mantenga estilo fuerte */
+            .ultra-title {
+                font-weight: 700 !important;
+                /* conserva título fuerte cuando hay contenido */
+            }
+
+            /* ===== Placeholder difuminado y claramente distinto del texto ===== */
+            #wpbody-content .ultra-wrap input.ultra-title::placeholder,
+            #wpbody-content .ultra-wrap input.ultra-title::-webkit-input-placeholder,
+            #wpbody-content .ultra-wrap input.ultra-title::-moz-placeholder,
+            #wpbody-content .ultra-wrap input.ultra-title:-ms-input-placeholder,
+            #wpbody-content .ultra-wrap input.ultra-title::-ms-input-placeholder,
+            #wpbody-content .ultra-wrap textarea.ultra-input::placeholder,
+            #wpbody-content .ultra-wrap textarea.ultra-input::-webkit-input-placeholder,
+            #wpbody-content .ultra-wrap textarea.ultra-input::-moz-placeholder,
+            #wpbody-content .ultra-wrap textarea.ultra-input:-ms-input-placeholder,
+            #wpbody-content .ultra-wrap textarea.ultra-input::-ms-input-placeholder {
+                color: rgba(247, 251, 255, 0.22) !important;
+                /* mucho más atenuado */
+                font-weight: 400 !important;
+                /* más ligero */
+                font-style: italic !important;
+                /* opcional: indica placeholder */
+                font-size: 1.6rem !important;
+                /* más pequeño que el título real (ajusta al gusto) */
+                text-shadow: none !important;
+                /* eliminar sombras que aumentan contraste */
+                -webkit-text-fill-color: unset !important;
+                /* anula fill blanco aplicado globalmente */
+                opacity: 1 !important;
+                /* usa RGBA en color, no opacity global */
+                transition: color .18s ease-in-out !important;
+            }
+
+            /* Cuando el input tiene foco mantenemos el placeholder muy sutil (si queda visible) */
+            #wpbody-content .ultra-wrap input.ultra-title:focus::placeholder,
+            #wpbody-content .ultra-wrap textarea.ultra-input:focus::placeholder {
+                color: rgba(247, 251, 255, 0.18) !important;
+            }
+
+            /* Si necesitas que el placeholder sea aún más pequeño en títulos, baja font-size */
         </style>
 
         <script>
@@ -547,8 +657,182 @@ class Actualidad_Noticias_Ultra
                 setupPreview('media_pdfs_extra', 'preview_extra_container', false);
             });
         </script>
-        <div class="ultra-wrap">
+        <style>
+            /* Contenedor relativo para el faux placeholder */
+            .faux-input-wrap {
+                position: relative;
+                display: block;
+            }
 
+            /* Span que actúa como placeholder (estilo difuminado premium) */
+            /* Faux placeholder: mismo tamaño/peso, solo color más débil */
+            .faux-placeholder {
+                position: absolute;
+                left: 26px;
+                /* ajusta si necesitas alinearlo */
+                top: 50%;
+                transform: translateY(-50%);
+                pointer-events: none;
+                font: inherit !important;
+                /* hereda tamaño, peso y familia del input */
+                color: rgba(247, 251, 255, 0.28) !important;
+                /* color más débil; ajusta el último valor (0.28) */
+                font-style: normal !important;
+                /* quitar itálica si la tenías */
+                transition: opacity .14s ease, color .14s ease;
+                opacity: 1;
+                z-index: 2;
+                text-shadow: none !important;
+            }
+
+            .faux-placeholder.hidden {
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            /* Ocultar cuando el campo tiene texto o está enfocado */
+            .faux-placeholder.hidden {
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            /* Asegura que el input esté por encima del background pero debajo del texto real cuando escribes */
+            .faux-input-wrap .ultra-title {
+                position: relative;
+                z-index: 3;
+                background: transparent;
+            }
+
+            /* =========================
+                                                                                                                                                                                                                                                                                                                                                                                            PARTICLES BACKGROUND
+                                                                                                                                                                                                                                                                                                                                                                                         ========================= */
+            #cyber-particles {
+                position: fixed;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 0;
+                pointer-events: none;
+            }
+
+            .ultra-wrap {
+                position: relative;
+                z-index: 2;
+            }
+
+            .faux-placeholder {
+                font-size: 2.7rem;
+                font-weight: 600;
+                letter-spacing: -0.6px;
+                background: linear-gradient(90deg,
+                        rgba(247, 251, 255, 0.35),
+                        rgba(165, 216, 255, 0.45));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                opacity: 0.9;
+            }
+
+            .ultra-title:focus+.faux-placeholder {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+        </style>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                document.querySelectorAll('.ultra-title').forEach(function (input) {
+                    // crear wrapper
+                    var wrapper = document.createElement('div');
+                    wrapper.className = 'faux-input-wrap';
+
+                    // insertar wrapper antes del input y mover el input dentro
+                    input.parentNode.insertBefore(wrapper, input);
+                    wrapper.appendChild(input);
+
+                    // crear span con el texto del placeholder
+                    var phText = input.getAttribute('placeholder') || '';
+                    var span = document.createElement('span');
+                    span.className = 'faux-placeholder';
+                    span.textContent = phText;
+                    wrapper.appendChild(span);
+
+                    // quitar placeholder nativo (evita interferencias)
+                    input.removeAttribute('placeholder');
+
+                    // toggle function
+                    var toggle = function () {
+                        if (input.value && input.value.trim().length > 0) {
+                            span.classList.add('hidden');
+                        } else {
+                            span.classList.remove('hidden');
+                        }
+                    };
+
+                    // eventos
+                    input.addEventListener('input', toggle);
+                    input.addEventListener('focus', function () { span.classList.add('hidden'); });
+                    input.addEventListener('blur', toggle);
+
+                    // estado inicial
+                    toggle();
+                });
+            });
+
+            // =========================
+            // CYBER PARTICLES BACKGROUND
+            // =========================
+            const canvas = document.getElementById('cyber-particles');
+            const ctx = canvas.getContext('2d');
+
+            let particles = [];
+            const PARTICLE_COUNT = 80;
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            function createParticles() {
+                particles = [];
+                for (let i = 0; i < PARTICLE_COUNT; i++) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        r: Math.random() * 1.8  0.6,
+                        vx: (Math.random() - 0.5) * 0.3,
+                        vy: (Math.random() - 0.5) * 0.3,
+                        alpha: Math.random() * 0.6  0.2
+                                                                                                                                                                                                                                                                                                                                                                         });
+                }
+            }
+            createParticles();
+
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                particles.forEach(p => {
+                    p.x = p.vx;
+                    p.y = p.vy;
+
+                    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(0,212,255,${p.alpha})`;
+                    ctx.fill();
+                });
+
+                requestAnimationFrame(animateParticles);
+            }
+
+            animateParticles();
+
+        </script>
+        <canvas id="cyber-particles"></canvas>
+        <div class="ultra-wrap">
             <div class="header-pro">
                 <h1>Nueva Publicación</h1>
 
@@ -561,16 +845,17 @@ class Actualidad_Noticias_Ultra
                 <div class="main-editor">
                     <div class="input-group">
                         <label>TITULAR PRINCIPAL</label>
-                        <input type="text" name="titulo" class="ultra-input" placeholder="¿Qué está pasando?" required>
+                        <input type="text" name="titulo" class="ultra-input ultra-title" placeholder="¿Qué está pasando?"
+                            required>
                     </div>
                     <div class="input-group">
                         <label>CONTENIDO EDITORIAL</label>
-                        <textarea name="contenido" class="ultra-input" style="min-height: 400px;"
-                            placeholder="Desarrolle aquí el contenido completo de la noticia..." required></textarea>
+
+                        <div id="blocks-editor"></div>
                     </div>
                 </div>
 
-                <div class="sidebar-editor offset-down">
+                <div class="sidebar-editor">
                     <div class="input-group select-ultra">
                         <label>CATEGORÍA</label>
                         <div class="select-wrapper">
@@ -611,194 +896,391 @@ class Actualidad_Noticias_Ultra
                     </div>
                     <button type="submit" class="btn-publish">Publicar Ahora ✦</button>
                 </div>
+                <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const editor = document.getElementById('blocks-editor');
+                        if (!editor) return;
+
+                        const DEFAULT_BLOCKS = ['entradilla', 'desarrollo', 'conclusion'];
+
+                        const createBlock = (type, removable = true) => {
+                            const block = document.createElement('div');
+                            block.className = 'block-item';
+                            block.dataset.type = type;
+                            block.innerHTML = `
+                                    <div class="block-toolbar">
+                                    <span class="drag-handle" title="Mover bloque">⋮⋮</span>
+                                        <div class="block-left-actions">
+                                            <button type="button" class="block-add" title="Añadir texto debajo"></button>
+                                            <button type="button" class="block-add-image" title="Añadir imagen debajo">🖼</button>
+                                            <span class="block-tag">${type}</span>
+                                        </div>
+                                        ${removable ? '<button type="button" class="block-remove" title="Eliminar bloque"></button>' : ''}
+                                    </div>
+                                    <textarea class="ultra-input"
+                                        name="blocks[${type}][]"
+                                        placeholder="Escribe ${type}..."></textarea>
+                                `;
+
+                            const removeBtn = block.querySelector('.block-remove');
+                            if (removeBtn) {
+                                removeBtn.addEventListener('click', () => block.remove());
+                            }
+                            const addBtn = block.querySelector('.block-add');
+                            const addImageBtn = block.querySelector('.block-add-image');
+
+                            if (addImageBtn) {
+                                addImageBtn.addEventListener('click', () => {
+                                    insertImageBelow(block);
+                                });
+                            }
+
+                            if (addBtn) {
+                                addBtn.addEventListener('click', () => {
+                                    const newBlock = createBlock(type, true);
+                                    block.after(newBlock);
+                                });
+                            }
+
+
+                            editor.appendChild(block);
+                            return block;
+                        };
+                        // =========================
+                        // BLOQUE IMAGEN SIMPLE
+                        // =========================
+                        const insertImageBelow = (afterBlock) => {
+                            const frame = wp.media({
+                                title: 'Seleccionar imagen',
+                                button: { text: 'Insertar imagen' },
+                                multiple: false,
+                                library: { type: 'image' }
+                            });
+
+                            frame.on('select', () => {
+                                const img = frame.state().get('selection').first().toJSON();
+
+                                const imgBlock = document.createElement('div');
+                                imgBlock.className = 'block-item block-image';
+
+                                imgBlock.innerHTML = `
+            <div class="block-toolbar">
+                <span class="drag-handle">⋮⋮</span>
+                <span class="block-tag">imagen</span>
+                <button type="button" class="block-remove"></button>
+            </div>
+
+            <input type="hidden" name="blocks[image][]" value="${img.url}">
+            <img src="${img.url}" class="block-image-preview">
+        `;
+
+                                imgBlock.querySelector('.block-remove').onclick = () => imgBlock.remove();
+                                afterBlock.after(imgBlock);
+                            });
+
+                            frame.open();
+                        };
+
+                        // =========================
+                        // BLOQUE IMAGEN
+                        // =========================
+                        const createImageBlock = (image) => {
+                            const block = document.createElement('div');
+                            block.className = 'block-item block-image';
+                            block.dataset.type = 'image';
+
+                            block.innerHTML = `
+                            <div class="block-toolbar">
+                                <span class="drag-handle">⋮⋮</span>
+                                <span class="block-tag">imagen</span>
+                                <button type="button" class="block-remove"></button>
+                            </div>
+
+                            <input type="hidden" name="blocks[][type]" value="image">
+                            <input type="hidden" name="blocks[][id]" value="${image.id}">
+                            <input type="hidden" name="blocks[][url]" value="${image.url}">
+
+                            <img src="${image.url}" class="block-image-preview">
+
+                            <input type="text"
+                                class="ultra-input image-caption"
+                                name="blocks[][caption]"
+                                placeholder="Pie de foto (opcional)">
+                        `;
+
+                            block.querySelector('.block-remove').onclick = () => block.remove();
+                            return block;
+                        };
+                        // =========================
+                        // SELECTOR DE IMÁGENES WP
+                        // =========================
+                        const openImagePicker = (afterBlock) => {
+                            const frame = wp.media({
+                                title: 'Seleccionar imagen',
+                                button: { text: 'Insertar imagen' },
+                                multiple: false,
+                                library: { type: 'image' }
+                            });
+
+                            frame.on('select', () => {
+                                const img = frame.state().get('selection').first().toJSON();
+                                const imgBlock = createImageBlock(img);
+                                afterBlock.after(imgBlock);
+                            });
+
+                            frame.open();
+                        };
+
+
+                        // 🔹 CREAR LOS 3 BLOQUES BASE (NO ELIMINABLES)
+                        DEFAULT_BLOCKS.forEach(type => createBlock(type, false));
+
+                        // 🔹 BOTONES → AÑADEN BLOQUES EXTRA
+                        document.querySelectorAll('.btn-add').forEach(btn => {
+                            btn.addEventListener('click', () => {
+                                createBlock(btn.dataset.type, true);
+                            });
+                        });
+                        // =========================
+                        // DRAG & DROP DE BLOQUES
+                        // =========================
+                        Sortable.create(editor, {
+                            animation: 180,
+                            draggable: '.block-item',
+
+                            ghostClass: 'block-ghost',
+                            chosenClass: 'block-chosen',
+                            dragClass: 'block-dragging',
+
+                            // ⛔ NO iniciar drag desde inputs editables
+                            onMove: function (evt) {
+                                const target = evt.originalEvent.target;
+                                return !target.closest('textarea, input, select, button');
+                            }
+                        });
+                    });
+                </script>
             </form>
         </div>
         <?php
     }
 
-    /* ===============================
-     * FRONTEND: EXPERIENCIA VISUAL CYBER
-     * =============================== */
-    public function inject_frontend_styles()
+
+    public function inject_admin_block_styles()
     {
+        if (!isset($_GET['page']) || $_GET['page'] !== 'crear-noticia-pro') {
+            return;
+        }
         ?>
         <style>
-            .news-ultra-container {
-                --u-accent: #00d4ff;
-                --u-primary: #0a2e4e;
-                --u-secondary: #126b97;
-                --u-dark: #061a2b;
-                background: radial-gradient(circle at top left, var(--u-primary) 0%, var(--u-secondary) 50%, var(--u-dark) 100%);
-                padding: 100px 5%;
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-                gap: 40px;
-                position: relative;
-                overflow: hidden;
-            }
+            /* ===== BLOQUES EDITOR (ADMIN) ===== */
 
-            /* Efecto de partículas en el fondo */
-            .news-ultra-container::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background:
-                    radial-gradient(2px 2px at 20% 30%, var(--u-accent), transparent),
-                    radial-gradient(2px 2px at 60% 70%, var(--u-accent), transparent),
-                    radial-gradient(1px 1px at 50% 50%, var(--u-accent), transparent);
-                background-size: 200% 200%;
-                opacity: 0.2;
-                animation: particleMove 20s ease-in-out infinite;
-                pointer-events: none;
-            }
-
-            @keyframes particleMove {
-
-                0%,
-                100% {
-                    background-position: 0% 0%, 100% 100%, 50% 50%;
-                }
-
-                50% {
-                    background-position: 100% 100%, 0% 0%, 25% 75%;
-                }
-            }
-
-            .news-ultra-container:hover .news-ultra-card:not(:hover) {
-                opacity: 0.5;
-                filter: grayscale(0.3);
-                transform: scale(0.97);
-            }
-
-            .news-ultra-card {
-                position: relative;
-                height: 500px;
-                border-radius: 24px;
-                overflow: hidden;
-                transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-                background: rgba(255, 255, 255, 0.03);
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            }
-
-            .news-ultra-card:hover {
-                border-color: var(--u-accent);
-                box-shadow: 0 20px 60px rgba(0, 212, 255, 0.4), 0 0 80px rgba(0, 212, 255, 0.2);
-                transform: translateY(-8px);
-            }
-
-            .news-ultra-img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                transition: transform 1s ease;
-                filter: brightness(0.8);
-            }
-
-            .news-ultra-card:hover .news-ultra-img {
-                transform: scale(1.08);
-                filter: brightness(1);
-            }
-
-            .news-ultra-overlay {
-                position: absolute;
-                inset: 0;
-                background: linear-gradient(to top,
-                        rgba(6, 26, 43, 0.95) 0%,
-                        rgba(6, 26, 43, 0.7) 40%,
-                        rgba(6, 26, 43, 0) 80%);
+            #blocks-editor {
                 display: flex;
                 flex-direction: column;
-                justify-content: flex-end;
-                padding: 35px;
-                transition: all 0.4s;
+                gap: 18px;
             }
 
-            .u-badge {
-                align-self: flex-start;
-                background: rgba(0, 212, 255, 0.15);
-                color: var(--u-accent);
-                padding: 8px 18px;
-                border-radius: 50px;
-                font-size: 0.65rem;
-                font-weight: 800;
+            .block-item {
+                background: rgba(255, 255, 255, .05);
+                border: 1px solid rgba(0, 212, 255, .35);
+                border-radius: 14px;
+                padding: 16px;
+            }
+
+            .block-toolbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 8px;
+                color: var(--accent-cyan);
                 text-transform: uppercase;
-                letter-spacing: 1.5px;
-                margin-bottom: 18px;
-                border: 1px solid var(--u-accent);
-                box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+                font-size: .7rem;
             }
 
-            .news-ultra-card h3 {
+            .block-left-actions {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .block-left-actions {
+                margin-left: 12px;
+                /* ajusta: 8px–16px según gusto */
+            }
+
+
+            /* BOTÓN + */
+            .block-add {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                border: 2px solid var(--accent-cyan);
+                background: rgba(0, 212, 255, .25);
+                cursor: pointer;
+                position: relative;
+                box-shadow: 0 0 12px rgba(0, 212, 255, .55);
+            }
+
+            .block-add::before,
+            .block-add::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                background: #fff;
+                transform: translate(-50%, -50%);
+            }
+
+            .block-add::before {
+                width: 14px;
+                height: 2px;
+            }
+
+            .block-add::after {
+                width: 2px;
+                height: 14px;
+            }
+
+            .block-add:hover {
+                transform: scale(1.15);
+                background: rgba(0, 212, 255, .45);
+            }
+
+            /* BOTÓN − */
+            .block-remove {
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                border: none;
+                background: rgba(255, 107, 107, .2);
+                cursor: pointer;
+                position: relative;
+                box-shadow: 0 0 10px rgba(255, 107, 107, .6);
+            }
+
+            .block-remove::before,
+            .block-remove::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 14px;
+                height: 2px;
+                background: #ff6b6b;
+            }
+
+            .block-remove::before {
+                transform: translate(-50%, -50%) rotate(45deg);
+            }
+
+            .block-remove::after {
+                transform: translate(-50%, -50%) rotate(-45deg);
+            }
+
+            /* ===== DRAG HANDLE ===== */
+            .drag-handle {
+                cursor: grab;
+                font-size: 16px;
+                letter-spacing: -2px;
+                color: var(--accent-cyan);
+                opacity: 0.7;
+                margin-right: 10px;
+                user-select: none;
+            }
+
+            .drag-handle:hover {
+                opacity: 1;
+                text-shadow: 0 0 8px rgba(0, 212, 255, 0.8);
+            }
+
+            .block-dragging {
+                opacity: 0.6;
+            }
+
+            .block-ghost {
+                background: rgba(0, 212, 255, 0.15);
+                border: 2px dashed var(--accent-cyan);
+            }
+
+            /* ===== CURSOR DE ARRASTRE (UX CLARO) ===== */
+
+            /* Card completa: se puede mover */
+            .block-item {
+                cursor: grab;
+            }
+
+            /* Mientras se arrastra */
+            .block-item.sortable-chosen,
+            .block-item.sortable-drag {
+                cursor: grabbing !important;
+            }
+
+            /* Inputs mantienen su cursor natural */
+            .block-item textarea,
+            .block-item input {
+                cursor: text;
+            }
+
+            /* Botones mantienen pointer */
+            .block-item button {
+                cursor: pointer;
+            }
+
+            /* Hover sutil para indicar que se puede mover */
+            .block-item:hover {
+                box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.6),
+                    0 0 18px rgba(0, 212, 255, 0.25);
+            }
+
+            /* ===== BLOQUE IMAGEN ===== */
+            .block-image-preview {
+                max-width: 100%;
+                border-radius: 12px;
+                margin: 10px 0;
+                box-shadow: 0 0 18px rgba(0, 212, 255, .25);
+            }
+
+            .block-image .image-caption {
+                margin-top: 8px;
+            }
+
+            .block-add-image {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                border: 2px solid rgba(0, 212, 255, 0.9);
+                background: linear-gradient(135deg,
+                        rgba(0, 212, 255, 0.55),
+                        rgba(0, 153, 204, 0.55));
+                cursor: pointer;
+                font-size: 15px;
+                display: grid;
+                place-items: center;
                 color: #ffffff;
-                font-size: 1.75rem;
-                font-weight: 700;
-                line-height: 1.2;
-                margin: 0 0 14px 0;
-                transform: translateY(20px);
-                opacity: 0;
-                transition: all 0.5s 0.1s;
-                letter-spacing: -0.3px;
+                box-shadow:
+                    0 0 10px rgba(0, 212, 255, 0.9),
+                    inset 0 0 6px rgba(255, 255, 255, 0.35);
             }
 
-            .news-ultra-card p {
-                color: #cdefff;
-                font-size: 0.95rem;
-                margin: 0;
-                line-height: 1.6;
-                transform: translateY(20px);
-                opacity: 0;
-                transition: all 0.5s 0.2s;
+            .block-add-image:hover {
+                transform: scale(1.18);
+                box-shadow:
+                    0 0 18px rgba(0, 212, 255, 1),
+                    0 0 30px rgba(0, 212, 255, 0.6);
             }
 
-            .news-ultra-card:hover h3,
-            .news-ultra-card:hover p {
-                transform: translateY(0);
-                opacity: 1;
-            }
-
-            /* Glow superior cyan en hover */
-            .news-ultra-card::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 4px;
-                background: var(--u-accent);
-                transform: scaleX(0);
-                transition: transform 0.4s ease;
-                box-shadow: 0 0 15px var(--u-accent);
-            }
-
-            .news-ultra-card:hover::before {
-                transform: scaleX(1);
-            }
-
-            /* Efecto de brillo radial */
-            .news-ultra-card::after {
-                content: '';
-                position: absolute;
-                top: -50%;
-                left: -50%;
-                width: 200%;
-                height: 200%;
-                background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
-                opacity: 0;
-                transition: opacity 0.5s;
-                pointer-events: none;
-            }
-
-            .news-ultra-card:hover::after {
-                opacity: 1;
+            .block-image-preview {
+                max-width: 100%;
+                border-radius: 12px;
+                margin-top: 10px;
+                box-shadow: 0 0 18px rgba(0, 212, 255, .25);
             }
         </style>
         <?php
     }
+
 
     public function render_noticias()
     {
@@ -808,7 +1290,7 @@ class Actualidad_Noticias_Ultra
         while ($q->have_posts()):
             $q->the_post();
             $cat = get_post_meta(get_the_ID(), '_categoria', true);
-            $img = get_the_post_thumbnail_url(get_the_ID(), 'large');
+            $img = get_the_post_thumbnail_url(get_the_ID(), 'full');
             if (!$img)
                 $img = 'https://via.placeholder.com/800x600/0a2e4e/00d4ff?text=Noticia';
             ?>
@@ -860,75 +1342,65 @@ class Actualidad_Noticias_Ultra
 
     private function handle_admin_create()
     {
-        if (!wp_verify_nonce($_POST['crear_noticia_admin_nonce'], 'crear_noticia_admin'))
+        if (!wp_verify_nonce($_POST['crear_noticia_admin_nonce'], 'crear_noticia_admin')) {
             return;
+        }
 
         $post_id = wp_insert_post([
             'post_type' => 'noticia',
             'post_title' => sanitize_text_field($_POST['titulo']),
-            'post_content' => wp_kses_post($_POST['contenido']),
+            'post_content' => '', // 👈 contenido clásico desactivado
             'post_status' => 'publish',
         ]);
 
-        if (!is_wp_error($post_id)) {
-            update_post_meta($post_id, '_categoria', sanitize_text_field($_POST['categoria']));
+        if (is_wp_error($post_id)) {
+            return;
+        }
 
-            if (!empty($_FILES['imagen']['name'])) {
-                require_once ABSPATH . 'wp-admin/includes/media.php';
-                require_once ABSPATH . 'wp-admin/includes/file.php';
-                require_once ABSPATH . 'wp-admin/includes/image.php';
-                $img_id = media_handle_upload('imagen', $post_id);
-                if (!is_wp_error($img_id)) {
-                    set_post_thumbnail($post_id, $img_id);
+        $blocks = [];
+
+        if (!empty($_POST['blocks'])) {
+            foreach ($_POST['blocks'] as $type => $items) {
+                foreach ($items as $content) {
+                    $blocks[] = [
+                        'type' => sanitize_text_field($type),
+                        'content' => wp_kses_post($content)
+                    ];
                 }
             }
-
-            echo '<div class="notice notice-success is-dismissible"><p><strong>✓ Publicación lanzada con éxito</strong></p></div>';
         }
-        // Subir PDF único
+
+        update_post_meta($post_id, '_news_blocks', $blocks);
+
+        // 📌 Categoría
+        update_post_meta($post_id, '_categoria', sanitize_text_field($_POST['categoria']));
+
+        // 📌 Imagen destacada
+        if (!empty($_FILES['imagen']['name'])) {
+            require_once ABSPATH . 'wp-admin/includes/media.php';
+            require_once ABSPATH . 'wp-admin/includes/file.php';
+            require_once ABSPATH . 'wp-admin/includes/image.php';
+
+            $img_id = media_handle_upload('imagen', $post_id);
+            if (!is_wp_error($img_id)) {
+                set_post_thumbnail($post_id, $img_id);
+            }
+        }
+
+        // 📌 PDF principal
         if (!empty($_FILES['pdf_doc']['name'])) {
             require_once ABSPATH . 'wp-admin/includes/media.php';
             require_once ABSPATH . 'wp-admin/includes/file.php';
 
             $pdf_id = media_handle_upload('pdf_doc', $post_id);
-
             if (!is_wp_error($pdf_id)) {
                 update_post_meta($post_id, '_pdf_doc', $pdf_id);
             }
         }
 
-        // Subir múltiples PDFs adicionales
-        if (!empty($_FILES['pdfs_adicionales']['name'][0])) {
-            require_once ABSPATH . 'wp-admin/includes/media.php';
-            require_once ABSPATH . 'wp-admin/includes/file.php';
-            require_once ABSPATH . 'wp-admin/includes/image.php';
-
-            $files = $_FILES['pdfs_adicionales'];
-            $attachment_ids = [];
-
-            foreach ($files['name'] as $key => $value) {
-                if ($files['name'][$key]) {
-                    $file = [
-                        'name' => $files['name'][$key],
-                        'type' => $files['type'][$key],
-                        'tmp_name' => $files['tmp_name'][$key],
-                        'error' => $files['error'][$key],
-                        'size' => $files['size'][$key]
-                    ];
-
-                    $_FILES['upload_file'] = $file;
-                    $attachment_id = media_handle_upload('upload_file', $post_id);
-
-                    if (!is_wp_error($attachment_id)) {
-                        $attachment_ids[] = $attachment_id;
-                    }
-                }
-            }
-            if (!empty($attachment_ids)) {
-                update_post_meta($post_id, '_pdf_docs', $attachment_ids);
-            }
-        }
-
+        echo '<div class="notice notice-success is-dismissible">
+            <p><strong>✓ Publicación lanzada con éxito</strong></p>
+          </div>';
     }
 
     public function register_meta_boxes()
@@ -1011,7 +1483,6 @@ class Actualidad_Noticias_Ultra
                 });
             });
         </script>
-
         <?php
     }
 

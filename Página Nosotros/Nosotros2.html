@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipo - Elite Force</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Gradiente de texto personalizado */
+        .gradient-text {
+            background: linear-gradient(90deg, #fff, #00cfff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card-item img {
+            filter: none;
+            image-rendering: auto;
+            backface-visibility: hidden;
+        }
+
+        /* Header glow background */
+        .header-glow {
+            background: radial-gradient(closest-side at 50% 40%, rgba(0, 242, 255, .18), transparent 70%),
+                radial-gradient(closest-side at 30% 70%, rgba(0, 207, 255, .12), transparent 72%);
+            filter: blur(0px);
+        }
+
+        /* Card glow effect */
+        .card-glow-effect {
+            background: radial-gradient(circle at 30% 20%, rgba(0, 207, 255, .35), transparent 65%);
+        }
+
+
+        /* Grid wrapper */
+        .cards-grid-wrapper {
+            position: relative;
+            min-height: 600px;
+            transition: min-height 0.6s ease-in-out;
+        }
+
+        @media (min-width: 992px) {
+            .cards-grid-wrapper {
+                min-height: 620px;
+            }
+        }
+
+        /* Asegura transición suave en la sección completa */
+        #equipo {
+            transition: all 0.6s ease-in-out;
+        }
+
+
+        @media (min-width: 992px) {
+
+
+            .card-item>.relative.group {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .card-item>.relative.group>div:last-child {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+        }
+
+        @media (min-width: 992px) {
+
+            .btn-nav-desktop-prev,
+            .btn-nav-desktop-next {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 20;
+            }
+
+            .btn-nav-desktop-prev {
+                left: -64px;
+                /* fuera del carrusel */
+            }
+
+            .btn-nav-desktop-next {
+                right: -64px;
+                /* fuera del carrusel */
+            }
+        }
+
+        .cards-carousel-container {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        .cards-carousel-track {
+            display: flex;
+            gap: 32px;
+            will-change: transform;
+        }
+
+        /* MOBILE */
+        .card-item {
+            flex: 0 0 100%;
+            max-width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* DESKTOP */
+        @media (min-width: 992px) {
+            .card-item {
+                flex: 0 0 calc((100% - 96px) / 4);
+                max-width: calc((100% - 96px) / 4);
+            }
+        }
+
+        .card-item>.relative.group {
+            width: 100%;
+        }
+
+        .card-item>.relative.group>div:last-child {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .card-item,
+        .card-item * {
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body class="bg-black">
+
+    <section id="equipo" class="relative overflow-visible isolate"
+        style="padding: clamp(70px, 10vh, 120px) 5vw clamp(40px, 6vh, 60px);">
+        <div class="w-full mx-auto">
+            <!-- Header -->
+            <header class="text-center relative" style="margin-bottom: clamp(32px, 6vh, 70px);">
+                <!-- Background Glow -->
+                <div class="absolute left-1/2 -translate-x-1/2 -top-8 pointer-events-none -z-10 header-glow opacity-85"
+                    style="width: min(860px, 92vw); height: 220px;"></div>
+
+                <!-- Kicker -->
+                <div class="mb-4 relative z-10">
+                    <span
+                        class="inline-flex items-center px-4 py-[7px] rounded-full text-sm uppercase font-black bg-[rgba(0,207,255,0.10)] border border-[rgba(0,207,255,0.28)] text-[#00cfff]"
+                        style="letter-spacing: 2px;">
+                        Elite Force
+                    </span>
+                </div>
+
+                <!-- Title -->
+                <h2 class="font-black leading-[1.08] mb-2.5 relative z-10 text-white"
+                    style="font-size: clamp(2.1rem, 4.5vw, 3.4rem); margin: 18px 0 10px;">
+                    El motor de tu <span class="gradient-text">transformación</span>
+                </h2>
+
+                <!-- Lead -->
+                <p class="max-w-[78ch] mx-auto text-lg leading-relaxed mb-5 relative z-10 text-[#cdefff] opacity-95"
+                    style="margin: 0 auto 22px;">
+                    No somos solo técnicos; somos arquitectos de soluciones que blindan tu negocio y escalan tus
+                    resultados.
+                </p>
+
+                <!-- Stats Mini -->
+                <div class="flex justify-center gap-[18px] mt-2 relative z-10 flex-wrap">
+                    <div class="font-extrabold text-[13px] text-[rgba(0,207,255,0.95)] rounded-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.10)]"
+                        style="padding: 0.45rem 0.75rem;">
+                        <span class="text-white mr-1.5 text-base">+10</span> Años Exp.
+                    </div>
+                    <div class="font-extrabold text-[13px] text-[rgba(0,207,255,0.95)] rounded-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.10)]"
+                        style="padding: 0.45rem 0.75rem;">
+                        <span class="text-white mr-1.5 text-base">100%</span> Compromiso
+                    </div>
+                    <div class="font-extrabold text-[13px] text-[rgba(0,207,255,0.95)] rounded-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.10)]"
+                        style="padding: 0.45rem 0.75rem;">
+                        <span class="text-white mr-1.5 text-base">24/7</span> Vigilancia
+                    </div>
+                </div>
+            </header>
+
+            <!-- Cards Carousel Container -->
+            <div class="cards-grid-wrapper relative">
+                <div class="relative">
+                    <!-- Prev Button -->
+                    <button id="btn-prev"
+                        class="btn-nav-desktop-prev hidden lg:flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.15)] hover:bg-[rgba(0,207,255,0.15)] hover:border-[rgba(0,207,255,0.4)] transition-all duration-300 cursor-pointer"
+                        aria-label="Grupo anterior">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+
+                    <!-- Next Button -->
+                    <button id="btn-next"
+                        class="btn-nav-desktop-next hidden lg:flex items-center justify-center w-12 h-12 rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.15)] hover:bg-[rgba(0,207,255,0.15)] hover:border-[rgba(0,207,255,0.4)] transition-all duration-300 cursor-pointer"
+                        aria-label="Grupo siguiente">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+
+                    <div class="cards-carousel-container">
+                        <div class="cards-carousel-track" id="carousel-track">
+                            <!-- Card: Manolo -->
+                            <article class="card-item">
+                                <div class="relative group">
+                                    <div
+                                        class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
+                                    </div>
+                                    <div class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center z-[2]"
+                                        style="padding: 28px 24px; gap: 14px; min-height: 520px;">
+                                        <div
+                                            class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px] bg-gradient-to-br from-cyan-400/90 to-cyan-400/20 shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.08)]">
+                                            <div class="w-full h-full rounded-full overflow-hidden">
+                                                <img src="https://darknet-sys.com/wp-content/uploads/2026/02/ChatGPT-Image-2-feb-2026-13_03_14.png"
+                                                    alt="Manolo CEO" class="w-full h-full object-cover object-center"
+                                                    loading="lazy"
+                                                    style="transform: scale(1.5) translateY(1%) translateX(3%);">
+                                            </div>
+                                        </div>
+                                        <div class="w-full">
+                                            <div class="inline-block text-[11px] font-black text-[rgba(0,207,255,0.95)] uppercase bg-[rgba(0,207,255,0.10)] border border-[rgba(0,207,255,0.18)] px-3 py-[5px] rounded-full"
+                                                style="letter-spacing: 1.5px;">
+                                                Chief Executive Officer
+                                            </div>
+                                            <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">Manolo</h3>
+                                            <ul class="list-none p-0 my-[10px_0_14px] w-full text-left flex flex-col gap-2"
+                                                style="margin: 10px 0 14px;">
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Definición de la visión estratégica global</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Diseño de la arquitectura de crecimiento</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Supervisión de la seguridad y decisiones clave</span>
+                                                </li>
+                                            </ul>
+                                            <div class="flex gap-2 flex-wrap justify-center mt-auto">
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#Liderazgo</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#Web3</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#Ciber</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Card: Juan Jesús -->
+                            <article class="card-item">
+                                <div class="relative group">
+                                    <div
+                                        class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
+                                    </div>
+                                    <div class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center z-[2]"
+                                        style="padding: 28px 24px; gap: 14px; min-height: 520px;">
+                                        <div
+                                            class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px] bg-gradient-to-br from-cyan-400/90 to-cyan-400/20 shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.10)]">
+                                            <div class="w-full h-full rounded-full overflow-hidden">
+                                                <img src="https://darknet-sys.com/wp-content/uploads/2026/02/JuanJesus2.png"
+                                                    alt="Juan Jesús" class="w-full h-full object-cover object-center"
+                                                    loading="lazy"
+                                                    style="transform: scale(1.4) translateY(3%) translateX(0%);">
+                                            </div>
+                                        </div>
+                                        <div class="w-full">
+                                            <div class="inline-block text-[11px] font-black text-[rgba(0,207,255,0.95)] uppercase bg-[rgba(0,207,255,0.10)] border border-[rgba(0,207,255,0.18)] px-3 py-[5px] rounded-full"
+                                                style="letter-spacing: 1.5px;">
+                                                Director General
+                                            </div>
+                                            <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">Juan Jesús
+                                            </h3>
+                                            <ul class="list-none p-0 w-full text-left flex flex-col gap-2"
+                                                style="margin: 10px 0 14px;">
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Dirección operativa y estratégica</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Optimización de procesos y escalabilidad</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Alineación entre negocio y tecnología</span>
+                                                </li>
+                                            </ul>
+                                            <div class="flex gap-2 flex-wrap justify-center mt-auto">
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#Dirección</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#Estrategia</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#Management</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Card: Mónica -->
+                            <article class="card-item">
+                                <div class="relative group">
+                                    <div
+                                        class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
+                                    </div>
+                                    <div class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center z-[2]"
+                                        style="padding: 28px 24px; gap: 14px; min-height: 520px;">
+                                        <div
+                                            class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px] bg-gradient-to-br from-cyan-400/90 to-cyan-400/20 shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.08)]">
+                                            <div class="w-full h-full rounded-full overflow-hidden">
+                                                <img src="https://darknet-sys.com/wp-content/uploads/2026/02/MO1.png"
+                                                    alt="Mónica - Jefa de Administración"
+                                                    class="w-full h-full object-cover object-center" loading="lazy"
+                                                    style="transform: scale(1.35) translateY(-8%) translateX(-14px);">
+                                            </div>
+                                        </div>
+                                        <div class="w-full">
+                                            <div class="inline-block text-[11px] font-black text-[rgba(0,207,255,0.95)] uppercase bg-[rgba(0,207,255,0.10)] border border-[rgba(0,207,255,0.18)] px-3 py-[5px] rounded-full"
+                                                style="letter-spacing: 1.5px;">
+                                                Jefa de Administración
+                                            </div>
+                                            <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">Mónica</h3>
+                                            <ul class="list-none p-0 w-full text-left flex flex-col gap-2"
+                                                style="margin: 10px 0 14px;">
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Coordinación administrativa y financiera</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Supervisión de facturación y control interno</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Apoyo estratégico a dirección</span>
+                                                </li>
+                                            </ul>
+                                            <div class="flex gap-2 flex-wrap justify-center mt-auto">
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#Administración</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#Gestión</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#Finanzas</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Card: Jose Ángel -->
+                            <article class="card-item">
+                                <div class="relative group">
+                                    <div
+                                        class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
+                                    </div>
+                                    <div class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center z-[2]"
+                                        style="padding: 28px 24px; gap: 14px; min-height: 520px;">
+                                        <div
+                                            class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px] bg-gradient-to-br from-cyan-400/90 to-cyan-400/20 shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.08)]">
+                                            <div class="w-full h-full rounded-full overflow-hidden">
+                                                <img src="https://darknet-sys.com/wp-content/uploads/2026/02/Angel1.png"
+                                                    alt="Jose Ángel" class="w-full h-full object-cover object-center"
+                                                    loading="lazy"
+                                                    style="transform: scale(1.5) translateY(18%) translateX(5%);">
+                                            </div>
+                                        </div>
+                                        <div class="w-full">
+                                            <div class="inline-block text-[11px] font-black text-[rgba(0,207,255,0.95)] uppercase bg-[rgba(0,207,255,0.10)] border border-[rgba(0,207,255,0.18)] px-3 py-[5px] rounded-full"
+                                                style="letter-spacing: 1.5px;">
+                                                CIO/CISO
+                                            </div>
+                                            <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">Jose Ángel
+                                            </h3>
+                                            <ul class="list-none p-0 w-full text-left flex flex-col gap-2"
+                                                style="margin: 10px 0 14px;">
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Gestión de seguridad y cumplimiento</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Ejecución de auditorías y hardening</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Garantía de continuidad del negocio</span>
+                                                </li>
+                                            </ul>
+                                            <div class="flex gap-2 flex-wrap justify-center mt-auto">
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#Audit</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#Security</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#LegalTech</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+
+
+                            <!-- Card: Eduardo -->
+                            <article class="card-item">
+                                <div class="relative group">
+                                    <div
+                                        class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
+                                    </div>
+                                    <div class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center z-[2]"
+                                        style="padding: 28px 24px; gap: 14px; min-height: 520px;">
+
+                                        <div
+                                            class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px] bg-gradient-to-br from-cyan-400/90 to-cyan-400/20 shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.08)]">
+                                            <div class="w-full h-full rounded-full overflow-hidden">
+                                                <img src="https://darknet-sys.com/wp-content/uploads/2026/02/Edu.jpeg"
+                                                    alt="Eduardo" class="w-full h-full object-cover object-center"
+                                                    loading="lazy"
+                                                    style="transform: scale(1.3) translateY(-6%) translateX(-1%);">
+                                            </div>
+                                        </div>
+                                        <div class="w-full">
+                                            <div class="inline-block text-[11px] font-black text-[rgba(0,207,255,0.95)] uppercase bg-[rgba(0,207,255,0.10)] border border-[rgba(0,207,255,0.18)] px-3 py-[5px] rounded-full"
+                                                style="letter-spacing: 1.5px;">
+                                                Soporte y Sistemas
+                                            </div>
+                                            <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">Eduardo</h3>
+                                            <ul class="list-none p-0 w-full text-left flex flex-col gap-2"
+                                                style="margin: 10px 0 14px;">
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Mantenimiento de sistemas críticos</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Resolución de incidencias SLA</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Estabilidad y rendimiento operativo</span>
+                                                </li>
+                                            </ul>
+                                            <div class="flex gap-2 flex-wrap justify-center mt-auto">
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#SysAdmin</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#Support</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#SLA</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                            <!-- Card: Javier -->
+                            <article class="card-item">
+                                <div class="relative group">
+                                    <div
+                                        class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
+                                    </div>
+                                    <div class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center z-[2]"
+                                        style="padding: 28px 24px; gap: 14px; min-height: 520px;">
+
+                                        <div
+                                            class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px] bg-gradient-to-br from-cyan-400/90 to-cyan-400/20 shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.08)]">
+                                            <div class="w-full h-full rounded-full overflow-hidden">
+                                                <img src="https://darknet-sys.com/wp-content/uploads/2026/02/Javier.jpeg"
+                                                    alt="Javier" class="w-full h-full object-cover object-center"
+                                                    style="transform: scale(1.4) translateY(-2%) translateX(1%);"
+                                                    loading="lazy">
+                                            </div>
+                                        </div>
+                                        <div class="w-full">
+                                            <div class="inline-block text-[11px] font-black text-[rgba(0,207,255,0.95)] uppercase bg-[rgba(0,207,255,0.10)] border border-[rgba(0,207,255,0.18)] px-3 py-[5px] rounded-full"
+                                                style="letter-spacing: 1.5px;">
+                                                Desarrollador Senior
+                                            </div>
+                                            <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">Javier</h3>
+                                            <ul class="list-none p-0 w-full text-left flex flex-col gap-2"
+                                                style="margin: 10px 0 14px;">
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Diseño de soluciones técnicas complejas</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Desarrollo de APIs y automatización</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Optimización de rendimiento</span>
+                                                </li>
+                                            </ul>
+                                            <div class="flex gap-2 flex-wrap justify-center mt-auto">
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#Dev</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#APIs</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#Cloud</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                            <!-- Card: Luis Miguel -->
+                            <article class="card-item">
+                                <div class="relative group">
+                                    <div
+                                        class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
+                                    </div>
+                                    <div class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center z-[2]"
+                                        style="padding: 28px 24px; gap: 14px; min-height: 520px;">
+
+                                        <div
+                                            class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px] bg-gradient-to-br from-cyan-400/90 to-cyan-400/20 shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.08)]">
+                                            <div class="w-full h-full rounded-full overflow-hidden">
+                                                <img src="https://darknet-sys.com/wp-content/uploads/2026/02/Luimi4.jpeg"
+                                                    alt="Luis Miguel" class="w-full h-full object-cover object-center"
+                                                    style="    transform: scale(1.4) translateY(2%) translateX(-5%);"
+                                                    loading="lazy">
+                                            </div>
+                                        </div>
+                                        <div class="w-full">
+                                            <div class="inline-block text-[11px] font-black text-[rgba(0,207,255,0.95)] uppercase bg-[rgba(0,207,255,0.10)] border border-[rgba(0,207,255,0.18)] px-3 py-[5px] rounded-full"
+                                                style="letter-spacing: 1.5px;">
+                                                Desarrollador Backend
+                                            </div>
+                                            <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">Luis Miguel
+                                            </h3>
+                                            <ul class="list-none p-0 w-full text-left flex flex-col gap-2"
+                                                style="margin: 10px 0 14px;">
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Backend de alto rendimiento</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>IA aplicada y big data en producción</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Arquitecturas escalables de datos</span>
+                                                </li>
+                                            </ul>
+                                            <div class="flex gap-2 flex-wrap justify-center mt-auto">
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#Backend</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#AI</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#BigData</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Card: Suhail -->
+                            <article class="card-item">
+                                <div class="relative group">
+                                    <div
+                                        class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
+                                    </div>
+                                    <div class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center z-[2]"
+                                        style="padding: 28px 24px; gap: 14px; min-height: 520px;">
+
+                                        <div
+                                            class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px] bg-gradient-to-br from-cyan-400/90 to-cyan-400/20 shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.08)]">
+                                            <div class="w-full h-full rounded-full overflow-hidden">
+                                                <img src="https://darknet-sys.com/wp-content/uploads/2026/02/SuhailDefinitivo.png"
+                                                    alt="Suhail" class="w-full h-full object-cover object-center" style="transform: scale(1.3) translateY(4%) translateX(3%);
+" loading="lazy">
+                                            </div>
+                                        </div>
+                                        <div class="w-full">
+                                            <div class="inline-block text-[11px] font-black text-[rgba(0,207,255,0.95)] uppercase bg-[rgba(0,207,255,0.10)] border border-[rgba(0,207,255,0.18)] px-3 py-[5px] rounded-full"
+                                                style="letter-spacing: 1.5px;">
+                                                Desarrollador Frontend
+                                            </div>
+                                            <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">Suhail</h3>
+                                            <ul class="list-none p-0 w-full text-left flex flex-col gap-2"
+                                                style="margin: 10px 0 14px;">
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Interfaces con alto sentido intuitivo</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Flujos frontend asistidos por IA</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Optimización continua de UX</span>
+                                                </li>
+                                            </ul>
+                                            <div class="flex gap-2 flex-wrap justify-center mt-auto">
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#Frontend</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#AI</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#UX</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                            <!-- Card: Corinne -->
+                            <article class="card-item">
+                                <div class="relative group">
+                                    <div
+                                        class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
+                                    </div>
+                                    <div class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center z-[2]"
+                                        style="padding: 28px 24px; gap: 14px; min-height: 520px;">
+
+                                        <div
+                                            class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px] bg-gradient-to-br from-cyan-400/90 to-cyan-400/20 shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.08)]">
+                                            <div class="w-full h-full rounded-full overflow-hidden">
+                                                <img src="https://darknet-sys.com/wp-content/uploads/2026/02/Corinne.jpeg"
+                                                    alt="Corinne" class="w-full h-full object-cover object-center"
+                                                    loading="lazy"
+                                                    style="transform: scale(1.2) translateY(-18%) translateX(1%);">
+
+                                            </div>
+                                        </div>
+                                        <div class="w-full">
+                                            <div class="inline-block text-[11px] font-black text-[rgba(0,207,255,0.95)] uppercase bg-[rgba(0,207,255,0.10)] border border-[rgba(0,207,255,0.18)] px-3 py-[5px] rounded-full"
+                                                style="letter-spacing: 1.5px;">
+                                                Soporte y Sistemas
+                                            </div>
+                                            <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">Corinne</h3>
+                                            <ul class="list-none p-0 w-full text-left flex flex-col gap-2"
+                                                style="margin: 10px 0 14px;">
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Seguimiento y soporte especializado</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Gestión operativa diaria</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Calidad y continuidad del servicio</span>
+                                                </li>
+                                            </ul>
+                                            <div class="flex gap-2 flex-wrap justify-center mt-auto">
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#SysAdmin</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#Support</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#SLA</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                            <!-- Card: Carmen -->
+                            <article class="card-item">
+                                <div class="relative group">
+                                    <div
+                                        class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
+                                    </div>
+                                    <div class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center z-[2]"
+                                        style="padding: 28px 24px; gap: 14px; min-height: 520px;">
+
+                                        <div class="relative mb-2 w-[118px] h-[118px]  rounded-full p-[3px]
+                                            bg-gradient-to-br from-cyan-400/90 to-cyan-400/20
+                                            shadow-[0_14px_36px_rgba(0,0,0,.28),0_0_0_5px_rgba(0,207,255,.10)]">
+                                            <div class="w-full h-full rounded-full overflow-hidden">
+                                                <img src="https://darknet-sys.com/wp-content/uploads/2026/02/Carmen-2.png"
+                                                    alt="Carmen" class="w-full h-full object-cover object-center"
+                                                    loading="lazy"
+                                                    style="transform: scale(1.4) translateY(-8%) translateX(-1%);">
+                                            </div>
+
+                                        </div>
+                                        <div class="w-full">
+                                            <div class="inline-block text-[11px] font-black text-[rgba(0,207,255,0.95)] uppercase bg-[rgba(0,207,255,0.10)] border border-[rgba(0,207,255,0.18)] px-3 py-[5px] rounded-full"
+                                                style="letter-spacing: 1.5px;">
+                                                Soporte y Sistemas
+                                            </div>
+                                            <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">Carmen</h3>
+                                            <ul class="list-none p-0 w-full text-left flex flex-col gap-2"
+                                                style="margin: 10px 0 14px;">
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Soporte técnico avanzado</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Gestión preventiva y correctiva</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Continuidad del servicio</span>
+                                                </li>
+                                            </ul>
+                                            <div class="flex gap-2 flex-wrap justify-center mt-auto">
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#SysAdmin</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#Support</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#SLA</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                            <!-- Card: Jesús -->
+                            <article class="card-item">
+                                <div class="relative group">
+                                    <div
+                                        class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
+                                    </div>
+                                    <div class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center z-[2]"
+                                        style="padding: 28px 24px; gap: 14px; min-height: 520px;">
+
+                                        <div class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px]
+                bg-gradient-to-br from-cyan-400/90 to-cyan-400/20
+                shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.08)]">
+                                            <div class="w-full h-full rounded-full overflow-hidden">
+                                                <img src="https://darknet-sys.com/wp-content/uploads/2026/02/Jesus.png"
+                                                    alt="Jesús" class="w-full h-full object-cover object-center"
+                                                    loading="lazy"
+                                                    style="transform: scale(1.35) translateY(3%) translateX(0%);">
+                                            </div>
+                                        </div>
+
+                                        <div class="w-full">
+                                            <div class="inline-block text-[11px] font-black text-[rgba(0,207,255,0.95)] uppercase
+                    bg-[rgba(0,207,255,0.10)] border border-[rgba(0,207,255,0.18)]
+                    px-3 py-[5px] rounded-full" style="letter-spacing: 1.5px;">
+                                                Sistemas
+                                            </div>
+
+                                            <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">
+                                                Jesús
+                                            </h3>
+
+                                            <ul class="list-none p-0 w-full text-left flex flex-col gap-2"
+                                                style="margin: 10px 0 14px;">
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Administración y mantenimiento de sistemas</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Soporte técnico de segundo nivel</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Monitorización y estabilidad de infraestructura</span>
+                                                </li>
+                                            </ul>
+
+                                            <div class="flex gap-2 flex-wrap justify-center mt-auto">
+                                                <span class="text-xs text-[rgba(255,255,255,0.70)]
+                        bg-[rgba(255,255,255,0.05)]
+                        border border-[rgba(255,255,255,0.08)]
+                        px-2.5 py-1 rounded-full">#SysAdmin</span>
+                                                <span class="text-xs text-[rgba(255,255,255,0.70)]
+                        bg-[rgba(255,255,255,0.05)]
+                        border border-[rgba(255,255,255,0.08)]
+                        px-2.5 py-1 rounded-full">#Infra</span>
+                                                <span class="text-xs text-[rgba(255,255,255,0.70)]
+                        bg-[rgba(255,255,255,0.05)]
+                        border border-[rgba(255,255,255,0.08)]
+                        px-2.5 py-1 rounded-full">#Support</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                            <!-- Card: María Fe -->
+                            <article class="card-item">
+                                <div class="relative group">
+                                    <div
+                                        class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
+                                    </div>
+                                    <div class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center z-[2]"
+                                        style="padding: 28px 24px; gap: 14px; min-height: 520px;">
+
+                                        <div
+                                            class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px] bg-gradient-to-br from-cyan-400/90 to-cyan-400/20 shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.08)]">
+                                            <div class="w-full h-full rounded-full overflow-hidden">
+                                                <img src="https://darknet-sys.com/wp-content/uploads/2026/01/MarifeCorrecta.png"
+                                                    alt="María Fe" class="w-full h-full object-cover"
+                                                    style="transform: scale(1.5) translateY(-2%) translateX(-5%);"
+                                                    loading="lazy">
+                                            </div>
+                                        </div>
+                                        <div class="w-full">
+                                            <div class="inline-block text-[11px] font-black text-[rgba(0,207,255,0.95)] uppercase bg-[rgba(0,207,255,0.10)] border border-[rgba(0,207,255,0.18)] px-3 py-[5px] rounded-full"
+                                                style="letter-spacing: 1.5px;">
+                                                Administración
+                                            </div>
+                                            <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">María Fe</h3>
+                                            <ul class="list-none p-0 w-full text-left flex flex-col gap-2"
+                                                style="margin: 10px 0 14px;">
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Gestión administrativa y documental</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Facturación y control de procesos internos</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Soporte operativo a dirección y equipos</span>
+                                                </li>
+                                            </ul>
+                                            <div class="flex gap-2 flex-wrap justify-center mt-auto">
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#Administración</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#Gestión</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#Operaciones</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+
+
+                            <!-- Card: Janisse -->
+                            <article class="card-item">
+                                <div class="relative group">
+                                    <div
+                                        class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
+                                    </div>
+                                    <div class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px] border border-[rgba(255,255,255,0.10)] flex flex-col items-center text-center z-[2]"
+                                        style="padding: 28px 24px; gap: 14px; min-height: 520px;">
+
+                                        <div
+                                            class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px] bg-gradient-to-br from-cyan-400/90 to-cyan-400/20 shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.08)]">
+                                            <div class="w-full h-full rounded-full overflow-hidden">
+                                                <img src="https://darknet-sys.com/wp-content/uploads/2026/01/Janisse.jpeg"
+                                                    alt="Janisse" class="w-full h-full object-cover object-center"
+                                                    loading="lazy"
+                                                    style="transform: scale(1.3) translateY(-3%) translateX(0%);">
+                                            </div>
+                                        </div>
+                                        <div class="w-full">
+                                            <div class="inline-block text-[11px] font-black text-[rgba(0,207,255,0.95)] uppercase bg-[rgba(0,207,255,0.10)] border border-[rgba(0,207,255,0.18)] px-3 py-[5px] rounded-full"
+                                                style="letter-spacing: 1.5px;">
+                                                Recursos Humanos
+                                            </div>
+                                            <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">Janisse</h3>
+                                            <ul class="list-none p-0 w-full text-left flex flex-col gap-2"
+                                                style="margin: 10px 0 14px;">
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Gestión del talento y clima laboral</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Procesos de selección y onboarding</span>
+                                                </li>
+                                                <li
+                                                    class="text-[#cdefff] text-[0.95rem] pb-2 border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Desarrollo profesional y cultura interna</span>
+                                                </li>
+                                            </ul>
+                                            <div class="flex gap-2 flex-wrap justify-center mt-auto">
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#RRHH</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#Talento</span>
+                                                <span
+                                                    class="text-xs text-[rgba(255,255,255,0.70)] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1 rounded-full">#PeopleOps</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                            <!-- Card: Lorenzo -->
+                            <article class="card-item">
+                                <div class="relative group">
+                                    <div
+                                        class="absolute inset-[-2px] rounded-[22px] card-glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-[1]">
+                                    </div>
+
+                                    <div class="relative bg-[rgba(255,255,255,0.045)] rounded-[24px]
+                    border border-[rgba(255,255,255,0.10)]
+                    flex flex-col items-center text-center z-[2]"
+                                        style="padding: 28px 24px; gap: 14px; min-height: 520px;">
+
+                                        <!-- Avatar -->
+                                        <div class="relative mb-2 w-[118px] h-[118px] rounded-full p-[3px]
+                bg-gradient-to-br from-cyan-400/90 to-cyan-400/20
+                shadow-[0_10px_28px_rgba(0,0,0,.25),0_0_0_4px_rgba(0,207,255,.08)]">
+                                            <div class="w-full h-full rounded-full overflow-hidden">
+                                                <img src="https://darknet-sys.com/wp-content/uploads/2026/02/Lorenzo.png"
+                                                    alt="Lorenzo" class="w-full h-full object-cover object-center"
+                                                    loading="lazy"
+                                                    style="transform: scale(1.35) translateY(-5%) translateX(0%);">
+                                            </div>
+                                        </div>
+
+                                        <!-- Content -->
+                                        <div class="w-full">
+                                            <div class="inline-block text-[11px] font-black text-[rgba(0,207,255,0.95)] uppercase
+                           bg-[rgba(0,207,255,0.10)] border border-[rgba(0,207,255,0.18)]
+                           px-3 py-[5px] rounded-full" style="letter-spacing: 1.5px;">
+                                                Sistemas
+                                            </div>
+
+                                            <h3 class="text-[1.75rem] font-black mt-[8px] mb-1 text-white">
+                                                Lorenzo
+                                            </h3>
+
+                                            <ul class="list-none p-0 w-full text-left flex flex-col gap-2"
+                                                style="margin: 10px 0 14px;">
+                                                <li class="text-[#cdefff] text-[0.95rem] pb-2
+                               border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Gestión y mantenimiento de sistemas</span>
+                                                </li>
+                                                <li class="text-[#cdefff] text-[0.95rem] pb-2
+                               border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Soporte técnico y resolución de incidencias</span>
+                                                </li>
+                                                <li class="text-[#cdefff] text-[0.95rem] pb-2
+                               border-b border-[rgba(255,255,255,0.06)] flex gap-2.5">
+                                                    <span class="text-[#00cfff] font-black">▹</span>
+                                                    <span>Supervisión de estabilidad y rendimiento</span>
+                                                </li>
+                                            </ul>
+
+                                            <div class="flex gap-2 flex-wrap justify-center mt-auto">
+                                                <span class="text-xs text-[rgba(255,255,255,0.70)]
+                               bg-[rgba(255,255,255,0.05)]
+                               border border-[rgba(255,255,255,0.08)]
+                               px-2.5 py-1 rounded-full">#SysAdmin</span>
+                                                <span class="text-xs text-[rgba(255,255,255,0.70)]
+                               bg-[rgba(255,255,255,0.05)]
+                               border border-[rgba(255,255,255,0.08)]
+                               px-2.5 py-1 rounded-full">#Infra</span>
+                                                <span class="text-xs text-[rgba(255,255,255,0.70)]
+                               bg-[rgba(255,255,255,0.05)]
+                               border border-[rgba(255,255,255,0.08)]
+                               px-2.5 py-1 rounded-full">#Support</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Navigation -->
+                <div class="flex lg:hidden justify-center gap-4 mt-6">
+                    <button id="btn-prev-mobile"
+                        class="flex items-center justify-center w-11 h-11 rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.15)] hover:bg-[rgba(0,207,255,0.15)] hover:border-[rgba(0,207,255,0.4)] transition-all duration-300 cursor-pointer"
+                        aria-label="Grupo anterior">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button id="btn-next-mobile"
+                        class="flex items-center justify-center w-11 h-11 rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.15)] hover:bg-[rgba(0,207,255,0.15)] hover:border-[rgba(0,207,255,0.4)] transition-all duration-300 cursor-pointer"
+                        aria-label="Grupo siguiente">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+    </section>
+
+    <script>
+        (() => {
+            const track = document.getElementById("carousel-track");
+            const originalCards = Array.from(track.children);
+
+            // 🔁 Duplicamos el contenido 2 veces
+            originalCards.forEach(card => {
+                track.appendChild(card.cloneNode(true));
+            });
+            originalCards.forEach(card => {
+                track.appendChild(card.cloneNode(true));
+            });
+
+            let position = 0;
+            let timer = null;
+
+            function cardStep() {
+                const card = track.children[0];
+                const gap = parseFloat(getComputedStyle(track).gap) || 0;
+                return card.getBoundingClientRect().width + gap;
+            }
+
+            function update(animate = true) {
+                track.style.transition = animate
+                    ? "transform 0.8s cubic-bezier(0.4,0,0.2,1)"
+                    : "none";
+
+                track.style.transform = `translateX(${-position}px)`;
+            }
+
+            function next() {
+                position += cardStep();
+                update(true);
+
+                const resetPoint = cardStep() * originalCards.length;
+
+                if (position >= resetPoint * 2) {
+                    position -= resetPoint;
+                    update(false);
+                }
+                reset();
+            }
+
+            function prev() {
+                position -= cardStep();
+                update(true);
+
+                const resetPoint = cardStep() * originalCards.length;
+
+                if (position < cardStep()) {
+                    position += resetPoint;
+                    update(false);
+                }
+                reset();
+            }
+
+
+            function reset() {
+                clearTimeout(timer);
+                timer = setTimeout(next, 6000);
+            }
+
+            document.getElementById("btn-next")?.addEventListener("click", next);
+            document.getElementById("btn-prev")?.addEventListener("click", prev);
+            document.getElementById("btn-next-mobile")?.addEventListener("click", next);
+            document.getElementById("btn-prev-mobile")?.addEventListener("click", prev);
+
+            update(false);
+            reset();
+
+            window.addEventListener("resize", () => update(false));
+        })();
+    </script>
+
+
+
+</body>
+
+</html>
