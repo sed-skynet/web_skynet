@@ -234,9 +234,6 @@ class Actualidad_Noticias_Ultra
                 box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
             }
 
-            #wpbody-content * {
-                overflow: visible;
-            }
 
             /* Formulario Glass Effect Cyan */
             .glass-form {
@@ -325,8 +322,8 @@ class Actualidad_Noticias_Ultra
             }
 
             /* =========================
-                                                                                                                                                                                                                                                                                                                                                                                                                                                               SELECT CYBER STYLE
-                                                                                                                                                                                                                                                                                                                                                                                                                                                               ========================= */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               SELECT CYBER STYLE
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ========================= */
             .select-wrapper {
                 position: relative;
                 width: 100%;
@@ -385,8 +382,8 @@ class Actualidad_Noticias_Ultra
             }
 
             /* =========================
-                                                                                                                                                                                                                                                                                                                                                                                                                                                               FILE INPUT CYBER
-                                                                                                                                                                                                                                                                                                                                                                                                                                                               ========================= */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               FILE INPUT CYBER
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ========================= */
             .file-ultra input[type="file"] {
                 display: none;
             }
@@ -704,8 +701,8 @@ class Actualidad_Noticias_Ultra
             }
 
             /* =========================
-                                                                                                                                                                                                                                                                                                                                                                                            PARTICLES BACKGROUND
-                                                                                                                                                                                                                                                                                                                                                                                         ========================= */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            PARTICLES BACKGROUND
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ========================= */
             #cyber-particles {
                 position: fixed;
                 inset: 0;
@@ -804,7 +801,7 @@ class Actualidad_Noticias_Ultra
                         vx: (Math.random() - 0.5) * 0.3,
                         vy: (Math.random() - 0.5) * 0.3,
                         alpha: Math.random() * 0.6  0.2
-                                                                                                                                                                                                                                                                                                                                                                         });
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         });
                 }
             }
             createParticles();
@@ -895,6 +892,9 @@ class Actualidad_Noticias_Ultra
                         </label>
                     </div>
                     <button type="submit" class="btn-publish">Publicar Ahora ✦</button>
+                    <button type="button" id="btn-preview" class="btn-preview">
+                        👁 Vista previa
+                    </button>
                 </div>
                 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
                 <script>
@@ -1062,6 +1062,61 @@ class Actualidad_Noticias_Ultra
                     });
                 </script>
             </form>
+            <div id="preview-modal" class="preview-modal">
+                <div class="preview-inner">
+                    <button class="preview-close">✕</button>
+                    <div id="preview-content"></div>
+                </div>
+            </div>
+            <script>
+                document.getElementById('btn-preview').addEventListener('click', () => {
+                    const preview = document.getElementById('preview-content');
+                    preview.innerHTML = '';
+
+                    // TÍTULO
+                    const title = document.querySelector('input[name="titulo"]').value;
+                    preview.innerHTML += `<h1 style="font-size:42px;margin-bottom:20px">${title}</h1>`;
+
+                    // CATEGORÍA
+                    const cat = document.getElementById('segmento').value;
+                    preview.innerHTML += `<span style="color:#00d4ff;font-weight:700">${cat}</span>`;
+
+                    // IMAGEN DESTACADA (si existe)
+                    const cover = document.querySelector('#preview_cover_container img');
+                    if (cover) {
+                        preview.innerHTML += `<img src="${cover.src}" style="width:100%;margin:30px 0;border-radius:14px">`;
+                    }
+
+                    // BLOQUES
+                    document.querySelectorAll('#blocks-editor .block-item').forEach(block => {
+                        if (block.classList.contains('block-image')) {
+                            const img = block.querySelector('img');
+                            if (img) {
+                                preview.innerHTML += `
+                    <figure style="margin:30px 0">
+                        <img src="${img.src}" style="width:100%;border-radius:12px">
+                    </figure>
+                `;
+                            }
+                        } else {
+                            const textarea = block.querySelector('textarea');
+                            if (textarea && textarea.value.trim()) {
+                                preview.innerHTML += `<p style="font-size:18px;line-height:1.7;margin:22px 0">${textarea.value}</p>`;
+                            }
+                        }
+                    });
+
+                    document.getElementById('preview-modal').classList.add('active');
+                    document.body.classList.add('preview-open');
+                });
+
+                // Cerrar preview
+                document.querySelector('.preview-close').onclick = () => {
+                    document.getElementById('preview-modal').classList.remove('active');
+                    document.body.classList.remove('preview-open');
+                };
+
+            </script>
         </div>
         <?php
     }
@@ -1075,6 +1130,71 @@ class Actualidad_Noticias_Ultra
         ?>
         <style>
             /* ===== BLOQUES EDITOR (ADMIN) ===== */
+            .preview-modal {
+                position: fixed;
+                inset: 0;
+                background: rgba(3, 10, 18, .92);
+                z-index: 999999;
+                display: none;
+
+                /* 🔒 EL OVERLAY NUNCA SCROLLEA */
+                overflow: hidden;
+            }
+
+            .preview-modal.active {
+                display: block;
+            }
+
+            .preview-modal.active {
+                display: block;
+            }
+
+            .preview-inner {
+                max-width: 980px;
+                margin: 60px auto;
+                background: #0b1622;
+                border-radius: 20px;
+                padding: 40px;
+                color: #fff;
+                position: relative;
+                box-shadow: 0 0 60px rgba(0, 212, 255, .25);
+
+                max-height: calc(100vh - 120px);
+                overflow-y: auto;
+            }
+
+            .preview-close {
+                position: absolute;
+                top: 18px;
+                right: 18px;
+                background: none;
+                border: none;
+                color: #fff;
+                font-size: 20px;
+                cursor: pointer;
+            }
+
+            .btn-preview {
+                width: 100%;
+                margin-top: 10px;
+                padding: 16px;
+                border-radius: 14px;
+                border: 1px solid rgba(0, 212, 255, .6);
+                background: rgba(0, 212, 255, .12);
+                color: #fff;
+                font-weight: 700;
+                letter-spacing: 1px;
+                cursor: pointer;
+                transition: all .25s ease;
+                box-shadow: inset 0 0 14px rgba(0, 212, 255, .15);
+            }
+
+            .btn-preview:hover {
+                background: rgba(0, 212, 255, .25);
+                box-shadow:
+                    0 0 20px rgba(0, 212, 255, .6),
+                    inset 0 0 18px rgba(255, 255, 255, .2);
+            }
 
             #blocks-editor {
                 display: flex;
@@ -1277,6 +1397,59 @@ class Actualidad_Noticias_Ultra
                 margin-top: 10px;
                 box-shadow: 0 0 18px rgba(0, 212, 255, .25);
             }
+
+            /* 🔒 Bloqueo total del scroll del admin cuando el modal está activo */
+            body.preview-open,
+            body.preview-open #wpwrap,
+            body.preview-open #wpcontent,
+            body.preview-open #wpbody,
+            body.preview-open #wpbody-content {
+                overflow: hidden !important;
+            }
+
+            .news-read-more {
+                margin-top: auto;
+                display: inline-block;
+                padding: 12px 18px;
+                border-radius: 12px;
+                font-weight: 700;
+                text-align: center;
+                text-decoration: none;
+                color: #ffffff;
+                background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+                box-shadow: 0 6px 20px rgba(43, 144, 227, 0.35);
+                transition: all .25s ease;
+            }
+
+            .news-read-more:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 30px rgba(43, 144, 227, 0.55);
+            }
+
+            .news-read-more {
+                margin-top: auto;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+
+                padding: 14px 18px;
+                border-radius: 14px;
+
+                font-weight: 800;
+                letter-spacing: .5px;
+                text-transform: uppercase;
+
+                background: linear-gradient(135deg, #2b90e3, #3bc6e7);
+                color: #fff !important;
+
+                box-shadow: 0 8px 24px rgba(43, 144, 227, .45);
+            }
+
+            .news-read-more:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 36px rgba(43, 144, 227, .65);
+            }
         </style>
         <?php
     }
@@ -1300,7 +1473,9 @@ class Actualidad_Noticias_Ultra
                     <span class="u-badge"><?= esc_html($cat ?: 'General') ?></span>
                     <h3><?= get_the_title() ?></h3>
                     <p><?= wp_trim_words(get_the_content(), 18) ?></p>
-
+                    <a href="<?= esc_url(get_permalink()) ?>" class="news-read-more">
+                        Leer noticia →
+                    </a>
                     <?php
                     // PDF principal
                     $pdf_id = get_post_meta(get_the_ID(), '_pdf_doc', true);

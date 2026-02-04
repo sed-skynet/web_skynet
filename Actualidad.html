@@ -28,46 +28,188 @@
             min-height: 100%;
             margin: 0;
             padding: 0;
+            background-color: #0f172a;
+            /* Fondo base por si el canvas tarda en cargar */
         }
 
-        /* Página aislada (NO afecta al navbar) */
+        /* Página aislada */
         .news-page {
             min-height: 100vh;
-            background: linear-gradient(135deg, #0a2540 0%, #126b97 50%, #3bc6e7 100%);
+            background: transparent;
             color: #fff;
             position: relative;
             overflow-x: hidden;
+            padding-bottom: 60px;
         }
 
-        #tech-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 0;
-            pointer-events: none;
+        .container {
+            width: min(var(--container), calc(100% - 48px));
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Header Section */
+        /* Grid Principal */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        @media (max-width: 1100px) {
+            .news-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        /* Tarjetas de Noticias */
+        .news-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, .08) 0%, rgba(255, 255, 255, .03) 100%);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, .1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, .2);
+            transition: all .4s cubic-bezier(.4, 0, .2, 1);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            /* Para que todas tengan la misma altura */
+        }
+
+        .news-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, .4);
+            background: linear-gradient(135deg, rgba(255, 255, 255, .12) 0%, rgba(255, 255, 255, .05) 100%);
+            border-color: rgba(255, 255, 255, .2);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: linear-gradient(135deg, rgba(43, 144, 227, .3), rgba(59, 198, 231, .3));
+        }
+
+        .news-content {
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .news-meta {
+            margin-bottom: auto;
+        }
+
+        .category-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            width: fit-content;
+        }
+
+        /* Colores de categorías */
+        .category-badge.technology {
+            background: rgba(59, 130, 246, .15);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, .3);
+        }
+
+        .category-badge.sports {
+            background: rgba(34, 197, 94, .15);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, .3);
+        }
+
+        .category-badge.politics {
+            background: rgba(239, 68, 68, .15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, .3);
+        }
+
+        .category-badge.science {
+            background: rgba(168, 85, 247, .15);
+            color: #c084fc;
+            border: 1px solid rgba(168, 85, 247, .3);
+        }
+
+        .news-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 0 12px 0;
+            line-height: 1.4;
+            color: #fff;
+        }
+
+        .news-description {
+            font-size: 15px;
+            line-height: 1.6;
+            color: rgba(224, 242, 255, .7);
+            margin: 0 0 24px 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            /* Limita el texto a 3 líneas */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .ai-summary-btn {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .ai-summary-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
         .header-section {
             text-align: center;
             margin-bottom: 60px;
+            padding-top: 60px;
             animation: fadeInDown 0.8s ease-out;
         }
 
+        /* Resto de estilos del header y tabs... */
         .header-icon {
             width: 64px;
             height: 64px;
             margin: 0 auto 24px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
         }
 
         .header-icon svg {
@@ -86,18 +228,13 @@
             background: linear-gradient(135deg, #ffffff 0%, #e0f2ff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.3));
         }
 
         .subtitle {
             font-size: 20px;
             color: rgba(224, 242, 255, 0.8);
-            font-weight: 500;
-            margin: 0;
         }
 
-        /* Category Tabs */
         .category-tabs {
             display: flex;
             justify-content: center;
@@ -113,10 +250,9 @@
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
             border: 1px solid rgba(255, 255, 255, 0.15);
             background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
             color: rgba(255, 255, 255, 0.7);
         }
 
@@ -124,7 +260,6 @@
             background: rgba(255, 255, 255, 0.15);
             color: #fff;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .tab.active {
@@ -140,133 +275,6 @@
             border-color: transparent;
         }
 
-        .tab.for-you::before {
-            content: "✨ ";
-        }
-
-        /* News Grid */
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 28px;
-            animation: fadeInUp 0.8s ease-out 0.4s both;
-        }
-
-        .news-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.08) 100%);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .news-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.12) 100%);
-            border-color: rgba(255, 255, 255, 0.25);
-        }
-
-        .news-image {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            background: linear-gradient(135deg, rgba(43, 144, 227, 0.3), rgba(59, 198, 231, 0.3));
-        }
-
-        .news-content {
-            padding: 24px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .category-badge {
-            display: inline-block;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 6px 12px;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            width: fit-content;
-        }
-
-        .category-badge.technology {
-            background: rgba(59, 130, 246, 0.2);
-            color: #60a5fa;
-            border: 1px solid rgba(59, 130, 246, 0.3);
-        }
-
-        .category-badge.sports {
-            background: rgba(34, 197, 94, 0.2);
-            color: #4ade80;
-            border: 1px solid rgba(34, 197, 94, 0.3);
-        }
-
-        .category-badge.politics {
-            background: rgba(239, 68, 68, 0.2);
-            color: #f87171;
-            border: 1px solid rgba(239, 68, 68, 0.3);
-        }
-
-        .category-badge.science {
-            background: rgba(168, 85, 247, 0.2);
-            color: #c084fc;
-            border: 1px solid rgba(168, 85, 247, 0.3);
-        }
-
-        .news-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin: 0 0 12px 0;
-            line-height: 1.4;
-            color: #fff;
-        }
-
-        .news-description {
-            font-size: 15px;
-            line-height: 1.6;
-            color: rgba(224, 242, 255, 0.7);
-            margin: 0 0 20px 0;
-            flex-grow: 1;
-        }
-
-        .ai-summary-btn {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.1) 100%);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff;
-            padding: 12px 20px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            justify-content: center;
-        }
-
-        .ai-summary-btn::before {
-            content: "🤖";
-            font-size: 16px;
-        }
-
-        .ai-summary-btn:hover {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.18) 100%);
-            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-
-        /* Animations */
         @keyframes fadeInDown {
             from {
                 opacity: 0;
@@ -291,189 +299,246 @@
             }
         }
 
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .news-grid {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            }
+        #tech-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
         }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 42px;
-            }
+        /* ======================================
+   BRIDGE DEFINITIVO SHORTCODE → DISEÑO
+   ====================================== */
 
-            .subtitle {
-                font-size: 18px;
-            }
-
-            .news-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .container {
-                padding: 40px 20px;
-            }
-
-            .category-tabs {
-                gap: 8px;
-            }
-
-            .tab {
-                padding: 10px 16px;
-                font-size: 14px;
-            }
+        /* El grid lo controlas tú */
+        .news-from-shortcode .news-ultra-container {
+            display: contents;
+            /* hereda el grid padre */
         }
 
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 36px;
-            }
+        /* =========================
+   CARD REAL PARA SHORTCODE
+   ========================= */
+        .news-ultra-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, .08) 0%, rgba(255, 255, 255, .03) 100%);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, .1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, .2);
+            transition: all .4s cubic-bezier(.4, 0, .2, 1);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
 
-            .header-icon {
-                width: 56px;
-                height: 56px;
-            }
+        .news-ultra-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, .4);
+            background: linear-gradient(135deg, rgba(255, 255, 255, .12) 0%, rgba(255, 255, 255, .05) 100%);
+            border-color: rgba(255, 255, 255, .2);
+        }
 
-            .header-icon svg {
-                width: 28px;
-                height: 28px;
-            }
+
+        /* Imagen */
+        .news-ultra-img {
+            width: 100%;
+            height: 217px !important;
+            object-fit: cover;
+            object-position: center top;
+            /* 👈 CLAVE */
+        }
+
+        /* Contenido */
+        .news-ultra-overlay {
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Badge */
+        .u-badge {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            width: fit-content;
+            background: rgba(59, 130, 246, .15);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, .3);
+        }
+
+        /* Título */
+        .news-ultra-overlay h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 0 12px 0;
+            line-height: 1.4;
+            color: #fff;
+        }
+
+        /* Descripción */
+        .news-ultra-overlay p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: rgba(224, 242, 255, .7);
+            margin: 0 0 24px 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Botón IA / enlaces */
+        .news-ultra-overlay a {
+            margin-top: auto;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 12px;
+            padding: 12px;
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: .25s ease;
+        }
+
+        .news-ultra-overlay a:hover {
+            background: rgba(255, 255, 255, .15);
+            border-color: rgba(255, 255, 255, .3);
         }
     </style>
 </head>
 
 <body>
     <canvas id="tech-bg"></canvas>
-    <div class="header-section">
-        <div class="header-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"
-                    stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+
+    <div class="news-page">
+
+        <div class="header-section">
+            <h1>Actualidad al Día</h1>
+            <p class="subtitle">Tu fuente diaria de noticias resumidas y contenido personalizado</p>
         </div>
-        <h1>Actualidad al Día</h1>
-        <p class="subtitle">Tu fuente diaria de noticias resumidas y contenido personalizado</p>
-    </div>
 
-    <div class="category-tabs">
-        <div class="tab">Todo</div>
-        <div class="tab for-you active">Para Ti</div>
-        <div class="tab">Tecnología</div>
-        <div class="tab">Deportes</div>
-        <div class="tab">Política</div>
-        <div class="tab">Ciencia</div>
-    </div>
-
-    <div class="container">
-        <div class="news-grid">
-            [actualidad_noticias]
+        <div class="category-tabs">
+            <div class="tab">Todo</div>
+            <div class="tab for-you active">✨ Para Ti</div>
+            <div class="tab">Tecnología</div>
+            <div class="tab">Deportes</div>
+            <div class="tab">Política</div>
+            <div class="tab">Ciencia</div>
         </div>
-    </div>
 
-    <script>
-        const canvas = document.getElementById('tech-bg');
-        const ctx = canvas.getContext('2d');
-        let width, height, time = 0;
+        <div class="container">
+            <div class="news-grid news-from-shortcode">
+                [actualidad_noticias]
+            </div>
+        </div>
 
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
+        <script>
+            const canvas = document.getElementById('tech-bg');
+            const ctx = canvas.getContext('2d');
+            let width, height, time = 0;
 
-        const particles = [];
-        const particleCount = 80;
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
 
-        function resetParticles() {
-            particles.length = 0;
-            for (let i = 0; i < particleCount; i++) {
-                particles.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    vx: (Math.random() - 0.5) * 0.6,
-                    vy: (Math.random() - 0.5) * 0.6,
-                    size: Math.random() * 2.5 + 1.5
+            const particles = [];
+            const particleCount = 80;
+
+            function resetParticles() {
+                particles.length = 0;
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        vx: (Math.random() - 0.5) * 0.6,
+                        vy: (Math.random() - 0.5) * 0.6,
+                        size: Math.random() * 2.5 + 1.5
+                    });
+                }
+            }
+            resetParticles();
+            window.addEventListener('resize', resetParticles);
+
+            function drawParticles() {
+                particles.forEach((p, i) => {
+                    const pulse = Math.sin(time * 0.8 + i * 0.5) * 0.4 + 1;
+                    const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * pulse * 3);
+                    gradient.addColorStop(0, 'rgba(144,224,239,0.8)');
+                    gradient.addColorStop(0.5, 'rgba(144,224,239,0.3)');
+                    gradient.addColorStop(1, 'rgba(144,224,239,0)');
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size * pulse * 3, 0, Math.PI * 2);
+                    ctx.fillStyle = gradient;
+                    ctx.fill();
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size * pulse, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255,255,255,0.9)';
+                    ctx.shadowColor = 'rgba(144,224,239,0.8)';
+                    ctx.shadowBlur = 15 * pulse;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const p2 = particles[j];
+                        const dx = p.x - p2.x;
+                        const dy = p.y - p2.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 150) {
+                            const opacity = (1 - dist / 150) * 0.3;
+                            const gradient = ctx.createLinearGradient(p.x, p.y, p2.x, p2.y);
+                            gradient.addColorStop(0, `rgba(144,224,239,${opacity})`);
+                            gradient.addColorStop(0.5, `rgba(255,255,255,${opacity * 0.5})`);
+                            gradient.addColorStop(1, `rgba(144,224,239,${opacity})`);
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.strokeStyle = gradient;
+                            ctx.lineWidth = 1.5;
+                            ctx.stroke();
+                        }
+                    }
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    if (p.x < 0) p.x = width;
+                    if (p.x > width) p.x = 0;
+                    if (p.y < 0) p.y = height;
+                    if (p.y > height) p.y = 0;
                 });
             }
-        }
-        resetParticles();
-        window.addEventListener('resize', resetParticles);
 
-        function drawParticles() {
-            particles.forEach((p, i) => {
-                const pulse = Math.sin(time * 0.8 + i * 0.5) * 0.4 + 1;
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                drawParticles();
+                time += 0.01;
+                requestAnimationFrame(animate);
+            }
+            animate();
 
-                // Glow effect
-                const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * pulse * 3);
-                gradient.addColorStop(0, 'rgba(144,224,239,0.8)');
-                gradient.addColorStop(0.5, 'rgba(144,224,239,0.3)');
-                gradient.addColorStop(1, 'rgba(144,224,239,0)');
-
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size * pulse * 3, 0, Math.PI * 2);
-                ctx.fillStyle = gradient;
-                ctx.fill();
-
-                // Core particle
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size * pulse, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255,255,255,0.9)';
-                ctx.shadowColor = 'rgba(144,224,239,0.8)';
-                ctx.shadowBlur = 15 * pulse;
-                ctx.fill();
-                ctx.shadowBlur = 0;
-
-                // Connections
-                for (let j = i + 1; j < particles.length; j++) {
-                    const p2 = particles[j];
-                    const dx = p.x - p2.x;
-                    const dy = p.y - p2.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 150) {
-                        const opacity = (1 - dist / 150) * 0.3;
-                        const gradient = ctx.createLinearGradient(p.x, p.y, p2.x, p2.y);
-                        gradient.addColorStop(0, `rgba(144,224,239,${opacity})`);
-                        gradient.addColorStop(0.5, `rgba(255,255,255,${opacity * 0.5})`);
-                        gradient.addColorStop(1, `rgba(144,224,239,${opacity})`);
-
-                        ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.strokeStyle = gradient;
-                        ctx.lineWidth = 1.5;
-                        ctx.stroke();
-                    }
-                }
-
-                p.x += p.vx;
-                p.y += p.vy;
-                if (p.x < 0) p.x = width;
-                if (p.x > width) p.x = 0;
-                if (p.y < 0) p.y = height;
-                if (p.y > height) p.y = 0;
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function () {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
             });
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            drawParticles();
-            time += 0.01;
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-        // Tab functionality
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.addEventListener('click', function () {
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-    </script>
+        </script>
+    </div>
 </body>
 
 </html>
