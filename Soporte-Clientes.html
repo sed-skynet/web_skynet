@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Soporte Clientes | Skynet Systems</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --accent-cyan: #00d4ff;
+            --primary-blue: #0a2e4e;
+            --secondary-blue: #126b97;
+            --dark-navy: #061a2b;
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-main: #ffffff;
+            --text-muted: #cdefff;
+            --text-accent: #a5d8ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--secondary-blue);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+
+        /* Canvas de partículas de fondo */
+        #cyber-particles {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Contenedor principal */
+        .soporte-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Logo/Badge superior */
+        .skynet-badge {
+            display: inline-block;
+            background: rgba(0, 212, 255, 0.15);
+            color: var(--accent-cyan);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border: 1px solid var(--accent-cyan);
+            font-size: 12px;
+            margin-bottom: 32px;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 35px rgba(0, 212, 255, 0.7);
+            }
+        }
+
+        /* Título principal */
+        .soporte-container h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            background: linear-gradient(to right, #fff, var(--text-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+            text-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Descripción */
+        .soporte-container p {
+            font-size: 1.2rem;
+            line-height: 1.75;
+            color: var(--text-muted);
+            margin-bottom: 48px;
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 500;
+        }
+
+        .soporte-container p strong {
+            color: var(--accent-cyan);
+            font-weight: 800;
+        }
+
+        /* Card contenedora del botón */
+        .download-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            padding: 48px 40px;
+            box-shadow:
+                0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                inset 0 0 20px rgba(255, 255, 255, 0.03);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 32px;
+        }
+
+        .download-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: var(--accent-cyan);
+            border-radius: 8px;
+            box-shadow: 0 0 20px var(--accent-cyan);
+        }
+
+        .download-card-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--text-main);
+            letter-spacing: 0.5px;
+        }
+
+        .download-card-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            font-weight: 500;
+        }
+
+        /* Botón de descarga */
+        .btn-descarga {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 22px 42px;
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, #0099cc 100%);
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.1rem;
+            border-radius: 16px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-descarga:hover,
+        .btn-descarga:focus-visible {
+            transform: scale(1.04);
+            color: #ffffff;
+        }
+
+
+        .btn-descarga:active {
+            transform: translateY(-2px);
+        }
+
+        .btn-icon {
+            font-size: 1.4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Características/Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+            margin-bottom: 40px;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 212, 255, 0.25);
+            border-radius: 18px;
+            padding: 24px 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-cyan), transparent);
+            border-radius: 18px 0 0 18px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.25);
+            border-color: rgba(0, 212, 255, 0.6);
+        }
+
+        .feature-item:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .feature-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            opacity: 0.8;
+        }
+
+        /* Nota de seguridad */
+        .nota {
+            margin-top: 32px;
+            padding: 20px 28px;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 4px solid var(--accent-cyan);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            text-align: left;
+            box-shadow: -4px 0 15px rgba(0, 212, 255, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .nota-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        /* Instrucciones paso a paso */
+        .instrucciones {
+            margin-top: 60px;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .instrucciones-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 28px;
+            text-align: center;
+            background: linear-gradient(90deg, #fff, var(--text-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .paso {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            margin-bottom: 24px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .paso:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(0, 212, 255, 0.4);
+            transform: translateX(4px);
+        }
+
+        .paso-numero {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-cyan), #0099cc);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.4);
+        }
+
+        .paso-texto {
+            flex: 1;
+            line-height: 1.6;
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .soporte-container {
+                padding: 60px 24px;
+            }
+
+            .soporte-container h1 {
+                font-size: 2.5rem;
+            }
+
+            .soporte-container p {
+                font-size: 1.05rem;
+            }
+
+            .download-card {
+                padding: 36px 24px;
+            }
+
+            .btn-descarga {
+                padding: 18px 32px;
+                font-size: 1rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animación de entrada */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .soporte-container>* {
+            animation: fadeInUp 0.8s ease-out backwards;
+        }
+
+        .skynet-badge {
+            animation-delay: 0.1s;
+        }
+
+        .soporte-container h1 {
+            animation-delay: 0.2s;
+        }
+
+        .soporte-container>p {
+            animation-delay: 0.3s;
+        }
+
+        .download-card {
+            animation-delay: 0.4s;
+        }
+
+        .features {
+            animation-delay: 0.5s;
+        }
+
+        .nota {
+            animation-delay: 0.6s;
+        }
+
+        .instrucciones {
+            animation-delay: 0.7s;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cyber-particles"></canvas>
+
+    <main class="soporte-container">
+        <!-- Badge superior -->
+        <div class="skynet-badge">⚡ Skynet Systems</div>
+
+        <!-- Título y descripción -->
+        <h1>Soporte Técnico Remoto</h1>
+        <p>
+            Para brindarte asistencia técnica de forma rápida, segura y profesional,
+            utilizamos <strong>AnyDesk</strong>, la solución líder en acceso remoto.
+            <br /><br />
+            Descarga el software y comparte tu ID cuando nuestro equipo te lo solicite.
+        </p>
+
+        <!-- Card de descarga -->
+        <div class="download-card">
+            <h2 class="download-card-title">Descarga AnyDesk</h2>
+            <p class="download-card-subtitle">Software oficial y gratuito de conexión remota</p>
+
+            <a class="btn-descarga" href="https://get.anydesk.com/nx618Cg0/SoporteSkynet.exe" target="_blank" rel="noopener noreferrer">
+                <span class="btn-icon">⬇</span>
+                <span class="btn-text">Descargar Ahora</span>
+            </a>
+        </div>
+
+        <!-- Características -->
+        <div class="features">
+            <div class="feature-item">
+                <span class="feature-icon">🔒</span>
+                <div class="feature-title">100% Seguro</div>
+                <div class="feature-desc">Cifrado de extremo a extremo</div>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">⚡</span>
+                <div class="feature-title">Ultra Rápido</div>
+                <div class="feature-desc">Conexión en segundos</div>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">🎯</span>
+                <div class="feature-title">Fácil de Usar</div>
+                <div class="feature-desc">Sin configuración compleja</div>
+            </div>
+        </div>
+
+        <!-- Nota de seguridad -->
+        <div class="nota">
+            <span class="nota-icon">🛡️</span>
+            <div>
+                <strong>Tu seguridad es nuestra prioridad.</strong> La conexión solo se establece con tu autorización
+                explícita.
+                Nunca compartiremos tu información ni accederemos sin tu consentimiento.
+            </div>
+        </div>
+
+        <!-- Instrucciones paso a paso -->
+        <div class="instrucciones">
+            <h3 class="instrucciones-title">¿Cómo funciona?</h3>
+
+            <div class="paso">
+                <div class="paso-numero">1</div>
+                <div class="paso-texto">
+                    Descarga e instala <strong>AnyDesk</strong> desde el botón anterior
+                </div>
+            </div>
+
+            <div class="paso">
+                <div class="paso-numero">2</div>
+                <div class="paso-texto">
+                    Abre la aplicación y localiza tu <strong>ID de AnyDesk</strong> (número de 9 dígitos)
+                </div>
+            </div>
+
+            <div class="paso">
+                <div class="paso-numero">3</div>
+                <div class="paso-texto">
+                    Comparte ese ID con nuestro técnico por teléfono, email o chat
+                </div>
+            </div>
+
+            <div class="paso">
+                <div class="paso-numero">4</div>
+                <div class="paso-texto">
+                    Acepta la solicitud de conexión cuando te llegue y permite el acceso
+                </div>
+            </div>
+
+            <div class="paso">
+                <div class="paso-numero">5</div>
+                <div class="paso-texto">
+                    ¡Listo! Nuestro equipo resolverá tu incidencia de forma remota
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // =========================
+        // CYBER PARTICLES BACKGROUND
+        // =========================
+        const canvas = document.getElementById('cyber-particles');
+        const ctx = canvas.getContext('2d');
+
+        let particles = [];
+        const PARTICLE_COUNT = 100;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function createParticles() {
+            particles = [];
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    r: Math.random() * 4 + 0.5,
+                    alpha: Math.random() * 0.6 + 0.2,
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4,
+                });
+            }
+        }
+        createParticles();
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(0, 212, 255, ${p.alpha})`;
+                ctx.fill();
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        animateParticles();
+
+        // =========================
+        // EFECTO HOVER EN BOTÓN
+        // =========================
+        const btnDescarga = document.querySelector('.btn-descarga');
+
+        btnDescarga.addEventListener('mouseenter', function () {
+            this.style.letterSpacing = '2px';
+        });
+
+        btnDescarga.addEventListener('mouseleave', function () {
+            this.style.letterSpacing = '1px';
+        });
+    </script>
+</body>
+
+</html>

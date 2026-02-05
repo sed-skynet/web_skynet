@@ -7,7 +7,6 @@
         <span class="u-badge">
             <?= esc_html(get_post_meta(get_the_ID(), '_categoria', true)) ?>
         </span>
-
         <h1><?php the_title(); ?></h1>
 
         <?php if (has_post_thumbnail()): ?>
@@ -40,16 +39,16 @@
                             echo '<p>' . wp_kses_post($block['content']) . '</p>';
                             echo '</section>';
                             break;
-
+                        case 'image':
+                            echo '<figure class="news-figure">';
+                            echo '<img src="' . esc_url($block['content']) . '" alt="">';
+                            echo '</figure>';
+                            break;
                     }
                 }
             }
             ?>
         </article>
-
-        <a href="<?= esc_url(get_post_type_archive_link('noticia')) ?>" class="news-back">
-            ← Volver a noticias
-        </a>
 
     </div>
     <style>
@@ -71,11 +70,10 @@
         /* ===========================
    CONTEXTO GENERAL
 =========================== */
-
         body {
-            background: radial-gradient(circle at top left,
-                    #0a2e4e 0%,
-                    #0f3556 45%,
+            background: radial-gradient(circle at top,
+                    #0f3556 0%,
+                    #0b243a 45%,
                     #061a2b 100%);
             color: var(--text-main);
         }
@@ -182,7 +180,7 @@
             width: 100%;
             height: auto;
             border-radius: 24px;
-            margin: 40px auto 60px;
+            margin: 40px auto 110px;
             border: 1px solid var(--glass-border);
             box-shadow: 0 12px 40px rgba(0, 0, 0, .35);
         }
@@ -298,22 +296,88 @@
         /* ===========================
    HERO GRID SINGLE NOTICIA
 =========================== */
+        html,
+        body {
+
+            background: linear-gradient(180deg,
+                    #0f3556 0%,
+                    #0b243a 50%,
+                    #061a2b 100%) !important;
+        }
 
         .news-single .container {
-            background: linear-gradient(135deg,
-                    rgba(18, 107, 151, 0.35),
-                    rgba(10, 46, 78, 0.25));
             display: grid;
+            background: transparent !important;
             grid-template-columns: 1.1fr 0.9fr;
             grid-template-areas:
                 "badge content"
                 "title content"
-                "image content"
-                "back content";
+                "image content";
             column-gap: 40px;
             align-items: start;
-            margin-top: -170px;
+            margin-top: -210px;
         }
+
+        .news-back-top {
+            grid-column: 2;
+            justify-self: start;
+            margin-bottom: 12px;
+            padding: 0;
+            background: none;
+            border: none;
+            color: rgba(224, 242, 255, 0.75);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .news-single-content {
+            margin-top: 16px !important;
+        }
+
+        .news-back-top::before {
+            content: "←";
+            opacity: 0.7;
+        }
+
+        .news-back-top:hover {
+            color: #ffffff;
+        }
+
+        .u-badge {
+            margin-bottom: 6px;
+        }
+
+        .news-back-top {
+            grid-area: back;
+            margin: 0 0 18px;
+            padding: 0;
+            background: none;
+            border: none;
+            color: rgba(224, 242, 255, 0.75);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            width: fit-content;
+        }
+
+        .news-back-top::before {
+            content: "←";
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        .news-back-top:hover {
+            color: #ffffff;
+        }
+
+
 
         /* Asignación de áreas */
         .u-badge {
@@ -327,11 +391,12 @@
         .news-single-img {
             grid-area: image;
             margin-top: 24px;
+            z-index: 2;
         }
 
         .news-single-content {
             grid-area: content;
-            margin-top: 30px !important;
+            margin-top: 64px !important;
             /* 👈 AQUÍ BAJA */
         }
 
@@ -348,8 +413,6 @@
 
         .news-single-content {
             position: sticky;
-            top: 200px;
-            /* antes 140px */
         }
 
         /* ===========================
@@ -451,7 +514,7 @@
             height: 100%;
             z-index: 0;
             pointer-events: none;
-            opacity: 0.35;
+            opacity: 0.65;
             /* 👈 controla intensidad */
         }
 
@@ -461,6 +524,106 @@
             z-index: 2;
         }
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const canvas = document.getElementById("news-particles");
+            if (!canvas) return;
+
+            const ctx = canvas.getContext("2d");
+            let w, h, dpr;
+            let particles = [];
+
+            const COUNT = 120;          // 🔥 más densidad
+            const LINK_DIST = 160;      // 🔥 líneas más largas
+
+            function resize() {
+                dpr = window.devicePixelRatio || 1;
+                w = window.innerWidth;
+                h = window.innerHeight;
+                canvas.width = w * dpr;
+                canvas.height = h * dpr;
+                canvas.style.width = w + "px";
+                canvas.style.height = h + "px";
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            }
+
+            class Particle {
+                constructor() {
+                    this.reset();
+                }
+
+                reset() {
+                    this.x = Math.random() * w;
+                    this.y = Math.random() * h;
+                    this.r = Math.random() * 2.4 + 1.2; // 🔥 MÁS GRANDES
+                    this.vx = (Math.random() - 0.5) * 0.45;
+                    this.vy = (Math.random() - 0.5) * 0.45;
+                    this.alpha = Math.random() * 0.5 + 0.4; // 🔥 MÁS OPACAS
+                }
+
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    if (this.x < -50 || this.x > w + 50 || this.y < -50 || this.y > h + 50) {
+                        this.reset();
+                    }
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(160, 220, 255, ${this.alpha})`;
+                    ctx.shadowColor = "rgba(80,200,255,0.6)";
+                    ctx.shadowBlur = 8;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+            }
+
+            function init() {
+                particles = [];
+                for (let i = 0; i < COUNT; i++) {
+                    particles.push(new Particle());
+                }
+            }
+
+            function drawLines() {
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < LINK_DIST) {
+                            ctx.strokeStyle = `rgba(90,190,255, ${0.15 * (1 - dist / LINK_DIST)})`;
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, w, h);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                drawLines();
+                requestAnimationFrame(animate);
+            }
+
+            resize();
+            init();
+            animate();
+            window.addEventListener("resize", resize);
+        });
+    </script>
+
+
 </main>
 
 <?php get_footer(); ?>

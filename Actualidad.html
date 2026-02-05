@@ -125,28 +125,67 @@
         }
 
         /* Colores de categorías */
-        .category-badge.technology {
+        .category-badge.actualidad,
+        .u-badge[data-cat="Actualidad"] {
             background: rgba(59, 130, 246, .15);
             color: #60a5fa;
             border: 1px solid rgba(59, 130, 246, .3);
         }
 
-        .category-badge.sports {
+        .category-badge.casos-exito,
+        .u-badge[data-cat="Casos de Éxito"] {
             background: rgba(34, 197, 94, .15);
             color: #4ade80;
             border: 1px solid rgba(34, 197, 94, .3);
         }
 
-        .category-badge.politics {
+        .category-badge.medios,
+        .u-badge[data-cat="Medios de comunicación"] {
+            background: rgba(168, 85, 247, .15);
+            color: #c084fc;
+            border: 1px solid rgba(168, 85, 247, .3);
+        }
+
+        .category-badge.rgpd,
+        .u-badge[data-cat="RGPD"] {
             background: rgba(239, 68, 68, .15);
             color: #f87171;
             border: 1px solid rgba(239, 68, 68, .3);
         }
 
-        .category-badge.science {
-            background: rgba(168, 85, 247, .15);
-            color: #c084fc;
-            border: 1px solid rgba(168, 85, 247, .3);
+        .category-badge.rsc,
+        .u-badge[data-cat="RSC"] {
+            background: rgba(20, 184, 166, .15);
+            color: #2dd4bf;
+            border: 1px solid rgba(20, 184, 166, .3);
+        }
+
+        .category-badge.seguridad,
+        .u-badge[data-cat="Seguridad Informática"] {
+            background: rgba(249, 115, 22, .15);
+            color: #fb923c;
+            border: 1px solid rgba(249, 115, 22, .3);
+        }
+
+        .category-badge.servicios,
+        .u-badge[data-cat="Servicios"] {
+            background: rgba(99, 102, 241, .15);
+            color: #818cf8;
+            border: 1px solid rgba(99, 102, 241, .3);
+        }
+
+        .category-badge.servicios-web,
+        .u-badge[data-cat="Servicios Web"] {
+            background: rgba(236, 72, 153, .15);
+            color: #f472b6;
+            border: 1px solid rgba(236, 72, 153, .3);
+        }
+
+        .category-badge.soluciones-it,
+        .u-badge[data-cat="Soluciones IT"] {
+            background: rgba(234, 179, 8, .15);
+            color: #facc15;
+            border: 1px solid rgba(234, 179, 8, .3);
         }
 
         .news-title {
@@ -236,24 +275,49 @@
         }
 
         .category-tabs {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(5, auto);
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             margin-bottom: 48px;
-            flex-wrap: wrap;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 24px;
             animation: fadeInUp 0.8s ease-out 0.2s both;
         }
 
+        @media (max-width: 1100px) {
+            .category-tabs {
+                grid-template-columns: repeat(4, auto);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .category-tabs {
+                grid-template-columns: repeat(3, auto);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .category-tabs {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+        }
+
         .tab {
-            padding: 12px 24px;
-            border-radius: 12px;
-            font-size: 15px;
+            padding: 12px 22px;
+            border-radius: 11px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
             border: 1px solid rgba(255, 255, 255, 0.15);
             background: rgba(255, 255, 255, 0.08);
             color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            white-space: nowrap;
         }
 
         .tab:hover {
@@ -267,12 +331,6 @@
             color: #fff;
             border-color: transparent;
             box-shadow: 0 4px 16px rgba(43, 144, 227, 0.4);
-        }
-
-        .tab.for-you {
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-            color: #fff;
-            border-color: transparent;
         }
 
         @keyframes fadeInDown {
@@ -430,12 +488,16 @@
         </div>
 
         <div class="category-tabs">
-            <div class="tab">Todo</div>
-            <div class="tab for-you active">✨ Para Ti</div>
-            <div class="tab">Tecnología</div>
-            <div class="tab">Deportes</div>
-            <div class="tab">Política</div>
-            <div class="tab">Ciencia</div>
+            <div class="tab active">Todo</div>
+            <div class="tab">Actualidad</div>
+            <div class="tab">Casos de Éxito</div>
+            <div class="tab">Medios de comunicación</div>
+            <div class="tab">RGPD</div>
+            <div class="tab">RSC</div>
+            <div class="tab">Seguridad Informática</div>
+            <div class="tab">Servicios</div>
+            <div class="tab">Servicios Web</div>
+            <div class="tab">Soluciones IT</div>
         </div>
 
         <div class="container">
@@ -443,6 +505,47 @@
                 [actualidad_noticias]
             </div>
         </div>
+<script>
+    function normalizeCategory(str) {
+    return str
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/\s+/g, '-')
+        .trim();
+}
+
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const tabs = document.querySelectorAll('.tab');
+    const cards = document.querySelectorAll('.news-ultra-card');
+
+    if (!tabs.length || !cards.length) return;
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+
+            const selected = normalizeCategory(tab.textContent);
+
+            cards.forEach(card => {
+                const cardCat = normalizeCategory(
+                    card.dataset.category || ''
+                );
+
+                if (selected === 'todo' || selected === cardCat) {
+                    card.style.display = '';
+                    card.style.animation = 'fadeInUp .4s ease both';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+
+});
+</script>
 
         <script>
             const canvas = document.getElementById('tech-bg');
