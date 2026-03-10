@@ -1,0 +1,371 @@
+<!-- ====== TARJETAS GLASS + LOTTIE CENTRAL ====== -->
+<section id="pilares-glass" class="zona-nosotros" aria-label="Cómo trabajamos">
+    <style>
+        #pilares-glass {
+            --cian: #00cfff;
+            --cian-2: #00f2ff;
+            --txt: #eaf6ff;
+            --txt-soft: #cdefff;
+            --glass-bg: rgba(255, 255, 255, .04);
+            --glass-shadow: 0 0 10px rgba(0, 255, 255, .08);
+            padding: 4vh 5vw 6vh;
+            font-family: 'Segoe UI', sans-serif;
+            color: var(--txt);
+            position: relative;
+            z-index: 2;
+            overflow-x: hidden;
+        }
+
+        #pilares-glass h2 {
+            color: var(--cian) !important;
+            font-weight: 800;
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            margin: 0 0 .5rem;
+            text-align: center;
+        }
+
+        #pilares-glass p.desc {
+            font-size: 1.05rem;
+            color: var(--txt-soft);
+            opacity: .9;
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 2.2rem;
+        }
+
+        #pilares-glass .estructura-arco {
+            display: grid;
+            grid-template-columns: [l] 1fr [v1] 1.4fr [v2] 1fr [r];
+            align-items: center;
+            gap: 2rem 2rem;
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        #pilares-glass .fila-1 {
+            grid-column: l / v1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        #pilares-glass .columna {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        #pilares-glass .card-anim {
+            background: var(--glass-bg);
+            border-radius: 16px;
+            padding: .9rem 1rem .9rem 1.15rem;
+            box-shadow: var(--glass-shadow);
+            width: min(280px, 100%);
+            max-width: 100%;
+            min-height: 100px;
+            position: relative;
+            backdrop-filter: saturate(115%) blur(0px);
+            will-change: transform, box-shadow, filter;
+            transition: transform .35s ease, box-shadow .35s ease, filter .35s ease;
+        }
+
+        #pilares-glass .card-anim h3 {
+            font-size: 1.2rem;
+            white-space: normal !important;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+        }
+
+        #pilares-glass .card-anim p {
+            font-size: 1rem;
+            color: var(--txt-soft);
+            line-height: 1.4;
+            margin-top: 1.2rem;
+        }
+
+        #pilares-glass .card-anim:hover {
+            transform: translateY(-8px) scale(1.015);
+            box-shadow: 0 14px 30px rgba(0, 255, 255, .18), 0 2px 8px rgba(0, 0, 0, .25);
+            filter: drop-shadow(0 6px 14px rgba(0, 255, 255, .12));
+        }
+
+        /* Animación entrada + flotación */
+        @keyframes fadeInUpOnce {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floatLoop {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-10px);
+            }
+        }
+
+        #pilares-glass .card-anim {
+            animation: fadeInUpOnce .45s ease both, floatLoop 6s ease-in-out .45s infinite alternate;
+        }
+
+        #pilares-glass .columna .card-anim:nth-child(2) {
+            animation-duration: .45s, 7s;
+            animation-delay: 0s, .45s;
+        }
+
+        #pilares-glass .columna .card-anim:nth-child(3) {
+            animation-duration: .45s, 5.5s;
+            animation-delay: 0s, .45s;
+        }
+
+        /* ===== LOTTIE CENTRAL — MÁS GRANDE ===== */
+        #pilares-glass .icono-central {
+            grid-column: v1 / v2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-self: center;
+        }
+
+        #pilares-glass .icono-central lottie-player {
+            width: clamp(260px, 28vw, 380px);
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Columna derecha */
+        #pilares-glass .fila-2 {
+            grid-column: v2 / r;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        /* Alineación izquierda para ambas columnas */
+        #pilares-glass .fila-1 .card-anim h3,
+        #pilares-glass .fila-1 .card-anim p,
+        #pilares-glass .fila-2 .card-anim h3,
+        #pilares-glass .fila-2 .card-anim p {
+            text-align: left !important;
+        }
+
+        /* CTA */
+        #pilares-glass .boton-cta {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        #pilares-glass .boton-cta a {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--cian-2), var(--cian));
+            color: #0a0f2c;
+            padding: 14px 32px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            text-decoration: none;
+            transition: transform .3s, box-shadow .3s;
+        }
+
+        #pilares-glass .boton-cta a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 255, 255, .2);
+        }
+
+        /* ===== TABLET ===== */
+        @media (min-width:641px) and (max-width:1030px) {
+            #pilares-glass .estructura-arco {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
+                max-width: 860px;
+                margin: 0 auto;
+                align-items: stretch;
+            }
+
+            /* quitar comportamiento de columnas originales */
+            #pilares-glass .fila-1,
+            #pilares-glass .fila-2 {
+                grid-column: auto;
+                display: contents;
+            }
+
+            /* lottie arriba centrado ocupando las 2 columnas */
+            #pilares-glass .icono-central {
+                grid-column: 1 / -1;
+                order: -1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: .5rem;
+            }
+
+            #pilares-glass .icono-central lottie-player {
+                width: 320px;
+                max-width: 100%;
+                height: auto;
+            }
+
+            /* cards limpias, sin cortes */
+            #pilares-glass .card-anim {
+                width: 100%;
+                max-width: none;
+                min-height: 190px;
+                padding: 1.1rem 1.1rem 1.15rem;
+                text-align: left;
+                animation: none !important;
+                transform: none !important;
+            }
+
+            #pilares-glass .card-anim:hover {
+                transform: none;
+                filter: none;
+                box-shadow: var(--glass-shadow);
+            }
+
+            #pilares-glass .card-anim h3 {
+                justify-content: flex-start;
+                font-size: 1.1rem;
+            }
+
+            #pilares-glass .card-anim p {
+                font-size: .98rem;
+                margin-top: .9rem;
+            }
+        }
+
+        /* ===== MÓVIL ===== */
+        @media (max-width:640px) {
+            #pilares-glass .estructura-arco {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+                width: 100%;
+            }
+
+            #pilares-glass .columna {
+                align-items: center;
+                gap: 1rem;
+                width: 100%;
+                text-align: center;
+            }
+
+            #pilares-glass .card-anim {
+                width: 90%;
+                max-width: 320px;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            #pilares-glass .icono-central {
+                order: 0;
+                width: 100%;
+                justify-content: center;
+            }
+
+            #pilares-glass .icono-central lottie-player {
+                width: 300px;
+            }
+
+            /* ← antes 240px */
+        }
+
+        /* Accesibilidad */
+        @media (prefers-reduced-motion: reduce) {
+            #pilares-glass .card-anim {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
+        #pilares-glass .estructura-arco-wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        #pilares-glass h2 {
+            margin-bottom: .7rem;
+            letter-spacing: .3px;
+        }
+
+        .zona-nosotros::after,
+        .zona-nosotros::before {
+            display: none !important;
+        }
+
+        .zona-nosotros+*::before {
+            display: none !important;
+        }
+    </style>
+
+    <div class="estructura-arco-wrapper">
+
+        <h2>Nuestra forma de trabajar</h2>
+        <p class="desc">En Skynet Systems te acompañamos con un enfoque 360º: diagnóstico, ejecución y soporte continuo.
+        </p>
+
+
+        <div class="estructura-arco" role="list" aria-label="Pilares de servicio">
+            <div class="columna fila-1">
+                <article class="card-anim" role="listitem">
+                    <h3>🔍 Diagnóstico inteligente</h3>
+                    <p>Identificamos oportunidades tecnológicas reales en tu empresa.</p>
+                </article>
+                <article class="card-anim" role="listitem">
+                    <h3>💡 Implementación ágil</h3>
+                    <p>Creamos e iteramos soluciones contigo desde el día uno.</p>
+                </article>
+                <article class="card-anim" role="listitem">
+                    <h3>🤝 Soporte cercano</h3>
+                    <p>Acompañamos tu crecimiento con asesoría constante y humana.</p>
+                </article>
+            </div>
+
+            <!-- LOTTIE CENTRADO -->
+            <div class="icono-central" aria-hidden="true">
+                <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_k86wxpgr.json"
+                    background="transparent" speed="1" loop autoplay>
+                </lottie-player>
+            </div>
+
+            <div class="columna fila-2">
+                <article class="card-anim" role="listitem">
+                    <h3>🚀 Escalabilidad</h3>
+                    <p>Diseño preparado para acompañar tu crecimiento.</p>
+                </article>
+                <article class="card-anim" role="listitem">
+                    <h3>🔐 Seguridad</h3>
+                    <p>Protegemos tus activos con medidas robustas.</p>
+                </article>
+                <article class="card-anim" role="listitem">
+                    <h3>📊 Inteligencia de datos</h3>
+                    <p>Convertimos información en decisiones estratégicas.</p>
+                </article>
+            </div>
+        </div>
+        <div class="boton-cta">
+            <a href="/contacto">Agenda una llamada</a>
+        </div>
+    </div>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" defer></script>
+</section>

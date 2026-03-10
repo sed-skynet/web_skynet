@@ -271,14 +271,92 @@
         }
 
         /* Responsive */
-        @media (max-width: 980px) {
+        @media (max-width: 1024px) {
+
             .fc-inner {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px 30px;
+                text-align: left;
             }
 
             .fc-brand {
                 grid-column: span 2;
-                margin-bottom: 20px;
+                text-align: center;
+                max-width: 520px;
+                margin: 0 auto;
+            }
+
+            .fc-logo {
+                margin-inline: auto;
+            }
+
+            .fc-desc {
+                margin-inline: auto;
+                text-align: center;
+            }
+
+            .fc-inner>.fc-col:nth-child(2),
+            .fc-inner>.fc-col:nth-child(3),
+            .fc-inner>.fc-col:nth-child(4) {
+                grid-column: span 1;
+            }
+
+            .fc-social {
+                justify-content: flex-start;
+            }
+
+            .badge-ens {
+                height: 70px;
+            }
+
+            .badge-iso {
+                height: 110px;
+            }
+        }
+
+        @media (max-width: 640px) {
+
+            .fc-inner {
+                display: flex;
+                flex-direction: column;
+                gap: 35px;
+                text-align: center;
+            }
+
+            .fc-brand {
+                min-width: auto;
+                max-width: 360px;
+                margin: 0 auto;
+            }
+
+            .fc-logo {
+                max-width: 220px;
+                margin: 0 auto 12px auto;
+            }
+
+            .fc-desc {
+                max-width: 100%;
+                font-size: .9rem;
+            }
+
+            .fc-col h4 {
+                margin-bottom: 10px;
+            }
+
+            .fc-col h4::after {
+                margin: 6px auto 0 auto;
+            }
+
+            .fc-social {
+                justify-content: center;
+            }
+
+            .fc-certifications {
+                padding: 20px 10px;
+            }
+
+            .fc-badges-container {
+                gap: 20px;
             }
 
             .badge-ens {
@@ -286,24 +364,15 @@
             }
 
             .badge-iso {
-                height: 105px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .fc-inner {
-                display: flex;
-                flex-direction: column;
-                gap: 30px;
+                height: 90px;
             }
 
-            .badge-ens {
-                height: 50px;
+            .fc-bottom {
+                font-size: .75rem;
+                line-height: 1.5;
+                padding: 18px 12px;
             }
 
-               .badge-iso {
-        height: 95px;
-    }
         }
 
         [data-footer*="type-1"] .ct-footer {

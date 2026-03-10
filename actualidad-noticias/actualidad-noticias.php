@@ -23,7 +23,23 @@ class Actualidad_Noticias_Ultra
         add_action('wp_head', [$this, 'inject_frontend_styles']);
         add_action('admin_enqueue_scripts', [$this, 'admin_assets']);
         add_action('admin_head', [$this, 'inject_admin_block_styles']);
+        add_action('init', [$this, 'register_taxonomy']);
 
+    }
+    public function register_taxonomy()
+    {
+        register_taxonomy('categoria_noticia', 'noticia', [
+            'labels' => [
+                'name' => 'Categorías',
+                'singular_name' => 'Categoría',
+            ],
+            'public' => true,
+            'hierarchical' => true, // como categorías normales
+            'show_ui' => true,
+            'show_admin_column' => true,
+            'show_in_rest' => true,
+            'rewrite' => ['slug' => 'categoria-noticia'],
+        ]);
     }
 
     public function enable_thumbnails()
@@ -138,13 +154,20 @@ class Actualidad_Noticias_Ultra
         $post = $is_edit ? get_post($post_id) : null;
 
         $titulo = $is_edit ? $post->post_title : '';
-        $categoria = $is_edit ? get_post_meta($post_id, '_categoria', true) : 'Actualidad';
+        $terms = $is_edit ? get_the_terms($post_id, 'categoria_noticia') : [];
+        $categoria = ($terms && !is_wp_error($terms))
+            ? implode(', ', wp_list_pluck($terms, 'name'))
+            : 'Actualidad';
         $blocks = $is_edit ? get_post_meta($post_id, '_news_blocks', true) : [];
         $existing_pdf_id = $is_edit ? get_post_meta($post_id, '_pdf_doc', true) : null;
         $existing_pdf_url = $existing_pdf_id ? wp_get_attachment_url($existing_pdf_id) : null;
 
         $existing_thumb_id = $is_edit ? get_post_thumbnail_id($post_id) : null;
         $existing_thumb_url = $existing_thumb_id ? wp_get_attachment_url($existing_thumb_id) : null;
+        $categorias = get_terms([
+            'taxonomy' => 'categoria_noticia',
+            'hide_empty' => false,
+        ]);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST['post_id']) && intval($_POST['post_id']) > 0) {
@@ -480,8 +503,8 @@ class Actualidad_Noticias_Ultra
             }
 
             /* =========================
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       FILE INPUT CYBER
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ========================= */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               FILE INPUT CYBER
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ========================= */
             .file-ultra input[type="file"] {
                 display: none;
             }
@@ -825,89 +848,53 @@ class Actualidad_Noticias_Ultra
 
         <script>
             document.addEventListener('DOMContentLoaded', () => {
-                // CYBER SELECT CUSTOM
                 const cyberSelect = document.getElementById('cyber-select');
-                const hiddenInput = document.getElementById('segmento-value');
-                if (cyberSelect && hiddenInput) {
-                    const btn = cyberSelect.querySelector('.cyber-select-btn');
-                    const textEl = cyberSelect.querySelector('.cyber-select-text');
-                    const options = cyberSelect.querySelectorAll('.cyber-select-option');
+                const hiddenInput = document.getElementById('categorias-value');
+                if (!cyberSelect || !hiddenInput) return;
 
-                    // Marcar opción inicial como seleccionada
-                    options.forEach(opt => {
-                        if (opt.dataset.value === hiddenInput.value) {
-                            opt.classList.add('selected');
-                        }
-                    });
+                const btn = cyberSelect.querySelector('.cyber-select-btn');
+                const textEl = cyberSelect.querySelector('.cyber-select-text');
+                const options = cyberSelect.querySelectorAll('.cyber-select-option');
 
-                    // Toggle dropdown
-                    btn.addEventListener('click', (e) => {
+                let selected = [];
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    cyberSelect.classList.toggle('open');
+                });
+
+                options.forEach(opt => {
+                    opt.addEventListener('click', (e) => {
                         e.stopPropagation();
-                        cyberSelect.classList.toggle('open');
-                    });
+                        const value = opt.dataset.value;
 
-                    // Seleccionar opción
-                    options.forEach(opt => {
-                        opt.addEventListener('click', () => {
-                            const value = opt.dataset.value;
-                            hiddenInput.value = value;
-                            textEl.textContent = value;
-                            options.forEach(o => o.classList.remove('selected'));
-                            opt.classList.add('selected');
-                            cyberSelect.classList.remove('open');
-                        });
-                    });
-
-                    // Cerrar al hacer click fuera
-                    document.addEventListener('click', (e) => {
-                        if (!cyberSelect.contains(e.target)) {
-                            cyberSelect.classList.remove('open');
-                        }
-                    });
-                }
-
-                // 2. Función Maestra de Previsualización
-                const setupPreview = (inputId, containerId, isImage) => {
-                    const input = document.getElementById(inputId);
-                    const container = document.getElementById(containerId);
-                    if (!input || !container) return;
-
-                    input.addEventListener('change', function () {
-                        container.innerHTML = ''; // Limpiar
-                        const smallTxt = this.nextElementSibling.querySelector('small');
-
-                        if (this.files && this.files.length > 0) {
-                            container.classList.add('preview-active');
-                            if (smallTxt) smallTxt.textContent = this.files.length > 1 ? `${this.files.length} archivos` : this.files[0].name;
-
-                            Array.from(this.files).forEach(file => {
-                                if (isImage && file.type.startsWith('image/')) {
-                                    const reader = new FileReader();
-                                    reader.onload = e => {
-                                        const img = document.createElement('img');
-                                        img.src = e.target.result;
-                                        container.appendChild(img);
-                                    };
-                                    reader.readAsDataURL(file);
-                                } else {
-                                    const info = document.createElement('div');
-                                    info.className = 'pdf-item-preview';
-                                    info.innerHTML = `📎 ${file.name}`;
-                                    container.appendChild(info);
-                                }
-                            });
+                        if (selected.includes(value)) {
+                            selected = selected.filter(v => v !== value);
+                            opt.classList.remove('selected');
                         } else {
-                            container.classList.remove('preview-active');
-                            if (smallTxt) smallTxt.textContent = 'No se ha seleccionado ningún archivo';
+                            selected.push(value);
+                            opt.classList.add('selected');
                         }
-                    });
-                };
 
-                // Ejecutar para los 3 campos
-                setupPreview('media_pdf', 'preview_pdf_container', false);
-                setupPreview('media_pdfs_extra', 'preview_extra_container', false);
+                        hiddenInput.innerHTML = '';
+                        selected.forEach(cat => {
+                            const input = document.createElement('input');
+                            input.type = 'hidden';
+                            input.name = 'categorias[]';
+                            input.value = cat;
+                            hiddenInput.appendChild(input);
+                        });
+                        textEl.textContent = selected.length
+                            ? selected.join(', ')
+                            : 'Selecciona categorías';
+                    });
+                });
+
+                document.addEventListener('click', () => {
+                    cyberSelect.classList.remove('open');
+                });
             });
         </script>
+
         <script>
             document.addEventListener('DOMContentLoaded', function () {
 
@@ -1034,8 +1021,8 @@ class Actualidad_Noticias_Ultra
             }
 
             /* ===============================
-                                                                                                                                           SELECTOR DE NOTICIAS (CYBER)
-                                                                                                                                        =============================== */
+                                                                                                                                                                                                                                                                                                                                                                   SELECTOR DE NOTICIAS (CYBER)
+                                                                                                                                                                                                                                                                                                                                                                =============================== */
 
             .ultra-selector {
                 max-width: 1200px;
@@ -1218,6 +1205,21 @@ class Actualidad_Noticias_Ultra
 
             animateParticles();
 
+            const form = document.querySelector('.glass-form');
+
+            if (form) {
+                form.addEventListener('submit', function (e) {
+
+                    const cats = document.querySelectorAll('#categorias-value input[name="categorias[]"]');
+
+                    if (!cats.length) {
+                        e.preventDefault();
+                        alert("Debes seleccionar al menos una categoría.");
+                    }
+
+                });
+            }
+
         </script>
         <canvas id="cyber-particles"></canvas>
         <div class="ultra-wrap <?= $is_edit ? 'ultra-edit-mode' : 'ultra-create-mode' ?>">
@@ -1251,25 +1253,27 @@ class Actualidad_Noticias_Ultra
                 <div class="sidebar-editor">
                     <div class="input-group select-ultra">
                         <label>CATEGORÍA</label>
-                        <input type="hidden" name="categoria" id="segmento-value"
-                            value="<?= esc_attr($categoria ?: 'Actualidad') ?>">
+                        <div id="categorias-value"></div>
                         <div class="cyber-select" id="cyber-select">
                             <div class="cyber-select-btn">
-                                <span class="cyber-select-text"><?= esc_html($categoria ?: 'Actualidad') ?></span>
+                                <span class="cyber-select-text">Selecciona categorías</span>
                                 <span class="cyber-select-arrow">▾</span>
                             </div>
+
                             <div class="cyber-select-dropdown">
-                                <div class="cyber-select-option" data-value="Actualidad">Actualidad</div>
-                                <div class="cyber-select-option" data-value="Casos de Éxito">Casos de Éxito</div>
-                                <div class="cyber-select-option" data-value="Medios de comunicación">Medios de comunicación
-                                </div>
-                                <div class="cyber-select-option" data-value="RGPD">RGPD</div>
-                                <div class="cyber-select-option" data-value="RSC">RSC</div>
-                                <div class="cyber-select-option" data-value="Seguridad Informática">Seguridad Informática</div>
-                                <div class="cyber-select-option" data-value="Servicios">Servicios</div>
-                                <div class="cyber-select-option" data-value="Servicios Web">Servicios Web</div>
-                                <div class="cyber-select-option" data-value="Soluciones IT">Soluciones IT</div>
+                                <?php if (!empty($categorias) && !is_wp_error($categorias)): ?>
+                                    <?php foreach ($categorias as $cat): ?>
+                                        <div class="cyber-select-option" data-value="<?= esc_attr($cat->name) ?>">
+                                            <?= esc_html($cat->name) ?>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <div class="cyber-select-option disabled">
+                                        No hay categorías creadas
+                                    </div>
+                                <?php endif; ?>
                             </div>
+
                         </div>
                     </div>
 
@@ -1519,16 +1523,25 @@ class Actualidad_Noticias_Ultra
                     preview.innerHTML = '';
 
                     // CATEGORÍA (Badge)
-                    const catInput = document.getElementById('segmento-value');
-                    const cat = catInput ? catInput.value : '';
+                    const catWrapper = document.getElementById('categorias-value');
+                    let cat = 'Actualidad';
+
+                    if (catWrapper) {
+                        const inputs = catWrapper.querySelectorAll('input[name="categorias[]"]');
+                        if (inputs.length) {
+                            cat = [...inputs].map(i => i.value).join(', ');
+                        }
+                    }
+
                     preview.innerHTML += `<span class="preview-badge">${cat}</span>`;
+
 
                     // TÍTULO
                     const title = document.querySelector('input[name="titulo"]').value || 'Sin título';
                     preview.innerHTML += `<h1 class="preview-title">${title}</h1>`;
 
                     // IMAGEN DESTACADA (si existe)
-                    const cover = document.querySelector('#preview_cover_container img');
+                    const cover = document.querySelector('#cover-preview img');
                     if (cover) {
                         preview.innerHTML += `<img src="${cover.src}" class="preview-featured-img">`;
                     }
@@ -1614,6 +1627,25 @@ class Actualidad_Noticias_Ultra
         $post_id = intval($_POST['post_id']);
         if (!$post_id)
             return;
+        if (!empty($_POST['categorias']) && is_array($_POST['categorias'])) {
+
+            $cats = array_map('sanitize_text_field', $_POST['categorias']);
+
+            foreach ($cats as $cat_name) {
+                if (!term_exists($cat_name, 'categoria_noticia')) {
+                    wp_insert_term($cat_name, 'categoria_noticia');
+                }
+            }
+
+            wp_set_object_terms(
+                $post_id,
+                $cats,
+                'categoria_noticia',
+                false
+            );
+        }
+
+
 
         wp_update_post([
             'ID' => $post_id,
@@ -1634,8 +1666,6 @@ class Actualidad_Noticias_Ultra
         }
         update_post_meta($post_id, '_news_blocks', $blocks);
 
-        // CATEGORÍA
-        update_post_meta($post_id, '_categoria', sanitize_text_field($_POST['categoria']));
 
         // ✅ IMAGEN DESTACADA DESDE WP MEDIA
         if (!empty($_POST['cover_image_id'])) {
@@ -2075,23 +2105,33 @@ class Actualidad_Noticias_Ultra
                 <div class="selector-grid">
                     <?php while ($q->have_posts()):
                         $q->the_post();
-                        $categoria = get_post_meta(get_the_ID(), '_categoria', true) ?: 'General';
+
+                        $terms = get_the_terms(get_the_ID(), 'categoria_noticia');
+                        $categoria = ($terms && !is_wp_error($terms))
+                            ? implode(', ', wp_list_pluck($terms, 'name'))
+                            : 'General';
                         ?>
                         <div class="selector-card">
                             <span class="card-category"><?= esc_html($categoria) ?></span>
                             <h3><?= esc_html(get_the_title()) ?></h3>
+
                             <div class="card-meta">
                                 <span>📅 <?= esc_html(get_the_date()) ?></span>
                                 <span>🕐 <?= esc_html(get_the_time()) ?></span>
                             </div>
+
                             <div class="card-actions">
                                 <a class="btn-edit"
                                     href="<?= admin_url('edit.php?post_type=noticia&page=editar-noticia-pro&post_id=' . get_the_ID()) ?>">
                                     ✏️ Editar Noticia
                                 </a>
-                                <a class="btn-delete" href="#"
-                                    onclick="openDeleteModal('<?= esc_attr(get_the_title()) ?>', '<?= wp_nonce_url(admin_url('edit.php?post_type=noticia&page=editar-noticia-pro&delete_id=' . get_the_ID()), 'delete_noticia_' . get_the_ID()) ?>'); return false;"
-                                    title="Eliminar">
+                                <a class="btn-delete" href="#" onclick="openDeleteModal(
+                         '<?= esc_attr(get_the_title()) ?>',
+                         '<?= wp_nonce_url(
+                             admin_url('edit.php?post_type=noticia&page=editar-noticia-pro&delete_id=' . get_the_ID()),
+                             'delete_noticia_' . get_the_ID()
+                         ) ?>'
+                       ); return false;">
                                     🗑️
                                 </a>
                             </div>
@@ -2201,8 +2241,8 @@ class Actualidad_Noticias_Ultra
             }
 
             /* ===========================
-                                                                                                                                               ESTILOS IDÉNTICOS A SINGLE-NOTICIA
-                                                                                                                                               =========================== */
+                                                                                                                                                                                                                                                                                                                                                                       ESTILOS IDÉNTICOS A SINGLE-NOTICIA
+                                                                                                                                                                                                                                                                                                                                                                       =========================== */
             #preview-content {
                 font-family: 'Inter', ui-sans-serif, system-ui;
                 max-width: 760px;
@@ -2651,58 +2691,51 @@ class Actualidad_Noticias_Ultra
 
     public function render_noticias()
     {
-        $q = new WP_Query(['post_type' => 'noticia', 'posts_per_page' => 6]);
+        $q = new WP_Query([
+            'post_type' => 'noticia',
+            'posts_per_page' => 6
+        ]);
+
         ob_start();
         echo '<div class="news-ultra-container">';
+
         while ($q->have_posts()):
             $q->the_post();
-            $cat = get_post_meta(get_the_ID(), '_categoria', true);
-            $img = get_the_post_thumbnail_url(get_the_ID(), 'full');
-            if (!$img)
-                $img = 'https://via.placeholder.com/800x600/0a2e4e/00d4ff?text=Noticia';
+
+            $terms = get_the_terms(get_the_ID(), 'categoria_noticia');
+            $cat = ($terms && !is_wp_error($terms))
+                ? implode(', ', wp_list_pluck($terms, 'name'))
+                : 'General';
+
+            $img = get_the_post_thumbnail_url(get_the_ID(), 'full')
+                ?: 'https://via.placeholder.com/800x600/0a2e4e/00d4ff?text=Noticia';
             ?>
-            <div class="news-ultra-card" data-category="<?= esc_attr($cat ?: 'General') ?>">
+            <div class="news-ultra-card" data-category="<?= esc_attr($cat) ?>">
                 <img src="<?= esc_url($img) ?>" class="news-ultra-img" alt="<?= esc_attr(get_the_title()) ?>">
+
                 <div class="news-ultra-overlay">
-                    <span class="u-badge"><?= esc_html($cat ?: 'General') ?></span>
-                    <h3><?= get_the_title() ?></h3>
-                    <p><?= wp_trim_words(get_the_content(), 18) ?></p>
+                    <span class="u-badge"><?= esc_html($cat) ?></span>
+                    <h3><?= esc_html(get_the_title()) ?></h3>
+                    <p><?= esc_html(wp_trim_words(get_the_content(), 18)) ?></p>
+
                     <a href="<?= esc_url(get_permalink()) ?>" class="news-read-more">
                         Leer noticia →
                     </a>
+
                     <?php
-                    // PDF principal
                     $pdf_id = get_post_meta(get_the_ID(), '_pdf_doc', true);
                     if ($pdf_id):
                         $pdf_url = wp_get_attachment_url($pdf_id);
                         ?>
                         <a href="<?= esc_url($pdf_url) ?>" target="_blank"
-                            style="margin-top:14px; display:block; color:#00d4ff; font-weight:700; text-decoration:none;">
+                            style="margin-top:14px; display:block; color:#00d4ff; font-weight:700;">
                             📄 Ver documento principal
                         </a>
                     <?php endif; ?>
-
-                    <?php
-                    // PDFs adicionales (_pdf_docs)
-                    $pdfs = get_post_meta(get_the_ID(), '_pdf_docs', true);
-                    if (!empty($pdfs) && is_array($pdfs)):
-                        foreach ($pdfs as $pdf_id_extra):
-                            $pdf_url_extra = wp_get_attachment_url($pdf_id_extra);
-                            if ($pdf_url_extra):
-                                ?>
-                                <a href="<?= esc_url($pdf_url_extra) ?>" target="_blank"
-                                    style="margin-top:6px; display:block; color:#00d4ff; font-weight:500; text-decoration:none;">
-                                    📄 Documento adicional
-                                </a>
-                                <?php
-                            endif;
-                        endforeach;
-                    endif;
-                    ?>
-
                 </div>
             </div>
         <?php endwhile;
+
         echo '</div>';
         wp_reset_postdata();
         return ob_get_clean();
@@ -2727,6 +2760,24 @@ class Actualidad_Noticias_Ultra
         }
 
         $blocks = [];
+        if (!empty($_POST['categorias']) && is_array($_POST['categorias'])) {
+
+            $cats = array_map('sanitize_text_field', $_POST['categorias']);
+
+            foreach ($cats as $cat_name) {
+                if (!term_exists($cat_name, 'categoria_noticia')) {
+                    wp_insert_term($cat_name, 'categoria_noticia');
+                }
+            }
+
+            wp_set_object_terms(
+                $post_id,
+                $cats,
+                'categoria_noticia',
+                false
+            );
+        }
+
 
         if (!empty($_POST['blocks'])) {
             foreach ($_POST['blocks'] as $type => $items) {
@@ -2740,9 +2791,6 @@ class Actualidad_Noticias_Ultra
         }
 
         update_post_meta($post_id, '_news_blocks', $blocks);
-
-        // 📌 Categoría
-        update_post_meta($post_id, '_categoria', sanitize_text_field($_POST['categoria']));
 
         // ✅ IMAGEN DESTACADA DESDE WP MEDIA
         if (!empty($_POST['cover_image_id'])) {
@@ -2848,24 +2896,10 @@ class Actualidad_Noticias_Ultra
         <?php
     }
 
-
-    public function meta_box_html($post)
-    {
-        $categoria = get_post_meta($post->ID, '_categoria', true);
-        ?>
-        <select name="categoria" style="width:100%; border-radius: 5px; padding: 8px;">
-            <?php foreach (['Tecnología', 'Deportes', 'Cripto', 'Ciencia'] as $cat): ?>
-                <option value="<?= $cat ?>" <?= selected($categoria, $cat) ?>><?= $cat ?></option>
-            <?php endforeach; ?>
-        </select>
-        <?php
-    }
-
     public function save_meta($post_id)
     {
 
         if (isset($_POST['categoria'])) {
-            update_post_meta($post_id, '_categoria', sanitize_text_field($_POST['categoria']));
         }
 
         if (isset($_POST['pdf_docs'])) {

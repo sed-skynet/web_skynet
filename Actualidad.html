@@ -474,6 +474,139 @@
             background: rgba(255, 255, 255, .15);
             border-color: rgba(255, 255, 255, .3);
         }
+
+        /* ===============================
+   CATEGORY FILTER SMART
+   =============================== */
+
+        .category-filter {
+            width: min(1200px, calc(100% - 48px));
+            margin: 0 auto 48px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .category-filter-toggle {
+            display: none;
+        }
+
+        .category-tabs {
+            display: grid;
+            grid-template-columns: repeat(5, auto);
+            justify-content: center;
+            gap: 10px;
+            padding: 0 24px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @media (max-width: 1100px) {
+            .category-tabs {
+                grid-template-columns: repeat(4, auto);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .category-tabs {
+                grid-template-columns: repeat(3, auto);
+            }
+        }
+
+        /* ===== MÓVIL: botón + desplegable ===== */
+        @media (max-width: 576px) {
+
+            .category-filter {
+                width: min(100%, calc(100% - 24px));
+                margin: 0 auto 24px;
+            }
+
+            .category-filter-toggle {
+                width: 75%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+                padding: 12px 16px;
+                border-radius: 14px;
+                border: 1px solid rgba(255, 255, 255, .15);
+                background: rgba(255, 255, 255, .08);
+                color: #fff;
+                font-size: 14px;
+                font-weight: 600;
+                cursor: pointer;
+                backdrop-filter: blur(14px);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, .18);
+                margin-left: 39px;
+            }
+
+            .filter-label {
+                color: rgba(255, 255, 255, .68);
+                font-weight: 500;
+            }
+
+            .filter-current {
+                flex: 1;
+                text-align: left;
+                color: #fff;
+                font-weight: 700;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .filter-arrow {
+                transition: transform .25s ease;
+            }
+
+            .category-filter.open .filter-arrow {
+                transform: rotate(180deg);
+            }
+
+            .category-tabs {
+                display: none;
+                margin-top: 10px;
+                padding: 10px;
+                grid-template-columns: 1fr;
+                gap: 8px;
+                background: rgba(10, 20, 40, .72);
+                border: 1px solid rgba(255, 255, 255, .12);
+                border-radius: 16px;
+                backdrop-filter: blur(18px);
+                box-shadow: 0 16px 40px rgba(0, 0, 0, .28);
+            }
+
+            .category-filter.open .category-tabs {
+                display: grid;
+            }
+
+            .tab {
+                width: 100%;
+                padding: 12px 14px;
+                font-size: 13px;
+                border-radius: 10px;
+                text-align: left;
+                white-space: normal;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 36px;
+                line-height: 1.08;
+                letter-spacing: -0.8px;
+                margin-bottom: 10px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+                line-height: 1.5;
+                padding: 0 12px;
+            }
+
+            .header-section {
+                margin-bottom: 32px;
+                padding-top: 38px;
+            }
+        }
     </style>
 </head>
 
@@ -487,17 +620,25 @@
             <p class="subtitle">Tu fuente diaria de noticias resumidas y contenido personalizado</p>
         </div>
 
-        <div class="category-tabs">
-            <div class="tab active">Todo</div>
-            <div class="tab">Actualidad</div>
-            <div class="tab">Casos de Éxito</div>
-            <div class="tab">Medios de comunicación</div>
-            <div class="tab">RGPD</div>
-            <div class="tab">RSC</div>
-            <div class="tab">Seguridad Informática</div>
-            <div class="tab">Servicios</div>
-            <div class="tab">Servicios Web</div>
-            <div class="tab">Soluciones IT</div>
+        <div class="category-filter">
+            <button class="category-filter-toggle" id="categoryFilterToggle" type="button" aria-expanded="false">
+                <span class="filter-label">Categoría:</span>
+                <span class="filter-current" id="filterCurrent">Todo</span>
+                <span class="filter-arrow">▾</span>
+            </button>
+
+            <div class="category-tabs" id="categoryTabs">
+                <div class="tab active">Todo</div>
+                <div class="tab">Actualidad</div>
+                <div class="tab">Casos de Éxito</div>
+                <div class="tab">Medios de comunicación</div>
+                <div class="tab">RGPD</div>
+                <div class="tab">RSC</div>
+                <div class="tab">Seguridad Informática</div>
+                <div class="tab">Servicios</div>
+                <div class="tab">Servicios Web</div>
+                <div class="tab">Soluciones IT</div>
+            </div>
         </div>
 
         <div class="container">
@@ -505,47 +646,81 @@
                 [actualidad_noticias]
             </div>
         </div>
-<script>
-    function normalizeCategory(str) {
-    return str
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/\s+/g, '-')
-        .trim();
-}
+        <script>
+            function normalizeCategory(str) {
+                return str
+                    .toLowerCase()
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "")
+                    .replace(/\s+/g, '-')
+                    .trim();
+            }
 
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
+        </script>
 
-    const tabs = document.querySelectorAll('.tab');
-    const cards = document.querySelectorAll('.news-ultra-card');
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
 
-    if (!tabs.length || !cards.length) return;
+                const tabs = document.querySelectorAll('.tab');
+                const cards = document.querySelectorAll('.news-ultra-card');
+                const filterWrap = document.querySelector('.category-filter');
+                const filterToggle = document.getElementById('categoryFilterToggle');
+                const filterCurrent = document.getElementById('filterCurrent');
 
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
+                if (!tabs.length || !cards.length) return;
 
-            const selected = normalizeCategory(tab.textContent);
+                if (filterToggle) {
+                    filterToggle.addEventListener('click', () => {
+                        filterWrap.classList.toggle('open');
+                        const expanded = filterWrap.classList.contains('open');
+                        filterToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+                    });
 
-            cards.forEach(card => {
-                const cardCat = normalizeCategory(
-                    card.dataset.category || ''
-                );
-
-                if (selected === 'todo' || selected === cardCat) {
-                    card.style.display = '';
-                    card.style.animation = 'fadeInUp .4s ease both';
-                } else {
-                    card.style.display = 'none';
+                    document.addEventListener('click', (e) => {
+                        if (!filterWrap.contains(e.target)) {
+                            filterWrap.classList.remove('open');
+                            filterToggle.setAttribute('aria-expanded', 'false');
+                        }
+                    });
                 }
-            });
-        });
-    });
 
-});
-</script>
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+
+                        tabs.forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
+
+                        const selectedText = tab.textContent.trim();
+                        const selected = normalizeCategory(selectedText);
+
+                        if (filterCurrent) {
+                            filterCurrent.textContent = selectedText;
+                        }
+
+                        cards.forEach(card => {
+                            const rawCats = card.dataset.category || '';
+                            const cardCats = rawCats
+                                .split(',')
+                                .map(c => normalizeCategory(c));
+
+                            if (selected === 'todo' || cardCats.includes(selected)) {
+                                card.style.display = '';
+                                card.style.animation = 'fadeInUp .4s ease both';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+
+                        if (window.innerWidth <= 576 && filterWrap) {
+                            filterWrap.classList.remove('open');
+                            filterToggle?.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                });
+
+            });
+        </script>
+
 
         <script>
             const canvas = document.getElementById('tech-bg');
@@ -560,17 +735,26 @@ document.addEventListener('DOMContentLoaded', () => {
             resize();
 
             const particles = [];
-            const particleCount = 80;
+
+            function isMobileView() {
+                return window.innerWidth < 600;
+            }
 
             function resetParticles() {
                 particles.length = 0;
+
+                const mobile = isMobileView();
+                const particleCount = mobile ? 40 : 80;
+
                 for (let i = 0; i < particleCount; i++) {
                     particles.push({
                         x: Math.random() * width,
                         y: Math.random() * height,
                         vx: (Math.random() - 0.5) * 0.6,
                         vy: (Math.random() - 0.5) * 0.6,
-                        size: Math.random() * 2.5 + 1.5
+                        size: mobile
+                            ? Math.random() * 1.2 + 0.6
+                            : Math.random() * 2.5 + 1.5
                     });
                 }
             }
@@ -603,7 +787,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         const dx = p.x - p2.x;
                         const dy = p.y - p2.y;
                         const dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < 150) {
+                        const mobile = isMobileView();
+
+                        if (dist < (mobile ? 90 : 150)) {
                             const opacity = (1 - dist / 150) * 0.3;
                             const gradient = ctx.createLinearGradient(p.x, p.y, p2.x, p2.y);
                             gradient.addColorStop(0, `rgba(144,224,239,${opacity})`);
@@ -633,13 +819,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 requestAnimationFrame(animate);
             }
             animate();
-
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.addEventListener('click', function () {
-                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            });
         </script>
     </div>
 </body>
