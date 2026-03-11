@@ -52,14 +52,10 @@
             }
         }
 
-
-
         #tech-bg {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
             z-index: 0;
             pointer-events: none;
         }
@@ -230,11 +226,8 @@
         textarea {
             width: 100%;
             padding: 20px 24px;
-            /* MÁS ALTURA */
             min-height: 56px;
-            /* Presencia clara */
             border-radius: 16px;
-            /* Más suave */
 
             background: #f9fbfd;
             color: #1f2937;
@@ -242,7 +235,6 @@
             border: 1.5px solid #e3eaf2;
 
             font-size: 12px;
-            /* Mejor legibilidad */
             font-family: inherit;
             font-weight: 500;
 
@@ -251,9 +243,6 @@
                 border-color 0.25s ease,
                 box-shadow 0.25s ease,
                 background 0.25s ease;
-
-
-
         }
 
         input::placeholder,
@@ -274,18 +263,14 @@
             min-height: 140px;
         }
 
-        /* === BOTÓN PREMIUM REDONDEADO === */
         form button {
             align-self: center;
             width: auto;
 
             padding: 24px 56px;
-            /* MÁS GRANDE */
             min-height: 64px;
-            /* Altura clara */
 
             border-radius: 9999px;
-            /* Capsule real */
 
             background: linear-gradient(135deg,
                     var(--accent-light) 0%,
@@ -316,8 +301,6 @@
             transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-
-        /* Efecto de destello (Glimmer) */
         button::before {
             content: '';
             position: absolute;
@@ -336,7 +319,6 @@
         button:hover {
             transform: translateY(-5px) scale(1.02);
             background-position: right center;
-            /* Mueve el degradado */
             box-shadow:
                 0 20px 35px rgba(43, 144, 227, 0.4),
                 0 12px 12px rgba(0, 0, 0, 0.1);
@@ -352,7 +334,6 @@
             box-shadow: 0 5px 15px rgba(43, 144, 227, 0.4);
         }
 
-        /* Opcional: Añadir un pequeño icono al botón en el HTML */
         button::after {
             content: '→';
             font-size: 20px;
@@ -514,18 +495,6 @@
             transform: translateY(-3px);
         }
 
-        .get-directions-btn {
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease;
-        }
-
-        .get-directions-btn {
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease;
-        }
-
         .get-directions-btn:active {
             transform: translateY(-1px);
         }
@@ -536,7 +505,6 @@
             fill: currentColor;
         }
 
-        /* === BLOQUEAR COLOR DEL BOTÓN "CÓMO LLEGAR" === */
         .get-directions-btn,
         .get-directions-btn:hover,
         .get-directions-btn:focus,
@@ -545,8 +513,6 @@
             color: #ffffff !important;
         }
 
-
-        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -563,7 +529,6 @@
             animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Media Queries */
         @media (max-width: 1024px) {
             .wrap {
                 margin: 40px 20px;
@@ -642,25 +607,18 @@
             button {
                 padding: 16px 24px;
                 font-size: 16px;
-            }
-
-            button {
                 border-radius: 2000px;
             }
-
 
             .info-card {
                 padding: 24px;
             }
         }
 
-        /* Enhanced particle styles */
         .particle {
             filter: blur(0.5px);
         }
 
-        /* === INPUT LIMPIO Y MODERNO (SOLO RECUADRO) === */
-        /* === INPUT PREMIUM CON PRESENCIA === */
         .form-field input,
         .form-field textarea {
             background: linear-gradient(180deg,
@@ -685,7 +643,6 @@
             font-size: 16px;
         }
 
-        /* Placeholder más suave */
         .form-field input::placeholder,
         .form-field textarea::placeholder {
             color: #9aa8bb;
@@ -700,7 +657,6 @@
                 0 12px 28px rgba(0, 0, 0, 0.18);
         }
 
-        /* Focus limpio (clave) */
         .form-field input:focus,
         .form-field textarea:focus {
             background: #ffffff;
@@ -736,21 +692,15 @@
             transform: translateY(-2px) scale(0.98);
         }
 
-        /* === CTA PILL DEFINITIVO (override WP / Elementor) === */
-        /* === CTA FORM FULL-WIDTH (alineado con inputs) === */
         .btn-pill-cta {
             display: flex !important;
             width: 100% !important;
-            /* MISMO ancho que inputs */
             align-self: stretch !important;
 
             padding: 16px 22px !important;
-            /* Igual que input */
             min-height: 52px !important;
-            /* Más bajo */
 
             border-radius: 9999px !important;
-            /* Pill suave */
 
             font-size: 16px !important;
             font-weight: 700 !important;
@@ -791,7 +741,6 @@
             transform: translateY(0) scale(0.98) !important;
         }
 
-        /* === TEXTAREA MENSAJE (DESTACADO) === */
         .textarea-message {
             min-height: 180px;
             font-size: 16px;
@@ -900,7 +849,7 @@
 
     <script>
         const canvas = document.getElementById('tech-bg');
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d', { alpha: true });
         let width, height, time = 0;
 
         function resize() {
@@ -932,7 +881,6 @@
             particles.forEach((p, i) => {
                 const pulse = Math.sin(time * 0.8 + i * 0.5) * 0.4 + 1;
 
-                // Glow effect
                 const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * pulse * 3);
                 gradient.addColorStop(0, 'rgba(144,224,239,0.8)');
                 gradient.addColorStop(0.5, 'rgba(144,224,239,0.3)');
@@ -943,7 +891,6 @@
                 ctx.fillStyle = gradient;
                 ctx.fill();
 
-                // Core particle
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.size * pulse, 0, Math.PI * 2);
                 ctx.fillStyle = 'rgba(255,255,255,0.9)';
@@ -952,7 +899,6 @@
                 ctx.fill();
                 ctx.shadowBlur = 0;
 
-                // Connections
                 for (let j = i + 1; j < particles.length; j++) {
                     const p2 = particles[j];
                     const dx = p.x - p2.x;
@@ -985,6 +931,7 @@
 
         function animate() {
             ctx.clearRect(0, 0, width, height);
+            ctx.globalCompositeOperation = 'source-over';
             drawParticles();
             time += 0.01;
             requestAnimationFrame(animate);

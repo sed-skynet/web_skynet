@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Protección de Datos · Skynet Systems</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cian: #00cfff;
+            --cian-2: #00f2ff;
+            --txt: #eaf6ff;
+            --soft: #cdefff;
+            --glass: rgba(255, 255, 255, .04);
+            --ring: rgba(0, 207, 255, .15);
+            --accent: #1da183;
+        }
+
+        html,
+        body {
+            min-height: 100%;
+            overflow-x: hidden;
+            font-family: 'Exo 2', 'Segoe UI', sans-serif;
+            color: var(--txt);
+        }
+
+        #network-bg {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: var(--cian);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--cian);
+            z-index: 0;
+            pointer-events: none;
+            animation: floatPar 9s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) {
+            left: 8%;
+            top: 18%;
+            animation-delay: 0s;
+            animation-duration: 8s;
+        }
+
+        .particle:nth-child(2) {
+            left: 88%;
+            top: 12%;
+            animation-delay: 1.5s;
+            animation-duration: 10s;
+        }
+
+        .particle:nth-child(3) {
+            left: 22%;
+            top: 72%;
+            animation-delay: 3s;
+            animation-duration: 7s;
+        }
+
+        .particle:nth-child(4) {
+            left: 72%;
+            top: 62%;
+            animation-delay: 4.5s;
+            animation-duration: 9s;
+        }
+
+        .particle:nth-child(5) {
+            left: 50%;
+            top: 88%;
+            animation-delay: 2s;
+            animation-duration: 11s;
+        }
+
+        @keyframes floatPar {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+                opacity: .25;
+            }
+
+            50% {
+                transform: translateY(-40px) translateX(20px);
+                opacity: .9;
+            }
+        }
+
+        .page-wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: clamp(40px, 8vh, 90px) clamp(18px, 5vw, 48px) clamp(60px, 10vh, 120px);
+        }
+
+        .page-wrap::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse at 20% 30%,
+                    #0d3f5a 0%,
+                    #071c2b 55%,
+                    #030e17 100%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* ── HERO ── */
+        .doc-hero {
+            text-align: center;
+            margin-bottom: clamp(40px, 6vh, 72px);
+            animation: fadeInUp .9s ease both;
+        }
+
+        .doc-hero .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .8rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--cian);
+            border: 1px solid var(--ring);
+            background: rgba(0, 207, 255, .06);
+            border-radius: 999px;
+            padding: 6px 18px;
+            margin-bottom: 1.4rem;
+        }
+
+        .doc-hero .badge::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            background: var(--cian);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--cian);
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .2
+            }
+        }
+
+        .doc-hero h1 {
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 800;
+            color: var(--cian);
+            line-height: 1.05;
+            letter-spacing: -.5px;
+            margin-bottom: .9rem;
+            text-shadow: 0 0 40px rgba(0, 207, 255, .3);
+        }
+
+        .doc-hero .meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .8rem;
+            color: var(--soft);
+            opacity: .6;
+        }
+
+        /* ── TOC ── */
+        .toc {
+            background: var(--glass);
+            border: 1px solid var(--ring);
+            border-radius: 16px;
+            padding: clamp(24px, 3vw, 34px);
+            margin-bottom: clamp(36px, 5vh, 60px);
+            animation: fadeInUp .9s ease .15s both;
+            counter-reset: toc-item;
+        }
+
+        .toc h2 {
+            font-size: .78rem;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: .18em;
+            color: var(--cian);
+            margin-bottom: 1.6rem;
+            opacity: .8;
+        }
+
+        .toc ol {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            column-gap: 40px;
+            row-gap: 18px;
+            align-items: start;
+        }
+
+        .toc li {
+            counter-increment: toc-item;
+        }
+
+        .toc a {
+            display: grid;
+            grid-template-columns: 34px 1fr;
+            align-items: center;
+            gap: 10px;
+            color: var(--soft);
+            text-decoration: none;
+            font-size: .95rem;
+            line-height: 1.35;
+            transition: color .2s;
+        }
+
+        .toc a::before {
+            content: counter(toc-item, decimal-leading-zero);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .72rem;
+            color: var(--cian);
+            opacity: .8;
+        }
+
+        .toc a:hover {
+            color: var(--cian);
+        }
+
+        /* ── SECCIONES ── */
+        .legal-section {
+            background: var(--glass);
+            border: 1px solid var(--ring);
+            border-radius: 16px;
+            padding: clamp(22px, 3vw, 38px);
+            margin-bottom: clamp(20px, 3vh, 32px);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp .7s ease both;
+        }
+
+        .legal-section::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--cian-2), var(--cian));
+            border-radius: 3px 0 0 3px;
+        }
+
+        .section-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .72rem;
+            color: var(--cian);
+            opacity: .6;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            margin-bottom: .5rem;
+        }
+
+        .legal-section h2 {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-weight: 700;
+            color: var(--cian);
+            margin-bottom: 1rem;
+        }
+
+        .legal-section h2::after {
+            content: '';
+            display: block;
+            width: 36px;
+            height: 2px;
+            background: var(--accent);
+            margin-top: 6px;
+        }
+
+        .legal-section p {
+            color: var(--soft);
+            line-height: 1.75;
+            font-size: .96rem;
+            margin-bottom: .85rem;
+        }
+
+        .legal-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .legal-section ul,
+        .legal-section ol {
+            padding-left: 1.4rem;
+            color: var(--soft);
+            font-size: .96rem;
+            line-height: 1.75;
+            margin-bottom: .85rem;
+        }
+
+        .legal-section li {
+            margin: .3rem 0;
+        }
+
+        .legal-section ul li::marker {
+            color: var(--cian);
+        }
+
+        .legal-section strong {
+            color: var(--txt);
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: rgba(0, 207, 255, .06);
+            border: 1px solid rgba(0, 207, 255, .2);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 1rem 0;
+            color: var(--txt);
+            font-size: .92rem;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .highlight-box .icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: .88rem;
+        }
+
+        .data-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(0, 207, 255, .1);
+            color: var(--soft);
+            vertical-align: top;
+        }
+
+        .data-table td:first-child {
+            color: var(--cian);
+            font-weight: 600;
+            white-space: nowrap;
+            width: 38%;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .82rem;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .legal-section a {
+            color: var(--cian);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 207, 255, .3);
+            transition: border-color .2s;
+        }
+
+        .legal-section a:hover {
+            border-color: var(--cian);
+        }
+
+        /* ── Derechos sub-bloque ── */
+        .rights-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin-top: 1rem;
+        }
+
+        .right-card {
+            background: rgba(0, 207, 255, .04);
+            border: 1px solid rgba(0, 207, 255, .12);
+            border-radius: 10px;
+            padding: 14px 16px;
+        }
+
+        .right-card .right-title {
+            font-weight: 700;
+            color: var(--txt);
+            font-size: .92rem;
+            margin-bottom: .45rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .right-card .right-title .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--cian);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .right-card p {
+            color: var(--soft);
+            font-size: .87rem;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        /* ── stagger ── */
+        .legal-section:nth-child(1) {
+            animation-delay: .08s
+        }
+
+        .legal-section:nth-child(2) {
+            animation-delay: .16s
+        }
+
+        .legal-section:nth-child(3) {
+            animation-delay: .22s
+        }
+
+        .legal-section:nth-child(4) {
+            animation-delay: .28s
+        }
+
+        .legal-section:nth-child(5) {
+            animation-delay: .34s
+        }
+
+        .legal-section:nth-child(6) {
+            animation-delay: .40s
+        }
+
+        .legal-section:nth-child(7) {
+            animation-delay: .46s
+        }
+
+        .legal-section:nth-child(8) {
+            animation-delay: .52s
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .doc-footer {
+            text-align: center;
+            margin-top: clamp(40px, 6vh, 72px);
+            padding-top: 32px;
+            border-top: 1px solid var(--ring);
+            color: var(--soft);
+            font-size: .8rem;
+            opacity: .6;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        @media (max-width: 900px) {
+            .toc ol {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .rights-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .toc ol {
+                grid-template-columns: 1fr;
+            }
+
+            .data-table td:first-child {
+                width: auto;
+                white-space: normal;
+            }
+
+            .data-table {
+                font-size: .82rem;
+            }
+
+            .rights-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+    <canvas id="network-bg"></canvas>
+
+    <div class="page-wrap">
+
+        <!-- HERO -->
+        <header class="doc-hero">
+            <div class="badge">Documento legal</div>
+            <h1>Política de Protección de Datos</h1>
+            <p class="meta">Última actualización: marzo 2025 &nbsp;·&nbsp; Skynet Systems</p>
+        </header>
+
+        <!-- ÍNDICE -->
+        <nav class="toc" aria-label="Índice de contenidos">
+            <h2>// Índice</h2>
+            <ol>
+                <li><a href="#s0">Introducción</a></li>
+                <li><a href="#s1">Responsable del tratamiento</a></li>
+                <li><a href="#s2">Finalidad del tratamiento</a></li>
+                <li><a href="#s3">Legitimación y conservación</a></li>
+                <li><a href="#s4">Acceso a los datos</a></li>
+                <li><a href="#s5">Derechos de los usuarios</a></li>
+                <li><a href="#s6">Medidas de seguridad</a></li>
+                <li><a href="#s7">Comunicaciones comerciales</a></li>
+                <li><a href="#s8">Modificación de la política</a></li>
+            </ol>
+        </nav>
+
+        <!-- INTRO -->
+        <section id="s0" class="legal-section" aria-labelledby="h-s0">
+            <div class="section-num">Introducción</div>
+            <h2 id="h-s0">¿Qué es esta política?</h2>
+            <div class="highlight-box">
+                <span class="icon">🔒</span>
+                <span>La presente Política de Protección de Datos tiene como objetivo informar con transparencia de qué
+                    forma <strong>Skynet Systems SLU</strong> trata y protege los datos que el <strong>Usuario</strong>
+                    —entendido como aquella persona física interesada en los servicios ofrecidos a través de su página
+                    web— introduce en los formularios.</span>
+            </div>
+            <p>Con carácter previo a que el Usuario aporte sus datos de carácter personal en cualquiera de los
+                formularios online, Skynet Systems SLU mostrará un primer aviso informativo básico de protección de
+                datos y solicitará el consentimiento expreso del Usuario a través de una casilla sin marcar.</p>
+            <p><strong>Ejemplo de aviso informativo básico:</strong></p>
+            <table class="data-table" aria-label="Información básica sobre protección de datos">
+                <tbody>
+                    <tr>
+                        <td>Responsable</td>
+                        <td>Skynet Systems SLU</td>
+                    </tr>
+                    <tr>
+                        <td>Finalidad</td>
+                        <td>Se informará de la/s finalidades para la que se recogen los datos</td>
+                    </tr>
+                    <tr>
+                        <td>Legitimación</td>
+                        <td>Se informará de las bases legales del art. 6 RGPD</td>
+                    </tr>
+                    <tr>
+                        <td>Destinatarios</td>
+                        <td>Se informará de los potenciales destinatarios de datos</td>
+                    </tr>
+                    <tr>
+                        <td>Derechos</td>
+                        <td>Se informará de los derechos que puede ejercitar el interesado</td>
+                    </tr>
+                    <tr>
+                        <td>Info. adicional</td>
+                        <td>Se indica para su consulta información complementaria</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- I -->
+        <section id="s1" class="legal-section" aria-labelledby="h-s1">
+            <div class="section-num">I</div>
+            <h2 id="h-s1">¿Quién es el Responsable del tratamiento de sus datos?</h2>
+            <p><strong>Skynet Systems SLU</strong> es la empresa Responsable del Tratamiento de los datos personales
+                del Usuario. El Usuario podrá ponerse en contacto para resolver cualquier duda o necesidad en materia de
+                protección de datos contactando con nuestro Delegado de Protección de Datos.</p>
+            <table class="data-table" aria-label="Datos identificativos del responsable">
+                <tbody>
+                    <tr>
+                        <td>Denominación social</td>
+                        <td>Skynet Systems SLU</td>
+                    </tr>
+                    <tr>
+                        <td>Domicilio social</td>
+                        <td>Carril Condomina, 5. Murcia</td>
+                    </tr>
+                    <tr>
+                        <td>Correo-e</td>
+                        <td><a href="mailto:info@skynet-sys.es">info@skynet-sys.es</a></td>
+                    </tr>
+                    <tr>
+                        <td>Delegado de protección de datos</td>
+                        <td><a href="mailto:info@skynet-sys.es">info@skynet-sys.es</a></td>
+                    </tr>
+                    <tr>
+                        <td>Dominios</td>
+                        <td><a href="https://skynet-sys.es/" target="_blank"
+                                rel="noopener noreferrer">https://skynet-sys.es/</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- II -->
+        <section id="s2" class="legal-section" aria-labelledby="h-s2">
+            <div class="section-num">II</div>
+            <h2 id="h-s2">¿Con qué finalidad tratamos sus datos personales?</h2>
+            <p>Skynet Systems SLU tratará los datos de carácter personal que el Usuario facilite a través de los
+                formularios online para las finalidades concretas, siempre que exista una base legal que legitime el
+                tratamiento, tal y como se detalla en el apartado siguiente.</p>
+            <p>Las <strong>finalidades</strong> derivadas de los tratamientos de datos efectuados en el sitio web son:
+            </p>
+            <ul>
+                <li>Gestionar la solicitud de información relativa a los servicios de Skynet Systems SLU.</li>
+            </ul>
+        </section>
+
+        <!-- III -->
+        <section id="s3" class="legal-section" aria-labelledby="h-s3">
+            <div class="section-num">III</div>
+            <h2 id="h-s3">¿Cuál es la legitimación para el tratamiento de sus datos personales?</h2>
+            <p>La base legal para el tratamiento de datos de las finalidades <strong>a)</strong> y <strong>b)</strong>
+                es el <strong>consentimiento</strong> que se solicita al Usuario para suministrarle información
+                comercial acerca de los servicios de Skynet Systems SLU.</p>
+            <p>La base legal para el tratamiento de datos de la finalidad <strong>c)</strong> es poner a disposición
+                del Usuario (cliente) la documentación exigida por la <strong>Ley de Prevención de Riesgos
+                    Laborales</strong> (art. 22.3 y 23), como parte de la relación contractual existente, así como el
+                consentimiento (art. 6.1.a RGPD) que se le solicita al Usuario para procesar datos personales con el
+                fin de gestionar dicha documentación.</p>
+            <div class="highlight-box">
+                <span class="icon">📋</span>
+                <span>Skynet Systems SLU tan solo recoge la información estrictamente necesaria para poder identificar,
+                    informar y suministrar la información requerida en base a las finalidades concretas.</span>
+            </div>
+            <p><strong>¿Por cuánto tiempo conservamos sus datos personales?</strong></p>
+            <p>Conservaremos los datos relativos a los tratamientos a) y b) durante el tiempo que dure la relación
+                contractual, y hasta que el Usuario solicite su supresión; sin perjuicio de que pudiera ser necesaria
+                la conservación para formular, ejercer o defender una reclamación, o por una previsión legal.</p>
+        </section>
+
+        <!-- IV -->
+        <section id="s4" class="legal-section" aria-labelledby="h-s4">
+            <div class="section-num">IV</div>
+            <h2 id="h-s4">¿Quién tiene acceso a sus datos personales?</h2>
+            <p>Skynet Systems SLU comparte datos con terceros en los siguientes casos:</p>
+            <ul>
+                <li><strong>Prestadores de servicios de Internet:</strong> Para llevar a cabo los servicios prestados a
+                    través de la página web, otras empresas que prestan servicios de correo electrónico y alojamiento
+                    de datos procesan los datos personales como Encargados de Tratamiento. Estos proveedores pueden
+                    acceder a los datos personales del Usuario y se les exige que los utilicen únicamente para
+                    proporcionar el servicio solicitado.</li>
+                <li><strong>Para el cumplimiento legal:</strong> Se llevarán a cabo cesiones o comunicaciones de datos
+                    personales, de acuerdo con la legislación vigente, con la finalidad de atender obligaciones con las
+                    Administraciones Públicas y, en su caso, con Fuerzas y Cuerpos de Seguridad del Estado y órganos
+                    Judiciales.</li>
+            </ul>
+        </section>
+
+        <!-- V -->
+        <section id="s5" class="legal-section" aria-labelledby="h-s5">
+            <div class="section-num">V</div>
+            <h2 id="h-s5">¿Cuáles son los derechos de los usuarios?</h2>
+            <p>Si quiere ejercitar sus derechos puede hacerlo contactando con Skynet Systems SLU a través de correo
+                postal o electrónico:</p>
+            <table class="data-table" aria-label="Datos de contacto para ejercer derechos">
+                <tbody>
+                    <tr>
+                        <td>Responsable</td>
+                        <td>Skynet Systems SLU</td>
+                    </tr>
+                    <tr>
+                        <td>Dirección postal</td>
+                        <td>Carril Condomina 5, Murcia</td>
+                    </tr>
+                    <tr>
+                        <td>Dirección electrónica</td>
+                        <td><a href="mailto:info@skynet-sys.es">info@skynet-sys.es</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>También puede dirigirse a la <strong>Agencia Española de Protección de Datos</strong>
+                (<a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">www.aepd.es</a>) para ampliar
+                información acerca de sus derechos o solicitar su tutela.</p>
+
+            <div class="rights-grid">
+                <div class="right-card">
+                    <div class="right-title"><span class="dot"></span>Derecho de acceso</div>
+                    <p>Podrá conocer los fines del tratamiento, categorías de datos, destinatarios, plazos de
+                        conservación,
+                        transferencias internacionales y la existencia de decisiones automatizadas.</p>
+                </div>
+                <div class="right-card">
+                    <div class="right-title"><span class="dot"></span>Derecho de rectificación</div>
+                    <p>Puede requerir que se rectifiquen sus datos inexactos o que se completen los datos incompletos.
+                    </p>
+                </div>
+                <div class="right-card">
+                    <div class="right-title"><span class="dot"></span>Derecho de supresión</div>
+                    <p>Puede requerir la supresión de sus datos cuando ya no sean necesarios para la finalidad por la
+                        que
+                        fueron recogidos u otros supuestos previstos en la Ley.</p>
+                </div>
+                <div class="right-card">
+                    <div class="right-title"><span class="dot"></span>Derecho de limitación</div>
+                    <p>Puede requerir la suspensión o conservación del tratamiento para el ejercicio de reclamaciones,
+                        protección de derechos de terceros o por razones de interés público.</p>
+                </div>
+                <div class="right-card">
+                    <div class="right-title"><span class="dot"></span>Derecho a la portabilidad</div>
+                    <p>Puede requerir que se le remitan sus datos en formato estructurado de uso común y lectura
+                        mecánica
+                        para transmitirlos a otro responsable, cuando sea técnicamente posible.</p>
+                </div>
+                <div class="right-card">
+                    <div class="right-title"><span class="dot"></span>Derecho de oposición</div>
+                    <p>Puede requerir el cese del tratamiento por motivos relacionados con su situación personal, salvo
+                        interés legítimo acreditado, o el cese del envío de comunicaciones comerciales.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- VI -->
+        <section id="s6" class="legal-section" aria-labelledby="h-s6">
+            <div class="section-num">VI</div>
+            <h2 id="h-s6">¿Qué medidas de seguridad tenemos implementadas?</h2>
+            <div class="highlight-box">
+                <span class="icon">🛡️</span>
+                <span>La empresa adopta las medidas técnicas y organizativas necesarias para mantener la
+                    <strong>confidencialidad, integridad y disponibilidad</strong> de la información que trata en su
+                    sistema de información.</span>
+            </div>
+        </section>
+
+        <!-- VII -->
+        <section id="s7" class="legal-section" aria-labelledby="h-s7">
+            <div class="section-num">VII</div>
+            <h2 id="h-s7">Envío de comunicaciones comerciales e informativas</h2>
+            <p>Skynet Systems SLU sólo envía comunicaciones comerciales e informativas relacionadas con las actividades
+                de la empresa y que sean de interés para el Usuario.</p>
+            <p>El Usuario tiene derecho a <strong>revocar en cualquier momento</strong> el consentimiento prestado para
+                la recepción de comunicaciones comerciales, con la simple notificación a Skynet Systems SLU, en base al
+                artículo 22 de la Ley 34/2002 de Servicios para la Sociedad de la Información y de Comercio
+                Electrónico.</p>
+        </section>
+
+        <!-- VIII -->
+        <section id="s8" class="legal-section" aria-labelledby="h-s8">
+            <div class="section-num">VIII</div>
+            <h2 id="h-s8">Modificación de la Política de Protección de Datos</h2>
+            <p>Skynet Systems SLU se reserva la facultad de modificar esta Política de Protección de Datos con el
+                objeto de adaptarla a novedades legislativas o intereses de la entidad.</p>
+        </section>
+
+        <footer class="doc-footer">
+            © 2025 Skynet Systems &nbsp;·&nbsp; Todos los derechos reservados &nbsp;·&nbsp; v1.0
+        </footer>
+
+    </div>
+
+    <script>
+        (function () {
+            const canvas = document.getElementById('network-bg');
+            const ctx = canvas.getContext('2d');
+            let W, H, nodes = [];
+
+            function resize() {
+                W = canvas.width = window.innerWidth;
+                H = canvas.height = window.innerHeight;
+                const count = Math.floor((W * H) / 12000);
+                nodes = Array.from({ length: count }, () => ({
+                    x: Math.random() * W,
+                    y: Math.random() * H,
+                    vx: (Math.random() - .5) * .4,
+                    vy: (Math.random() - .5) * .4
+                }));
+            }
+            window.addEventListener('resize', resize, { passive: true });
+            resize();
+
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+                ctx.fillStyle = 'rgba(0,207,255,.55)';
+                ctx.strokeStyle = 'rgba(0,207,255,.07)';
+                ctx.lineWidth = 1;
+
+                nodes.forEach((n, i) => {
+                    ctx.beginPath();
+                    ctx.arc(n.x, n.y, 1.5, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    for (let j = i + 1; j < nodes.length; j++) {
+                        const n2 = nodes[j];
+                        const dx = n.x - n2.x, dy = n.y - n2.y;
+                        const d = Math.sqrt(dx * dx + dy * dy);
+                        if (d < 130) {
+                            ctx.globalAlpha = 1 - d / 130;
+                            ctx.beginPath();
+                            ctx.moveTo(n.x, n.y);
+                            ctx.lineTo(n2.x, n2.y);
+                            ctx.stroke();
+                        }
+                    }
+                    ctx.globalAlpha = 1;
+
+                    n.x += n.vx; n.y += n.vy;
+                    if (n.x < 0 || n.x > W) n.vx *= -1;
+                    if (n.y < 0 || n.y > H) n.vy *= -1;
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
+        })();
+    </script>
+
+</body>
+
+</html>

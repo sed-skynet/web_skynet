@@ -1,0 +1,175 @@
+<section id="quienes-somos"
+    class="sn-intro-company sn-intro-company--hero"
+    aria-labelledby="qs-title">
+
+    <div class="qs-container">
+        <header class="qs-header">
+
+            <span class="qs-kicker">Tecnología con criterio</span>
+
+            <h2 id="qs-title" class="qs-h2">Quiénes somos</h2>
+
+            <p class="qs-text">
+                Skynet Systems es una consultora TIC formada por profesionales con una amplia trayectoria en el ámbito
+                de las tecnologías de la información y las comunicaciones. Nacemos con el propósito de acompañar a
+                nuestros clientes en la mejora, evolución y optimización de sus entornos tecnológicos, aportando
+                soluciones eficaces y orientadas a resultados.
+            </p>
+
+            <ul class="qs-highlights" aria-label="Valores clave">
+                <li>🔧 Experiencia técnica real</li>
+                <li>📊 Enfoque práctico y orientado a negocio</li>
+                <li>🤝 Acompañamiento cercano y continuo</li>
+            </ul>
+
+            <p class="qs-bridge">
+                Una forma de trabajar clara y consistente, desde el diagnóstico hasta el soporte.
+            </p>
+
+        </header>
+    </div>
+
+    <style>
+        /* =========================
+           SCOPE: solo #quienes-somos
+           ========================= */
+        #quienes-somos.sn-intro-company {
+             background: radial-gradient(circle, #247ba0 0%, #1b4f72 100%);
+            --color-primary: #00cfff;
+            --color-accent: #00f2ff;
+            --color-light: #eaf6ff;
+            --color-text-muted: #cdefff;
+
+            font-family: 'Segoe UI', sans-serif;
+            color: var(--color-light);
+            position: relative;
+            z-index: 2;
+
+            /* ⬇️ ligeramente más compacto */
+            min-height: clamp(680px, 90vh, 1040px);
+            display: grid;
+            align-items: center;
+
+            padding-block: clamp(115px, 16vh, 185px);
+            padding-inline: 5vw;
+
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        #quienes-somos .qs-container {
+            max-width: 1240px; /* ⬇️ un pelín más estrecho */
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Kicker */
+        #quienes-somos .qs-kicker {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.4rem;
+
+            padding: .6rem 1.3rem;
+            border-radius: 999px;
+            font-size: 1.05rem;
+            font-weight: 800;
+
+            color: var(--color-primary);
+            background: rgba(0, 207, 255, .12);
+            border: 1px solid rgba(0, 207, 255, .24);
+            letter-spacing: .25px;
+        }
+
+        /* Título */
+        #quienes-somos .qs-h2 {
+            color: var(--color-primary);
+            font-weight: 950;
+            font-size: clamp(3.3rem, 6.2vw, 5.2rem); /* ⬇️ */
+            line-height: 1.03;
+            margin: .3rem 0 2rem;
+        }
+
+        /* Texto principal */
+        #quienes-somos .qs-text {
+            max-width: 80ch;
+            margin: 0 auto 2.6rem;
+
+            font-size: clamp(1.22rem, 1.6vw, 1.5rem); /* ⬇️ */
+            line-height: 1.8;
+
+            color: var(--color-text-muted);
+            opacity: .95;
+
+            text-align: justify;
+            text-align-last: auto;
+            text-wrap: pretty;
+
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            overflow-wrap: break-word;
+        }
+
+        /* Highlights */
+        #quienes-somos .qs-highlights {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+
+            display: flex;
+            gap: 1.1rem 1.3rem;
+            justify-content: center;
+            flex-wrap: wrap;
+
+            font-weight: 800;
+            color: var(--color-light);
+        }
+
+        #quienes-somos .qs-highlights li {
+            padding: .85rem 1.25rem;
+            border-radius: 16px;
+
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .13);
+
+            font-size: 1.08rem; /* ⬇️ */
+            box-shadow: 0 10px 24px rgba(0, 207, 255, .12);
+        }
+
+        /* Puente */
+        #quienes-somos .qs-bridge {
+            margin: 2.2rem auto 0;
+            max-width: 70ch;
+
+            font-size: 1.12rem; /* ⬇️ */
+            color: var(--color-text-muted);
+            opacity: .86;
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 680px) {
+            #quienes-somos.sn-intro-company {
+                min-height: auto;
+                padding-block: clamp(100px, 14vh, 155px);
+            }
+
+            #quienes-somos .qs-h2 {
+                font-size: clamp(2.6rem, 10vw, 3.6rem);
+            }
+
+            #quienes-somos .qs-text {
+                font-size: 1.08rem;
+                line-height: 1.75;
+                text-align: left;
+            }
+
+            #quienes-somos .qs-highlights li {
+                width: 100%;
+                max-width: 440px;
+                text-align: center;
+            }
+        }
+    </style>
+
+</section>

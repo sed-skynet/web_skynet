@@ -272,7 +272,9 @@
       border-color: rgba(0, 207, 255, .26);
       box-shadow: 0 16px 34px rgba(0, 207, 255, .14);
     }
-
+html, body{
+  background: linear-gradient(135deg,#126b97,#3bc6e7) !important;
+}
     #cultura .chip--ghost {
       background: rgba(255, 255, 255, .04);
       border-color: rgba(255, 255, 255, .12);
@@ -344,6 +346,23 @@
       #cultura .chip {
         transition: none !important;
       }
+    }
+
+    #cultura.sn-cultureBalanced.v6 {
+      --color-primary: #00cfff;
+      --color-accent: #00f2ff;
+      --color-light: #eaf6ff;
+      --color-text-muted: #cdefff;
+
+
+      padding-block: clamp(56px, 8.5vh, 100px);
+      padding-inline: 5vw;
+
+      font-family: 'Segoe UI', sans-serif;
+      color: var(--color-light);
+      position: relative;
+      overflow: hidden;
+      isolation: auto;
     }
   </style>
 

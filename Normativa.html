@@ -15,12 +15,20 @@
             font-family: 'Inter', sans-serif;
         }
 
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
 
+        html,
         body {
             margin: 0;
             min-height: 100vh;
-            background: radial-gradient(circle at top left, #0a2e4e 0%, #126b97 50%, #061a2b 100%);
+
+            /* FIX para WordPress que fuerza fondo negro */
+            background: radial-gradient(circle at top left, #0a2e4e 0%, #126b97 50%, #061a2b 100%) !important;
+        }
+
+        body {
             color: var(--text-light);
             overflow-x: hidden;
             line-height: 1.6;
@@ -28,8 +36,10 @@
 
         #tech-bg {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: 0;
             opacity: 0.8;
         }
@@ -55,13 +65,15 @@
             margin-bottom: 30px;
         }
 
-        .headline-block { flex: 1; }
+        .headline-block {
+            flex: 1;
+        }
 
         .lottie-container {
             flex: 0 0 350px;
             width: 350px;
             height: 200px;
-            margin-top:-120px;
+            margin-top: -120px;
         }
 
         .tag {
@@ -115,8 +127,10 @@
         .info-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0;
-            width: 6px; height: 100%;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
             background: var(--accent);
             box-shadow: 0 0 15px var(--accent);
         }
@@ -130,12 +144,34 @@
         }
 
         @media (max-width: 960px) {
-            .hero-section { flex-direction: column; text-align: center; }
-            .lottie-container { flex: none; width: 280px; height: 280px; order: -1; margin-top: 0; }
-            h1 { font-size: 34px; }
-            .divider { margin: 0 auto 25px auto; }
-            .info-card { padding: 25px; }
-            .info-card p { font-size: 16px; }
+            .hero-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .lottie-container {
+                flex: none;
+                width: 280px;
+                height: 280px;
+                order: -1;
+                margin-top: 0;
+            }
+
+            h1 {
+                font-size: 34px;
+            }
+
+            .divider {
+                margin: 0 auto 25px auto;
+            }
+
+            .info-card {
+                padding: 25px;
+            }
+
+            .info-card p {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
@@ -145,19 +181,23 @@
 
     <div class="wrap">
         <span class="tag">Servicios IT</span>
-        
+
         <div class="hero-section">
             <div class="headline-block">
                 <h1>Confidencialidad y privacidad asegurada</h1>
                 <div class="divider"></div>
-                <p class="lead">Garantizamos la seguridad de su infraestructura y la protección de los datos de sus clientes mediante el cumplimiento estricto del RGPD.</p>
+                <p class="lead">Garantizamos la seguridad de su infraestructura y la protección de los datos de sus
+                    clientes mediante el cumplimiento estricto del RGPD.</p>
             </div>
             <div class="lottie-container" id="lottie-anim"></div>
         </div>
 
         <div class="info-card">
             <p>
-                El <strong>RGPD</strong> es la normativa de obligado cumplimiento en la Unión Europea que unifica la protección de datos para todas las empresas. Este reglamento otorga a los ciudadanos un control total sobre su información personal en el entorno digital, permitiéndoles decidir quién accede a sus datos, cómo se utilizan y garantizando su derecho a retirar dicho acceso en cualquier momento.
+                El <strong>RGPD</strong> es la normativa de obligado cumplimiento en la Unión Europea que unifica la
+                protección de datos para todas las empresas. Este reglamento otorga a los ciudadanos un control total
+                sobre su información personal en el entorno digital, permitiéndoles decidir quién accede a sus datos,
+                cómo se utilizan y garantizando su derecho a retirar dicho acceso en cualquier momento.
             </p>
         </div>
     </div>
@@ -198,14 +238,14 @@
 
         function animate() {
             ctx.clearRect(0, 0, width, height);
-            
+
             for (let i = 0; i < particles.length; i++) {
                 let p = particles[i];
                 p.x += p.vx; p.y += p.vy;
-                
+
                 if (p.x < 0) p.x = width; if (p.x > width) p.x = 0;
                 if (p.y < 0) p.y = height; if (p.y > height) p.y = 0;
-                
+
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
                 ctx.fillStyle = 'rgba(0, 212, 255, 0.5)'; // Un poco más opacas
@@ -219,7 +259,7 @@
 
                     if (dist < connectionDist) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(0, 212, 255, ${0.15 * (1 - dist/connectionDist)})`;
+                        ctx.strokeStyle = `rgba(0, 212, 255, ${0.15 * (1 - dist / connectionDist)})`;
                         ctx.lineWidth = 0.8;
                         ctx.moveTo(p.x, p.y);
                         ctx.lineTo(p2.x, p2.y);
@@ -232,4 +272,5 @@
         animate();
     </script>
 </body>
+
 </html>

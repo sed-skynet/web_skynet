@@ -25,11 +25,17 @@
             box-sizing: border-box;
         }
 
+        html,
+        body {
+            min-height: 100vh;
+
+            /* FIX WordPress fondo negro */
+            background: linear-gradient(135deg, #126b97, #3bc6e7) !important;
+        }
+
         body {
             font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: var(--secondary-blue);
             color: var(--text-main);
-            min-height: 100vh;
             overflow-x: hidden;
             position: relative;
         }
@@ -436,7 +442,8 @@
             <h2 class="download-card-title">Descarga AnyDesk</h2>
             <p class="download-card-subtitle">Software oficial y gratuito de conexión remota</p>
 
-            <a class="btn-descarga" href="https://get.anydesk.com/nx618Cg0/SoporteSkynet.exe" target="_blank" rel="noopener noreferrer">
+            <a class="btn-descarga" href="https://get.anydesk.com/nx618Cg0/SoporteSkynet.exe" target="_blank"
+                rel="noopener noreferrer">
                 <span class="btn-icon">⬇</span>
                 <span class="btn-text">Descargar Ahora</span>
             </a>
