@@ -9,7 +9,7 @@
             --ring: rgba(0, 207, 255, .18);
             font-family: 'Segoe UI', sans-serif;
             color: var(--txt);
-            padding: 6vh clamp(16px, 4vw, 40px) 7vh;
+            padding: 6vh var(--home-side-pad, clamp(16px, 4vw, 40px)) 7vh;
         }
 
         #iso .title {
@@ -33,7 +33,7 @@
             gap: 1.8rem;
             align-items: center;
             grid-template-columns: minmax(160px, 220px) 1fr;
-            max-width: 1100px;
+            max-width: var(--home-max, 1280px);
             margin: 0 auto;
             background: var(--glass);
             border: 1px solid var(--ring);
@@ -151,3 +151,5 @@
         </div>
     </div>
 </section>
+
+

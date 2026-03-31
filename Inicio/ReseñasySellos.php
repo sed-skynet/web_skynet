@@ -51,12 +51,12 @@ function skynet_opiniones_y_sellos_shortcode( $atts = [] ) {
 <style>
 /* ================= CONTENEDOR ================= */
 #<?php echo $uid; ?>{
-  padding:6vh clamp(16px, 4vw, 40px);
+  padding:6vh var(--home-side-pad, clamp(16px, 4vw, 40px));
   position:relative;
   z-index:2;
 }
 #<?php echo $uid; ?> .ti-pack__inner{
-  max-width:1160px;
+  max-width: var(--home-max, 1280px);
   margin:0 auto;
 }
 
@@ -144,4 +144,5 @@ function skynet_opiniones_y_sellos_shortcode( $atts = [] ) {
   return ob_get_clean();
 }
 add_shortcode('opiniones_y_sellos', 'skynet_opiniones_y_sellos_shortcode');
+
 

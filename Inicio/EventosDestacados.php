@@ -15,7 +15,7 @@ function skynet_eventos_destacados_shortcode() {
     position:relative;
     z-index:5;
     background:#f9fafb;
-    padding:4rem clamp(16px, 4vw, 40px);
+    padding:4rem var(--home-side-pad, clamp(16px, 4vw, 40px));
     margin:0 auto;
     max-width:100vw;
     border-radius:2.5rem;
@@ -25,20 +25,20 @@ function skynet_eventos_destacados_shortcode() {
 /* Ajustes responsive del contenedor principal */
 @media (max-width: 968px) {
     #eventos{
-        padding:3rem clamp(16px, 4vw, 40px);
+        padding:3rem var(--home-side-pad, clamp(16px, 4vw, 40px));
         border-radius:2rem;
     }
 }
 
 @media (max-width: 640px) {
     #eventos{
-        padding:2.5rem clamp(16px, 4vw, 40px);
+        padding:2.5rem var(--home-side-pad, clamp(16px, 4vw, 40px));
         border-radius:1.5rem;
     }
 }
 
 .contenedor-eventos{
-    max-width:1280px;
+    max-width: var(--home-max, 1280px);
     margin:0 auto;
     padding:0;
     width:100%;
@@ -376,3 +376,6 @@ $query = new WP_Query([
     return ob_get_clean();
 }
 add_shortcode('eventos_destacados', 'skynet_eventos_destacados_shortcode');
+
+
+3.8

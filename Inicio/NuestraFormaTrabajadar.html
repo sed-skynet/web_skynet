@@ -8,7 +8,7 @@
             --txt-soft: #cdefff;
             --glass-bg: rgba(255, 255, 255, .04);
             --glass-shadow: 0 0 10px rgba(0, 255, 255, .08);
-            padding: 4vh clamp(16px, 4vw, 40px) 6vh;
+            padding: 4vh var(--home-side-pad, clamp(16px, 4vw, 40px)) 6vh;
             font-family: 'Segoe UI', sans-serif;
             color: var(--txt);
             position: relative;
@@ -39,7 +39,7 @@
             align-items: center;
             gap: 2rem 2rem;
             width: 100%;
-            max-width: 1300px;
+            max-width: var(--home-max, 1280px);
             margin: 0 auto;
         }
 
@@ -298,7 +298,7 @@
         }
 
         #pilares-glass .estructura-arco-wrapper {
-            max-width: 1300px;
+            max-width: var(--home-max, 1280px);
             margin: 0 auto;
             text-align: center;
         }
@@ -369,3 +369,5 @@
     </div>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" defer></script>
 </section>
+
+
