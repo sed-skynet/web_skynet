@@ -43,7 +43,27 @@ function skynet_opiniones_y_sellos_shortcode( $atts = [] ) {
     </div>
 
     <!-- ===== Tira de sellos ===== -->
-    
+    <section class="ti-pack__tira" aria-label="Sellos y partners">
+      <div class="sellos-track">
+        <img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2020/04/google-partner.png" alt="Google Partner">
+        <img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2022/06/microsoft-gris.png" alt="Microsoft Partner">
+        <img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2021/03/silver-partner-synology-2.png" alt="Synology Silver Partner">
+        <img decoding="async" class="sello sello-grande" src="https://darknet-sys.com/wp-content/uploads/2026/01/WatchGuardONE_Gold.png" alt="WatchGuard ONE Gold Partner">
+        <img decoding="async" class="sello sello-grande" src="https://skynet-sys.es/wp-content/uploads/2022/03/Registered-Logo.png" alt="TP-LINK Partner">
+        <img decoding="async" class="sello sello-grande" src="https://darknet-sys.com/wp-content/uploads/2026/01/incibe.webp" alt="INCIBE">
+        <img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2021/02/pacto_entidad_adscrita_color.png" alt="Pacto Digital">
+        <img decoding="async" class="sello sello-grande" src="https://darknet-sys.com/wp-content/uploads/2026/01/PETEC.webp" alt="PETEC">
+
+        <img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2020/04/google-partner.png" alt="Google Partner">
+        <img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2022/06/microsoft-gris.png" alt="Microsoft Partner">
+        <img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2021/03/silver-partner-synology-2.png" alt="Synology Silver Partner">
+        <img decoding="async" class="sello sello-grande" src="https://darknet-sys.com/wp-content/uploads/2026/01/WatchGuardONE_Gold.png" alt="WatchGuard ONE Gold Partner">
+        <img decoding="async" class="sello sello-grande" src="https://skynet-sys.es/wp-content/uploads/2022/03/Registered-Logo.png" alt="TP-LINK Partner">
+        <img decoding="async" class="sello sello-grande" src="https://darknet-sys.com/wp-content/uploads/2026/01/incibe.webp" alt="INCIBE">
+        <img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2021/02/pacto_entidad_adscrita_color.png" alt="Pacto Digital">
+        <img decoding="async" class="sello sello-grande" src="https://darknet-sys.com/wp-content/uploads/2026/01/PETEC.webp" alt="PETEC">
+      </div>
+    </section>
 
   </div>
 </section>

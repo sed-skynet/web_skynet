@@ -46,14 +46,21 @@
         #iso .logo {
             display: grid;
             place-items: center;
-            aspect-ratio: 3/4;
+            aspect-ratio: 2/3;
             border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, .08);
-            background: rgba(255, 255, 255, .03);
+            border: 0;
+            background: transparent;
         }
 
         #iso .logo img {
-            max-width: 70%;
+            max-width: 92%;
+            height: auto;
+            opacity: .95;
+            transition: transform .25s ease;
+        }
+
+        #iso .logo svg {
+            width: 92%;
             height: auto;
             opacity: .95;
             transition: transform .25s ease;
@@ -129,7 +136,24 @@
     <h2 id="iso-title" class="title">¿Por qué somos tu mejor opción?</h2>
     <div class="wrap">
         <figure class="logo" aria-hidden="true">
-            <svg viewBox="0 0 120 120" role="img" aria-label="Seguridad tecnologica" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00f2ff"/><stop offset="100%" stop-color="#00cfff"/></linearGradient></defs><path fill="url(#sg)" d="M60 8l40 14v31c0 25-14 47-40 59C34 100 20 78 20 53V22L60 8z"/><path fill="#0c2230" d="M54 67l-12-12 6-6 6 6 18-18 6 6-24 24z"/></svg>
+            <svg viewBox="0 0 220 320" role="img" aria-label="Equipo de oficina colaborando en soluciones tecnológicas" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="bgOffice" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#00f2ff"/>
+                        <stop offset="100%" stop-color="#00cfff"/>
+                    </linearGradient>
+                </defs>
+                <rect x="35" y="50" width="150" height="92" rx="12" fill="url(#bgOffice)" opacity=".32"/>
+                <rect x="46" y="62" width="58" height="34" rx="6" fill="#00cfff" opacity=".28"/>
+                <rect x="116" y="62" width="58" height="34" rx="6" fill="#00f2ff" opacity=".22"/>
+                <rect x="58" y="160" width="104" height="10" rx="5" fill="#00cfff" opacity=".5"/>
+                <circle cx="74" cy="152" r="11" fill="#cdefff"/>
+                <rect x="66" y="162" width="16" height="46" rx="8" fill="#cdefff"/>
+                <circle cx="146" cy="152" r="11" fill="#eaf6ff"/>
+                <rect x="138" y="162" width="16" height="46" rx="8" fill="#eaf6ff"/>
+                <circle cx="110" cy="142" r="13" fill="#00cfff"/>
+                <rect x="100" y="156" width="20" height="56" rx="10" fill="#00cfff"/>
+            </svg>
         </figure>
 
         <div class="content">
