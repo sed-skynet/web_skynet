@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Soluciones TIC & Seguridad | Infraestructura y Ciberseguridad</title>
+
+    <!-- SEO -->
+    <meta name="description"
+        content="Soluciones TIC, infraestructura IT y ciberseguridad para empresas. Redes, cloud, sistemas y protección avanzada.">
+    <meta name="keywords" content="servicios IT, ciberseguridad, infraestructura, redes, cloud, sistemas">
+    <meta name="author" content="Soluciones TIC & Seguridad">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Soluciones TIC & Seguridad">
+    <meta property="og:description" content="Infraestructura IT y ciberseguridad empresarial">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_ES">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        /* PARTNERS TITLE PROTAGONISMO */
+        .partners-title {
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 14px;
+        }
+
+        .partners-line {
+            width: 90px;
+            height: 4px;
+            margin: -15px auto 0;
+            background: linear-gradient(90deg, #2b90e3, #7dd3fc);
+            border-radius: 999px;
+            box-shadow: 0 4px 14px rgba(43, 144, 227, 0.6);
+        }
+
+        .partner-logo {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 12px 18px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+            transition: transform .3s ease, box-shadow .3s ease;
+        }
+
+        .partner-logo:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+        }
+
+        .partner-logo img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        /* WatchGuard: logo más grande dentro del mismo recuadro */
+        .logo-watchguard {
+            transform: scale(1.25);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px rgba(44, 70, 130, 0.18);
+        }
+
+        .text-gradient {
+            background: linear-gradient(90deg, #ffffff 0%, #e0f2ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        html,
+        body {
+            min-height: 100%;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle, #247ba0 0%, #1b4f72 100%);
+            z-index: -3;
+            pointer-events: none;
+        }
+
+        #network-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            pointer-events: none;
+            display: block;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-[#126b97] to-[#3bc6e7] relative overflow-x-hidden py-12 px-4">
+
+    <canvas id="network-bg" aria-hidden="true"></canvas>
+
+    <main class="relative z-10 max-w-[1100px] mx-auto space-y-16">
+
+        <section class="rounded-[32px] p-10 md:p-16 relative overflow-hidden -mt-6
+border border-white/20
+glass-card
+shadow-[0_20px_60px_rgba(15,60,110,.35)]">
+
+
+            <!-- DECORACIÓN SUAVE -->
+            <div class="absolute -top-32 -right-32 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl pointer-events-none">
+            </div>
+
+            <!-- CABECERA -->
+            <div class="text-center mb-16 relative z-10">
+                <h2 class="font-black uppercase
+tracking-[0.14em] md:tracking-[0.16em] lg:tracking-[0.18em]
+text-[clamp(1.9rem,4vw,3rem)]
+text-white drop-shadow-lg">
+
+                    Infraestructura IT
+
+                </h2>
+                <div class="h-1.5 w-44 bg-gradient-to-r from-[#7dd3fc] to-[#2b90e3]
+        mx-auto mt-6 rounded-full shadow-lg"></div>
+                <p class="text-sky-100/85 mt-6 max-w-2xl mx-auto text-lg leading-relaxed">
+                    Diseñamos, implantamos y mantenemos infraestructuras tecnológicas
+                    fiables, escalables y alineadas con los objetivos de tu negocio.
+                </p>
+            </div>
+
+            <!-- GRID -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 relative z-10">
+
+                <!-- CARD -->
+                <div class="group relative rounded-3xl p-8 text-center bg-gradient-to-br from-white/35 to-white/10 backdrop-blur-lg border border-white/20
+             hover:bg-white/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl
+               hover:shadow-[0_20px_40px_rgba(43,144,227,.35)]"">
+
+          <div class=" w-16 h-16 mb-6 mx-auto rounded-2xl bg-gradient-to-br from-[#2b90e3] to-[#18476b] flex
+                    items-center justify-center text-2xl text-white shadow-lg group-hover:scale-110 transition">
+                    🖥️
+                </div>
+
+                <h3 class="text-xl font-bold text-white mb-3">
+                    Hardware
+                </h3>
+
+                <p class="text-sky-100/85 text-sm leading-relaxed">
+                    Equipos propios y primeras marcas optimizados para entornos
+                    empresariales exigentes.
+                </p>
+            </div>
+
+            <!-- CARD -->
+            <div class="group relative rounded-3xl p-8 text-center bg-gradient-to-br from-white/35 to-white/10 backdrop-blur-lg border border-white/20
+             hover:bg-white/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl  hover:shadow-[0_20px_40px_rgba(43,144,227,.35)]"">
+
+          <div class=" w-16 h-16 mb-6 mx-auto rounded-2xl bg-gradient-to-br from-[#2b90e3] to-[#18476b] flex
+                items-center justify-center text-2xl text-white shadow-lg group-hover:scale-110 transition">
+                ☁️
+            </div>
+
+            <h3 class="text-xl font-bold text-white mb-3">
+                Sistemas informáticos
+            </h3>
+
+            <p class="text-sky-100/85 text-sm leading-relaxed">
+                Infraestructuras on-premise y soluciones Cloud híbridas
+                diseñadas para crecer contigo.
+            </p>
+            </div>
+
+            <!-- CARD -->
+            <div class="group relative rounded-3xl p-8 text-center bg-gradient-to-br from-white/35 to-white/10 backdrop-blur-lg border border-white/20
+             hover:bg-white/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl   hover:shadow-[0_20px_40px_rgba(43,144,227,.35)]"">
+
+          <div class=" w-16 h-16 mb-6 mx-auto rounded-2xl bg-gradient-to-br from-[#2b90e3] to-[#18476b] flex
+                items-center justify-center text-2xl text-white shadow-lg group-hover:scale-110 transition">
+                🌐
+            </div>
+
+            <h3 class="text-xl font-bold text-white mb-3">
+                Soluciones de Red
+            </h3>
+
+            <p class="text-sky-100/85 text-sm leading-relaxed">
+                Redes WAN / LAN, VPN seguras y entornos WIFI
+                profesionales de alto rendimiento.
+            </p>
+            </div>
+
+            <!-- CARD -->
+            <div class="group relative rounded-3xl p-8 text-center bg-gradient-to-br from-white/35 to-white/10 backdrop-blur-lg border border-white/20
+             hover:bg-white/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl   hover:shadow-[0_20px_40px_rgba(43,144,227,.35)]"">
+
+          <div class=" w-16 h-16 mb-6 mx-auto rounded-2xl bg-gradient-to-br from-[#2b90e3] to-[#18476b] flex
+                items-center justify-center text-2xl text-white shadow-lg group-hover:scale-110 transition">
+                💻
+            </div>
+
+            <h3 class="text-xl font-bold text-white mb-3">
+                Diseño y mantenimiento
+            </h3>
+
+            <p class="text-sky-100/85 text-sm leading-relaxed">
+                Diseño, soporte y mantenimiento continuo de sistemas
+                cloud y on-premise.
+            </p>
+            </div>
+
+            </div>
+        </section>
+
+
+    </main>    <!-- SCRIPTS -->
+    <script>
+        (function () {
+            if (window.skynetNetworkBgInit) return;
+            window.skynetNetworkBgInit = true;
+
+            let canvas = document.getElementById('network-bg');
+            if (!canvas) {
+                canvas = document.createElement('canvas');
+                canvas.id = 'network-bg';
+                canvas.setAttribute('aria-hidden', 'true');
+                document.body.appendChild(canvas);
+            }
+
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return;
+
+            let w = 0;
+            let h = 0;
+            let animId = null;
+            let nodes = [];
+
+            function createNodes(count) {
+                nodes = [];
+                for (let i = 0; i < count; i++) {
+                    nodes.push({
+                        x: Math.random() * w,
+                        y: Math.random() * h,
+                        vx: (Math.random() - 0.5) * 0.45,
+                        vy: (Math.random() - 0.5) * 0.45
+                    });
+                }
+            }
+
+            function resize() {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight;
+                createNodes(Math.floor((w * h) / 10000));
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, w, h);
+                ctx.fillStyle = '#ffffff';
+                ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+                ctx.lineWidth = 1;
+
+                for (let i = 0; i < nodes.length; i++) {
+                    const p = nodes[i];
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    for (let j = i + 1; j < nodes.length; j++) {
+                        const n2 = nodes[j];
+                        const dx = p.x - n2.x;
+                        const dy = p.y - n2.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 120) {
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(n2.x, n2.y);
+                            ctx.stroke();
+                        }
+                    }
+
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    if (p.x < 0 || p.x > w) p.vx *= -1;
+                    if (p.y < 0 || p.y > h) p.vy *= -1;
+                }
+
+                animId = requestAnimationFrame(animate);
+            }
+
+            window.addEventListener('resize', resize, { passive: true });
+            resize();
+            animate();
+
+            document.addEventListener('visibilitychange', function () {
+                if (document.hidden) {
+                    if (animId) cancelAnimationFrame(animId);
+                    animId = null;
+                    return;
+                }
+                if (!animId) animate();
+            });
+        })();
+    </script>
+
+</body>
+
+</html>
+
