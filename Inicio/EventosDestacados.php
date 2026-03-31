@@ -15,7 +15,7 @@ function skynet_eventos_destacados_shortcode() {
     position:relative;
     z-index:5;
     background:#f9fafb;
-    padding:4rem 1.5rem;
+    padding:4rem clamp(16px, 4vw, 40px);
     margin:0 auto;
     max-width:100vw;
     border-radius:2.5rem;
@@ -25,14 +25,14 @@ function skynet_eventos_destacados_shortcode() {
 /* Ajustes responsive del contenedor principal */
 @media (max-width: 968px) {
     #eventos{
-        padding:3rem 1.25rem;
+        padding:3rem clamp(16px, 4vw, 40px);
         border-radius:2rem;
     }
 }
 
 @media (max-width: 640px) {
     #eventos{
-        padding:2.5rem 1rem;
+        padding:2.5rem clamp(16px, 4vw, 40px);
         border-radius:1.5rem;
     }
 }

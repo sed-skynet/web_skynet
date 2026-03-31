@@ -14,7 +14,9 @@
             box-sizing: border-box;
         }
 
-        html { height: 100%; }
+        html {
+            height: 100%;
+        }
 
         body {
             min-height: 100vh;
@@ -24,7 +26,9 @@
             font-family: system-ui, -apple-system, sans-serif;
         }
 
-        main { flex: 1; }
+        main {
+            flex: 1;
+        }
 
         :root {
             --fc-grad1: #123c53;
@@ -51,15 +55,16 @@
 
         /* ───────────────────────────────────────────
            GRID PRINCIPAL — Desktop (≥1025px)
+           Ahora 5 columnas: Brand | Empresa | Soporte | Legal | Contacto
         ─────────────────────────────────────────── */
         .fc-inner {
-            max-width: 1200px;
+            max-width: 1280px;
             width: 100%;
             margin-inline: auto;
             padding: clamp(35px, 5vw, 55px) clamp(20px, 4vw, 40px) 35px;
             display: grid;
-            grid-template-columns: 2fr 1.4fr 1fr 1.6fr;
-            gap: 30px 40px;
+            grid-template-columns: 2fr 1.2fr 1fr 1.4fr 1.6fr;
+            gap: 30px 36px;
             align-items: start;
         }
 
@@ -156,7 +161,7 @@
             color: #fff;
             font-size: 0.9rem;
             transition: background 0.2s, border-color 0.2s, transform 0.2s;
-            padding-left: 0; /* reset hover override */
+            padding-left: 0;
         }
 
         .fc-social a:hover {
@@ -196,8 +201,14 @@
             transform: scale(1.05);
         }
 
-        .badge-ens  { height: 90px; }
-        .badge-iso  { height: 110px; filter: brightness(1.1) drop-shadow(0 3px 8px rgba(0,0,0,.3)); }
+        .badge-ens {
+            height: 90px;
+        }
+
+        .badge-iso {
+            height: 110px;
+            filter: brightness(1.1) drop-shadow(0 3px 8px rgba(0, 0, 0, .3));
+        }
 
         /* ───────────────────────────────────────────
            PIE LEGAL
@@ -221,20 +232,13 @@
             color: var(--fc-accent);
         }
 
-        .fc-bottom .fc-legal-links {
-            display: inline-flex;
-            flex-wrap: wrap;
-            gap: 4px 12px;
-            justify-content: center;
-        }
-
         /* ───────────────────────────────────────────
-           TABLET — ≤1024px
+           TABLET — ≤1100px
         ─────────────────────────────────────────── */
-        @media (max-width: 1024px) {
+        @media (max-width: 1100px) {
             .fc-inner {
-                grid-template-columns: 1fr 1fr;
-                gap: 36px 30px;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 36px 28px;
             }
 
             /* Brand ocupa toda la fila superior */
@@ -249,21 +253,6 @@
             .fc-brand .fc-desc {
                 max-width: 50ch;
             }
-
-            /* Las 3 columnas de nav/contacto: 2 + 1 en fila siguiente */
-            /* Col 2 y 3 quedan en la misma fila, col 4 en fila siguiente centrada */
-        }
-
-        /* Tablet estrecho — 3 columnas de nav apiladas mejor */
-        @media (max-width: 860px) and (min-width: 641px) {
-            .fc-inner {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 30px 24px;
-            }
-
-            .fc-brand {
-                grid-column: 1 / -1;
-            }
         }
 
         /* ───────────────────────────────────────────
@@ -271,14 +260,16 @@
         ─────────────────────────────────────────── */
         @media (max-width: 640px) {
             .fc-inner {
-                grid-template-columns: 1fr;
-                gap: 28px;
+                grid-template-columns: 1fr 1fr;
+                gap: 28px 20px;
                 padding: 32px 20px 28px;
                 text-align: center;
             }
 
             .fc-brand {
-                grid-column: 1;
+                grid-column: 1 / -1;
+                display: flex;
+                flex-direction: column;
                 align-items: center;
             }
 
@@ -292,7 +283,6 @@
                 margin-inline: auto;
             }
 
-            /* Cada columna centrada */
             .fc-col {
                 display: flex;
                 flex-direction: column;
@@ -307,7 +297,6 @@
                 text-align: center;
             }
 
-            /* Evitar que el hover desplace texto en mobile */
             .fc-col a:hover {
                 padding-left: 0;
             }
@@ -316,8 +305,13 @@
                 justify-content: center;
             }
 
-            .badge-ens  { height: 58px; }
-            .badge-iso  { height: 80px; }
+            .badge-ens {
+                height: 58px;
+            }
+
+            .badge-iso {
+                height: 80px;
+            }
 
             .fc-certifications {
                 padding: 20px 16px;
@@ -327,31 +321,33 @@
                 padding: 16px 16px;
                 font-size: .73rem;
             }
-
-            /* Separador punto visible en mobile */
-            .fc-bottom .sep { display: none; }
-            .fc-bottom .fc-legal-links {
-                display: flex;
-                flex-direction: column;
-                gap: 4px;
-                margin-top: 4px;
-            }
         }
 
         /* ───────────────────────────────────────────
-           MOBILE MUY PEQUEÑO — ≤360px
+           MOBILE MUY PEQUEÑO — ≤400px
         ─────────────────────────────────────────── */
-        @media (max-width: 360px) {
+        @media (max-width: 400px) {
             .fc-inner {
+                grid-template-columns: 1fr;
                 padding: 28px 14px 24px;
+                text-align: center;
+            }
+
+            .fc-brand {
+                grid-column: 1;
             }
 
             .fc-logo {
                 max-width: 170px;
             }
 
-            .badge-ens  { height: 48px; }
-            .badge-iso  { height: 65px; }
+            .badge-ens {
+                height: 48px;
+            }
+
+            .badge-iso {
+                height: 65px;
+            }
 
             .fc-social a {
                 width: 32px;
@@ -364,14 +360,13 @@
            STICKY — cuando el contenido no llena pantalla
         ─────────────────────────────────────────── */
         .footer-sticky {
-            position: sticky;  /* empuja al fondo via flex */
+            position: sticky;
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Simulación de contenido mínimo para ver el footer -->
     <main></main>
 
     <!-- ══════════════════════════════════════════
@@ -395,7 +390,7 @@
                 <ul>
                     <li><a href="#nosotros">Nosotros</a></li>
                     <li><a href="#servicios">Servicios IT</a></li>
-                    <li><a href="#comunicacion">Comunicación Web</a></li>
+                    <li><a href="/desarrollo">Desarrollo</a></li>
                 </ul>
             </nav>
 
@@ -404,8 +399,21 @@
                 <h4>Soporte</h4>
                 <ul>
                     <li><a href="#ciberseguridad">Ciberseguridad</a></li>
-                    <li><a href="#rgpd">RGPD</a></li>
                     <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+
+            <!-- Nav Legal -->
+            <nav class="fc-col" aria-label="Legal">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="/aviso-legal">Aviso Legal</a></li>
+                    <li><a href="/privacidad">Privacidad</a></li>
+                    <li><a href="/politica-cookies">Cookies</a></li>
+                    <li><a href="/mas-informacion-cookies">Más Información Cookies</a></li>
+                    <li><a
+                            href="https://skynet-sys.es/wp-content/uploads/2025/07/PSI-Politica-de-Seguridad-de-la-Informacion-v1.2.pdf">Política
+                            de Seguridad</a></li>
                 </ul>
             </nav>
 
@@ -429,28 +437,17 @@
         <!-- CERTIFICACIONES -->
         <div class="fc-certifications">
             <div class="fc-badges-container">
+                <img class="fc-badge badge-iso" src="https://darknet-sys.com/wp-content/uploads/2026/01/Iso.webp"
+                    alt="ISO 27001">
                 <img class="fc-badge badge-ens"
                     src="https://darknet-sys.com/wp-content/uploads/2026/01/distintivo_ens_declaracion_BASICA_RD311-2022-1.png"
-                    alt="ENS Certificación">
-                <img class="fc-badge badge-iso"
-                    src="https://darknet-sys.com/wp-content/uploads/2026/01/Iso.webp"
-                    alt="ISO 27001">
+                    alt="ENS Certificacion">
             </div>
         </div>
 
         <!-- PIE LEGAL -->
         <div class="fc-bottom">
-            <p>
-                © 2025 Skynet Systems
-                <span class="sep"> · </span>
-                <span class="fc-legal-links">
-                    <a href="/aviso-legal">Aviso legal</a>
-                    <a href="/privacidad">Privacidad</a>
-                    <a href="/politica-cookies">Cookies</a>
-                    <a href="/mas-informacion-cookies">Más Información Cookies</a>
-                    <a href="https://skynet-sys.es/wp-content/uploads/2025/07/PSI-Politica-de-Seguridad-de-la-Informacion-v1.2.pdf">Politica de Seguridad de la Informacion</a>
-                </span>
-            </p>
+            <p>© 2025 Skynet Systems</p>
         </div>
 
     </footer>
@@ -493,4 +490,8 @@
     </script>
 
 </body>
+
 </html>
+
+
+

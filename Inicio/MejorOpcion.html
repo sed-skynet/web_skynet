@@ -1,0 +1,153 @@
+<section id="iso" class="zona-nosotros" aria-labelledby="iso-title">
+    <style>
+        /* === ISO (clean) === */
+        #iso {
+            --cian: #00cfff;
+            --txt: #eaf6ff;
+            --soft: #cdefff;
+            --glass: rgba(255, 255, 255, .04);
+            --ring: rgba(0, 207, 255, .18);
+            font-family: 'Segoe UI', sans-serif;
+            color: var(--txt);
+            padding: 6vh clamp(16px, 4vw, 40px) 7vh;
+        }
+
+        #iso .title {
+            font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+            font-weight: 800;
+            color: var(--cian);
+            text-align: center;
+            margin: 0 0 1.25rem;
+        }
+
+        #iso .lead {
+            text-align: center;
+            color: var(--soft);
+            max-width: 900px;
+            margin: 0 auto 2.2rem;
+        }
+
+        /* Contenedor */
+        #iso .wrap {
+            display: grid;
+            gap: 1.8rem;
+            align-items: center;
+            grid-template-columns: minmax(160px, 220px) 1fr;
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--glass);
+            border: 1px solid var(--ring);
+            border-radius: 16px;
+            padding: clamp(16px, 2vw, 24px);
+            backdrop-filter: blur(0px) saturate(110%);
+        }
+
+        /* Logo */
+        #iso .logo {
+            display: grid;
+            place-items: center;
+            aspect-ratio: 3/4;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, .08);
+            background: rgba(255, 255, 255, .03);
+        }
+
+        #iso .logo img {
+            max-width: 70%;
+            height: auto;
+            opacity: .95;
+            transition: transform .25s ease;
+        }
+
+        #iso .logo:hover img {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        /* Texto */
+        #iso .content h3 {
+            font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+            color: var(--cian);
+            margin: .25rem 0 .5rem;
+            font-weight: 700;
+        }
+
+        #iso .content p {
+            color: var(--soft);
+            margin: 0 0 .75rem;
+            line-height: 1.6;
+        }
+
+        /* Lista simple con marcadores cian */
+        #iso .list {
+            margin: .4rem 0 1rem;
+            padding-left: 1.1rem;
+            color: var(--txt);
+        }
+
+        #iso .list li {
+            margin: .35rem 0;
+        }
+
+        #iso .list li::marker {
+            color: var(--cian);
+        }
+
+        /* Nota final sutil */
+        #iso .note {
+            margin-top: .8rem;
+            font-weight: 600;
+            color: var(--txt);
+        }
+
+        /* Responsive */
+        @media (max-width: 860px) {
+            #iso .wrap {
+                grid-template-columns: 1fr;
+            }
+
+            #iso .logo {
+                aspect-ratio: auto;
+                padding: 10px;
+            }
+
+            #iso .logo img {
+                max-width: 140px;
+            }
+
+            #iso .lead {
+                margin-bottom: 1.6rem;
+            }
+        }
+
+        @media (prefers-reduced-motion:reduce) {
+            #iso .logo img {
+                transition: none !important;
+            }
+        }
+    </style>
+
+    <h2 id="iso-title" class="title">¿Por qué somos tu mejor opción?</h2>
+    <div class="wrap">
+        <figure class="logo" aria-hidden="true">
+            <svg viewBox="0 0 120 120" role="img" aria-label="Seguridad tecnologica" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00f2ff"/><stop offset="100%" stop-color="#00cfff"/></linearGradient></defs><path fill="url(#sg)" d="M60 8l40 14v31c0 25-14 47-40 59C34 100 20 78 20 53V22L60 8z"/><path fill="#0c2230" d="M54 67l-12-12 6-6 6 6 18-18 6 6-24 24z"/></svg>
+        </figure>
+
+        <div class="content">
+            <h3>Escuchamos. Entendemos. Solucionamos.</h3>
+            <p>Convertimos tus necesidades en soluciones tecnológicas eficientes, seguras y orientadas a resultados.</p>
+
+            <h3>Beneficios</h3>
+            <ul class="list">
+                <li><strong>Implementación rápida y eficaz</strong></li>
+                <li><strong>Reducción de riesgos</strong></li>
+                <li><strong>Optimización de procesos</strong></li>
+                <li><strong>Soporte continuo</strong></li>
+            </ul>
+
+            <h3>Seguridad certificada</h3>
+            <p>Trabajamos bajo el estándar <strong>ISO&nbsp;27001</strong>, con controles y auditorías continuas.</p>
+
+            <p class="note">Tu tranquilidad es nuestra prioridad.</p>
+        </div>
+    </div>
+</section>
