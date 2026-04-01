@@ -1,0 +1,266 @@
+<section id="asociaciones-logos" aria-label="Asociaciones y colaboraciones">
+    <style>
+        #asociaciones-logos {
+            --pad-x: clamp(16px, 4vw, 40px);
+            --gap: 30px;
+            padding: clamp(6px, 1.2vh, 16px) var(--pad-x) clamp(32px, 4.5vh, 54px);
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        #asociaciones-logos .logos-shell {
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        #asociaciones-logos .logos-head {
+            text-align: center;
+            margin-bottom: clamp(18px, 2.8vh, 26px);
+        }
+
+        #asociaciones-logos .logos-kicker {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.85rem;
+            padding: 0.55rem 1.2rem;
+            border-radius: 999px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #00cfff;
+            background: rgba(0, 207, 255, 0.1);
+            border: 1px solid rgba(0, 207, 255, 0.22);
+            text-transform: uppercase;
+            letter-spacing: 0.2px;
+        }
+
+        #asociaciones-logos .logos-title {
+            color: #00cfff;
+            font-weight: 900;
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            margin: 0.3rem 0 0.6rem;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        #asociaciones-logos .logos-copy {
+            color: #cdefff;
+            opacity: 0.88;
+            font-size: 1.05rem;
+            max-width: 60ch;
+            margin: 0 auto;
+            line-height: 1.6;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        #asociaciones-logos .logos-marquee {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            padding: 4px 0;
+            mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+        }
+
+        #asociaciones-logos .logos-grid {
+            display: flex;
+            align-items: center;
+            gap: var(--gap);
+            width: max-content;
+            will-change: transform;
+        }
+
+        #asociaciones-logos .logo-card {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 170px;
+            min-height: 110px;
+            padding: 16px 20px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.72);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+            backdrop-filter: blur(8px);
+        }
+
+        #asociaciones-logos .logo-card.logo-clear {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.11);
+        }
+
+        #asociaciones-logos .logo-card img {
+            display: block;
+            width: auto;
+            height: 62px;
+            max-width: 150px;
+            object-fit: contain;
+            filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.24));
+            opacity: 0.96;
+            transition: transform 0.18s ease, filter 0.18s ease, opacity 0.18s ease;
+        }
+
+        #asociaciones-logos .logo-card:hover img {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+
+        #asociaciones-logos .logo-card.logo-tall img {
+            height: 84px;
+            max-width: 168px;
+        }
+
+        #asociaciones-logos .logo-card.logo-wide img {
+            max-width: 170px;
+        }
+
+        #asociaciones-logos img[alt="INCIBE"] {
+            height: 92px;
+            max-width: 178px;
+        }
+
+        #asociaciones-logos img[alt="ADIMUR"] {
+            height: 72px;
+            max-width: 182px;
+        }
+
+        #asociaciones-logos img[alt="PETEC"] {
+            height: 82px;
+            max-width: 188px;
+        }
+
+        #asociaciones-logos img[alt="FREMM"] {
+            height: 76px;
+            max-width: 184px;
+        }
+
+        @media (max-width: 767px) {
+            #asociaciones-logos {
+                --gap: 18px;
+                padding: 0 var(--pad-x) clamp(26px, 4vh, 42px);
+            }
+
+            #asociaciones-logos .logo-card {
+                min-width: 138px;
+                min-height: 92px;
+                padding: 12px 14px;
+                border-radius: 20px;
+            }
+
+            #asociaciones-logos .logo-card img {
+                height: 50px;
+                max-width: 118px;
+            }
+
+            #asociaciones-logos .logo-card.logo-tall img {
+                height: 68px;
+                max-width: 128px;
+            }
+
+            #asociaciones-logos img[alt="INCIBE"] {
+                height: 76px;
+                max-width: 140px;
+            }
+
+            #asociaciones-logos img[alt="PETEC"] {
+                height: 66px;
+                max-width: 142px;
+            }
+
+            #asociaciones-logos img[alt="ADIMUR"] {
+                height: 58px;
+                max-width: 132px;
+            }
+
+            #asociaciones-logos img[alt="FREMM"] {
+                height: 62px;
+                max-width: 144px;
+            }
+        }
+    </style>
+
+    <div class="logos-shell">
+        <header class="logos-head">
+            <span class="logos-kicker">Skynet Systems</span>
+            <h2 class="logos-title">Asociaciones y Colaboraciones</h2>
+            <p class="logos-copy">
+                Formamos parte de un ecosistema de entidades y redes de innovación tecnológica comprometidas con el
+                desarrollo empresarial.
+            </p>
+        </header>
+
+        <div class="logos-marquee">
+            <div class="logos-grid" id="logos-track">
+                <div class="logo-card logo-wide logo-clear">
+                    <img decoding="async" src="https://darknet-sys.com/wp-content/uploads/2026/01/PETEC.webp" alt="PETEC">
+                </div>
+                <div class="logo-card logo-tall">
+                    <img decoding="async" src="https://darknet-sys.com/wp-content/uploads/2026/04/TICS-EN-ACCION-2-768x768-1.png" alt="TICS en Acción">
+                </div>
+                <div class="logo-card logo-tall logo-clear">
+                    <img decoding="async" src="https://darknet-sys.com/wp-content/uploads/2026/01/incibe.webp" alt="INCIBE">
+                </div>
+                <div class="logo-card logo-wide">
+                    <img decoding="async" src="https://darknet-sys.com/wp-content/uploads/2026/04/logo-adimur-murcia.png" alt="ADIMUR">
+                </div>
+                <div class="logo-card logo-wide">
+                    <img decoding="async" src="https://darknet-sys.com/wp-content/uploads/2026/04/fremm.png" alt="FREMM">
+                </div>
+                <div class="logo-card logo-wide">
+                    <img decoding="async" src="https://darknet-sys.com/wp-content/uploads/2026/04/indutec-removebg-preview.png" alt="INDUTEC">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (() => {
+            const section = document.getElementById("asociaciones-logos");
+            const track = section?.querySelector("#logos-track");
+            const marquee = section?.querySelector(".logos-marquee");
+            if (!track || !marquee) return;
+
+            let offset = 0;
+            let rafId = 0;
+            let lastTime = 0;
+            let speed = window.innerWidth < 768 ? 28 : 34;
+            let paused = false;
+
+            function firstStepWidth() {
+                const first = track.children[0];
+                if (!first) return 0;
+                const gap = parseFloat(getComputedStyle(track).gap) || 0;
+                return first.getBoundingClientRect().width + gap;
+            }
+
+            function frame(time) {
+                if (!lastTime) lastTime = time;
+                const delta = (time - lastTime) / 1000;
+                lastTime = time;
+
+                if (!paused) {
+                    offset += speed * delta;
+                    const step = firstStepWidth();
+                    if (step > 0 && offset >= step) {
+                        offset -= step;
+                        track.appendChild(track.children[0]);
+                    }
+                    track.style.transform = `translateX(${-offset}px)`;
+                }
+
+                rafId = requestAnimationFrame(frame);
+            }
+
+            function updateSpeed() {
+                speed = window.innerWidth < 768 ? 28 : 34;
+            }
+
+            marquee.addEventListener("mouseenter", () => { paused = true; });
+            marquee.addEventListener("mouseleave", () => { paused = false; });
+            window.addEventListener("resize", updateSpeed);
+
+            rafId = requestAnimationFrame(frame);
+        })();
+    </script>
+</section>

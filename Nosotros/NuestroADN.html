@@ -1,0 +1,441 @@
+<!-- ==========================================
+     CULTURA Y AMBIENTE (Glass/Cian · 3 pilares + chips)
+     + Partículas “bailando” por toda la sección (Canvas)
+     ========================================== -->
+
+<canvas id="network-bg" aria-hidden="true"
+    style="position:fixed;inset:0;width:100vw;height:100vh;z-index:-2;pointer-events:none;display:block;"></canvas>
+
+<section id="cultura" class="sn-cultureBalanced v6" aria-labelledby="cultura-title">
+
+    <div class="sn-container">
+        <header class="intro" aria-labelledby="cultura-title">
+            <span class="kicker" aria-hidden="true">Sobre nosotros</span>
+            <h2 id="cultura-title" class="sn-h2">Nuestro ADN</h2>
+            <p class="lead">
+                Personas primero, procesos claros y excelencia técnica. Buscamos soluciones útiles, mantenibles y
+                seguras.
+            </p>
+        </header>
+        <div class="grid-cultura" role="region" aria-label="Cultura, metodología y servicios">
+            <!-- Intro -->
+
+
+            <!-- Col 1 -->
+            <section class="card how card-anim" aria-labelledby="how-title">
+                <div class="card-head">
+                    <span class="mini">Metodología</span>
+                </div>
+
+                <ul class="list" aria-label="Metodología de trabajo">
+                    <li><span aria-hidden="true">🧩</span> Análisis inicial y plan de implantación a medida.</li>
+                    <li><span aria-hidden="true">🔁</span> Metodología ágil, entregas iterativas y feedback continuo.
+                    </li>
+                    <li><span aria-hidden="true">✅</span> Comunicación Fluida</li>
+                </ul>
+            </section>
+
+            <!-- Col 2 -->
+            <section class="card pillars card-anim" aria-labelledby="pillars-title">
+                <div class="card-head">
+                    <span class="mini">Cultura</span>
+
+                </div>
+
+                <ul class="list" aria-label="Pilares de cultura">
+                    <li><span aria-hidden="true">🧭</span> Transparencia: decisiones trazables y comunicación abierta.
+                    </li>
+                    <li><span aria-hidden="true">🤝</span> Colaboración: equipos mixtos técnicos/creativos con clientes.
+                    </li>
+                    <li><span aria-hidden="true">📚</span> Aprendizaje continuo y revisión entre pares.</li>
+                </ul>
+            </section>
+
+            <!-- Col 3 -->
+            <section class="card quality card-anim" aria-labelledby="quality-title">
+                <div class="card-head">
+                    <span class="mini">Garantías</span>
+                </div>
+
+                <ul class="list" aria-label="Garantías de calidad y seguridad">
+                    <li><span aria-hidden="true">🛡️</span> Seguridad por defecto (hardening, copias y controles RGPD).
+                    </li>
+                    <li><span aria-hidden="true">🧪</span> Validación: pruebas, checklist y control de cambios.</li>
+                    <li><span aria-hidden="true">📈</span> Monitorización y mejora continua orientada a resultados.</li>
+                </ul>
+            </section>
+
+        </div>
+    </div>
+
+    <style>
+        /* =========================
+       SCOPE: solo #cultura
+       ========================= */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle, #247ba0 0%, #1b4f72 100%);
+            z-index: -3;
+            pointer-events: none;
+        }
+
+        #cultura.sn-cultureBalanced.v6 {
+            --color-primary: #00cfff;
+            --color-accent: #00f2ff;
+            --color-light: #eaf6ff;
+            --color-text-muted: #cdefff;
+
+            --glass-bg: rgba(255, 255, 255, .045);
+            --glass-border: rgba(255, 255, 255, .10);
+            --glass-shadow: 0 10px 26px rgba(0, 207, 255, .14);
+
+            padding-block: clamp(56px, 8.5vh, 100px);
+            padding-inline: 5vw;
+
+            font-family: 'Segoe UI', sans-serif;
+            color: var(--color-light);
+            position: relative;
+            overflow: hidden;
+            isolation: auto;
+        }
+
+        /* Contenido por encima */
+        #cultura .sn-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Intro */
+        #cultura .intro {
+            text-align: center;
+            margin-bottom: clamp(10px, 1.5vw, 16px);
+        }
+
+        #cultura .kicker {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: .85rem;
+            padding: .55rem 1.05rem;
+            border-radius: 999px;
+            font-size: .98rem;
+            font-weight: 850;
+            color: var(--color-primary);
+            background: rgba(0, 207, 255, .10);
+            border: 1px solid rgba(0, 207, 255, .22);
+            letter-spacing: .2px;
+        }
+
+        #cultura .sn-h2 {
+            color: var(--color-primary) !important;
+            font-weight: 900;
+            font-size: clamp(2.15rem, 3.35vw, 2.85rem);
+            margin: 0 0 .5rem;
+            text-align: center;
+        }
+
+        #cultura .lead {
+            max-width: 74ch;
+            margin: 0 auto;
+            color: var(--color-text-muted);
+            opacity: .92;
+            line-height: 1.65;
+            font-size: 1.12rem;
+            text-align: center;
+        }
+
+        /* Grid */
+        #cultura .grid-cultura {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-areas:
+                "intro intro intro"
+                "how   pillars quality"
+                "services services services";
+            gap: clamp(14px, 2vw, 22px);
+            align-items: stretch;
+        }
+
+        #cultura .how {
+            grid-area: how;
+        }
+
+        #cultura .pillars {
+            grid-area: pillars;
+        }
+
+        #cultura .quality {
+            grid-area: quality;
+        }
+
+        /* Cards base */
+        #cultura .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            box-shadow: var(--glass-shadow);
+            padding: 1.25rem 1.35rem;
+            backdrop-filter: blur(0px);
+            -webkit-backdrop-filter: blur(0px);
+            transition: transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Cabecera de card (mini + título) */
+        #cultura .card-head {
+            display: grid;
+            gap: .2rem;
+            margin-bottom: .35rem;
+        }
+
+        #cultura .mini {
+            font-size: .9rem;
+            font-weight: 850;
+            color: rgba(234, 246, 255, .82);
+            letter-spacing: .16px;
+            text-transform: uppercase;
+        }
+
+        #cultura .sn-h3 {
+            color: var(--color-primary);
+            font-weight: 900;
+            font-size: 1.22rem;
+            margin: 0;
+        }
+
+        /* List */
+        #cultura .list {
+            list-style: none;
+            padding: 0;
+            margin: .7rem 0 0;
+            display: grid;
+            gap: .7rem;
+        }
+
+        #cultura .list li {
+            display: grid;
+            grid-template-columns: 1.55rem 1fr;
+            gap: .65rem;
+            align-items: start;
+            color: var(--color-text-muted);
+            line-height: 1.55;
+            font-size: 1.02rem;
+        }
+
+        /* Servicios chips */
+        #cultura .services-chips {
+            grid-area: services;
+            text-align: center;
+            margin-top: clamp(4px, 1vw, 10px);
+            padding-top: clamp(2px, .8vw, 6px);
+        }
+
+        #cultura .services-chips .sn-h3 {
+            margin-bottom: .75rem;
+            font-size: 1.2rem;
+        }
+
+        #cultura .chip-row {
+            display: flex;
+            gap: .7rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        #cultura .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: .55rem;
+            padding: .7rem 1rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .14);
+            color: rgba(234, 246, 255, .92);
+            box-shadow: 0 12px 26px rgba(0, 207, 255, .10);
+            font-weight: 800;
+            text-decoration: none;
+            transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+        }
+
+        #cultura .chip span[aria-hidden="true"] {
+            width: 1.45rem;
+            display: inline-flex;
+            justify-content: center;
+            flex: 0 0 1.45rem;
+        }
+
+        #cultura .chip:hover {
+            transform: translateY(-1px);
+            background: rgba(0, 207, 255, .10);
+            border-color: rgba(0, 207, 255, .26);
+            box-shadow: 0 16px 34px rgba(0, 207, 255, .14);
+        }
+
+        /* removed rogue bg override */
+        #cultura .chip--ghost {
+            background: rgba(255, 255, 255, .04);
+            border-color: rgba(255, 255, 255, .12);
+            opacity: .95;
+        }
+
+        /* Animación cards */
+        #cultura .card-anim {
+            will-change: transform, box-shadow;
+            animation: snFadeInUp .45s ease both, snFloatCard 6.5s ease-in-out .45s infinite alternate;
+        }
+
+        @keyframes snFadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes snFloatCard {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-8px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            #cultura .grid-cultura {
+                grid-template-columns: 1fr 1fr;
+                grid-template-areas:
+                    "intro intro"
+                    "how pillars"
+                    "quality quality"
+                    "services services";
+            }
+        }
+
+        @media (max-width: 680px) {
+            #cultura .grid-cultura {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "intro"
+                    "how"
+                    "pillars"
+                    "quality"
+                    "services";
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #network-bg {
+                display: none !important;
+            }
+
+            #cultura .card-anim {
+                animation: none !important;
+            }
+
+            #cultura .card,
+            #cultura .chip {
+                transition: none !important;
+            }
+        }
+
+        #cultura.sn-cultureBalanced.v6 {
+            --color-primary: #00cfff;
+            --color-accent: #00f2ff;
+            --color-light: #eaf6ff;
+            --color-text-muted: #cdefff;
+
+
+            padding-block: clamp(56px, 8.5vh, 100px);
+            padding-inline: 5vw;
+
+            font-family: 'Segoe UI', sans-serif;
+            color: var(--color-light);
+            position: relative;
+            overflow: hidden;
+            isolation: auto;
+        }
+    </style>
+
+
+    <script>
+        (function () {
+            if (window.skynetNetworkBgInit) return;
+            window.skynetNetworkBgInit = true;
+
+            const canvas = document.getElementById('network-bg');
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return;
+
+            let width = 0, height = 0, nodes = [], rafId = null;
+
+            function createNodes(count) {
+                nodes = [];
+                for (let i = 0; i < count; i++) {
+                    nodes.push({
+                        x: Math.random() * width, y: Math.random() * height,
+                        vx: (Math.random() - 0.5) * 0.45, vy: (Math.random() - 0.5) * 0.45
+                    });
+                }
+            }
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+                createNodes(Math.floor((width * height) / 10000));
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, width, height);
+                ctx.fillStyle = '#ffffff';
+                ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+                ctx.lineWidth = 1;
+
+                for (let i = 0; i < nodes.length; i++) {
+                    const n = nodes[i];
+                    ctx.beginPath();
+                    ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    for (let j = i + 1; j < nodes.length; j++) {
+                        const n2 = nodes[j];
+                        const dx = n.x - n2.x, dy = n.y - n2.y;
+                        if (Math.sqrt(dx * dx + dy * dy) < 120) {
+                            ctx.beginPath();
+                            ctx.moveTo(n.x, n.y);
+                            ctx.lineTo(n2.x, n2.y);
+                            ctx.stroke();
+                        }
+                    }
+
+                    n.x += n.vx; n.y += n.vy;
+                    if (n.x < 0 || n.x > width) n.vx *= -1;
+                    if (n.y < 0 || n.y > height) n.vy *= -1;
+                }
+
+                rafId = requestAnimationFrame(draw);
+            }
+
+            window.addEventListener('resize', resize, { passive: true });
+            resize();
+            draw();
+
+            document.addEventListener('visibilitychange', function () {
+                if (document.hidden) { if (rafId) cancelAnimationFrame(rafId); rafId = null; return; }
+                if (!rafId) draw();
+            });
+        })();
+    </script>
+</section>
