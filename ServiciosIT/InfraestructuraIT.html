@@ -7,13 +7,11 @@
 
     <title>Soluciones TIC & Seguridad | Infraestructura y Ciberseguridad</title>
 
-    <!-- SEO -->
     <meta name="description"
         content="Soluciones TIC, infraestructura IT y ciberseguridad para empresas. Redes, cloud, sistemas y protección avanzada.">
     <meta name="keywords" content="servicios IT, ciberseguridad, infraestructura, redes, cloud, sistemas">
     <meta name="author" content="Soluciones TIC & Seguridad">
 
-    <!-- Open Graph -->
     <meta property="og:title" content="Soluciones TIC & Seguridad">
     <meta property="og:description" content="Infraestructura IT y ciberseguridad empresarial">
     <meta property="og:type" content="website">
@@ -27,65 +25,12 @@
             font-family: 'Inter', system-ui, sans-serif;
         }
 
-        /* PARTNERS TITLE PROTAGONISMO */
-        .partners-title {
-            font-size: 1.4rem;
-            font-weight: 900;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: #ffffff;
-            text-align: center;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 14px;
-        }
-
-        .partners-line {
-            width: 90px;
-            height: 4px;
-            margin: -15px auto 0;
-            background: linear-gradient(90deg, #2b90e3, #7dd3fc);
-            border-radius: 999px;
-            box-shadow: 0 4px 14px rgba(43, 144, 227, 0.6);
-        }
-
-        .partner-logo {
-            background: #ffffff;
-            border-radius: 14px;
-            padding: 12px 18px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-            transition: transform .3s ease, box-shadow .3s ease;
-        }
-
-        .partner-logo:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
-        }
-
-        .partner-logo img {
-            max-height: 100%;
-            max-width: 100%;
-            object-fit: contain;
-        }
-
-        /* WatchGuard: logo más grande dentro del mismo recuadro */
-        .logo-watchguard {
-            transform: scale(1.25);
-        }
-
         .glass-card {
             background: rgba(255, 255, 255, 0.22);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
             border: 1px solid rgba(255, 255, 255, 0.18);
             box-shadow: 0 8px 32px rgba(44, 70, 130, 0.18);
-        }
-
-        .text-gradient {
-            background: linear-gradient(90deg, #ffffff 0%, #e0f2ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         @keyframes float {
@@ -128,128 +73,246 @@
             pointer-events: none;
             display: block;
         }
+
+        .timeline-container {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-row {
+            display: flex;
+            gap: 35px;
+            position: relative;
+            padding-bottom: 32px;
+        }
+
+        .timeline-left {
+            min-width: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .timeline-row:first-child .timeline-left::before {
+            content: "";
+            position: absolute;
+            top: -44px;
+            width: 2px;
+            height: 44px;
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.35), transparent);
+        }
+
+        .icon-bubble {
+            width: 62px;
+            height: 62px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #0d3452;
+            background: #ffffff;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            z-index: 2;
+        }
+
+        .line-connector {
+            position: absolute;
+            top: 25px;
+            bottom: 0;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.35);
+            z-index: 0;
+        }
+
+        .timeline-row:last-child .line-connector {
+            background: linear-gradient(to bottom,
+                    rgba(255, 255, 255, 0.35) 0%,
+                    rgba(255, 255, 255, 0.35) 70%,
+                    rgba(255, 255, 255, 0) 100%);
+        }
+
+        .timeline-panel {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            border-radius: 22px;
+            padding: 1.35rem 1.55rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 8px 24px rgba(8, 38, 68, 0.16);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .timeline-panel h3 {
+            margin: 0 0 .45rem;
+            font-size: clamp(1.15rem, 1.6vw, 1.7rem);
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: .03em;
+            text-transform: uppercase;
+        }
+
+        .timeline-panel p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.88);
+            line-height: 1.55;
+            font-size: 0.98rem;
+            max-width: 620px;
+        }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 140px;
+            padding: 10px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 12px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: .95rem;
+            white-space: nowrap;
+            background: rgba(255, 255, 255, 0.08);
+            transition: background-color .2s ease, border-color .2s ease, color .2s ease, box-shadow .2s ease;
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.16);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
+        }
+
+        .btn-ghost:focus-visible {
+            outline: 2px solid rgba(0, 207, 255, 0.8);
+            outline-offset: 2px;
+        }
+
+        @media (max-width: 820px) {
+            .timeline-row {
+                gap: 18px;
+            }
+
+            .timeline-left {
+                min-width: 50px;
+            }
+
+            .icon-bubble {
+                width: 42px;
+                height: 42px;
+                border-radius: 12px;
+                font-size: 1rem;
+            }
+
+            .timeline-panel h3 {
+                font-size: 1.05rem;
+            }
+
+            .timeline-panel {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
     </style>
 </head>
 
-<body class="min-h-screen bg-gradient-to-br from-[#126b97] to-[#3bc6e7] relative overflow-x-hidden py-12 px-4">
+<body class="min-h-screen bg-gradient-to-br from-[#126b97] to-[#3bc6e7] relative overflow-x-hidden py-10 px-4">
 
     <canvas id="network-bg" aria-hidden="true"></canvas>
 
-    <main class="relative z-10 max-w-[1100px] mx-auto space-y-16">
+    <main class="relative z-10 max-w-[1100px] mx-auto space-y-10">
 
-        <section class="rounded-[32px] p-10 md:p-16 relative overflow-hidden -mt-6
-border border-white/20
-glass-card
-shadow-[0_20px_60px_rgba(15,60,110,.35)]">
+        <section
+            class="glass-card rounded-[32px] px-8 py-10 md:px-12 md:py-12 relative overflow-hidden border border-white/20 shadow-[0_20px_60px_rgba(15,60,110,.35)]">
 
-
-            <!-- DECORACIÓN SUAVE -->
             <div class="absolute -top-32 -right-32 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl pointer-events-none">
             </div>
 
-            <!-- CABECERA -->
             <div class="text-center mb-16 relative z-10">
-                <h2 class="font-black uppercase
-tracking-[0.14em] md:tracking-[0.16em] lg:tracking-[0.18em]
-text-[clamp(1.9rem,4vw,3rem)]
-text-white drop-shadow-lg">
-
+                <h2
+                    class="font-black uppercase tracking-[0.14em] md:tracking-[0.16em] lg:tracking-[0.18em] text-[clamp(1.9rem,4vw,3rem)] text-white drop-shadow-lg">
                     Infraestructura IT
-
                 </h2>
-                <div class="h-1.5 w-44 bg-gradient-to-r from-[#7dd3fc] to-[#2b90e3]
-        mx-auto mt-6 rounded-full shadow-lg"></div>
+                <div
+                    class="h-1.5 w-44 bg-gradient-to-r from-[#7dd3fc] to-[#2b90e3] mx-auto mt-6 rounded-full shadow-lg">
+                </div>
                 <p class="text-sky-100/85 mt-6 max-w-2xl mx-auto text-lg leading-relaxed">
                     Diseñamos, implantamos y mantenemos infraestructuras tecnológicas
                     fiables, escalables y alineadas con los objetivos de tu negocio.
                 </p>
             </div>
 
-            <!-- GRID -->
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 relative z-10">
+            <div class="timeline-container">
 
-                <!-- CARD -->
-                <div class="group relative rounded-3xl p-8 text-center bg-gradient-to-br from-white/35 to-white/10 backdrop-blur-lg border border-white/20
-             hover:bg-white/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl
-               hover:shadow-[0_20px_40px_rgba(43,144,227,.35)]"">
+                <article class="timeline-row">
+                    <div class="timeline-left">
+                        <div class="icon-bubble">💻</div>
+                        <div class="line-connector"></div>
+                    </div>
+                    <div class="timeline-panel">
+                        <div class="panel-content">
+                            <h3>Diseño y mantenimiento</h3>
+                            <p>Diseño, soporte y mantenimiento continuo de sistemas cloud y on-premise.</p>
+                        </div>
+                        <a href="/contacto" class="btn-ghost">Solicitar asesoría →</a>
+                    </div>
+                </article>
 
-          <div class=" w-16 h-16 mb-6 mx-auto rounded-2xl bg-gradient-to-br from-[#2b90e3] to-[#18476b] flex
-                    items-center justify-center text-2xl text-white shadow-lg group-hover:scale-110 transition">
-                    🖥️
-                </div>
+                <article class="timeline-row">
+                    <div class="timeline-left">
+                        <div class="icon-bubble">☁️</div>
+                        <div class="line-connector"></div>
+                    </div>
+                    <div class="timeline-panel">
+                        <div class="panel-content">
+                            <h3>Sistemas informáticos</h3>
+                            <p>Infraestructuras on-premise y soluciones Cloud híbridas diseñadas para crecer contigo.
+                            </p>
+                        </div>
+                        <a href="/contacto" class="btn-ghost">Más info →</a>
+                    </div>
+                </article>
 
-                <h3 class="text-xl font-bold text-white mb-3">
-                    Hardware
-                </h3>
+                <article class="timeline-row">
+                    <div class="timeline-left">
+                        <div class="icon-bubble">🌐</div>
+                        <div class="line-connector"></div>
+                    </div>
+                    <div class="timeline-panel">
+                        <div class="panel-content">
+                            <h3>Soluciones de Red</h3>
+                            <p>Redes WAN / LAN, VPN seguras y entornos WIFI profesionales de alto rendimiento.</p>
+                        </div>
+                        <a href="/contacto" class="btn-ghost">Ver estrategia →</a>
+                    </div>
+                </article>
 
-                <p class="text-sky-100/85 text-sm leading-relaxed">
-                    Equipos propios y primeras marcas optimizados para entornos
-                    empresariales exigentes.
-                </p>
-            </div>
-
-            <!-- CARD -->
-            <div class="group relative rounded-3xl p-8 text-center bg-gradient-to-br from-white/35 to-white/10 backdrop-blur-lg border border-white/20
-             hover:bg-white/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl  hover:shadow-[0_20px_40px_rgba(43,144,227,.35)]"">
-
-          <div class=" w-16 h-16 mb-6 mx-auto rounded-2xl bg-gradient-to-br from-[#2b90e3] to-[#18476b] flex
-                items-center justify-center text-2xl text-white shadow-lg group-hover:scale-110 transition">
-                ☁️
-            </div>
-
-            <h3 class="text-xl font-bold text-white mb-3">
-                Sistemas informáticos
-            </h3>
-
-            <p class="text-sky-100/85 text-sm leading-relaxed">
-                Infraestructuras on-premise y soluciones Cloud híbridas
-                diseñadas para crecer contigo.
-            </p>
-            </div>
-
-            <!-- CARD -->
-            <div class="group relative rounded-3xl p-8 text-center bg-gradient-to-br from-white/35 to-white/10 backdrop-blur-lg border border-white/20
-             hover:bg-white/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl   hover:shadow-[0_20px_40px_rgba(43,144,227,.35)]"">
-
-          <div class=" w-16 h-16 mb-6 mx-auto rounded-2xl bg-gradient-to-br from-[#2b90e3] to-[#18476b] flex
-                items-center justify-center text-2xl text-white shadow-lg group-hover:scale-110 transition">
-                🌐
-            </div>
-
-            <h3 class="text-xl font-bold text-white mb-3">
-                Soluciones de Red
-            </h3>
-
-            <p class="text-sky-100/85 text-sm leading-relaxed">
-                Redes WAN / LAN, VPN seguras y entornos WIFI
-                profesionales de alto rendimiento.
-            </p>
-            </div>
-
-            <!-- CARD -->
-            <div class="group relative rounded-3xl p-8 text-center bg-gradient-to-br from-white/35 to-white/10 backdrop-blur-lg border border-white/20
-             hover:bg-white/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl   hover:shadow-[0_20px_40px_rgba(43,144,227,.35)]"">
-
-          <div class=" w-16 h-16 mb-6 mx-auto rounded-2xl bg-gradient-to-br from-[#2b90e3] to-[#18476b] flex
-                items-center justify-center text-2xl text-white shadow-lg group-hover:scale-110 transition">
-                💻
-            </div>
-
-            <h3 class="text-xl font-bold text-white mb-3">
-                Diseño y mantenimiento
-            </h3>
-
-            <p class="text-sky-100/85 text-sm leading-relaxed">
-                Diseño, soporte y mantenimiento continuo de sistemas
-                cloud y on-premise.
-            </p>
-            </div>
-
+                <article class="timeline-row">
+                    <div class="timeline-left">
+                        <div class="icon-bubble">🖥️</div>
+                        <div class="line-connector"></div>
+                    </div>
+                    <div class="timeline-panel">
+                        <div class="panel-content">
+                            <h3>Hardware</h3>
+                            <p>Equipos propios y primeras marcas optimizados para entornos empresariales exigentes.</p>
+                        </div>
+                        <a href="/contacto" class="btn-ghost">Ver detalle →</a>
+                    </div>
+                </article>
             </div>
         </section>
 
+    </main>
 
-    </main>    <!-- SCRIPTS -->
     <script>
         (function () {
             if (window.skynetNetworkBgInit) return;
@@ -342,4 +405,3 @@ text-white drop-shadow-lg">
 </body>
 
 </html>
-

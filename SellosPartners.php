@@ -36,6 +36,7 @@ function skynet_sellos_partners_shortcode( $atts = [] ) {
         <div class="sello-card"><img decoding="async" class="sello" src="https://darknet-sys.com/wp-content/uploads/2026/01/bp-del-e1769514187514.png" alt="Dell Partner"></div>
         <div class="sello-card"><img decoding="async" class="sello" src="https://darknet-sys.com/wp-content/uploads/2026/01/wg1-Gold-Reseller-logo.png" alt="WatchGuard Gold Reseller"></div>
         <div class="sello-card"><img decoding="async" class="sello" src="https://darknet-sys.com/wp-content/uploads/2026/01/acens-logo-2.webp" alt="Acens Partner"></div>
+        <div class="sello-card"><img decoding="async" class="sello" src="https://darknet-sys.com/wp-content/uploads/2026/04/indutec-1.png" alt="Indutec"></div>
 
         <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2020/04/google-partner.png" alt="Google Partner"></div>
         <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2022/06/microsoft-gris.png" alt="Microsoft Partner"></div>
@@ -44,6 +45,7 @@ function skynet_sellos_partners_shortcode( $atts = [] ) {
         <div class="sello-card"><img decoding="async" class="sello" src="https://darknet-sys.com/wp-content/uploads/2026/01/bp-del-e1769514187514.png" alt="Dell Partner"></div>
         <div class="sello-card"><img decoding="async" class="sello" src="https://darknet-sys.com/wp-content/uploads/2026/01/wg1-Gold-Reseller-logo.png" alt="WatchGuard Gold Reseller"></div>
         <div class="sello-card"><img decoding="async" class="sello" src="https://darknet-sys.com/wp-content/uploads/2026/01/acens-logo-2.webp" alt="Acens Partner"></div>
+        <div class="sello-card"><img decoding="async" class="sello" src="https://darknet-sys.com/wp-content/uploads/2026/04/indutec-1.png" alt="Indutec"></div>
       </div>
     </div>
   </div>
