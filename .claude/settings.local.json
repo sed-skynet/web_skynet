@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /c/Users/suhai/Documents/proyectos/skynet/web_skynet -name single-noticia* -o -name single.php)",
+      "WebFetch(domain:skynet-sys.es)"
+    ]
+  }
+}
