@@ -1,10 +1,22 @@
 <?php
 /**
- * SKYNET SYSTEMS — Optimizaciones de rendimiento para WordPress
+ * Blocksy functions and definitions
  *
- * INSTRUCCIONES:
- * Copia el contenido de este archivo al final del functions.php de tu tema activo.
- * Ruta en servidor: wp-content/themes/TU-TEMA/functions.php
+ * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ *
+ * @package Blocksy
+ */
+
+if (version_compare(PHP_VERSION, '5.7.0', '<')) {
+	require get_template_directory() . '/inc/php-fallback.php';
+	return;
+}
+
+require get_template_directory() . '/inc/init.php';
+
+
+/**
+ * SKYNET SYSTEMS — Optimizaciones de rendimiento para WordPress
  *
  * PARA EL .htaccess (añadir en la raíz de WordPress, antes de # BEGIN WordPress):
  * ─────────────────────────────────────────────────────────────────────
@@ -171,13 +183,13 @@ function skynet_remove_query_strings( $src ) {
 // esperar a que carguen las hojas de estilo externas del tema.
 //
 // Estructura de archivos (relativa a la raíz del tema activo):
-//   critical-css/global.css      → fondo + cabecera  (todas las páginas)
-//   critical-css/home.css        → hero Inicio
+//   critical-css/global.css       → fondo + cabecera  (todas las páginas)
+//   critical-css/home.css         → hero Inicio
 //   critical-css/servicios-it.css → hero Servicios IT / Infraestructura IT
-//   critical-css/desarrollo.css  → hero Desarrollo / Comunicación Web
-//   critical-css/actualidad.css  → cabecera Actualidad
-//   critical-css/nosotros.css    → sección Nosotros
-//   critical-css/inner.css       → fallback páginas internas
+//   critical-css/desarrollo.css   → hero Desarrollo / Comunicación Web
+//   critical-css/actualidad.css   → cabecera Actualidad
+//   critical-css/nosotros.css     → sección Nosotros
+//   critical-css/inner.css        → fallback páginas internas
 //
 // Para regenerar un archivo: edita el CSS en critical-css/ y se aplica
 // automáticamente en el siguiente pageload (no hay caché de PHP aquí).
@@ -216,16 +228,12 @@ add_action( 'wp_head', function () {
 }, 1 ); // priority 1 → antes que cualquier otro wp_head
 
 
-// ── 12. VIEW TRANSITIONS API + INSTANT.PAGE ──────────────────────────────────
-// Combina dos técnicas para una navegación casi instantánea:
-//   a) instant.page: precarga la página al hover (~300 ms antes del clic).
-//   b) View Transitions API: el navegador aplica un fade nativo entre páginas
-//      sin ningún JS adicional. Compatible con Chrome 111+, Edge 111+, Safari 18+.
-//      En navegadores sin soporte simplemente se ignora (degradación elegante).
+// ── 12. VIEW TRANSITIONS API ─────────────────────────────────────────────────
+// El navegador aplica un fade nativo entre páginas sin JS adicional.
+// Compatible con Chrome 111+, Edge 111+, Safari 18+.
+// En navegadores sin soporte se ignora (degradación elegante).
 add_action( 'wp_head', function () {
-    // Meta hint para View Transitions (navegación same-origin)
     echo '<meta name="view-transition" content="same-origin">' . "\n";
-    // CSS: activa la transición automática al navegar
     echo '<style id="sky-view-transitions">@view-transition{navigation:auto}</style>' . "\n";
 }, 2 );
 

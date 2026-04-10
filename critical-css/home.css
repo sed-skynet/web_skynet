@@ -1,0 +1,175 @@
+/*
+ * SKYNET SYSTEMS — CSS crítico HOME (page-id-96)
+ * Cubre: hero ExpertosTecnología (#gancho-hero) + variables de la home.
+ * Ruta en servidor: wp-content/themes/TU-TEMA/critical-css/home.css
+ */
+
+/* ── Variables globales de la home ── */
+body.page-id-96{
+  --home-side-pad:clamp(16px,4vw,40px);
+  --home-max:1280px;
+  --home-gap:clamp(56px,7vw,96px);
+}
+
+/* ── Resets de márgenes Elementor (evita saltos de layout) ── */
+body.page-id-96 .elementor-widget-shortcode,
+body.page-id-96 .elementor-widget-shortcode .elementor-widget-container,
+body.page-id-96 .e-con,
+body.page-id-96 .e-con>.e-con-inner{
+  margin-top:0!important;
+  margin-bottom:0!important;
+}
+body.page-id-96 .elementor-widget-shortcode .elementor-widget-container>p{
+  margin:0!important;
+}
+body.page-id-96 #gancho-hero,
+body.page-id-96 #servicios-2,
+body.page-id-96 #pilares-glass,
+body.page-id-96 #iso,
+body.page-id-96 [id^="ti-pack-"],
+body.page-id-96 #eventos{
+  margin-top:0!important;
+  margin-bottom:0!important;
+}
+body.page-id-96 #gancho-hero{
+  margin-top:clamp(44px,5vw,72px)!important;
+  padding-top:clamp(36px,5vw,72px)!important;
+  padding-left:var(--home-side-pad)!important;
+  padding-right:var(--home-side-pad)!important;
+}
+
+/* ── Sección hero ── */
+#gancho-hero{
+  --cian:#00cfff;
+  --cian-2:#00f2ff;
+  --txt:#eaf6ff;
+  --txt-soft:#cdefff;
+  padding:0;margin:0;
+  font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
+  color:var(--txt);
+  position:relative;overflow:hidden;
+  min-height:clamp(460px,64vh,620px);
+  display:flex;align-items:flex-start;justify-content:center;
+  background:transparent;
+}
+#gancho-hero::before,#gancho-hero::after{content:none}
+
+/* ── Contenedor principal del hero ── */
+.zona-gancho__container{
+  position:relative;z-index:2;
+  max-width:var(--home-max,1280px);margin:0 auto;
+  padding:clamp(18px,2.8vh,32px) var(--home-side-pad,clamp(16px,4vw,40px)) clamp(18px,3.5vh,44px);
+  text-align:center;
+  animation:fadeInUp 1s ease-out;
+}
+@keyframes fadeInUp{
+  from{transform:translateY(22px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+
+/* ── Badge superior ── */
+.zona-gancho__logo{display:inline-block;margin-bottom:2.25rem}
+.zona-gancho__logo-text{
+  font-size:1.3rem;font-weight:700;color:#00cfff;
+  letter-spacing:3.5px;text-transform:uppercase;
+  position:relative;padding:0 24px;
+}
+
+/* ── Título principal (LCP) ── */
+.zona-gancho__heading{
+  font-size:clamp(2.8rem,6.2vw,5.2rem);
+  line-height:1.08;font-weight:800;
+  margin:0 0 1.75rem;
+  color:#00cfff!important;
+  animation:titleGlow 6s ease-in-out infinite;
+}
+@keyframes titleGlow{
+  0%,100%{filter:brightness(1)}
+  50%{filter:brightness(1.22)}
+}
+
+/* ── Subtítulo ── */
+.zona-gancho__sub{
+  font-size:clamp(1.15rem,2vw,1.45rem);
+  color:#cdefff;max-width:980px;
+  margin:0 auto 2.75rem;
+  opacity:.95;line-height:1.7;font-weight:300;
+  animation:fadeInUp 1s ease-out .2s both;
+}
+
+/* ── Emblema de características ── */
+.zona-gancho__emblema{
+  display:inline-flex;align-items:center;gap:22px;
+  margin:1rem auto 3rem;padding:16px 32px;
+  border-radius:999px;
+  border:1px solid rgba(0,207,255,.28);
+  background:rgba(0,207,255,.06);
+  box-shadow:0 10px 36px rgba(0,255,255,.12) inset,0 6px 28px rgba(0,255,255,.18);
+  font-weight:600;font-size:clamp(.95rem,1.2vw,1.05rem);
+  color:#eaf6ff;backdrop-filter:blur(10px);
+  flex-wrap:wrap;justify-content:center;
+  animation:fadeInUp 1s ease-out .4s both;
+}
+.zona-gancho__emblema-item{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.zona-gancho__emblema-item::after{content:'·';margin-left:28px;opacity:.4}
+.zona-gancho__emblema-item:last-child::after{display:none}
+
+/* ── Botones CTA ── */
+.zona-gancho__cta-container{
+  display:flex;gap:24px;justify-content:center;
+  flex-wrap:wrap;animation:fadeInUp 1s ease-out .6s both;
+}
+.zona-gancho__cta{
+  display:inline-flex;align-items:center;gap:12px;
+  background:linear-gradient(135deg,#00f2ff,#00cfff);
+  color:#0a0f2c;padding:16px 36px;
+  border-radius:999px;font-weight:800;font-size:1.1rem;
+  text-decoration:none;
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 14px 40px rgba(0,255,255,.28);
+  position:relative;overflow:hidden;
+}
+.zona-gancho__cta svg{width:20px;height:20px}
+.zona-gancho__cta::before{
+  content:'';position:absolute;top:0;left:-100%;
+  width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);
+  transition:left .5s;
+}
+.zona-gancho__cta:hover::before{left:100%}
+.zona-gancho__cta:hover{
+  transform:translateY(-3px) scale(1.025);
+  box-shadow:0 18px 48px rgba(0,255,255,.34);
+  color:#0a0f2c;
+}
+.zona-gancho__cta-secondary{
+  background:transparent;color:#00cfff;
+  border:2px solid #00cfff;
+  box-shadow:0 0 24px rgba(0,255,255,.14);
+}
+.zona-gancho__cta-secondary:hover{
+  background:rgba(0,207,255,.1);color:#00cfff;
+  box-shadow:0 0 36px rgba(0,255,255,.22);
+}
+
+/* ── Stats ── */
+.zona-gancho__stats{
+  display:flex;justify-content:center;gap:80px;
+  margin-top:4.5rem;flex-wrap:wrap;
+  animation:fadeInUp 1s ease-out .8s both;
+}
+.zona-gancho__stat{text-align:center}
+.zona-gancho__stat-number{
+  font-size:clamp(2.2rem,3.2vw,3rem);font-weight:800;
+  background:linear-gradient(135deg,#00f2ff,#00cfff);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  display:block;margin-bottom:6px;
+}
+.zona-gancho__stat-label{font-size:1.05rem;color:#cdefff;opacity:.85}
+
+/* ── Mobile extra pequeño ── */
+@media(max-width:420px){
+  .zona-gancho__container{padding:6.5vh 6vw 7.5vh}
+  .zona-gancho__cta{width:100%;justify-content:center}
+  .zona-gancho__emblema{gap:18px;padding:16px 20px}
+}

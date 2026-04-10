@@ -1,0 +1,145 @@
+/*
+ * SKYNET SYSTEMS — CSS crítico ACTUALIDAD
+ * Página /actualidad — Actualidad.html
+ * Cubre: header de la sección, tabs de categorías y grid de noticias.
+ * Ruta en servidor: wp-content/themes/TU-TEMA/critical-css/actualidad.css
+ */
+
+/* ── Variables ── */
+:root{
+  --accent:#2b90e3;
+  --accent-dark:#1a6bb8;
+  --accent-light:#3bc6e7;
+  --container:1400px;
+  font-family:'Inter',ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+
+/* ── Body ── */
+html,body{min-height:100%;margin:0;padding:0;overflow:auto}
+
+/* ── Página contenedor ── */
+.news-page{
+  min-height:100vh;background:transparent;
+  color:#fff;position:relative;overflow-x:hidden;
+  padding-bottom:60px;
+}
+.container{
+  width:min(var(--container),calc(100% - 48px));
+  margin:0 auto;position:relative;z-index:1;
+}
+
+/* ── Header de la sección (LCP) ── */
+.header-section{
+  text-align:center;margin-bottom:60px;padding-top:60px;
+  animation:fadeInDown .8s ease-out;
+}
+@keyframes fadeInDown{
+  from{opacity:0;transform:translateY(-30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.header-icon{
+  width:64px;height:64px;margin:0 auto 24px;
+  background:rgba(255,255,255,.05);border-radius:20px;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.2);
+}
+
+/* ── Título H1 (LCP) ── */
+h1{
+  font-size:64px;font-weight:900;margin:0 0 16px;letter-spacing:-2px;
+  background:linear-gradient(135deg,#fff 0%,#e0f2ff 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.subtitle{font-size:20px;color:rgba(224,242,255,.8)}
+
+/* ── Filtro de categorías ── */
+.category-filter{
+  width:min(1200px,calc(100% - 48px));
+  margin:0 auto 48px;position:relative;z-index:2;
+}
+.category-filter-toggle{display:none}
+.category-tabs{
+  display:grid;grid-template-columns:repeat(5,auto);
+  justify-content:center;gap:10px;padding:0 24px;
+  animation:fadeInUp .8s ease-out .2s both;
+}
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ── Tab ── */
+.tab{
+  padding:12px 22px;border-radius:11px;font-size:14px;font-weight:600;
+  cursor:pointer;transition:all .3s;
+  border:1px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.08);
+  color:rgba(255,255,255,.7);text-align:center;white-space:nowrap;
+}
+.tab:hover{background:rgba(255,255,255,.15);color:#fff;transform:translateY(-2px)}
+.tab.active{
+  background:linear-gradient(135deg,var(--accent) 0%,var(--accent-dark) 100%);
+  color:#fff;border-color:transparent;
+  box-shadow:0 4px 16px rgba(43,144,227,.4);
+}
+
+/* ── Grid de noticias ── */
+.news-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:28px;animation:fadeInUp .8s ease-out .4s both;
+}
+@media(max-width:1100px){.news-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.news-grid{grid-template-columns:1fr;gap:20px}}
+
+/* ── Card de noticia (primera visible) ── */
+.news-card,.news-ultra-card{
+  background:linear-gradient(135deg,rgba(255,255,255,.08) 0%,rgba(255,255,255,.03) 100%);
+  backdrop-filter:blur(20px);border-radius:24px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 8px 32px rgba(0,0,0,.2);
+  transition:all .4s cubic-bezier(.4,0,.2,1);
+  cursor:pointer;display:flex;flex-direction:column;height:100%;
+}
+.news-image,.news-ultra-img{
+  width:100%;height:220px;object-fit:cover;
+  background:linear-gradient(135deg,rgba(43,144,227,.3),rgba(59,198,231,.3));
+}
+.news-ultra-img{height:217px!important;object-position:center top}
+.news-content,.news-ultra-overlay{
+  padding:24px;flex-grow:1;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+
+/* ── Badge de categoría ── */
+.u-badge,.category-badge{
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
+  padding:6px 12px;border-radius:8px;margin-bottom:16px;width:fit-content;
+  background:rgba(59,130,246,.15);color:#60a5fa;
+  border:1px solid rgba(59,130,246,.3);
+}
+
+/* ── Responsive: tabs en móvil ── */
+@media(max-width:1100px){.category-tabs{grid-template-columns:repeat(4,auto)}}
+@media(max-width:900px){.category-tabs{grid-template-columns:repeat(3,auto)}}
+@media(max-width:576px){
+  .category-filter{width:min(100%,calc(100% - 24px));margin:0 auto 24px}
+  .category-filter-toggle{
+    width:75%;display:flex;align-items:center;justify-content:space-between;
+    gap:10px;padding:12px 16px;border-radius:14px;
+    border:1px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.08);color:#fff;
+    font-size:14px;font-weight:600;cursor:pointer;
+    backdrop-filter:blur(14px);margin-left:39px;
+  }
+  .category-tabs{display:none}
+  .category-filter.open .category-tabs{
+    display:grid;grid-template-columns:1fr;margin-top:10px;
+    padding:10px;gap:8px;
+    background:rgba(10,20,40,.72);border:1px solid rgba(255,255,255,.12);
+    border-radius:16px;backdrop-filter:blur(18px);
+  }
+  h1{font-size:36px;line-height:1.08;letter-spacing:-.8px;margin-bottom:10px}
+  .subtitle{font-size:16px;line-height:1.5;padding:0 12px}
+  .header-section{margin-bottom:32px;padding-top:38px}
+}
