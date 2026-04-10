@@ -30,51 +30,63 @@
     }
 </style>
 
-<canvas id="network-bg"></canvas>
+<canvas id="network-bg" aria-hidden="true"></canvas>
 
 <script>
-    const canvas = document.getElementById('network-bg');
-    const ctx = canvas.getContext('2d');
-    let width, height;
-    let nodes = [];
+(function () {
+    if (window.skynetNetworkBgInit) return;
+    window.skynetNetworkBgInit = true;
 
-    function resize() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-        createNodes(Math.floor((width * height) / 10000)); // ajustar cantidad de nodos según resolución
+    var canvas = document.getElementById('network-bg');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    var width = 0, height = 0, nodes = [], rafId = null;
+    var resizeTimer = null;
+
+    function nodeCount() {
+        // Menos nodos en móvil para ahorrar CPU
+        var w = window.innerWidth;
+        if (w < 768) return Math.floor((w * window.innerHeight) / 18000);
+        return Math.floor((w * window.innerHeight) / 10000);
     }
-
-    window.addEventListener('resize', resize);
-    resize();
 
     function createNodes(count) {
         nodes = [];
-        for (let i = 0; i < count; i++) {
+        for (var i = 0; i < count; i++) {
             nodes.push({
                 x: Math.random() * width,
                 y: Math.random() * height,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5
+                vx: (Math.random() - 0.5) * 0.45,
+                vy: (Math.random() - 0.5) * 0.45
             });
         }
     }
 
+    function resize() {
+        width  = canvas.width  = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        createNodes(nodeCount());
+    }
+
     function draw() {
         ctx.clearRect(0, 0, width, height);
-        ctx.fillStyle = '#ffffff';
-        ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+        ctx.fillStyle    = 'rgba(255,255,255,0.9)';
+        ctx.strokeStyle  = 'rgba(255,255,255,0.1)';
+        ctx.lineWidth    = 1;
 
-        nodes.forEach((n, i) => {
+        for (var i = 0; i < nodes.length; i++) {
+            var n = nodes[i];
             ctx.beginPath();
-            ctx.arc(n.x, n.y, 2, 0, 2 * Math.PI);
+            ctx.arc(n.x, n.y, 1.8, 0, Math.PI * 2);
             ctx.fill();
 
-            for (let j = i + 1; j < nodes.length; j++) {
-                const n2 = nodes[j];
-                const dx = n.x - n2.x;
-                const dy = n.y - n2.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 120) {
+            for (var j = i + 1; j < nodes.length; j++) {
+                var n2 = nodes[j];
+                var dx = n.x - n2.x, dy = n.y - n2.y;
+                var dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 130) {
                     ctx.beginPath();
                     ctx.moveTo(n.x, n.y);
                     ctx.lineTo(n2.x, n2.y);
@@ -82,17 +94,30 @@
                 }
             }
 
-            // Movimiento
-            n.x += n.vx;
-            n.y += n.vy;
-
-            // Rebote
-            if (n.x < 0 || n.x > width) n.vx *= -1;
+            n.x += n.vx; n.y += n.vy;
+            if (n.x < 0 || n.x > width)  n.vx *= -1;
             if (n.y < 0 || n.y > height) n.vy *= -1;
-        });
+        }
 
-        requestAnimationFrame(draw);
+        rafId = requestAnimationFrame(draw);
     }
 
+    // Debounce resize para evitar forced reflow continuo
+    window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(resize, 150);
+    }, { passive: true });
+
+    // Pausa cuando la pestaña está oculta
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden) {
+            if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+        } else if (!rafId) {
+            draw();
+        }
+    });
+
+    resize();
     draw();
+}());
 </script>

@@ -16,7 +16,7 @@ function skynet_eventos_destacados_shortcode() {
     z-index:5;
     background:#f9fafb;
     padding:4rem var(--home-side-pad, clamp(16px, 4vw, 40px));
-    margin:0 auto;
+    margin:clamp(18px, 2vw, 28px) auto 0;
     max-width:100vw;
     border-radius:2.5rem;
     overflow:hidden;
@@ -377,5 +377,3 @@ $query = new WP_Query([
 }
 add_shortcode('eventos_destacados', 'skynet_eventos_destacados_shortcode');
 
-
-3.8

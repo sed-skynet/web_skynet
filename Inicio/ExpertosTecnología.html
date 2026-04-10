@@ -10,12 +10,12 @@
         body.page-id-96 .elementor-widget-shortcode,
         body.page-id-96 .elementor-widget-shortcode .elementor-widget-container,
         body.page-id-96 .e-con,
-        body.page-id-96 .e-con > .e-con-inner {
+        body.page-id-96 .e-con>.e-con-inner {
             margin-top: 0 !important;
             margin-bottom: 0 !important;
         }
 
-        body.page-id-96 .elementor-widget-shortcode .elementor-widget-container > p {
+        body.page-id-96 .elementor-widget-shortcode .elementor-widget-container>p {
             margin: 0 !important;
         }
 
@@ -30,7 +30,8 @@
         }
 
         body.page-id-96 #gancho-hero {
-            padding-top: clamp(22px, 3.2vw, 46px) !important;
+            margin-top: clamp(44px, 5vw, 72px) !important;
+            padding-top: clamp(36px, 5vw, 72px) !important;
             padding-left: var(--home-side-pad) !important;
             padding-right: var(--home-side-pad) !important;
         }
@@ -111,12 +112,10 @@
 
         @keyframes fadeInUp {
             from {
-                opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(22px);
             }
 
             to {
-                opacity: 1;
                 transform: translateY(0);
             }
         }
@@ -541,4 +540,35 @@
     })();
 </script>
 
-
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Skynet Systems",
+  "alternateName": "Skynet Systems S.L.",
+  "description": "Empresa especializada en soluciones TIC, ciberseguridad, infraestructura IT y desarrollo web para pymes. Expertos en transformación digital.",
+  "url": "https://skynet-sys.es",
+  "telephone": "+34968679290",
+  "email": "info@skynet-sys.es",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "ES"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/skynet-systems-s-l-/",
+    "https://www.facebook.com/skynetsystemsslu/",
+    "https://x.com/skynetsystems_",
+    "https://www.youtube.com/channel/UCqS4sjjeOH4yPv-dvIgKvmg"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios TIC",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Infraestructura IT" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ciberseguridad" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Desarrollo Web" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Normativa y Cumplimiento" } }
+    ]
+  }
+}
+</script>

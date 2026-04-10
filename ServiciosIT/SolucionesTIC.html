@@ -17,60 +17,39 @@
     <meta property="og:type" content="website">
     <meta property="og:locale" content="es_ES">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    </noscript>
+
+    <!-- Precargar lottie y el JSON para que estén listos antes de window.load -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie_light.min.js" as="script"
+        crossorigin>
+    <link rel="preload" href="https://skynet-sys.es/wp-content/uploads/2026/04/ServiciosIt.json" as="fetch" crossorigin>
 
     <style>
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.22);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            box-shadow: 0 8px 32px rgba(44, 70, 130, 0.18);
-        }
-
-        /* ANIMACIÓN SCROLL INDICATOR */
-        @keyframes bounce-slow {
-
-            0%,
-            100% {
-                transform: translateY(0);
-                opacity: 0.6;
-            }
-
-            50% {
-                transform: translateY(10px);
-                opacity: 1;
-            }
-        }
-
-        .animate-bounce-slow {
-            animation: bounce-slow 2s infinite ease-in-out;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .animate-float {
-            animation: float 3s ease-in-out infinite;
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
         }
 
         html,
         body {
+            margin: 0;
             min-height: 100%;
+            font-family: 'Inter', system-ui, sans-serif;
+            background: transparent;
+        }
+
+        body {
+            position: relative;
+            overflow-x: hidden;
+            padding: 0 1rem;
+            color: #fff;
         }
 
         body::before {
@@ -93,49 +72,176 @@
             display: block;
         }
 
-        main {
+        /* ── Layout ── */
+        .page-main {
             position: relative;
             z-index: 10;
+            max-width: 1100px;
+            margin: 0px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            padding: 2.5rem 0;
         }
 
-        html,
-        body {
-            background: transparent !important;
+        /* ── Card ── */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px rgba(44, 70, 130, 0.18);
+        }
+
+        .main-card {
+            border-radius: 32px;
+            padding: 2.5rem 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .main-card {
+                padding: 3rem;
+            }
+        }
+
+        /* ── Hero grid ── */
+        .hero-grid {
+            display: grid;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        @media (min-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .hero-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* ── Badge ── */
+        .service-badge {
+            display: inline-block;
+            width: fit-content;
+            margin-bottom: 1.5rem;
+            padding: 0.625rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 700;
+            background: #eff6ff;
+            color: #2563eb;
+            border-radius: 9999px;
+        }
+
+        /* ── Heading ── */
+        .hero-title {
+            font-size: clamp(2.25rem, 5vw, 3.75rem);
+            font-weight: 900;
+            line-height: 1.15;
+            color: #fff;
+            margin: 1.5rem 0;
+        }
+
+        /* ── Description ── */
+        .hero-desc {
+            font-size: 1.125rem;
+            color: rgba(224, 242, 254, 0.9);
+            max-width: 36rem;
+            line-height: 1.625;
+            margin: 0;
+        }
+
+        /* ── Lottie ── */
+        .lottie-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        @media (min-width: 1024px) {
+            .lottie-wrap {
+                justify-content: flex-end;
+            }
+        }
+
+        #lottie-animation {
+            width: 100%;
+            max-width: 450px;
+            aspect-ratio: 1;
+        }
+
+        /* ── Scroll hint ── */
+        .scroll-hint {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.8;
+        }
+
+        .scroll-hint-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            font-weight: 700;
+            color: #bae6fd;
+        }
+
+        /* ── Animations ── */
+        @keyframes bounce-slow {
+
+            0%,
+            100% {
+                transform: translateY(0);
+                opacity: 0.6;
+            }
+
+            50% {
+                transform: translateY(10px);
+                opacity: 1;
+            }
+        }
+
+        .scroll-hint {
+            animation: bounce-slow 2s infinite ease-in-out;
         }
     </style>
 </head>
 
-<body class="min-h-screen bg-gradient-to-br from-[#126b97] to-[#3bc6e7] relative overflow-x-hidden px-4 text-white">
+<body>
 
     <canvas id="network-bg" aria-hidden="true"></canvas>
 
-    <main class="relative z-10 max-w-[1100px] mx-auto space-y-10 py-10">
+    <main class="page-main">
 
-        <section class="glass-card rounded-[32px] px-8 py-10 md:px-12 md:py-12">
+        <section class="glass-card main-card">
 
-            <div class="grid lg:grid-cols-2 gap-10 items-center">
-                <div class="flex flex-col justify-center">
-                    <span
-                        class="inline-block w-fit mb-6 px-6 py-2.5 text-sm font-bold bg-blue-50 text-blue-600 rounded-full">
-                        Servicios IT Profesionales
-                    </span>
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <span class="service-badge">Servicios IT Profesionales</span>
 
-                    <h1 class="text-4xl sm:text-5xl xl:text-6xl font-black leading-tight text-white my-6">
+                    <h1 class="hero-title">
                         Soluciones TIC<br>para empresas
                     </h1>
 
-                    <p class="text-lg text-sky-100 max-w-xl leading-relaxed">
+                    <p class="hero-desc">
                         Diseñamos, protegemos y optimizamos infraestructuras tecnológicas modernas
                         para garantizar continuidad, seguridad y crecimiento.
                     </p>
                 </div>
 
-                <div class="flex items-center justify-center lg:justify-end h-full">
-                    <div id="lottie-animation" class="w-full max-w-[450px] aspect-square lg:h-auto"></div>
+                <div class="lottie-wrap">
+                    <div id="lottie-animation"></div>
                 </div>
             </div>
-            <div class="mt-6 flex flex-col items-center gap-2 animate-bounce-slow opacity-80">
-                <span class="text-[10px] uppercase tracking-[0.3em] font-bold text-sky-200">Explorar servicios</span>
+
+            <div class="scroll-hint" aria-hidden="true">
+                <span class="scroll-hint-label">Explorar servicios</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
@@ -147,19 +253,32 @@
     </main>
 </body>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
 <script>
     (function () {
-        if (window.lottie) {
-            const lottieContainer = document.getElementById('lottie-animation');
-            if (lottieContainer) {
-                lottie.loadAnimation({
-                    container: lottieContainer,
-                    renderer: 'svg',
-                    loop: true,
-                    autoplay: true,
-                    path: 'https://lottie.host/403ec8a2-128c-4913-a82d-4d8afa8c06a3/KT3lgBmLHA.json'
-                });
+        // Cargar lottie_light (SVG-only, ~40% más ligero) tras window.load
+        // para no competir con recursos LCP
+        var lottieContainer = document.getElementById('lottie-animation');
+        if (lottieContainer) {
+            function loadLottieLight() {
+                if (window.__skyLottieLoaded) return;
+                window.__skyLottieLoaded = true;
+                var s = document.createElement('script');
+                s.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie_light.min.js';
+                s.onload = function () {
+                    window.lottie.loadAnimation({
+                        container: lottieContainer,
+                        renderer: 'svg',
+                        loop: true,
+                        autoplay: true,
+                        path: 'https://skynet-sys.es/wp-content/uploads/2026/04/ServiciosIt.json'
+                    });
+                };
+                document.head.appendChild(s);
+            }
+            if (document.readyState !== 'loading') {
+                loadLottieLight();
+            } else {
+                document.addEventListener('DOMContentLoaded', loadLottieLight, { once: true });
             }
         }
 
@@ -194,10 +313,17 @@
             }
         }
 
+        var resizeTimer = null;
+        function nodeCount() {
+            return width < 768
+                ? Math.floor((width * height) / 18000)
+                : Math.floor((width * height) / 10000);
+        }
+
         function resize() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
-            createNodes(Math.floor((width * height) / 10000));
+            createNodes(nodeCount());
         }
 
         function draw() {
@@ -236,7 +362,10 @@
             rafId = window.requestAnimationFrame(draw);
         }
 
-        window.addEventListener('resize', resize, { passive: true });
+        window.addEventListener('resize', function () {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(resize, 150);
+        }, { passive: true });
         resize();
         draw();
 
@@ -249,6 +378,23 @@
             if (!rafId) draw();
         });
     })();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Soluciones TIC",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Skynet Systems",
+    "url": "https://skynet-sys.es"
+  },
+  "name": "Soluciones TIC para empresas",
+  "description": "Diseño, protección y optimización de infraestructuras tecnológicas modernas: cloud, ciberseguridad, redes y continuidad de negocio.",
+  "areaServed": { "@type": "Country", "name": "España" },
+  "url": "https://skynet-sys.es/servicios-it"
+}
 </script>
 
 </html>

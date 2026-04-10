@@ -5,8 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de información | Desarrollo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap"
+          rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet"></noscript>
+
+    <!-- Precargar lottie y JSON para que estén listos al hacer DOMContentLoaded -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie_light.min.js" as="script" crossorigin>
 
     <style>
         :root {
@@ -18,8 +25,7 @@
             font-family: 'Inter', system-ui, sans-serif;
         }
 
-        html,
-        body {
+        html, body {
             margin: 0;
             padding: 0;
             min-height: 100%;
@@ -35,9 +41,7 @@
             pointer-events: none;
         }
 
-        body {
-            overflow-x: hidden;
-        }
+        body { overflow-x: hidden; }
 
         #network-bg {
             position: fixed;
@@ -116,9 +120,7 @@
             transform: translateX(-18px);
         }
 
-        .hero-copy {
-            max-width: 600px;
-        }
+        .hero-copy { max-width: 600px; }
 
         .hero-copy p {
             margin: 18px 0 0;
@@ -146,24 +148,13 @@
         }
 
         @keyframes hero-bounce {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(7px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(7px); }
         }
 
-        .hero-indicator svg {
-            animation: hero-bounce 2s infinite ease-in-out;
-        }
+        .hero-indicator svg { animation: hero-bounce 2s infinite ease-in-out; }
 
-        .section-b {
-            padding: 26px 20px 8px;
-        }
+        .section-b { padding: 26px 20px 8px; }
 
         .section-title {
             margin: 0;
@@ -183,7 +174,7 @@
             max-width: 44%;
             height: 6px;
             border-radius: 999px;
-            margin: 24px auto 24px;
+            margin: 24px auto;
             background: linear-gradient(90deg, #7dd3fc, #2b90e3);
             box-shadow: 0 10px 20px rgba(43, 144, 227, .28);
         }
@@ -286,60 +277,7 @@
             border-color: rgba(255, 255, 255, .5);
         }
 
-        .section-c {
-            padding: 24px 20px;
-        }
-
-        .section-c h2 {
-            margin: 0 0 6px;
-            text-align: center;
-            color: #fff;
-            font-size: clamp(1.2rem, 2.2vw, 1.8rem);
-            font-weight: 800;
-        }
-
-        .section-c p {
-            margin: 0 0 14px;
-            text-align: center;
-            color: var(--text-dim);
-            font-size: .98rem;
-        }
-
-        .partners-viewport {
-            overflow: hidden;
-            border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, .2);
-            background: rgba(255, 255, 255, .1);
-            padding: 14px;
-        }
-
-        .partners-track {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            width: max-content;
-            animation: partners-scroll 45s linear infinite;
-        }
-
-        .partner-logo {
-            height: 66px;
-            min-width: 128px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, .9);
-            padding: 8px 12px;
-            object-fit: contain;
-            box-shadow: 0 6px 18px rgba(8, 38, 68, .2);
-        }
-
-        @keyframes partners-scroll {
-            to {
-                transform: translateX(-50%);
-            }
-        }
-
-        footer,
-        .site-footer,
-        .footer-compact {
+        footer, .site-footer, .footer-compact {
             background: #0f3f5d !important;
             opacity: 1 !important;
             position: relative;
@@ -352,69 +290,44 @@
                 gap: 10px;
                 margin-top: 14px;
             }
-
             #lottie-animation {
                 max-width: 320px;
                 height: 205px;
                 margin: 0 auto;
                 transform: none;
             }
-
             .section-a {
                 min-height: auto;
                 padding: 24px 20px 14px;
             }
-
-            .tag {
-                font-size: .95rem;
-                padding: 8px 18px;
-            }
-
-            .section-a h1 {
-                font-size: clamp(2.1rem, 8vw, 3.2rem);
-            }
-
+            .tag { font-size: .95rem; padding: 8px 18px; }
+            .section-a h1 { font-size: clamp(2.1rem, 8vw, 3.2rem); }
             .timeline-panel {
                 flex-direction: column;
                 align-items: flex-start;
             }
-
-            .timeline-panel h3 {
-                font-size: 1.2rem;
-            }
-
+            .timeline-panel h3 { font-size: 1.2rem; }
             .section-title {
                 font-size: clamp(1.7rem, 8vw, 2.4rem);
                 letter-spacing: .12em;
             }
-
-            .section-divider {
-                width: 130px;
-                height: 5px;
-                margin: 16px auto 16px;
-            }
-
-            .section-lead {
-                font-size: 1rem;
-                margin-bottom: 18px;
-            }
+            .section-divider { width: 130px; height: 5px; margin: 16px auto; }
+            .section-lead { font-size: 1rem; margin-bottom: 18px; }
         }
     </style>
 </head>
 
 <body>
-    <canvas id="network-bg"></canvas>
+    <canvas id="network-bg" aria-hidden="true"></canvas>
 
     <div class="wrap">
 
-        <!-- 1) BLOQUE DEFINICION + ANIMACION -->
         <section class="glass-card section-a">
             <div class="hero-grid">
                 <div class="hero-copy">
                     <span class="tag">Servicios Digitales</span>
                     <h1>Desarrollo<br>Digital</h1>
-                    <p>Creamos soluciones digitales prácticas y escalables para acompañar el crecimiento de tu empresa.
-                    </p>
+                    <p>Creamos soluciones digitales prácticas y escalables para acompañar el crecimiento de tu empresa.</p>
                 </div>
                 <div id="lottie-animation"></div>
             </div>
@@ -427,12 +340,10 @@
             </div>
         </section>
 
-        <!-- 2) BLOQUE PROGRESO -->
         <section class="glass-card section-b" aria-label="Línea de progreso de servicios">
             <h2 class="section-title">Nuestros servicios</h2>
             <span class="section-divider" aria-hidden="true"></span>
-            <p class="section-lead">Creamos soluciones digitales prácticas y escalables para acompañar el crecimiento de
-                tu empresa.</p>
+            <p class="section-lead">Creamos soluciones digitales prácticas y escalables para acompañar el crecimiento de tu empresa.</p>
 
             <div class="timeline-row">
                 <div class="timeline-left">
@@ -489,104 +400,135 @@
                     <a href="/contacto" class="btn-ghost">Más info →</a>
                 </div>
             </div>
-
-
         </section>
-
 
     </div>
 
     <script>
-        lottie.loadAnimation({
-            container: document.getElementById('lottie-animation'),
-            renderer: 'svg',
-            loop: true,
-            autoplay: true,
-            path: 'https://lottie.host/f9d30b01-c69f-4dd2-90d8-cf41cf567190/wnAvprEHXG.json'
+    (function () {
+        // ── Lottie: lottie_light tras DOMContentLoaded ──────────────────────
+        var lottieContainer = document.getElementById('lottie-animation');
+        if (lottieContainer) {
+            function loadLottie() {
+                if (window.__skyLottieLoaded) return;
+                window.__skyLottieLoaded = true;
+                var s = document.createElement('script');
+                s.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie_light.min.js';
+                s.onload = function () {
+                    window.lottie.loadAnimation({
+                        container: lottieContainer,
+                        renderer: 'svg',
+                        loop: true,
+                        autoplay: true,
+                        path: 'https://lottie.host/f9d30b01-c69f-4dd2-90d8-cf41cf567190/wnAvprEHXG.json'
+                    });
+                };
+                document.head.appendChild(s);
+            }
+            if (document.readyState !== 'loading') {
+                loadLottie();
+            } else {
+                document.addEventListener('DOMContentLoaded', loadLottie, { once: true });
+            }
+        }
 
+        // ── Canvas network background ────────────────────────────────────────
+        if (window.skynetNetworkBgInit) return;
+        window.skynetNetworkBgInit = true;
 
+        var canvas = document.getElementById('network-bg');
+        if (!canvas) return;
+        var ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        var width = 0, height = 0, nodes = [], rafId = null, resizeTimer = null;
+
+        function nodeCount() {
+            return width < 768
+                ? Math.floor((width * height) / 18000)
+                : Math.floor((width * height) / 10000);
+        }
+
+        function createNodes(count) {
+            nodes = [];
+            for (var i = 0; i < count; i++) {
+                nodes.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.45,
+                    vy: (Math.random() - 0.5) * 0.45
+                });
+            }
+        }
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            createNodes(nodeCount());
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = '#ffffff';
+            ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+            ctx.lineWidth = 1;
+            for (var i = 0; i < nodes.length; i++) {
+                var n = nodes[i];
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
+                ctx.fill();
+                for (var j = i + 1; j < nodes.length; j++) {
+                    var n2 = nodes[j];
+                    var dx = n.x - n2.x, dy = n.y - n2.y;
+                    var dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(n.x, n.y);
+                        ctx.lineTo(n2.x, n2.y);
+                        ctx.stroke();
+                    }
+                }
+                n.x += n.vx; n.y += n.vy;
+                if (n.x < 0 || n.x > width) n.vx *= -1;
+                if (n.y < 0 || n.y > height) n.vy *= -1;
+            }
+            rafId = requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', function () {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(resize, 150);
+        }, { passive: true });
+
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) {
+                if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+            } else if (!rafId) {
+                draw();
+            }
         });
 
-        (function () {
-            if (window.skynetNetworkBgInit) return;
-            window.skynetNetworkBgInit = true;
-
-            const canvas = document.getElementById('network-bg');
-            const ctx = canvas.getContext('2d');
-            if (!ctx) return;
-
-            let width = 0;
-            let height = 0;
-            let nodes = [];
-            let rafId = null;
-
-            function createNodes(count) {
-                nodes = [];
-                for (let i = 0; i < count; i++) {
-                    nodes.push({
-                        x: Math.random() * width,
-                        y: Math.random() * height,
-                        vx: (Math.random() - 0.5) * 0.45,
-                        vy: (Math.random() - 0.5) * 0.45
-                    });
-                }
-            }
-
-            function resize() {
-                width = canvas.width = window.innerWidth;
-                height = canvas.height = window.innerHeight;
-                createNodes(Math.floor((width * height) / 10000));
-            }
-
-            function draw() {
-                ctx.clearRect(0, 0, width, height);
-                ctx.fillStyle = '#ffffff';
-                ctx.strokeStyle = 'rgba(255,255,255,0.1)';
-                ctx.lineWidth = 1;
-
-                for (let i = 0; i < nodes.length; i++) {
-                    const n = nodes[i];
-
-                    ctx.beginPath();
-                    ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
-                    ctx.fill();
-
-                    for (let j = i + 1; j < nodes.length; j++) {
-                        const n2 = nodes[j];
-                        const dx = n.x - n2.x;
-                        const dy = n.y - n2.y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < 120) {
-                            ctx.beginPath();
-                            ctx.moveTo(n.x, n.y);
-                            ctx.lineTo(n2.x, n2.y);
-                            ctx.stroke();
-                        }
-                    }
-
-                    n.x += n.vx;
-                    n.y += n.vy;
-                    if (n.x < 0 || n.x > width) n.vx *= -1;
-                    if (n.y < 0 || n.y > height) n.vy *= -1;
-                }
-
-                rafId = requestAnimationFrame(draw);
-            }
-
-            window.addEventListener('resize', resize, { passive: true });
-            resize();
-            draw();
-
-            document.addEventListener('visibilitychange', function () {
-                if (document.hidden) {
-                    if (rafId) cancelAnimationFrame(rafId);
-                    rafId = null;
-                    return;
-                }
-                if (!rafId) draw();
-            });
-        })();
+        resize();
+        draw();
+    })();
     </script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Desarrollo Digital",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Skynet Systems",
+    "url": "https://skynet-sys.es"
+  },
+  "name": "Desarrollo Digital para empresas",
+  "description": "Diseño web, programación a medida, interconexión de sistemas y automatizaciones con IA para empresas.",
+  "areaServed": { "@type": "Country", "name": "España" },
+  "url": "https://skynet-sys.es/desarrollo"
+}
+</script>
 </body>
 
 </html>

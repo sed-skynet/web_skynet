@@ -17,41 +17,32 @@
     <meta property="og:type" content="website">
     <meta property="og:locale" content="es_ES">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    </noscript>
 
     <style>
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.22);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            box-shadow: 0 8px 32px rgba(44, 70, 130, 0.18);
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .animate-float {
-            animation: float 3s ease-in-out infinite;
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
         }
 
         html,
         body {
+            margin: 0;
             min-height: 100%;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        body {
+            position: relative;
+            overflow-x: hidden;
+            padding: 2.5rem 1rem;
         }
 
         body::before {
@@ -72,6 +63,101 @@
             z-index: -2;
             pointer-events: none;
             display: block;
+        }
+
+        /* ── Layout ── */
+        .page-main {
+            position: relative;
+            z-index: 10;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        /* ── Card ── */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px rgba(44, 70, 130, 0.18);
+        }
+
+        .main-card {
+            border-radius: 32px;
+            padding: 2.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 60px rgba(15, 60, 110, .35);
+        }
+
+        @media (min-width: 768px) {
+            .main-card {
+                padding: 3rem;
+            }
+        }
+
+        /* ── Decorative blob ── */
+        .deco-blob {
+            position: absolute;
+            top: -8rem;
+            right: -8rem;
+            width: 24rem;
+            height: 24rem;
+            background: rgba(96, 165, 250, 0.1);
+            border-radius: 50%;
+            filter: blur(48px);
+            pointer-events: none;
+        }
+
+        /* ── Section header ── */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-title {
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-size: clamp(1.9rem, 4vw, 3rem);
+            color: #fff;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
+            margin: 0;
+        }
+
+        @media (min-width: 768px) {
+            .section-title {
+                letter-spacing: 0.16em;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .section-title {
+                letter-spacing: 0.18em;
+            }
+        }
+
+        .title-divider {
+            height: 6px;
+            width: 11rem;
+            background: linear-gradient(to right, #7dd3fc, #2b90e3);
+            margin: 1.5rem auto 0;
+            border-radius: 9999px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-subtitle {
+            color: rgba(224, 242, 254, 0.85);
+            margin: 1.5rem auto 0;
+            max-width: 42rem;
+            font-size: 1.125rem;
+            line-height: 1.625;
         }
 
         .timeline-container {
@@ -224,27 +310,20 @@
     </style>
 </head>
 
-<body class="min-h-screen bg-gradient-to-br from-[#126b97] to-[#3bc6e7] relative overflow-x-hidden py-10 px-4">
+<body>
 
     <canvas id="network-bg" aria-hidden="true"></canvas>
 
-    <main class="relative z-10 max-w-[1100px] mx-auto space-y-10">
+    <main class="page-main">
 
-        <section
-            class="glass-card rounded-[32px] px-8 py-10 md:px-12 md:py-12 relative overflow-hidden border border-white/20 shadow-[0_20px_60px_rgba(15,60,110,.35)]">
+        <section class="glass-card main-card">
 
-            <div class="absolute -top-32 -right-32 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl pointer-events-none">
-            </div>
+            <div class="deco-blob" aria-hidden="true"></div>
 
-            <div class="text-center mb-16 relative z-10">
-                <h2
-                    class="font-black uppercase tracking-[0.14em] md:tracking-[0.16em] lg:tracking-[0.18em] text-[clamp(1.9rem,4vw,3rem)] text-white drop-shadow-lg">
-                    Infraestructura IT
-                </h2>
-                <div
-                    class="h-1.5 w-44 bg-gradient-to-r from-[#7dd3fc] to-[#2b90e3] mx-auto mt-6 rounded-full shadow-lg">
-                </div>
-                <p class="text-sky-100/85 mt-6 max-w-2xl mx-auto text-lg leading-relaxed">
+            <div class="section-header">
+                <h2 class="section-title">Infraestructura IT</h2>
+                <div class="title-divider" aria-hidden="true"></div>
+                <p class="section-subtitle">
                     Diseñamos, implantamos y mantenemos infraestructuras tecnológicas
                     fiables, escalables y alineadas con los objetivos de tu negocio.
                 </p>
@@ -346,10 +425,17 @@
                 }
             }
 
+            var resizeTimer = null;
+            function nodeCount() {
+                return w < 768
+                    ? Math.floor((w * h) / 18000)
+                    : Math.floor((w * h) / 10000);
+            }
+
             function resize() {
                 w = canvas.width = window.innerWidth;
                 h = canvas.height = window.innerHeight;
-                createNodes(Math.floor((w * h) / 10000));
+                createNodes(nodeCount());
             }
 
             function animate() {
@@ -387,7 +473,10 @@
                 animId = requestAnimationFrame(animate);
             }
 
-            window.addEventListener('resize', resize, { passive: true });
+            window.addEventListener('resize', function () {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(resize, 150);
+            }, { passive: true });
             resize();
             animate();
 
@@ -402,6 +491,22 @@
         })();
     </script>
 
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Infraestructura IT",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Skynet Systems",
+    "url": "https://skynet-sys.es"
+  },
+  "name": "Infraestructura IT para empresas",
+  "description": "Diseño, implantación y mantenimiento de infraestructuras tecnológicas fiables y escalables: sistemas cloud, on-premise, redes WAN/LAN, VPN y hardware empresarial.",
+  "areaServed": { "@type": "Country", "name": "España" },
+  "url": "https://skynet-sys.es/servicios-it"
+}
+</script>
 </body>
 
 </html>
