@@ -59,13 +59,15 @@ body{
 @media(min-width:1024px){.hero-grid{grid-template-columns:1fr 1fr}}
 .hero-text{display:flex;flex-direction:column;justify-content:center}
 .hero-title{
-  font-size:clamp(2.25rem,5vw,3.75rem);
+  font-size:clamp(1.5rem,5vw,3.75rem);
   font-weight:900;line-height:1.15;color:#fff;margin:1.5rem 0;
 }
 .hero-desc{
   font-size:1.125rem;color:rgba(224,242,254,.9);
   max-width:36rem;line-height:1.625;margin:0;
+  text-align:justify;hyphens:auto;
 }
+.timeline-panel p{text-align:justify;hyphens:auto}
 
 /* ── Badge ── */
 .service-badge{
@@ -88,4 +90,32 @@ body{
   color:#fff;text-decoration:none;font-weight:600;font-size:.95rem;
   background:rgba(255,255,255,.08);white-space:nowrap;
   transition:background-color .2s ease,border-color .2s ease;
+}
+
+/* ── Resets Elementor — evita desfase horizontal en carga inicial ── */
+.elementor-widget-shortcode,
+.elementor-widget-shortcode .elementor-widget-container{
+  width:100%!important;
+  max-width:100%!important;
+}
+.e-con,
+.e-con>.e-con-inner{
+  margin-top:0!important;
+  margin-bottom:0!important;
+}
+.elementor-widget-shortcode .elementor-widget-container>p{
+  margin:0!important;
+}
+
+/* ── Soporte container ── */
+.soporte-container{
+  max-width:800px;
+  margin:0 auto;
+  text-align:center;
+  padding:80px 40px;
+  position:relative;
+  z-index:2;
+}
+@media(max-width:768px){
+  .soporte-container{padding:60px 24px}
 }

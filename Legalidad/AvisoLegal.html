@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviso Legal · Skynet Systems</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ============================================================
+           SKYNET SYSTEMS — AVISO LEGAL
+           Todos los selectores usan el prefijo  .sks-  o  #sks-
+           para garantizar aislamiento completo sin afectar al resto
+           de la página anfitriona.
+        ============================================================ */
+
+        /* --- Variables confinadas al contenedor raíz --- */
+        .sks-root {
+            --sks-cian: #00cfff;
+            --sks-cian2: #00f2ff;
+            --sks-txt: #eaf6ff;
+            --sks-soft: #cdefff;
+            --sks-glass: rgba(255, 255, 255, .04);
+            --sks-ring: rgba(0, 207, 255, .15);
+            --sks-accent: #1da183;
+
+            /* reset básico solo para este árbol */
+            box-sizing: border-box;
+            font-family: 'Exo 2', 'Segoe UI', sans-serif;
+            color: var(--sks-txt);
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .sks-root *,
+        .sks-root *::before,
+        .sks-root *::after {
+            box-sizing: inherit;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- Fondo fijo (solo visible dentro del root) --- */
+        .sks-bg-fixed {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle, #247ba0 0%, #1b4f72 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* --- Canvas de red neuronal --- */
+        #sks-network-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* --- Partículas flotantes --- */
+        .sks-particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: var(--sks-cian);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--sks-cian);
+            z-index: 2;
+            pointer-events: none;
+            animation: sks-floatPar 9s ease-in-out infinite;
+        }
+
+        .sks-particle:nth-child(1) {
+            left: 8%;
+            top: 18%;
+            animation-delay: 0s;
+            animation-duration: 8s;
+        }
+
+        .sks-particle:nth-child(2) {
+            left: 88%;
+            top: 12%;
+            animation-delay: 1.5s;
+            animation-duration: 10s;
+        }
+
+        .sks-particle:nth-child(3) {
+            left: 22%;
+            top: 72%;
+            animation-delay: 3s;
+            animation-duration: 7s;
+        }
+
+        .sks-particle:nth-child(4) {
+            left: 72%;
+            top: 62%;
+            animation-delay: 4.5s;
+            animation-duration: 9s;
+        }
+
+        .sks-particle:nth-child(5) {
+            left: 50%;
+            top: 88%;
+            animation-delay: 2s;
+            animation-duration: 11s;
+        }
+
+        @keyframes sks-floatPar {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+                opacity: .25;
+            }
+
+            50% {
+                transform: translateY(-40px) translateX(20px);
+                opacity: .9;
+            }
+        }
+
+        /* --- Envoltorio de página --- */
+        .sks-page-wrap {
+            position: relative;
+            z-index: 3;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: clamp(40px, 8vh, 90px) clamp(18px, 5vw, 48px) clamp(60px, 10vh, 120px);
+        }
+
+        /* --- Breadcrumb --- */
+        .sks-breadcrumb {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .75rem;
+            color: var(--sks-soft);
+            opacity: .6;
+            margin-bottom: 2.5rem;
+            letter-spacing: .08em;
+        }
+
+        .sks-breadcrumb a {
+            color: var(--sks-cian);
+            text-decoration: none;
+        }
+
+        .sks-breadcrumb span {
+            margin: 0 .5rem;
+            opacity: .5;
+        }
+
+        /* --- Hero del documento --- */
+        .sks-doc-hero {
+            text-align: center;
+            margin-bottom: clamp(40px, 6vh, 72px);
+            animation: sks-fadeInUp .9s ease both;
+        }
+
+        .sks-doc-hero .sks-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .8rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--sks-cian);
+            border: 1px solid var(--sks-ring);
+            background: rgba(0, 207, 255, .06);
+            border-radius: 999px;
+            padding: 6px 18px;
+            margin-bottom: 1.4rem;
+        }
+
+        .sks-doc-hero .sks-badge::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            background: var(--sks-cian);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--sks-cian);
+            animation: sks-blink 2s ease-in-out infinite;
+        }
+
+        @keyframes sks-blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: .2;
+            }
+        }
+
+        .sks-doc-hero h1 {
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 800;
+            color: var(--sks-cian);
+            line-height: 1.05;
+            letter-spacing: -.5px;
+            margin-bottom: .9rem;
+            text-shadow: 0 0 40px rgba(0, 207, 255, .3);
+        }
+
+        .sks-doc-hero .sks-meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .8rem;
+            color: var(--sks-soft);
+            opacity: .6;
+        }
+
+        /* --- Tabla de contenidos --- */
+        .sks-toc {
+            counter-reset: sks-toc-item;
+            background: var(--sks-glass);
+            border: 1px solid var(--sks-ring);
+            border-radius: 16px;
+            padding: clamp(24px, 3vw, 34px);
+            margin-bottom: clamp(36px, 5vh, 60px);
+            animation: sks-fadeInUp .9s ease .15s both;
+        }
+
+        .sks-toc-title {
+            font-size: .78rem;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: .18em;
+            color: var(--sks-cian);
+            margin-bottom: 1.6rem;
+            opacity: .8;
+        }
+
+        .sks-toc ol {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            column-gap: 40px;
+            row-gap: 18px;
+            align-items: start;
+        }
+
+        .sks-toc li {
+            counter-increment: sks-toc-item;
+        }
+
+        .sks-toc a {
+            display: grid;
+            grid-template-columns: 34px 1fr;
+            align-items: center;
+            gap: 10px;
+            color: var(--sks-soft);
+            text-decoration: none;
+            font-size: .95rem;
+            line-height: 1.35;
+            transition: color .2s;
+        }
+
+        .sks-toc a::before {
+            content: counter(sks-toc-item, decimal-leading-zero);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .72rem;
+            color: var(--sks-cian);
+            opacity: .8;
+        }
+
+        .sks-toc a:hover {
+            color: var(--sks-cian);
+        }
+
+        /* --- Sección legal --- */
+        .sks-section {
+            background: var(--sks-glass);
+            border: 1px solid var(--sks-ring);
+            border-radius: 16px;
+            padding: clamp(22px, 3vw, 38px);
+            margin-bottom: clamp(20px, 3vh, 32px);
+            position: relative;
+            overflow: hidden;
+            animation: sks-fadeInUp .7s ease both;
+        }
+
+        .sks-section::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--sks-cian2), var(--sks-cian));
+            border-radius: 3px 0 0 3px;
+        }
+
+        .sks-section-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .72rem;
+            color: var(--sks-cian);
+            opacity: .6;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            margin-bottom: .5rem;
+        }
+
+        .sks-section h2 {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-weight: 700;
+            color: var(--sks-cian);
+            margin-bottom: 1rem;
+        }
+
+        .sks-section h2::after {
+            content: '';
+            display: block;
+            width: 36px;
+            height: 2px;
+            background: var(--sks-accent);
+            margin-top: 6px;
+        }
+
+        .sks-section p {
+            color: var(--sks-soft);
+            line-height: 1.75;
+            font-size: .96rem;
+            margin-bottom: .85rem;
+        }
+
+        .sks-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .sks-section ul,
+        .sks-section ol {
+            padding-left: 1.4rem;
+            color: var(--sks-soft);
+            font-size: .96rem;
+            line-height: 1.75;
+            margin-bottom: .85rem;
+        }
+
+        .sks-section li {
+            margin: .3rem 0;
+        }
+
+        .sks-section ul li::marker {
+            color: var(--sks-cian);
+        }
+
+        .sks-section strong {
+            color: var(--sks-txt);
+            font-weight: 600;
+        }
+
+        .sks-section a {
+            color: var(--sks-cian);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 207, 255, .3);
+            transition: border-color .2s;
+        }
+
+        .sks-section a:hover {
+            border-color: var(--sks-cian);
+        }
+
+        /* Delays de aparición por orden */
+        .sks-section:nth-child(1) {
+            animation-delay: .10s;
+        }
+
+        .sks-section:nth-child(2) {
+            animation-delay: .18s;
+        }
+
+        .sks-section:nth-child(3) {
+            animation-delay: .24s;
+        }
+
+        .sks-section:nth-child(4) {
+            animation-delay: .30s;
+        }
+
+        .sks-section:nth-child(5) {
+            animation-delay: .36s;
+        }
+
+        .sks-section:nth-child(6) {
+            animation-delay: .42s;
+        }
+
+        /* --- Caja destacada --- */
+        .sks-highlight-box {
+            background: rgba(0, 207, 255, .06);
+            border: 1px solid rgba(0, 207, 255, .2);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 1rem 0;
+            color: var(--sks-txt);
+            font-size: .92rem;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .sks-highlight-box .sks-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* --- Tabla de datos --- */
+        .sks-data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: .88rem;
+        }
+
+        .sks-data-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(0, 207, 255, .1);
+            color: var(--sks-soft);
+            vertical-align: top;
+        }
+
+        .sks-data-table td:first-child {
+            color: var(--sks-cian);
+            font-weight: 600;
+            white-space: nowrap;
+            width: 38%;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .82rem;
+        }
+
+        .sks-data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* --- Footer --- */
+        .sks-doc-footer {
+            text-align: center;
+            margin-top: clamp(40px, 6vh, 72px);
+            padding-top: 32px;
+            border-top: 1px solid var(--sks-ring);
+            color: var(--sks-soft);
+            font-size: .8rem;
+            opacity: .6;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* --- Animaciones con namespace --- */
+        @keyframes sks-fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 900px) {
+            .sks-toc ol {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .sks-toc ol {
+                grid-template-columns: 1fr;
+            }
+
+            .sks-data-table td:first-child {
+                width: auto;
+                white-space: normal;
+            }
+
+            .sks-data-table {
+                font-size: .82rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .sks-root *,
+            .sks-root *::before,
+            .sks-root *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================================================================
+     RAÍZ SKYNET SYSTEMS  — todos los estilos quedan dentro de .sks-root
+================================================================ -->
+    <div class="sks-root">
+
+        <!-- Fondo y efectos visuales -->
+        <div class="sks-bg-fixed"></div>
+        <canvas id="sks-network-canvas"></canvas>
+        <div class="sks-particle"></div>
+        <div class="sks-particle"></div>
+        <div class="sks-particle"></div>
+        <div class="sks-particle"></div>
+        <div class="sks-particle"></div>
+
+        <!-- Contenido principal -->
+        <div class="sks-page-wrap">
+
+            <!-- Hero -->
+            <header class="sks-doc-hero">
+                <div class="sks-badge">Documento legal</div>
+                <h1>Aviso Legal</h1>
+                <p class="sks-meta">Última actualización: marzo 2025 &nbsp;·&nbsp; Skynet Systems</p>
+            </header>
+
+            <!-- Tabla de contenidos -->
+            <nav class="sks-toc" aria-label="Índice del documento">
+                <p class="sks-toc-title">Índice de contenidos</p>
+                <ol>
+                    <li><a href="#sks-s1">Información general</a></li>
+                    <li><a href="#sks-s2">Términos y condiciones</a></li>
+                    <li><a href="#sks-s3">Acceso y navegación</a></li>
+                    <li><a href="#sks-s4">Política de enlaces</a></li>
+                    <li><a href="#sks-s5">Propiedad intelectual</a></li>
+                    <li><a href="#sks-s6">Acciones legales</a></li>
+                </ol>
+            </nav>
+
+            <!-- I. Información general -->
+            <section id="sks-s1" class="sks-section" aria-labelledby="sks-h1">
+                <div class="sks-section-num">I</div>
+                <h2 id="sks-h1">Información general</h2>
+                <p>En cumplimiento con el deber de información dispuesto en la Ley 34/2002 de Servicios de la Sociedad
+                    de la Información y el Comercio Electrónico (LSSI-CE) de 11 de julio, se facilitan a continuación
+                    los siguientes datos de información general de este sitio web:</p>
+                <p>La titularidad de este sitio web, <strong>https://skynet-sys.es/</strong>, (en adelante, Sitio Web)
+                    la ostenta: <strong></strong>, provista de <strong>NIF: B73761298</strong> e inscrita en:
+                    <strong></strong> con los siguientes datos registrales: <strong></strong>, cuyo representante es:
+                    <strong>Manuel Pérez de Castro</strong>, y cuyos datos de contacto son:</p>
+
+                <table class="sks-data-table" aria-label="Datos generales del titular">
+                    <tbody>
+                        <tr>
+                            <td>Dirección</td>
+                            <td>Carril de la Condomina 3, 7ºC 30006 Murcia</td>
+                        </tr>
+                        <tr>
+                            <td>Teléfono de contacto</td>
+                            <td><a href="tel:968679290">968679290</a></td>
+                        </tr>
+                        <tr>
+                            <td>Email de contacto</td>
+                            <td><a href="mailto:info@skynet-sys.es">info@skynet-sys.es</a></td>
+                        </tr>
+                        <tr>
+                            <td>Representante</td>
+                            <td>Manuel Pérez de Castro</td>
+                        </tr>
+                        <tr>
+                            <td>NIF</td>
+                            <td>B73761298</td>
+                        </tr>
+                        <tr>
+                            <td>Sitio Web</td>
+                            <td><a href="https://skynet-sys.es/" target="_blank"
+                                    rel="noopener noreferrer">https://skynet-sys.es/</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- II. Términos -->
+            <section id="sks-s2" class="sks-section" aria-labelledby="sks-h2">
+                <div class="sks-section-num">II</div>
+                <h2 id="sks-h2">Términos y condiciones generales de uso</h2>
+
+                <p><strong>El objeto de las condiciones: El Sitio Web</strong></p>
+                <p>El objeto de las presentes Condiciones Generales de Uso (en adelante, Condiciones) es regular el
+                    acceso y la utilización del Sitio Web. A los efectos de las presentes Condiciones se entenderá como
+                    Sitio Web: la apariencia externa de los interfaces de pantalla, tanto de forma estática como de
+                    forma dinámica, es decir, el árbol de navegación; y todos los elementos integrados tanto en los
+                    interfaces de pantalla como en el árbol de navegación (en adelante, Contenidos) y todos aquellos
+                    servicios o recursos en línea que en su caso ofrezca a los Usuarios (en adelante, Servicios).</p>
+                <p>Skynet Systems se reserva la facultad de modificar, en cualquier momento, y sin aviso previo, la
+                    presentación y configuración del Sitio Web y de los Contenidos y Servicios que en él pudieran estar
+                    incorporados. El Usuario reconoce y acepta que en cualquier momento Skynet Systems pueda
+                    interrumpir, desactivar y/o cancelar cualquiera de estos elementos que se integran en el Sitio Web o
+                    el acceso a los mismos.</p>
+
+                <div class="sks-highlight-box">
+                    <span class="sks-icon">⚡</span>
+                    <span>El acceso al Sitio Web por el Usuario tiene carácter libre y, por regla general, es gratuito,
+                        salvo en lo relativo al coste de conexión a través de la red de telecomunicaciones suministrada
+                        por el proveedor contratado por el Usuario.</span>
+                </div>
+
+                <p>La utilización de alguno de los Contenidos o Servicios del Sitio Web podrá hacerse mediante la
+                    suscripción o registro previo del Usuario.</p>
+
+                <p><strong>El Usuario</strong></p>
+                <p>El acceso, la navegación y uso del Sitio Web, confiere la condición de Usuario, por lo que se
+                    aceptan, desde que se inicia la navegación por el Sitio Web, todas las Condiciones aquí
+                    establecidas, así como sus ulteriores modificaciones, sin perjuicio de la aplicación de la
+                    correspondiente normativa legal de obligado cumplimiento según el caso. Dada la relevancia de lo
+                    anterior, se recomienda al Usuario leerlas cada vez que visite el Sitio Web.</p>
+                <p>El Sitio Web de Skynet Systems proporciona gran diversidad de información, servicios y datos. El
+                    Usuario asume su responsabilidad para realizar un uso correcto del Sitio Web. Esta responsabilidad
+                    se extenderá a:</p>
+                <ul>
+                    <li>Un uso de la información, Contenidos y/o Servicios y datos ofrecidos por Skynet Systems sin que
+                        sea contrario a lo dispuesto por las presentes Condiciones, la Ley, la moral o el orden público,
+                        o que de cualquier otro modo puedan suponer lesión de los derechos de terceros o del mismo
+                        funcionamiento del Sitio Web.</li>
+                    <li>La veracidad y licitud de las informaciones aportadas por el Usuario en los formularios
+                        extendidos por Skynet Systems para el acceso a ciertos Contenidos o Servicios ofrecidos por el
+                        Sitio Web.</li>
+                    <li>La notificación inmediata a Skynet Systems de cualquier hecho que permita el uso indebido de la
+                        información registrada en dichos formularios, tales como, pero no sólo, el robo, extravío, o el
+                        acceso no autorizado a identificadores y/o contraseñas, con el fin de proceder a su inmediata
+                        cancelación.</li>
+                </ul>
+                <p>El mero acceso a este Sitio Web no supone entablar ningún tipo de relación de carácter comercial
+                    entre Skynet Systems y el Usuario.</p>
+                <p>Siempre en el respeto de la legislación vigente, este Sitio Web de Skynet Systems se dirige a todas
+                    las personas, sin importar su edad, que puedan acceder y/o navegar por las páginas del Sitio Web.
+                </p>
+                <p>El Sitio Web está dirigido principalmente a Usuarios residentes en España. Skynet Systems no asegura
+                    que el Sitio Web cumpla con legislaciones de otros países, ya sea total o parcialmente. Si el
+                    Usuario reside o tiene su domiciliado en otro lugar y decide acceder y/o navegar en el Sitio Web lo
+                    hará bajo su propia responsabilidad, deberá asegurarse de que tal acceso y navegación cumple con la
+                    legislación local que le es aplicable, no asumiendo Skynet Systems responsabilidad alguna que se
+                    pueda derivar de dicho acceso.</p>
+            </section>
+
+            <!-- III. Acceso -->
+            <section id="sks-s3" class="sks-section" aria-labelledby="sks-h3">
+                <div class="sks-section-num">III</div>
+                <h2 id="sks-h3">Acceso y navegación en el sitio web: exclusión de garantías y responsabilidad</h2>
+                <p>Skynet Systems no garantiza la continuidad, disponibilidad y utilidad del Sitio Web, ni de los
+                    Contenidos o Servicios. Skynet Systems hará todo lo posible por el buen funcionamiento del Sitio
+                    Web, sin embargo, no se responsabiliza ni garantiza que el acceso a este Sitio Web no vaya a ser
+                    ininterrumpido o que esté libre de error.</p>
+                <p>Tampoco se responsabiliza o garantiza que el contenido o software al que pueda accederse a través de
+                    este Sitio Web, esté libre de error o cause un daño al sistema informático (software y hardware) del
+                    Usuario. En ningún caso Skynet Systems será responsable por las pérdidas, daños o perjuicios de
+                    cualquier tipo que surjan por el acceso, navegación y el uso del Sitio Web, incluyéndose, pero no
+                    limitándose, a los ocasionados a los sistemas informáticos o los provocados por la introducción de
+                    virus.</p>
+
+                <div class="sks-highlight-box">
+                    <span class="sks-icon">🛡️</span>
+                    <span>Skynet Systems tampoco se hace responsable de los daños que pudiesen ocasionarse a los
+                        usuarios por un uso inadecuado de este Sitio Web, incluyendo caídas, interrupciones, falta o
+                        defecto de las telecomunicaciones.</span>
+                </div>
+            </section>
+
+            <!-- IV. Política de enlaces -->
+            <section id="sks-s4" class="sks-section" aria-labelledby="sks-h4">
+                <div class="sks-section-num">IV</div>
+                <h2 id="sks-h4">Política de enlaces</h2>
+                <p>Se informa que el Sitio Web de Skynet Systems pone o puede poner a disposición de los Usuarios medios
+                    de enlace (como, entre otros, links, banners, botones), directorios y motores de búsqueda que
+                    permiten a los Usuarios acceder a sitios web pertenecientes y/o gestionados por terceros.</p>
+                <p>La instalación de estos enlaces, directorios y motores de búsqueda en el Sitio Web tiene por objeto
+                    facilitar a los Usuarios la búsqueda de y acceso a la información disponible en Internet, sin que
+                    pueda considerarse una sugerencia, recomendación o invitación para la visita de los mismos.</p>
+                <p>Skynet Systems no ofrece ni comercializa por sí ni por medio de terceros los productos y/o servicios
+                    disponibles en dichos sitios enlazados.</p>
+                <p>Skynet Systems ofrece contenidos patrocinados, anuncios y/o enlaces de afiliados. La información que
+                    aparece en estos enlaces de afiliados o los anuncios insertados, son facilitados por los propios
+                    anunciantes, por lo que Skynet Systems no se hace responsable de posibles inexactitudes o errores
+                    que pudieran contener los anuncios, ni garantiza en modo alguno la experiencia, integridad o
+                    responsabilidad de los anunciantes o la calidad de sus productos y/o servicios.</p>
+                <p>Asimismo, tampoco garantizará la disponibilidad técnica, exactitud, veracidad, validez o legalidad de
+                    sitios ajenos a su propiedad a los que se pueda acceder por medio de los enlaces.</p>
+                <p>Skynet Systems en ningún caso revisará o controlará el contenido de otros sitios web, así como
+                    tampoco aprueba, examina ni hace propios los productos y servicios, contenidos, archivos y cualquier
+                    otro material existente en los referidos sitios enlazados.</p>
+                <p>Skynet Systems no asume ninguna responsabilidad por los daños y perjuicios que pudieran producirse
+                    por el acceso, uso, calidad o licitud de los contenidos, comunicaciones, opiniones, productos y
+                    servicios de los sitios web no gestionados por Skynet Systems y que sean enlazados en este Sitio
+                    Web.</p>
+                <p>El Usuario o tercero que realice un hipervínculo desde una página web de otro, distinto, sitio web al
+                    Sitio Web de Skynet Systems deberá saber que:</p>
+                <ul>
+                    <li>No se permite la reproducción —total o parcialmente— de ninguno de los Contenidos y/o Servicios
+                        del Sitio Web sin autorización expresa de Skynet Systems.</li>
+                    <li>No se permite tampoco ninguna manifestación falsa, inexacta o incorrecta sobre el Sitio Web de
+                        Skynet Systems, ni sobre los Contenidos y/o Servicios del mismo.</li>
+                    <li>A excepción del hipervínculo, el sitio web en el que se establezca dicho hiperenlace no
+                        contendrá ningún elemento de este Sitio Web protegido como propiedad intelectual por el
+                        ordenamiento jurídico español, salvo autorización expresa de Skynet Systems.</li>
+                    <li>El establecimiento del hipervínculo no implicará la existencia de relaciones entre Skynet
+                        Systems y el titular del sitio web desde el cual se realice, ni el conocimiento y aceptación de
+                        Skynet Systems de los contenidos, servicios y/o actividades ofrecidos en dicho sitio web, y
+                        viceversa.</li>
+                </ul>
+            </section>
+
+            <!-- V. Propiedad intelectual -->
+            <section id="sks-s5" class="sks-section" aria-labelledby="sks-h5">
+                <div class="sks-section-num">V</div>
+                <h2 id="sks-h5">Propiedad intelectual e industrial</h2>
+                <p>Skynet Systems por sí o como parte cesionaria, es titular de todos los derechos de propiedad
+                    intelectual e industrial del Sitio Web, así como de los elementos contenidos en el mismo (a título
+                    enunciativo y no exhaustivo, imágenes, sonido, audio, vídeo, software o textos, marcas o logotipos,
+                    combinaciones de colores, estructura y diseño, selección de materiales usados, programas de
+                    ordenador necesarios para su funcionamiento, acceso y uso, etc.).</p>
+                <p>Serán, por consiguiente, obras protegidas como propiedad intelectual por el ordenamiento jurídico
+                    español, siéndoles aplicables tanto la normativa española y comunitaria en este campo, como los
+                    tratados internacionales relativos a la materia y suscritos por España.</p>
+
+                <div class="sks-highlight-box">
+                    <span class="sks-icon">🔐</span>
+                    <span>Todos los derechos reservados. Quedan expresamente prohibidas la reproducción, distribución y
+                        comunicación pública, incluida su modalidad de puesta a disposición, de la totalidad o parte de
+                        los contenidos de esta página web con fines comerciales, sin autorización de Skynet
+                        Systems.</span>
+                </div>
+
+                <p>El Usuario se compromete a respetar los derechos de propiedad intelectual e industrial de Skynet
+                    Systems. Podrá visualizar los elementos del Sitio Web o incluso imprimirlos, copiarlos y
+                    almacenarlos en el disco duro de su ordenador o en cualquier otro soporte físico siempre y cuando
+                    sea, exclusivamente, para su uso personal. El Usuario, sin embargo, no podrá suprimir, alterar, o
+                    manipular cualquier dispositivo de protección o sistema de seguridad que estuviera instalado en el
+                    Sitio Web.</p>
+                <p>En caso de que el Usuario o tercero considere que cualquiera de los Contenidos del Sitio Web suponga
+                    una violación de los derechos de protección de la propiedad intelectual, deberá comunicarlo
+                    inmediatamente a Skynet Systems a través de los datos de contacto del apartado de
+                    <strong>Información General</strong> de este Aviso Legal y Condiciones Generales de Uso.</p>
+            </section>
+
+            <!-- VI. Acciones legales -->
+            <section id="sks-s6" class="sks-section" aria-labelledby="sks-h6">
+                <div class="sks-section-num">VI</div>
+                <h2 id="sks-h6">Acciones legales, legislación aplicable y jurisdicción</h2>
+                <p>Skynet Systems se reserva la facultad de presentar las acciones civiles o penales que considere
+                    necesarias por la utilización indebida del Sitio Web y Contenidos, o por el incumplimiento de las
+                    presentes Condiciones.</p>
+                <p>La relación entre el Usuario y Skynet Systems se regirá por la normativa vigente y de aplicación en
+                    el territorio español. De surgir cualquier controversia en relación con la interpretación y/o a la
+                    aplicación de estas Condiciones las partes someterán sus conflictos a la jurisdicción ordinaria
+                    sometiéndose a los jueces y tribunales que correspondan conforme a derecho.</p>
+            </section>
+
+            <footer class="sks-doc-footer">
+                © 2025 Skynet Systems &nbsp;·&nbsp; Todos los derechos reservados &nbsp;·&nbsp; v1.0
+            </footer>
+
+        </div><!-- /.sks-page-wrap -->
+    </div><!-- /.sks-root -->
+
+    <script>
+        (function () {
+            /* Canvas de red — usa ID prefijado para no colisionar */
+            const canvas = document.getElementById('sks-network-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let W, H, nodes = [];
+
+            function resize() {
+                W = canvas.width = window.innerWidth;
+                H = canvas.height = window.innerHeight;
+                const count = Math.floor((W * H) / 12000);
+                nodes = Array.from({ length: count }, () => ({
+                    x: Math.random() * W,
+                    y: Math.random() * H,
+                    vx: (Math.random() - .5) * .4,
+                    vy: (Math.random() - .5) * .4
+                }));
+            }
+            window.addEventListener('resize', resize, { passive: true });
+            resize();
+
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+                ctx.fillStyle = '#ffffff';
+                ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+                ctx.lineWidth = 1;
+
+                nodes.forEach((n, i) => {
+                    ctx.beginPath();
+                    ctx.arc(n.x, n.y, 1.5, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    for (let j = i + 1; j < nodes.length; j++) {
+                        const n2 = nodes[j];
+                        const dx = n.x - n2.x, dy = n.y - n2.y;
+                        const d = Math.sqrt(dx * dx + dy * dy);
+                        if (d < 130) {
+                            ctx.globalAlpha = 1 - d / 130;
+                            ctx.beginPath();
+                            ctx.moveTo(n.x, n.y);
+                            ctx.lineTo(n2.x, n2.y);
+                            ctx.stroke();
+                        }
+                    }
+                    ctx.globalAlpha = 1;
+
+                    n.x += n.vx; n.y += n.vy;
+                    if (n.x < 0 || n.x > W) n.vx *= -1;
+                    if (n.y < 0 || n.y > H) n.vy *= -1;
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
+        })();
+    </script>
+
+</body>
+
+</html>

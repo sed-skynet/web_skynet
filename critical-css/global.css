@@ -115,7 +115,7 @@ body::before{
              padding .6s cubic-bezier(.16,1,.3,1);
 }
 .logo img{
-  height:54px;
+  height:40px;
   transition:height .6s cubic-bezier(.16,1,.3,1),filter .6s cubic-bezier(.16,1,.3,1);
 }
 
@@ -151,7 +151,7 @@ body::before{
   box-shadow:var(--nav-shadow);padding:0 18px;gap:16px;
 }
 .header-wrapper.is-scrolled .logo img{
-  height:46px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.15));
+  height:36px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.15));
 }
 .header-wrapper.is-scrolled .nav-links{gap:10px;align-items:center}
 .header-wrapper.is-scrolled .nav-links a{
@@ -177,7 +177,7 @@ body::before{
   .topbar{display:none!important}
   .sky-hamburger{display:flex!important}
   .navbar-inner{height:70px;padding:0 20px}
-  .logo img{height:44px}
+  .logo img{height:36px}
   .header-wrapper.is-scrolled .navbar{
     background:rgba(255,255,255,.95);backdrop-filter:blur(6px);padding:0;
   }
@@ -186,4 +186,15 @@ body::before{
     box-shadow:0 4px 20px rgba(0,0,0,.12);padding:0 20px;height:70px;
   }
   .header-spacing{height:70px!important}
+}
+
+/* ── Elementor shortcode widget — previene desfase horizontal en carga inicial ── */
+.elementor-widget-shortcode,
+.elementor-widget-shortcode .elementor-widget-container{
+  width:100%!important;
+  max-width:100%!important;
+  float:none!important;
+}
+.elementor-widget-shortcode .elementor-widget-container>p{
+  margin:0!important;
 }

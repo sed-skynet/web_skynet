@@ -89,6 +89,8 @@
             color: var(--txt-soft);
             line-height: 1.4;
             margin-top: 1.2rem;
+            text-align: justify;
+            hyphens: auto;
         }
 
         #pilares-glass .card-anim:hover {
@@ -161,10 +163,14 @@
 
         /* Alineación izquierda para ambas columnas */
         #pilares-glass .fila-1 .card-anim h3,
-        #pilares-glass .fila-1 .card-anim p,
-        #pilares-glass .fila-2 .card-anim h3,
-        #pilares-glass .fila-2 .card-anim p {
+        #pilares-glass .fila-2 .card-anim h3 {
             text-align: left !important;
+        }
+
+        #pilares-glass .fila-1 .card-anim p,
+        #pilares-glass .fila-2 .card-anim p {
+            text-align: justify !important;
+            hyphens: auto !important;
         }
 
         /* CTA */

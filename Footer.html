@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skynet Systems - Footer Responsive</title>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-          rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"></noscript>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    </noscript>
     <style>
         * {
             margin: 0;
@@ -376,7 +378,11 @@
            STICKY — cuando el contenido no llena pantalla
         ─────────────────────────────────────────── */
         .footer-sticky {
-            position: sticky;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
         }
     </style>
 </head>
@@ -417,11 +423,11 @@
                 <h4>Legal</h4>
                 <ul>
                     <li><a href="/aviso-legal">Aviso Legal</a></li>
-                    <li><a href="/privacidad">Privacidad</a></li>
+                    <li><a href="/politica-de-privacidad">Privacidad</a></li>
                     <li><a href="/politica-cookies">Cookies</a></li>
                     <li><a href="/mas-informacion-cookies">Más Información Cookies</a></li>
                     <li><a
-                            href="https://skynet-sys.es/wp-content/uploads/2025/07/PSI-Politica-de-Seguridad-de-la-Informacion-v1.2.pdf">Política
+                            href="https://skynet-sys.es/wp-content/uploads/2026/04/PSI-Politica-de-Seguridad-de-la-Informacion-v1.2.pdf">Política
                             de Seguridad</a></li>
                 </ul>
             </nav>
@@ -434,10 +440,14 @@
                     <li>Email: <a href="mailto:info@skynet-sys.es">info@skynet-sys.es</a></li>
                 </ul>
                 <div class="fc-social" aria-label="Redes sociales">
-                    <a href="https://www.linkedin.com/company/skynet-systems-s-l-/?originalSubdomain=es" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-                    <a href="https://www.facebook.com/skynetsystemsslu/" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                    <a href="https://x.com/skynetsystems_" aria-label="X"><i class="fab fa-x-twitter" aria-hidden="true"></i></a>
-                    <a href="https://www.youtube.com/channel/UCqS4sjjeOH4yPv-dvIgKvmg" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                    <a href="https://www.linkedin.com/company/skynet-systems-s-l-/?originalSubdomain=es"
+                        aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                    <a href="https://www.facebook.com/skynetsystemsslu/" aria-label="Facebook"><i
+                            class="fab fa-facebook" aria-hidden="true"></i></a>
+                    <a href="https://x.com/skynetsystems_" aria-label="X"><i class="fab fa-x-twitter"
+                            aria-hidden="true"></i></a>
+                    <a href="https://www.youtube.com/channel/UCqS4sjjeOH4yPv-dvIgKvmg" aria-label="YouTube"><i
+                            class="fab fa-youtube" aria-hidden="true"></i></a>
                 </div>
             </div>
 
@@ -483,9 +493,17 @@
                 if (isAdjusting) return;
                 isAdjusting = true;
                 requestAnimationFrame(() => {
+                    // Quitar estado fijo temporalmente para medir altura real del contenido
+                    const wasFixed = footer.classList.contains('footer-sticky');
+                    if (wasFixed) {
+                        footer.classList.remove('footer-sticky');
+                        document.body.style.paddingBottom = '';
+                    }
                     const bodyHeight = document.body.scrollHeight;
                     const windowHeight = window.innerHeight;
-                    footer.classList.toggle('footer-sticky', bodyHeight < windowHeight);
+                    const isShort = bodyHeight < windowHeight;
+                    footer.classList.toggle('footer-sticky', isShort);
+                    document.body.style.paddingBottom = isShort ? footer.offsetHeight + 'px' : '';
                     isAdjusting = false;
                 });
             }
@@ -509,4 +527,3 @@
 </body>
 
 </html>
-

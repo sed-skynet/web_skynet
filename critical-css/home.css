@@ -32,8 +32,8 @@ body.page-id-96 #eventos{
   margin-bottom:0!important;
 }
 body.page-id-96 #gancho-hero{
-  margin-top:clamp(44px,5vw,72px)!important;
-  padding-top:clamp(36px,5vw,72px)!important;
+  margin-top:0px!important;
+  padding-top:clamp(40px,5vw,80px)!important;
   padding-left:var(--home-side-pad)!important;
   padding-right:var(--home-side-pad)!important;
 }
@@ -58,7 +58,7 @@ body.page-id-96 #gancho-hero{
 .zona-gancho__container{
   position:relative;z-index:2;
   max-width:var(--home-max,1280px);margin:0 auto;
-  padding:clamp(18px,2.8vh,32px) var(--home-side-pad,clamp(16px,4vw,40px)) clamp(18px,3.5vh,44px);
+  padding:clamp(40px,6vh,72px) var(--home-side-pad,clamp(16px,4vw,40px)) clamp(18px,3.5vh,44px);
   text-align:center;
   animation:fadeInUp 1s ease-out;
 }
@@ -172,4 +172,19 @@ body.page-id-96 #gancho-hero{
   .zona-gancho__container{padding:6.5vh 6vw 7.5vh}
   .zona-gancho__cta{width:100%;justify-content:center}
   .zona-gancho__emblema{gap:18px;padding:16px 20px}
+}
+
+/* ── Centrado de secciones home — previene CLS horizontal ── */
+body.page-id-96 #servicios-2 .estructura-arco-2[data-servicios="1"]{
+  max-width:var(--home-max,1280px);
+  margin:0 auto;
+}
+body.page-id-96 #pilares-glass .estructura-arco-wrapper{
+  max-width:var(--home-max,1280px);
+  margin:0 auto;
+  text-align:center;
+}
+body.page-id-96 #iso .wrap{
+  max-width:var(--home-max,1280px);
+  margin:0 auto;
 }

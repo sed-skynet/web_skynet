@@ -19,10 +19,10 @@
 body{overflow-x:hidden;font-family:'Inter',system-ui,sans-serif}
 
 /* ── Layout wrapper ── */
-.wrap{
+.wrap,.page-main{
   max-width:var(--max);
-  margin:28px auto 56px;
-  padding:0 16px;
+  margin:0 auto;
+  padding:clamp(40px,5vh,72px) 16px 56px;
   position:relative;z-index:2;
   display:grid;gap:34px;
 }
@@ -75,6 +75,7 @@ body{overflow-x:hidden;font-family:'Inter',system-ui,sans-serif}
   margin:18px 0 0;color:var(--text-dim);
   font-size:clamp(1rem,1.4vw,1.5rem);
   max-width:500px;line-height:1.5;
+  text-align:justify;hyphens:auto;
 }
 
 /* ── Lottie placeholder ── */

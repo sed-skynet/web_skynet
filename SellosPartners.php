@@ -29,10 +29,10 @@ function skynet_sellos_partners_shortcode( $atts = [] ) {
 
     <div class="sellos-viewport">
       <div class="sellos-track">
-        <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2020/04/google-partner.png" alt="Google Partner"></div>
-        <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2022/06/microsoft-gris.png" alt="Microsoft Partner"></div>
-        <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2021/03/silver-partner-synology-2.png" alt="Synology Silver Partner"></div>
-        <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2022/03/Registered-Logo.png" alt="TP-LINK Partner"></div>
+        <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2026/04/google-partner-150x56-1.png" alt="Google Partner"></div>
+        <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2026/04/microsoft-gris-300x64-1.png" alt="Microsoft Partner"></div>
+        <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2026/04/silver-partner-synology-2-131x75-1.png" alt="Synology Silver Partner"></div>
+        <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2026/04/Registered-Logo-150x150-1.png" alt="TP-LINK Partner"></div>
         <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2026/01/bp-del-e1769514187514.png" alt="Dell Partner"></div>
         <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2026/01/wg1-Gold-Reseller-logo.png" alt="WatchGuard Gold Reseller"></div>
         <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2026/01/acens-logo-2.webp" alt="Acens Partner"></div>
@@ -40,10 +40,10 @@ function skynet_sellos_partners_shortcode( $atts = [] ) {
         <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2026/03/veam.webp" alt="Veeam Backup"></div>
         <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2026/03/Occentus01.png" alt="Occentus"></div>
 
-        <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2020/04/google-partner.png" alt="Google Partner"></div>
-        <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2022/06/microsoft-gris.png" alt="Microsoft Partner"></div>
-        <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2021/03/silver-partner-synology-2.png" alt="Synology Silver Partner"></div>
-        <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2022/03/Registered-Logo.png" alt="TP-LINK Partner"></div>
+        <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2026/04/google-partner-150x56-1.png" alt="Google Partner"></div>
+        <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2026/04/microsoft-gris-300x64-1.png" alt="Microsoft Partner"></div>
+        <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2026/04/silver-partner-synology-2-131x75-1.png" alt="Synology Silver Partner"></div>
+        <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2026/04/Registered-Logo-150x150-1.png" alt="TP-LINK Partner"></div>
         <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2026/01/bp-del-e1769514187514.png" alt="Dell Partner"></div>
         <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2026/01/wg1-Gold-Reseller-logo.png" alt="WatchGuard Gold Reseller"></div>
         <div class="sello-card"><img decoding="async" class="sello" src="https://skynet-sys.es/wp-content/uploads/2026/01/acens-logo-2.webp" alt="Acens Partner"></div>

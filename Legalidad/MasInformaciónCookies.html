@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Más Información de Cookies · Skynet Systems</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ============================================================
+           SKYNET SYSTEMS — MÁS INFORMACIÓN DE COOKIES
+           Todos los selectores usan el prefijo  .ski-  o  #ski-
+           para garantizar aislamiento completo sin afectar al resto
+           de la página anfitriona.
+        ============================================================ */
+
+        /* --- Variables confinadas al contenedor raíz --- */
+        .ski-root {
+            --ski-cian: #00cfff;
+            --ski-cian2: #00f2ff;
+            --ski-txt: #eaf6ff;
+            --ski-soft: #cdefff;
+            --ski-glass: rgba(255, 255, 255, .04);
+            --ski-ring: rgba(0, 207, 255, .15);
+            --ski-accent: #1da183;
+
+            box-sizing: border-box;
+            font-family: 'Exo 2', 'Segoe UI', sans-serif;
+            color: var(--ski-txt);
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .ski-root *,
+        .ski-root *::before,
+        .ski-root *::after {
+            box-sizing: inherit;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- Fondo fijo --- */
+        .ski-bg-fixed {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle, #247ba0 0%, #1b4f72 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* --- Canvas de red neuronal --- */
+        #ski-network-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* --- Partículas flotantes --- */
+        .ski-particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: var(--ski-cian);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--ski-cian);
+            z-index: 2;
+            pointer-events: none;
+            animation: ski-floatPar 9s ease-in-out infinite;
+        }
+
+        .ski-particle:nth-child(1) {
+            left: 8%;
+            top: 18%;
+            animation-delay: 0s;
+            animation-duration: 8s;
+        }
+
+        .ski-particle:nth-child(2) {
+            left: 88%;
+            top: 12%;
+            animation-delay: 1.5s;
+            animation-duration: 10s;
+        }
+
+        .ski-particle:nth-child(3) {
+            left: 22%;
+            top: 72%;
+            animation-delay: 3s;
+            animation-duration: 7s;
+        }
+
+        .ski-particle:nth-child(4) {
+            left: 72%;
+            top: 62%;
+            animation-delay: 4.5s;
+            animation-duration: 9s;
+        }
+
+        .ski-particle:nth-child(5) {
+            left: 50%;
+            top: 88%;
+            animation-delay: 2s;
+            animation-duration: 11s;
+        }
+
+        @keyframes ski-floatPar {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+                opacity: .25;
+            }
+
+            50% {
+                transform: translateY(-40px) translateX(20px);
+                opacity: .9;
+            }
+        }
+
+        /* --- Envoltorio de página --- */
+        .ski-page-wrap {
+            position: relative;
+            z-index: 3;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: clamp(40px, 8vh, 90px) clamp(18px, 5vw, 48px) clamp(60px, 10vh, 120px);
+        }
+
+        /* --- Hero --- */
+        .ski-doc-hero {
+            text-align: center;
+            margin-bottom: clamp(40px, 6vh, 72px);
+            animation: ski-fadeInUp .9s ease both;
+        }
+
+        .ski-doc-hero .ski-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .8rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--ski-cian);
+            border: 1px solid var(--ski-ring);
+            background: rgba(0, 207, 255, .06);
+            border-radius: 999px;
+            padding: 6px 18px;
+            margin-bottom: 1.4rem;
+        }
+
+        .ski-doc-hero .ski-badge::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            background: var(--ski-cian);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--ski-cian);
+            animation: ski-blink 2s ease-in-out infinite;
+        }
+
+        @keyframes ski-blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: .2;
+            }
+        }
+
+        .ski-doc-hero h1 {
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 800;
+            color: var(--ski-cian);
+            line-height: 1.05;
+            letter-spacing: -.5px;
+            margin-bottom: .9rem;
+            text-shadow: 0 0 40px rgba(0, 207, 255, .3);
+        }
+
+        .ski-doc-hero .ski-meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .8rem;
+            color: var(--ski-soft);
+            opacity: .6;
+        }
+
+        /* --- Tabla de contenidos --- */
+        .ski-toc {
+            counter-reset: ski-toc-item;
+            background: var(--ski-glass);
+            border: 1px solid var(--ski-ring);
+            border-radius: 16px;
+            padding: clamp(24px, 3vw, 34px);
+            margin-bottom: clamp(36px, 5vh, 60px);
+            animation: ski-fadeInUp .9s ease .15s both;
+        }
+
+        .ski-toc-title {
+            font-size: .78rem;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: .18em;
+            color: var(--ski-cian);
+            margin-bottom: 1.6rem;
+            opacity: .8;
+        }
+
+        .ski-toc ol {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            column-gap: 40px;
+            row-gap: 18px;
+            align-items: start;
+        }
+
+        .ski-toc li {
+            counter-increment: ski-toc-item;
+        }
+
+        .ski-toc a {
+            display: grid;
+            grid-template-columns: 34px 1fr;
+            align-items: center;
+            gap: 10px;
+            color: var(--ski-soft);
+            text-decoration: none;
+            font-size: .95rem;
+            line-height: 1.35;
+            transition: color .2s;
+        }
+
+        .ski-toc a::before {
+            content: counter(ski-toc-item, decimal-leading-zero);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .72rem;
+            color: var(--ski-cian);
+            opacity: .8;
+        }
+
+        .ski-toc a:hover {
+            color: var(--ski-cian);
+        }
+
+        /* --- Sección legal --- */
+        .ski-section {
+            background: var(--ski-glass);
+            border: 1px solid var(--ski-ring);
+            border-radius: 16px;
+            padding: clamp(22px, 3vw, 38px);
+            margin-bottom: clamp(20px, 3vh, 32px);
+            position: relative;
+            overflow: hidden;
+            animation: ski-fadeInUp .7s ease both;
+        }
+
+        .ski-section::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--ski-cian2), var(--ski-cian));
+            border-radius: 3px 0 0 3px;
+        }
+
+        .ski-section-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .72rem;
+            color: var(--ski-cian);
+            opacity: .6;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            margin-bottom: .5rem;
+        }
+
+        .ski-section h2 {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-weight: 700;
+            color: var(--ski-cian);
+            margin-bottom: 1rem;
+        }
+
+        .ski-section h2::after {
+            content: '';
+            display: block;
+            width: 36px;
+            height: 2px;
+            background: var(--ski-accent);
+            margin-top: 6px;
+        }
+
+        .ski-section p {
+            color: var(--ski-soft);
+            line-height: 1.75;
+            font-size: .96rem;
+            margin-bottom: .85rem;
+        }
+
+        .ski-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .ski-section ul,
+        .ski-section ol {
+            padding-left: 1.4rem;
+            color: var(--ski-soft);
+            font-size: .96rem;
+            line-height: 1.75;
+            margin-bottom: .85rem;
+        }
+
+        .ski-section li {
+            margin: .3rem 0;
+        }
+
+        .ski-section ul li::marker {
+            color: var(--ski-cian);
+        }
+
+        .ski-section strong {
+            color: var(--ski-txt);
+            font-weight: 600;
+        }
+
+        .ski-section a {
+            color: var(--ski-cian);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 207, 255, .3);
+            transition: border-color .2s;
+        }
+
+        .ski-section a:hover {
+            border-color: var(--ski-cian);
+        }
+
+        /* Delays de aparición */
+        .ski-section:nth-child(1) {
+            animation-delay: .10s;
+        }
+
+        .ski-section:nth-child(2) {
+            animation-delay: .18s;
+        }
+
+        .ski-section:nth-child(3) {
+            animation-delay: .24s;
+        }
+
+        .ski-section:nth-child(4) {
+            animation-delay: .30s;
+        }
+
+        .ski-section:nth-child(5) {
+            animation-delay: .36s;
+        }
+
+        .ski-section:nth-child(6) {
+            animation-delay: .42s;
+        }
+
+        .ski-section:nth-child(7) {
+            animation-delay: .48s;
+        }
+
+        /* --- Caja destacada --- */
+        .ski-highlight-box {
+            background: rgba(0, 207, 255, .06);
+            border: 1px solid rgba(0, 207, 255, .2);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 1rem 0;
+            color: var(--ski-txt);
+            font-size: .92rem;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .ski-highlight-box .ski-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* --- Tarjetas de tipos de cookie --- */
+        .ski-cookie-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px;
+            margin: 1rem 0;
+        }
+
+        .ski-cookie-card {
+            background: rgba(0, 207, 255, .04);
+            border: 1px solid rgba(0, 207, 255, .15);
+            border-radius: 12px;
+            padding: 18px 20px;
+        }
+
+        .ski-cookie-card .ski-card-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .ski-cookie-card h3 {
+            font-size: .95rem;
+            font-weight: 700;
+            color: var(--ski-cian);
+            margin-bottom: 6px;
+        }
+
+        .ski-cookie-card p {
+            font-size: .88rem;
+            color: var(--ski-soft);
+            line-height: 1.6;
+            margin-bottom: 0 !important;
+        }
+
+        /* --- Bloques de navegador --- */
+        .ski-browser-block {
+            background: rgba(0, 207, 255, .03);
+            border: 1px solid rgba(0, 207, 255, .12);
+            border-radius: 12px;
+            padding: 18px 22px;
+            margin-bottom: 14px;
+        }
+
+        .ski-browser-block h3 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .85rem;
+            color: var(--ski-cian);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ski-browser-block h3::before {
+            content: '>';
+            opacity: .5;
+        }
+
+        .ski-browser-block ol {
+            padding-left: 1.4rem;
+            color: var(--ski-soft);
+            font-size: .88rem;
+            line-height: 1.75;
+            margin-bottom: 0 !important;
+        }
+
+        .ski-browser-block li {
+            margin: .25rem 0;
+        }
+
+        /* --- Footer --- */
+        .ski-doc-footer {
+            text-align: center;
+            margin-top: clamp(40px, 6vh, 72px);
+            padding-top: 32px;
+            border-top: 1px solid var(--ski-ring);
+            color: var(--ski-soft);
+            font-size: .8rem;
+            opacity: .6;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* --- Animaciones con namespace --- */
+        @keyframes ski-fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 900px) {
+            .ski-toc ol {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .ski-toc ol {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .ski-root *,
+            .ski-root *::before,
+            .ski-root *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================================================================
+     RAÍZ SKYNET SYSTEMS — MÁS INFORMACIÓN DE COOKIES
+     Todos los estilos quedan dentro de .ski-root
+================================================================ -->
+    <div class="ski-root">
+
+        <!-- Fondo y efectos visuales -->
+        <div class="ski-bg-fixed"></div>
+        <canvas id="ski-network-canvas"></canvas>
+        <div class="ski-particle"></div>
+        <div class="ski-particle"></div>
+        <div class="ski-particle"></div>
+        <div class="ski-particle"></div>
+        <div class="ski-particle"></div>
+
+        <!-- Contenido principal -->
+        <div class="ski-page-wrap">
+
+            <!-- Hero -->
+            <header class="ski-doc-hero">
+                <div class="ski-badge">Documento legal</div>
+                <h1>Más Información de Cookies</h1>
+                <p class="ski-meta">Última actualización: marzo 2025 &nbsp;·&nbsp; Skynet Systems</p>
+            </header>
+
+            <!-- Tabla de contenidos -->
+            <nav class="ski-toc" aria-label="Índice del documento">
+                <p class="ski-toc-title">Índice de contenidos</p>
+                <ol>
+                    <li><a href="#ski-s1">¿Qué es una cookie?</a></li>
+                    <li><a href="#ski-s2">¿Qué NO es una cookie?</a></li>
+                    <li><a href="#ski-s3">¿Qué información almacena?</a></li>
+                    <li><a href="#ski-s4">Tipos de cookies</a></li>
+                    <li><a href="#ski-s5">Propias y de terceros</a></li>
+                    <li><a href="#ski-s6">¿Qué ocurre si las desactivo?</a></li>
+                    <li><a href="#ski-s7">Configuración por navegador</a></li>
+                </ol>
+            </nav>
+
+            <!-- I. ¿Qué es una cookie? -->
+            <section id="ski-s1" class="ski-section" aria-labelledby="ski-h1">
+                <div class="ski-section-num">I</div>
+                <h2 id="ski-h1">¿Qué es una cookie?</h2>
+                <p>Una cookie es un <strong>fichero de texto inofensivo</strong> que se almacena en su navegador cuando
+                    visita casi cualquier página web. La utilidad de la cookie es que la web sea capaz de recordar su
+                    visita cuando vuelva a navegar por esa página.</p>
+                <div class="ski-highlight-box">
+                    <span class="ski-icon">💡</span>
+                    <span>Aunque mucha gente no lo sabe, las cookies se llevan utilizando desde hace más de 20 años,
+                        cuando aparecieron los primeros navegadores para la World Wide Web.</span>
+                </div>
+            </section>
+
+            <!-- II. ¿Qué NO es una cookie? -->
+            <section id="ski-s2" class="ski-section" aria-labelledby="ski-h2">
+                <div class="ski-section-num">II</div>
+                <h2 id="ski-h2">¿Qué NO es una cookie?</h2>
+                <div class="ski-highlight-box">
+                    <span class="ski-icon">🚫</span>
+                    <span>Una cookie <strong>no es un virus</strong>, ni un troyano, ni un gusano, ni spam, ni spyware,
+                        ni abre ventanas pop-up.</span>
+                </div>
+            </section>
+
+            <!-- III. ¿Qué información almacena? -->
+            <section id="ski-s3" class="ski-section" aria-labelledby="ski-h3">
+                <div class="ski-section-num">III</div>
+                <h2 id="ski-h3">¿Qué información almacena una cookie?</h2>
+                <p>Las cookies <strong>no suelen almacenar información sensible</strong> sobre usted, como tarjetas de
+                    crédito o datos bancarios, fotografías, su DNI o información personal. Los datos que guardan son de
+                    carácter técnico, preferencias personales, personalización de contenidos, etc.</p>
+                <p>El servidor web no le asocia a usted como persona, sino a su navegador web. De hecho, si usted navega
+                    habitualmente con un navegador y prueba con otro diferente en la misma web, el sitio no se dará
+                    cuenta de que es la misma persona, ya que está asociando al navegador, no a la persona.</p>
+            </section>
+
+            <!-- IV. Tipos de cookies -->
+            <section id="ski-s4" class="ski-section" aria-labelledby="ski-h4">
+                <div class="ski-section-num">IV</div>
+                <h2 id="ski-h4">¿Qué tipo de cookies existen?</h2>
+                <div class="ski-cookie-cards">
+                    <div class="ski-cookie-card">
+                        <span class="ski-card-icon">⚙️</span>
+                        <h3>Cookies técnicas</h3>
+                        <p>Son las más elementales. Permiten saber cuándo está navegando un humano o una aplicación
+                            automatizada, cuándo lo hace un usuario anónimo o uno registrado, y realizan tareas básicas
+                            para el funcionamiento de cualquier web dinámica.</p>
+                    </div>
+                    <div class="ski-cookie-card">
+                        <span class="ski-card-icon">📊</span>
+                        <h3>Cookies de análisis</h3>
+                        <p>Recogen información sobre el tipo de navegación que está realizando: secciones más visitadas,
+                            productos consultados, franja horaria de uso, idioma, etc.</p>
+                    </div>
+                    <div class="ski-cookie-card">
+                        <span class="ski-card-icon">📢</span>
+                        <h3>Cookies publicitarias</h3>
+                        <p>Muestran publicidad en función de su navegación, su país de procedencia, idioma y otros
+                            factores de comportamiento en línea.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- V. Propias y de terceros -->
+            <section id="ski-s5" class="ski-section" aria-labelledby="ski-h5">
+                <div class="ski-section-num">V</div>
+                <h2 id="ski-h5">¿Qué son las cookies propias y las de terceros?</h2>
+                <p>Las <strong>cookies propias</strong> son las generadas por la página que está visitando.</p>
+                <p>Las <strong>cookies de terceros</strong> son las generadas por servicios o proveedores externos como
+                    Facebook, Twitter, Google, etc., que pueden estar integrados en el sitio que visita.</p>
+            </section>
+
+            <!-- VI. ¿Qué ocurre si las desactivo? -->
+            <section id="ski-s6" class="ski-section" aria-labelledby="ski-h6">
+                <div class="ski-section-num">VI</div>
+                <h2 id="ski-h6">¿Qué ocurre si desactivo las cookies?</h2>
+                <p>Para que entienda el alcance que puede tener desactivar las cookies, le mostramos algunos ejemplos de
+                    lo que dejará de poder hacer:</p>
+                <ul>
+                    <li>No podrá compartir contenidos de esa web en Facebook, Twitter o cualquier otra red social.</li>
+                    <li>El sitio web no podrá adaptar los contenidos a sus preferencias personales, como suele ocurrir
+                        en las tiendas online.</li>
+                    <li>No podrá acceder al área personal de esa web (Mi cuenta, Mi perfil, Mis pedidos, etc.).</li>
+                    <li>En tiendas online, le será imposible realizar compras online; tendrán que ser telefónicas o
+                        presenciales.</li>
+                    <li>No será posible personalizar sus preferencias geográficas como franja horaria, divisa o idioma.
+                    </li>
+                    <li>El sitio web no podrá realizar analíticas web sobre visitantes y tráfico, lo que dificultará su
+                        competitividad.</li>
+                    <li>No podrá escribir en el blog, subir fotos, publicar comentarios, valorar o puntuar contenidos.
+                        La web tampoco podrá distinguir si usted es humano o un bot de spam.</li>
+                    <li>No se podrá mostrar publicidad sectorizada, lo que reducirá los ingresos publicitarios del
+                        sitio.</li>
+                    <li>Todas las redes sociales usan cookies; si las desactiva no podrá utilizarlas.</li>
+                </ul>
+                <div class="ski-highlight-box">
+                    <span class="ski-icon">🗑️</span>
+                    <span>Sí, las cookies se pueden eliminar. No sólo eliminar, también <strong>bloquear</strong>, de
+                        forma general o particular para un dominio específico. Para eliminar las cookies de un sitio web
+                        debe ir a la configuración de su navegador y allí podrá buscar las asociadas al dominio en
+                        cuestión.</span>
+                </div>
+            </section>
+
+            <!-- VII. Configuración por navegador -->
+            <section id="ski-s7" class="ski-section" aria-labelledby="ski-h7">
+                <div class="ski-section-num">VII</div>
+                <h2 id="ski-h7">Configuración de cookies por navegador</h2>
+                <p>A continuación le indicamos cómo gestionar las cookies en los navegadores y dispositivos más
+                    populares. Los pasos pueden variar según la versión del navegador.</p>
+
+                <div class="ski-browser-block">
+                    <h3>Google Chrome</h3>
+                    <ol>
+                        <li>Vaya a <strong>Configuración</strong> o <strong>Preferencias</strong> mediante el menú
+                            Archivo o el icono de personalización (arriba a la derecha).</li>
+                        <li>Pulse <strong>Mostrar opciones avanzadas</strong>.</li>
+                        <li>Vaya a <strong>Privacidad → Configuración de contenido</strong>.</li>
+                        <li>Seleccione <strong>Todas las cookies y los datos de sitios</strong>.</li>
+                        <li>Filtre por dominio en el campo <em>Buscar cookies</em>, seleccione la cookie y pulse la
+                            <strong>X</strong> para eliminarla.</li>
+                    </ol>
+                </div>
+
+                <div class="ski-browser-block">
+                    <h3>Internet Explorer</h3>
+                    <ol>
+                        <li>Vaya a <strong>Herramientas → Opciones de Internet</strong>.</li>
+                        <li>Haga clic en <strong>Privacidad</strong>.</li>
+                        <li>Mueva el deslizador hasta ajustar el nivel de privacidad deseado.</li>
+                    </ol>
+                </div>
+
+                <div class="ski-browser-block">
+                    <h3>Mozilla Firefox</h3>
+                    <ol>
+                        <li>Vaya a <strong>Opciones</strong> o <strong>Preferencias</strong> según su sistema operativo.
+                        </li>
+                        <li>Haga clic en <strong>Privacidad</strong>.</li>
+                        <li>En <em>Historial</em> elija <strong>Usar una configuración personalizada para el
+                                historial</strong>.</li>
+                        <li>Active o desactive la opción <strong>Aceptar cookies</strong> según sus preferencias.</li>
+                    </ol>
+                </div>
+
+                <div class="ski-browser-block">
+                    <h3>Safari (macOS)</h3>
+                    <ol>
+                        <li>Vaya a <strong>Preferencias → Privacidad</strong>.</li>
+                        <li>Ajuste la opción <strong>Bloquear cookies</strong> al tipo de bloqueo deseado.</li>
+                    </ol>
+                </div>
+
+                <div class="ski-browser-block">
+                    <h3>Safari (iOS)</h3>
+                    <ol>
+                        <li>Vaya a <strong>Ajustes → Safari</strong>.</li>
+                        <li>En <em>Privacidad y Seguridad</em>, ajuste la opción <strong>Bloquear cookies</strong>.</li>
+                    </ol>
+                </div>
+
+                <div class="ski-browser-block">
+                    <h3>Navegador Android</h3>
+                    <ol>
+                        <li>Ejecute el navegador y pulse la tecla <strong>Menú → Ajustes</strong>.</li>
+                        <li>Vaya a <strong>Seguridad y Privacidad</strong>.</li>
+                        <li>Active o desactive la casilla <strong>Aceptar cookies</strong>.</li>
+                    </ol>
+                </div>
+
+                <div class="ski-browser-block">
+                    <h3>Windows Phone / Internet Explorer Mobile</h3>
+                    <ol>
+                        <li>Abra <strong>Internet Explorer → Más → Configuración</strong>.</li>
+                        <li>Active o desactive la casilla <strong>Permitir cookies</strong>.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <footer class="ski-doc-footer">
+                © 2025 Skynet Systems &nbsp;·&nbsp; Todos los derechos reservados &nbsp;·&nbsp; v1.0
+            </footer>
+
+        </div><!-- /.ski-page-wrap -->
+    </div><!-- /.ski-root -->
+
+    <script>
+        (function () {
+            const canvas = document.getElementById('ski-network-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let W, H, nodes = [];
+
+            function resize() {
+                W = canvas.width = window.innerWidth;
+                H = canvas.height = window.innerHeight;
+                const count = Math.floor((W * H) / 12000);
+                nodes = Array.from({ length: count }, () => ({
+                    x: Math.random() * W,
+                    y: Math.random() * H,
+                    vx: (Math.random() - .5) * .4,
+                    vy: (Math.random() - .5) * .4
+                }));
+            }
+            window.addEventListener('resize', resize, { passive: true });
+            resize();
+
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+                ctx.fillStyle = '#ffffff';
+                ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+                ctx.lineWidth = 1;
+
+                nodes.forEach((n, i) => {
+                    ctx.beginPath();
+                    ctx.arc(n.x, n.y, 1.5, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    for (let j = i + 1; j < nodes.length; j++) {
+                        const n2 = nodes[j];
+                        const dx = n.x - n2.x, dy = n.y - n2.y;
+                        const d = Math.sqrt(dx * dx + dy * dy);
+                        if (d < 130) {
+                            ctx.globalAlpha = 1 - d / 130;
+                            ctx.beginPath();
+                            ctx.moveTo(n.x, n.y);
+                            ctx.lineTo(n2.x, n2.y);
+                            ctx.stroke();
+                        }
+                    }
+                    ctx.globalAlpha = 1;
+
+                    n.x += n.vx; n.y += n.vy;
+                    if (n.x < 0 || n.x > W) n.vx *= -1;
+                    if (n.y < 0 || n.y > H) n.vy *= -1;
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
+        })();
+    </script>
+
+</body>
+
+</html>
