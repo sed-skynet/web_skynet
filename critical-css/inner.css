@@ -93,15 +93,18 @@ body{
 }
 
 /* ── Resets Elementor — evita desfase horizontal en carga inicial ── */
+.e-con,
+.e-con>.e-con-inner{
+  width:100%!important;
+  box-sizing:border-box!important;
+  margin-top:0!important;
+  margin-bottom:0!important;
+}
 .elementor-widget-shortcode,
 .elementor-widget-shortcode .elementor-widget-container{
   width:100%!important;
   max-width:100%!important;
-}
-.e-con,
-.e-con>.e-con-inner{
-  margin-top:0!important;
-  margin-bottom:0!important;
+  flex:1 1 100%!important;
 }
 .elementor-widget-shortcode .elementor-widget-container>p{
   margin:0!important;

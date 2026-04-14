@@ -154,6 +154,23 @@ body{overflow-x:hidden;font-family:'Inter',system-ui,sans-serif}
   white-space:nowrap;
 }
 
+/* ── Resets Elementor — evita desfase horizontal en carga inicial ── */
+.e-con,
+.e-con>.e-con-inner{
+  width:100%!important;
+  box-sizing:border-box!important;
+}
+.elementor-widget-shortcode,
+.elementor-widget-shortcode .elementor-widget-container{
+  width:100%!important;
+  max-width:100%!important;
+  float:none!important;
+  flex:1 1 100%!important;
+}
+.elementor-widget-shortcode .elementor-widget-container>p{
+  margin:0!important;
+}
+
 /* ── Responsive ── */
 @media(max-width:860px){
   .hero-grid{grid-template-columns:1fr;gap:10px;margin-top:14px}

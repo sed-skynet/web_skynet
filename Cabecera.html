@@ -23,7 +23,7 @@
             class="nav-nosotros" href="/nosotros">Nosotros</a> <a href="/servicios-it">Servicios IT</a> <a
             href="/desarrollo">Desarrollo</a> <a href="/ciberseguridad">Ciberseguridad</a> <a
             href="/normativa">Normativa</a></nav><!-- Botón hamburguesa (solo móvil) --> <button class="sky-hamburger"
-          aria-label="Abrir menú" aria-expanded="false"> </button>
+          aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
       </div>
     </div>
   </header>
@@ -101,7 +101,6 @@
       width: 100%;
       margin: 0;
       box-shadow: 0 1px 5px rgba(0, 0, 0, .05);
-      overflow: hidden;
     }
 
     .container {
@@ -190,6 +189,7 @@
     .navbar {
       background-color: rgba(255, 255, 255, .95);
       backdrop-filter: blur(6px);
+      overflow: visible;
       transition: background-color .6s cubic-bezier(.16, 1, .3, 1),
         padding .6s cubic-bezier(.16, 1, .3, 1);
     }
@@ -199,6 +199,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      overflow: visible;
       transition: transform .75s cubic-bezier(.16, 1, .3, 1),
         height .6s cubic-bezier(.16, 1, .3, 1),
         border-radius .75s cubic-bezier(.16, 1, .3, 1),
@@ -676,6 +677,9 @@
 
       .sky-hamburger {
         display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
       }
 
       .navbar-inner {
@@ -744,9 +748,27 @@
 
         console.log("SkyDrawer: inicializado correctamente ✓");
 
-        /* Mover al body para escapar de cualquier contenedor Blocksy */
+        /* Mover al body para escapar de cualquier contenedor Blocksy.
+           CRÍTICO: header-wrapper también se mueve — Blocksy aplica
+           transform/display:none a .ct-header; un position:fixed dentro
+           de ese ancestro deja de ser relativo al viewport. */
+        var headerWrapper = document.querySelector(".header-wrapper");
+        if (headerWrapper) document.body.appendChild(headerWrapper);
         document.body.appendChild(overlay);
         document.body.appendChild(drawer);
+
+        /* Guardián: si algo externo oculta el hamburger via inline style, lo restaura */
+        var isMobile = window.matchMedia("(max-width: 960px)");
+        var guardObserver = new MutationObserver(function () {
+          if (!isMobile.matches) return;
+          var s = hamburger.style;
+          if (s.display === 'none' || s.visibility === 'hidden' || s.opacity === '0') {
+            s.removeProperty('display');
+            s.removeProperty('visibility');
+            s.removeProperty('opacity');
+          }
+        });
+        guardObserver.observe(hamburger, { attributes: true, attributeFilter: ['style'] });
 
         function openMenu() {
           drawer.classList.remove("closing");
