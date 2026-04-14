@@ -204,6 +204,10 @@
             padding: clamp(24px, 3vw, 34px);
             margin-bottom: clamp(36px, 5vh, 60px);
             animation: ski-fadeInUp .9s ease .15s both;
+            background: rgba(255, 255, 255, .06);
+            /* Ajustado para mejor visibilidad */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         .ski-toc-title {
@@ -255,7 +259,6 @@
 
         /* --- Sección legal --- */
         .ski-section {
-            background: var(--ski-glass);
             border: 1px solid var(--ski-ring);
             border-radius: 16px;
             padding: clamp(22px, 3vw, 38px);
@@ -263,6 +266,9 @@
             position: relative;
             overflow: hidden;
             animation: ski-fadeInUp .7s ease both;
+            background: rgba(255, 255, 255, .06);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         .ski-section::before {
@@ -470,12 +476,21 @@
         .ski-doc-footer {
             text-align: center;
             margin-top: clamp(40px, 6vh, 72px);
-            padding-top: 32px;
+            background: rgba(0, 20, 30, 0.6);
+            /* Fondo oscuro */
+            padding: 24px 20px;
             border-top: 1px solid var(--ski-ring);
+            border-radius: 8px 8px 0 0;
+
             color: var(--ski-soft);
-            font-size: .8rem;
-            opacity: .6;
+            font-size: 0.85rem;
             font-family: 'JetBrains Mono', monospace;
+
+            /* Centrado perfecto */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
         }
 
         /* --- Animaciones con namespace --- */
@@ -678,7 +693,8 @@
                         <li>Vaya a <strong>Privacidad → Configuración de contenido</strong>.</li>
                         <li>Seleccione <strong>Todas las cookies y los datos de sitios</strong>.</li>
                         <li>Filtre por dominio en el campo <em>Buscar cookies</em>, seleccione la cookie y pulse la
-                            <strong>X</strong> para eliminarla.</li>
+                            <strong>X</strong> para eliminarla.
+                        </li>
                     </ol>
                 </div>
 
@@ -738,7 +754,7 @@
             </section>
 
             <footer class="ski-doc-footer">
-                © 2025 Skynet Systems &nbsp;·&nbsp; Todos los derechos reservados &nbsp;·&nbsp; v1.0
+                © <span id="year-footer"></span> Skynet Systems · Todos los derechos reservados · v1.0
             </footer>
 
         </div><!-- /.ski-page-wrap -->
@@ -746,6 +762,11 @@
 
     <script>
         (function () {
+            // Actualizar el año automáticamente
+            const year = new Date().getFullYear();
+            const yearElement = document.getElementById('year-footer');
+            if (yearElement) yearElement.textContent = year;
+
             const canvas = document.getElementById('ski-network-canvas');
             if (!canvas) return;
             const ctx = canvas.getContext('2d');

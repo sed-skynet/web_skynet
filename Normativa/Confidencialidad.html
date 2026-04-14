@@ -61,6 +61,7 @@
         }
 
         /* ── Layout ── */
+        /* ── Layout en Confidencialidad ── */
         .page-main {
             position: relative;
             z-index: 10;
@@ -70,6 +71,25 @@
             flex-direction: column;
             gap: 2.5rem;
             padding-inline: 1rem;
+
+            /* 1. BAJAMOS EL BLOQUE: Igualamos el padding superior al de Soluciones TIC */
+            padding-top: 10rem;
+
+            /* 2. REDUCIMOS HUECO SUPERIOR: 
+       Si esta sección va debajo de Infraestructura, 
+       usamos un margen negativo para que se acerquen. */
+            margin-top: -2rem;
+        }
+
+        /* 3. ELIMINAMOS RELLENO DEL BODY:
+   El archivo original tiene 'padding: 2.5rem 0', lo que añade 
+   distancia extra. Cámbialo a 0. */
+        body {
+            position: relative;
+            overflow-x: hidden;
+            padding: 0;
+            /* Cambiado de 2.5rem a 0 */
+            color: #fff;
         }
 
         /* ── Glass card ── */

@@ -219,12 +219,16 @@
         /* --- Tabla de contenidos --- */
         .sks-toc {
             counter-reset: sks-toc-item;
-            background: var(--sks-glass);
+            background: rgba(255, 255, 255, .06);
             border: 1px solid var(--sks-ring);
             border-radius: 16px;
             padding: clamp(24px, 3vw, 34px);
             margin-bottom: clamp(36px, 5vh, 60px);
             animation: sks-fadeInUp .9s ease .15s both;
+
+            /* --- AÑADE ESTO TAMBIÉN --- */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         .sks-toc-title {
@@ -276,7 +280,8 @@
 
         /* --- Sección legal --- */
         .sks-section {
-            background: var(--sks-glass);
+            background: rgba(255, 255, 255, .06);
+            /* Ligeramente más opaco que el anterior */
             border: 1px solid var(--sks-ring);
             border-radius: 16px;
             padding: clamp(22px, 3vw, 38px);
@@ -284,6 +289,11 @@
             position: relative;
             overflow: hidden;
             animation: sks-fadeInUp .7s ease both;
+
+            /* --- ESTO ES LO QUE DEBES AÑADIR --- */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            /* Soporte para Safari */
         }
 
         .sks-section::before {
@@ -444,12 +454,24 @@
         .sks-doc-footer {
             text-align: center;
             margin-top: clamp(40px, 6vh, 72px);
-            padding-top: 32px;
+            /* Se añade fondo oscuro y padding para centrar el texto */
+            background: rgba(0, 20, 30, 0.6);
+            padding: 24px 20px;
             border-top: 1px solid var(--sks-ring);
+            border-radius: 8px 8px 0 0;
+            /* Suaviza las esquinas superiores */
+
             color: var(--sks-soft);
-            font-size: .8rem;
-            opacity: .6;
+            font-size: 0.85rem;
+            opacity: 0.8;
             font-family: 'JetBrains Mono', monospace;
+
+            /* Asegura alineación perfecta */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         /* --- Animaciones con namespace --- */
@@ -522,7 +544,7 @@
             <header class="sks-doc-hero">
                 <div class="sks-badge">Documento legal</div>
                 <h1>Aviso Legal</h1>
-                <p class="sks-meta">Última actualización: marzo 2025 &nbsp;·&nbsp; Skynet Systems</p>
+                <p class="sks-meta">Última actualización: marzo <span id="year-hero"></span> · Skynet Systems</p>
             </header>
 
             <!-- Tabla de contenidos -->
@@ -548,7 +570,8 @@
                 <p>La titularidad de este sitio web, <strong>https://skynet-sys.es/</strong>, (en adelante, Sitio Web)
                     la ostenta: <strong></strong>, provista de <strong>NIF: B73761298</strong> e inscrita en:
                     <strong></strong> con los siguientes datos registrales: <strong></strong>, cuyo representante es:
-                    <strong>Manuel Pérez de Castro</strong>, y cuyos datos de contacto son:</p>
+                    <strong>Manuel Pérez de Castro</strong>, y cuyos datos de contacto son:
+                </p>
 
                 <table class="sks-data-table" aria-label="Datos generales del titular">
                     <tbody>
@@ -740,7 +763,8 @@
                 <p>En caso de que el Usuario o tercero considere que cualquiera de los Contenidos del Sitio Web suponga
                     una violación de los derechos de protección de la propiedad intelectual, deberá comunicarlo
                     inmediatamente a Skynet Systems a través de los datos de contacto del apartado de
-                    <strong>Información General</strong> de este Aviso Legal y Condiciones Generales de Uso.</p>
+                    <strong>Información General</strong> de este Aviso Legal y Condiciones Generales de Uso.
+                </p>
             </section>
 
             <!-- VI. Acciones legales -->
@@ -757,12 +781,25 @@
             </section>
 
             <footer class="sks-doc-footer">
-                © 2025 Skynet Systems &nbsp;·&nbsp; Todos los derechos reservados &nbsp;·&nbsp; v1.0
+                © <span id="year-footer"></span> Skynet Systems · Todos los derechos reservados · v1.0
             </footer>
 
         </div><!-- /.sks-page-wrap -->
     </div><!-- /.sks-root -->
+    <script>
+        (function () {
+            // Obtenemos el año actual del sistema
+            const currentYear = new Date().getFullYear();
 
+            // Inyectamos el año en el Hero
+            const heroSpan = document.getElementById('year-hero');
+            if (heroSpan) heroSpan.textContent = currentYear;
+
+            // Inyectamos el año en el Footer
+            const footerSpan = document.getElementById('year-footer');
+            if (footerSpan) footerSpan.textContent = currentYear;
+        })();
+    </script>
     <script>
         (function () {
             /* Canvas de red — usa ID prefijado para no colisionar */

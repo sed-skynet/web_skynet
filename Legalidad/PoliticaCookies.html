@@ -230,6 +230,8 @@
             padding: clamp(24px, 3vw, 34px);
             margin-bottom: clamp(36px, 5vh, 60px);
             animation: skc-fadeInUp .9s ease .15s both;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         .skc-toc-title {
@@ -289,6 +291,8 @@
             position: relative;
             overflow: hidden;
             animation: skc-fadeInUp .7s ease both;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         .skc-section::before {
@@ -760,7 +764,7 @@
             </section>
 
             <footer class="skc-doc-footer">
-                © 2025 Skynet Systems &nbsp;·&nbsp; Todos los derechos reservados &nbsp;·&nbsp; v1.0
+                © <span id="year"></span> Skynet Systems &nbsp;·&nbsp; Todos los derechos reservados &nbsp;·&nbsp; v1.0
             </footer>
 
         </div><!-- /.skc-page-wrap -->
