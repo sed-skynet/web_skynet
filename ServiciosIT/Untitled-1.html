@@ -1,79 +1,626 @@
-<!-- Imágenes de las reinas -->
-<div style="overflow: hidden; margin-bottom: 32px;">
-    <div style="float: left; width: 45%; text-align: center;"><img
-            style="max-width: 100%; height: auto; display: block; margin: 0 auto;"
-            src="https://abanilla.es/wp-content/uploads/2026/04/Maria-Cartagena-Mendez.-Reina-Mora-2026.jpg"
-            alt="María Cartagena Méndez. Reina Mora 2026" />
-        <p style="font-size: 12px; margin-top: 8px;">María Cartagena Méndez. Reina Mora 2026.</p>
+<?php
+/**
+ * Blocksy functions and definitions
+ *
+ * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ *
+ * @package Blocksy
+ */
 
-    </div>
-    <div style="float: left; width: 45%; text-align: center; margin-right: 5%;"><img
-            style="max-width: 100%; height: auto; display: block; margin: 0 auto;"
-            src="https://abanilla.es/wp-content/uploads/2026/04/Lina-Cutillas-Tenza.-Reina-Cristiana-2026.jpg"
-            alt="Lina Cutillas Tenza. Reina Cristiana 2026" />
-        <p style="font-size: 12px; margin-top: 8px;">Lina Cutillas Tenza. Reina Cristiana 2026.</p>
+if (version_compare(PHP_VERSION, '5.7.0', '<')) {
+	require get_template_directory() . '/inc/php-fallback.php';
+	return;
+}
 
-    </div>
-</div>
-<!-- Programa -->
+require get_template_directory() . '/inc/init.php';
 
-<strong>21:00 h: XLII Pregón de Fiestas y Coronación de las Reinas Mora y Cristiana 2026</strong>, en el
-<strong>pabellón de deportes "Pascual Saurín Cutillas"</strong>. El acto será presentado por <strong>Catherine
-    Martínez Martínez</strong> y amenizado por el <strong>Ballet "Jaima"</strong>. Tras la entrada de las
-<strong>reinas moras y cristianas 2025 y 2026</strong> se procederá a la Coronación de las Reinas 2026: como
-<strong>Reina Mora</strong> a <strong>María Cartagena Méndez</strong> de la <strong>Kábila Musulmanes del
-    Chícamo</strong> y <strong>Reina Cristiana</strong> a <strong>Lina Cutillas Tenza</strong> de la <strong>Mesnada
-    Lanceros de Avellaneda</strong>, que tomarán el testigo de las reinas del pasado año: <strong>Reina Mora Beatriz
-    Riquelme Rocamora</strong> de la <strong>Kábila "Aljama"</strong> y <strong>Reina Cristiana Tania Martínez
-    Cascales</strong> de la <strong>Mesnada D. Jaime I el Conquistador</strong>.
 
-A continuación, el <strong>alcalde del Excmo. Ayuntamiento de Abanilla, José Antonio Blasco Martínez</strong>, les
-impondrá las bandas que lucirán las nuevas reinas durante las fiestas y pronunciará el discurso de apertura oficial
-de las mismas. Al concluir, el <strong>concejal de Fiestas, Manuel Carlos Cutillas Están</strong>, presentará al
-pregonero de las Fiestas patronales, para continuar con el Pregón de Fiestas a cargo de <strong>Antonio Peñarrubia
-    Caravaca</strong>, director de <strong>La 7 televisión Región de Murcia</strong>.
-<div style="text-align: center; margin: 24px 0;"><img style="max-width: 220px; height: auto;"
-        src="https://abanilla.es/wp-content/uploads/2026/04/Pregonero.jpg" alt="Imagen del acto" /></div>
-Posteriormente, la <strong>comisaria-presidenta de la Hermandad de la Santísima Cruz, Carmen Cascales
-    Gambín</strong>, entregará un detalle a los Capitanes, <strong>Ana María Martínez Barge</strong> y <strong>José
-    Ramón Cutillas Tenza</strong>, y a sus Pajes los niños: <strong>Antonio Salar Roca</strong> y <strong>Pepe López
-    Tenza</strong>.
+/**
+ * ═══════════════════════════════════════════════════════════════════════════
+ * SKYNET SYSTEMS — Optimizaciones de rendimiento para WordPress
+ * Versión 2.0 — Carga parcial global + rendimiento progresivo
+ * ═══════════════════════════════════════════════════════════════════════════
+ *
+ * PARA EL .htaccess (añadir en la raíz de WordPress, ANTES de # BEGIN WordPress):
+ * ─────────────────────────────────────────────────────────────────────────
+ * # ── Compresión GZIP ──
+ * <IfModule mod_deflate.c>
+ *   AddOutputFilterByType DEFLATE text/html text/css application/javascript
+ *   AddOutputFilterByType DEFLATE application/json application/xml text/xml
+ *   AddOutputFilterByType DEFLATE image/svg+xml application/font-woff2
+ * </IfModule>
+ *
+ * # ── Caché de navegador ──
+ * <IfModule mod_expires.c>
+ *   ExpiresActive On
+ *   ExpiresByType text/css              "access plus 1 year"
+ *   ExpiresByType application/javascript "access plus 1 year"
+ *   ExpiresByType image/webp            "access plus 1 year"
+ *   ExpiresByType image/png             "access plus 1 year"
+ *   ExpiresByType image/jpeg            "access plus 1 year"
+ *   ExpiresByType image/svg+xml         "access plus 1 year"
+ *   ExpiresByType font/woff2            "access plus 1 year"
+ * </IfModule>
+ *
+ * # ── Flush progresivo — enviar HTML parcial al navegador ──
+ * <IfModule mod_php.c>
+ *   php_flag output_buffering Off
+ *   php_flag implicit_flush On
+ * </IfModule>
+ *
+ * # ── Headers de rendimiento ──
+ * <IfModule mod_headers.c>
+ *   Header set X-Content-Type-Options "nosniff"
+ *   Header set Connection "keep-alive"
+ * </IfModule>
+ * ─────────────────────────────────────────────────────────────────────────
+ *
+ * PARA NGINX (añadir en el bloque server):
+ * ─────────────────────────────────────────────────────────────────────────
+ *   proxy_buffering off;
+ *   fastcgi_buffering off;
+ *   gzip on;
+ *   gzip_types text/html text/css application/javascript application/json;
+ *   tcp_nopush on;
+ *   tcp_nodelay on;
+ * ─────────────────────────────────────────────────────────────────────────
+ */
 
-Por último, las <strong>recién coronadas reinas, María Cartagena Méndez y Lina Cutillas Tenza</strong>, entregarán
-los <strong>premios correspondientes al desfile del 1 de mayo de 2025</strong>, junto con el <strong>presidente de
-    la Federación de Moros y Cristianos "Santa Cruz", Manuel Cutillas Torá</strong>.
-<ul>
-    <li><strong>Premio "Pascual Lozano" al mejor acompañamiento musical:</strong> ACM La Timba de Abanilla, con la
-        Kábila Musulmanes del Chícamo.</li>
-    <li><strong>Mejor Grupo Cristiano:</strong> Mesnada Mudéjares del Zurca.</li>
-    <li><strong>Mejor Grupo Moro:</strong> Kábila Jaira.</li>
-    <li><strong>Mejor Grupo Infantil:</strong> Mesnada Mudéjares del Zurca.</li>
-    <li><strong>Mejor Cabo Cristiano Femenino:</strong> Ana Martínez Barragán, Mesnada D. Jaime I el Conquistador.</li>
-    <li><strong>Mejor Cabo Moro Femenino:</strong> Ana Tomás Vicente, Kábila Jaira.</li>
-    <li><strong>Mejor Cabo Cristiano Masculino:</strong> José Fco. Martínez Torá, Mesnada Santa Ana.</li>
-    <li><strong>Mejor Cabo Moro Masculino:</strong> Ramón Rocamora Marco, Kábila Jaira.</li>
-    <li><strong>Mejor Traje Festero del Bando Cristiano "Verónica Lajara Martínez":</strong> Mesnada Arqueros de
-        Rocafull.</li>
-    <li><strong>Mejor Traje Festero del Bando Moro "Paquita Ramírez Rocamora":</strong> Kábila Jaira.</li>
-</ul>
-Igualmente, el <strong>presidente de la Federación de Moros y Cristianos "Santa Cruz"</strong> hará entrega de las
-<strong>distinciones honoríficas</strong> otorgadas por esta entidad:
-<ul>
-    <li><strong>Insignias de Oro:</strong> José María López Lozano, presidente de la Junta Central que aprobó el primer
-        Estatuto de la Asociación de Moros y Cristianos (presidente 1976-1977), y Teresa Elena Martínez Riquelme,
-        presidenta de la Federación de Moros y Cristianos de 2021 a 2025, colaboradora y miembro de juntas directivas
-        desde 2002.</li>
-    <li><strong>Insignia de Plata:</strong> José Antonio Ramírez Martínez (Kábila Muzalé), por la donación de tres
-        álbumes de negativos de desfiles correspondientes a los años 1981-1985, 1993 y 1994.</li>
-    <li><strong>Festero del Año:</strong> Francisco Medina Soriano, festero de la Kábila Al'Jarea de Al'Margen desde
-        1993, coordinador de desfiles y colaborador de la Hermandad de la Stma. Cruz y la Semana Santa.</li>
-    <li><strong>Embajadora de las Fiestas:</strong> María González Veracruz, secretaria de Estado de Digitalización e
-        Inteligencia Artificial, por su apoyo en 2018 a la propuesta de Declaración de las Fiestas de Abanilla como
-        Fiestas de Interés Turístico Nacional.</li>
-    <li><strong>Asociado de Honor:</strong> Instituto de las Industrias Culturales y las Artes (ICA), por su apoyo al
-        desarrollo de la Embajada Mayor.</li>
-</ul>
-<strong>23:30 h: Inauguración oficial de las verbenas populares</strong> a cargo de las Reinas Mora y Cristiana en el
-<strong>Paseo de la Ermita</strong>. Verbena amenizada por la <strong>Orquesta "Kacike"</strong>.
 
-<strong>01:00 h: Noche de actuaciones de DJ</strong> en el <strong>Campamento Festero</strong>.
+// ╔═══════════════════════════════════════════════════════════════════════════╗
+// ║  PARTE A — CARGA PARCIAL GLOBAL (Progressive Rendering)                 ║
+// ╚═══════════════════════════════════════════════════════════════════════════╝
+
+// ── A1. FLUSH PROGRESIVO DEL HTML ────────────────────────────────────────────
+// Envía el <head> y la estructura base al navegador ANTES de que PHP termine
+// de procesar toda la página. El usuario ve la página "armarse" de inmediato.
+add_action( 'template_redirect', function () {
+    if ( is_admin() ) return;
+
+    // Desactivar output buffering para permitir flush progresivo
+    while ( ob_get_level() > 0 ) {
+        ob_end_flush();
+    }
+
+    ob_implicit_flush( true );
+
+    // Indicar a Nginx/proxies que no almacenen el buffer
+    if ( ! headers_sent() ) {
+        header( 'X-Accel-Buffering: no' );
+    }
+}, 1 );
+
+// Flush después del <head> para que el navegador empiece a descargar CSS/JS
+add_action( 'wp_head', function () {
+    if ( ! is_admin() && ob_get_level() ) {
+        ob_flush();
+        flush();
+    }
+}, 999 );
+
+// Flush después del header/nav para que sea visible mientras carga el body
+add_action( 'wp_body_open', function () {
+    if ( ob_get_level() ) {
+        ob_flush();
+        flush();
+    }
+}, 999 );
+
+// Flush después del footer
+add_action( 'wp_footer', function () {
+    if ( ob_get_level() ) {
+        ob_flush();
+        flush();
+    }
+}, 1 );
+
+
+// ── A2. LAZY LOADING GLOBAL — TODO TIPO DE CONTENIDO ────────────────────────
+// Activa lazy loading nativo para imágenes (refuerzo WP 5.5+)
+add_filter( 'wp_lazy_loading_enabled', '__return_true' );
+
+// Lazy load global para iframes, videos y audios en todo el contenido
+function skynet_lazy_load_global( $content ) {
+    if ( is_admin() || empty( $content ) ) return $content;
+
+    // Iframes (YouTube, Maps, etc.)
+    $content = preg_replace(
+        '/<iframe((?!loading)[^>]*)>/i',
+        '<iframe loading="lazy"$1>',
+        $content
+    );
+
+    // Videos — no precargar hasta que el usuario interactúe
+    $content = preg_replace(
+        '/<video((?!preload)[^>]*)>/i',
+        '<video preload="none"$1>',
+        $content
+    );
+
+    // Audio
+    $content = preg_replace(
+        '/<audio((?!preload)[^>]*)>/i',
+        '<audio preload="none"$1>',
+        $content
+    );
+
+    return $content;
+}
+// Aplicar a TODOS los filtros de contenido de WordPress
+add_filter( 'the_content',         'skynet_lazy_load_global', 99 );
+add_filter( 'widget_text',         'skynet_lazy_load_global', 99 );
+add_filter( 'post_thumbnail_html', 'skynet_lazy_load_global', 99 );
+add_filter( 'get_avatar',          'skynet_lazy_load_global', 99 );
+add_filter( 'widget_text_content', 'skynet_lazy_load_global', 99 );
+
+
+// ── A3. DEFER GLOBAL — TODOS LOS SCRIPTS NO BLOQUEANTES ─────────────────────
+// Todos los JS del frontend cargan con defer (no bloquean el renderizado).
+// jQuery se excluye porque muchos plugins dependen de que esté disponible.
+add_filter( 'script_loader_tag', function ( $tag, $handle, $src ) {
+    if ( is_admin() || is_customize_preview() ) return $tag;
+
+    // Scripts que NO deben diferirse (críticos para el renderizado)
+    $excluidos = [
+        'jquery-core',
+        'jquery',
+        'jquery-migrate',
+        'wp-polyfill',
+    ];
+
+    if ( in_array( $handle, $excluidos, true ) ) return $tag;
+
+    // No duplicar si ya tiene defer o async
+    if ( strpos( $tag, ' defer' ) !== false || strpos( $tag, ' async' ) !== false ) {
+        return $tag;
+    }
+
+    return str_replace( ' src', ' defer src', $tag );
+}, 10, 3 );
+
+
+// ── A4. CSS NO CRÍTICO — CARGA ASÍNCRONA GLOBAL ─────────────────────────────
+// Convierte todas las hojas de estilo no críticas en carga asíncrona.
+// El navegador pinta la página con el CSS crítico inline (sección C1) y
+// luego aplica el resto sin bloquear el renderizado.
+add_filter( 'style_loader_tag', function ( $tag, $handle ) {
+    if ( is_admin() || is_customize_preview() ) return $tag;
+
+    // CSS que DEBE cargar de forma bloqueante (above the fold / crítico)
+    $criticos = [
+        'blocksy-fonts',           // Fuentes del tema
+        'sky-critical-inline',     // Nuestro CSS crítico
+    ];
+
+    if ( in_array( $handle, $criticos, true ) ) return $tag;
+
+    // Convertir a preload → stylesheet al cargar
+    $tag = str_replace(
+        "rel='stylesheet'",
+        "rel='preload' as='style' onload=\"this.onload=null;this.rel='stylesheet'\"",
+        $tag
+    );
+
+    // Fallback sin JS
+    $noscript_tag = str_replace(
+        [ "rel='preload' as='style' onload=\"this.onload=null;this.rel='stylesheet'\"" ],
+        [ "rel='stylesheet'" ],
+        $tag
+    );
+    $tag .= '<noscript>' . $noscript_tag . '</noscript>';
+
+    return $tag;
+}, 10, 2 );
+
+
+// ── A5. INTERSECTION OBSERVER — CARGA DIFERIDA POR SCROLL ───────────────────
+// Las secciones con atributo data-lazy-section se cargan vía AJAX cuando el
+// usuario se acerca a ellas. Útil para secciones pesadas below the fold.
+add_action( 'wp_footer', function () {
+    if ( is_admin() ) return;
+    ?>
+<script id="sky-intersection-observer">
+    (function () {
+        if (!('IntersectionObserver' in window)) return;
+
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    var el = entry.target;
+                    var src = el.getAttribute('data-lazy-src');
+                    if (src) {
+                        fetch(src)
+                            .then(function (r) { return r.text(); })
+                            .then(function (html) {
+                                el.innerHTML = html;
+                                el.classList.remove('sky-loading');
+                                el.classList.add('sky-loaded');
+                            });
+                    }
+                    observer.unobserve(el);
+                }
+            });
+        }, {
+            rootMargin: '300px'
+        });
+
+        document.querySelectorAll('[data-lazy-section]').forEach(function (el) {
+            observer.observe(el);
+        });
+    })();
+</script>
+<?php
+}, 20 );
+
+
+// ── A6. FETCHPRIORITY PARA IMAGEN LCP ───────────────────────────────────────
+// Marca la primera imagen del contenido con fetchpriority="high" para que
+// el navegador la descargue con máxima prioridad (mejora LCP).
+add_filter( 'the_content', function ( $content ) {
+    if ( is_admin() || empty( $content ) ) return $content;
+
+    // Solo la primera imagen recibe prioridad alta
+    $content = preg_replace(
+        '/<img((?!fetchpriority)[^>]*class="[^"]*wp-image[^>]*)>/i',
+        '<img fetchpriority="high"$1>',
+        $content,
+        1  // Solo la primera ocurrencia
+    );
+
+    return $content;
+}, 5 );
+
+
+// ╔═══════════════════════════════════════════════════════════════════════════╗
+// ║  PARTE B — ELIMINACIÓN DE RECURSOS INNECESARIOS                         ║
+// ╚═══════════════════════════════════════════════════════════════════════════╝
+
+// ── B1. DESENCOLAR MAGNIFIC POPUP EN LA HOME ─────────────────────────────────
+add_action( 'wp_enqueue_scripts', function () {
+    if ( is_front_page() ) {
+        wp_dequeue_style( 'magnific-popup' );
+        wp_dequeue_script( 'magnific-popup' );
+        wp_dequeue_script( 'jquery-magnific-popup' );
+    }
+}, 99 );
+
+
+// ── B2. DESHABILITAR EMOJIS DE WORDPRESS (~15 KB innecesarios) ──────────────
+add_action( 'init', function () {
+    remove_action( 'wp_head',         'print_emoji_detection_script', 7 );
+    remove_action( 'wp_print_styles', 'print_emoji_styles' );
+    remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+    remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+    remove_filter( 'wp_mail',          'wp_staticize_emoji_for_email' );
+} );
+
+
+// ── B3. DESENCOLAR CF7 Y RECURSOS INNECESARIOS EN PÁGINAS SIN FORMULARIO ───
+add_action( 'wp_enqueue_scripts', function () {
+    if ( is_page( 'servicios-it' ) ) {
+        wp_dequeue_script( 'contact-form-7' );
+        wp_dequeue_style( 'contact-form-7' );
+        wp_dequeue_script( 'wpcf7-swv' );
+        wp_dequeue_style( 'wpcf7-swv' );
+        wp_dequeue_script( 'jquery-ui-core' );
+        wp_dequeue_script( 'jquery-migrate' );
+    }
+}, 99 );
+
+
+// ── B4. ELIMINAR RECURSOS INNECESARIOS DEL FRONTEND ─────────────────────────
+// Dashicons (~47 KB), wp-embed, Gutenberg block-library CSS (~71 KB)
+add_action( 'wp_enqueue_scripts', function () {
+    if ( ! is_admin() ) {
+        wp_dequeue_style( 'dashicons' );
+        wp_dequeue_script( 'wp-embed' );
+        wp_dequeue_style( 'wp-block-library' );
+        wp_dequeue_style( 'wp-block-library-theme' );
+        wp_dequeue_style( 'global-styles' );
+        wp_dequeue_style( 'classic-theme-styles' );
+    }
+}, 100 );
+
+
+// ── B5. ELIMINAR QUERY STRINGS DE RECURSOS ESTÁTICOS ────────────────────────
+// Los ?ver=X.X.X impiden el caché en CDN y proxies.
+add_filter( 'script_loader_src', 'skynet_remove_query_strings', 15 );
+add_filter( 'style_loader_src',  'skynet_remove_query_strings', 15 );
+function skynet_remove_query_strings( $src ) {
+    if ( is_admin() ) return $src;
+    $parts = explode( '?ver=', $src );
+    return $parts[0];
+}
+
+
+// ╔═══════════════════════════════════════════════════════════════════════════╗
+// ║  PARTE C — CSS CRÍTICO Y RENDERIZADO INSTANTÁNEO                        ║
+// ╚═══════════════════════════════════════════════════════════════════════════╝
+
+// ── C1. CSS CRÍTICO INLINE POR PÁGINA ────────────────────────────────────────
+// Inyecta en <head> el CSS mínimo para renderizar el above-the-fold sin
+// esperar a que carguen las hojas de estilo externas del tema.
+//
+// Estructura de archivos (relativa a la raíz del tema activo):
+//   critical-css/global.css       → fondo + cabecera  (todas las páginas)
+//   critical-css/home.css         → hero Inicio
+//   critical-css/servicios-it.css → hero Servicios IT / Infraestructura IT
+//   critical-css/desarrollo.css   → hero Desarrollo / Comunicación Web
+//   critical-css/actualidad.css   → cabecera Actualidad
+//   critical-css/nosotros.css     → sección Nosotros
+//   critical-css/inner.css        → fallback páginas internas
+add_action( 'wp_head', function () {
+    $dir = get_template_directory() . '/critical-css/';
+
+    $page_css = null;
+    if ( is_front_page() || is_home() ) {
+        $page_css = $dir . 'home.css';
+    } elseif ( is_page( [ 'servicios-it', 'infraestructura-it', 'soluciones-tic' ] ) ) {
+        $page_css = $dir . 'servicios-it.css';
+    } elseif ( is_page( [ 'desarrollo', 'comunicacion-web' ] ) ) {
+        $page_css = $dir . 'desarrollo.css';
+    } elseif ( is_page( 'actualidad' ) || is_post_type_archive( 'noticia' ) ) {
+        $page_css = $dir . 'actualidad.css';
+    } elseif ( is_page( 'nosotros' ) ) {
+        $page_css = $dir . 'nosotros.css';
+    } elseif ( is_page( [ 'ciberseguridad', 'normativa', 'contacto', 'soporte-clientes' ] ) ) {
+        $page_css = $dir . 'inner.css';
+    }
+
+    $css = '';
+    $global_file = $dir . 'global.css';
+    if ( file_exists( $global_file ) ) {
+        $css .= file_get_contents( $global_file );
+    }
+    if ( $page_css && file_exists( $page_css ) ) {
+        $css .= file_get_contents( $page_css );
+    }
+
+    if ( $css ) {
+        echo '<style id="sky-critical">' . $css . '</style>' . "\n";
+    }
+}, 1 );
+
+
+// ── C2. CSS SKELETON / PLACEHOLDER GLOBAL ────────────────────────────────────
+// Estilos para los placeholders que se muestran mientras carga el contenido.
+// Cualquier elemento con clase .sky-loading muestra la animación shimmer.
+add_action( 'wp_head', function () {
+    ?>
+<style id="sky-skeleton">
+    .sky-loading {
+        position: relative;
+        overflow: hidden;
+        min-height: 120px;
+    }
+
+    .sky-loading::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(0, 0, 0, 0.04) 40%,
+                rgba(0, 0, 0, 0.04) 60%,
+                transparent 100%);
+        background-size: 200% 100%;
+        animation: sky-shimmer 1.5s ease-in-out infinite;
+    }
+
+    @keyframes sky-shimmer {
+        0% {
+            background-position: 200% 0;
+        }
+
+        100% {
+            background-position: -200% 0;
+        }
+    }
+
+    .sky-loaded {
+        animation: sky-fadein 0.3s ease-out;
+    }
+
+    @keyframes sky-fadein {
+        from {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+<?php
+}, 2 );
+
+
+// ╔═══════════════════════════════════════════════════════════════════════════╗
+// ║  PARTE D — PRECARGA, PREFETCH Y NAVEGACIÓN INSTANTÁNEA                  ║
+// ╚═══════════════════════════════════════════════════════════════════════════╝
+
+// ── D1. DNS PREFETCH PARA DOMINIOS EXTERNOS ──────────────────────────────────
+add_action( 'wp_head', function () {
+    echo '<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">' . "\n";
+    echo '<link rel="dns-prefetch" href="https://fonts.googleapis.com">' . "\n";
+    echo '<link rel="dns-prefetch" href="https://fonts.gstatic.com">' . "\n";
+    echo '<link rel="dns-prefetch" href="https://lottie.host">' . "\n";
+}, 1 );
+
+
+// ── D2. PRECONNECT A RECURSOS CRÍTICOS ───────────────────────────────────────
+// Preconnect es más agresivo que dns-prefetch: resuelve DNS + TCP + TLS.
+add_action( 'wp_head', function () {
+    echo '<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>' . "\n";
+    echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+}, 1 );
+
+
+// ── D3. PRELOAD DE LA FUENTE PRINCIPAL ───────────────────────────────────────
+add_action( 'wp_head', function () {
+    echo '<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" onload="this.rel=\'stylesheet\'" crossorigin>' . "\n";
+}, 2 );
+
+
+// ── D4. PREFETCH EN HOVER — instant.page ─────────────────────────────────────
+// Precarga la siguiente página cuando el cursor se posa sobre un enlace
+// (~300 ms antes del clic). La navegación se siente instantánea.
+add_action( 'wp_footer', function () {
+    echo '<script src="https://instant.page/5.2.0" type="module" integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aCdq+" crossorigin="anonymous"></script>' . "\n";
+}, 99 );
+
+
+// ── D5. VIEW TRANSITIONS API ─────────────────────────────────────────────────
+// Fade nativo entre páginas. Chrome 111+, Edge 111+, Safari 18+.
+// En navegadores sin soporte se ignora (degradación elegante).
+add_action( 'wp_head', function () {
+    echo '<meta name="view-transition" content="same-origin">' . "\n";
+    echo '<style id="sky-view-transitions">@view-transition{navigation:auto}</style>' . "\n";
+}, 2 );
+
+
+// ╔═══════════════════════════════════════════════════════════════════════════╗
+// ║  PARTE E — CARGA DIFERIDA DE WIDGETS Y TERCEROS                         ║
+// ╚═══════════════════════════════════════════════════════════════════════════╝
+
+// ── E1. DIFERIR SCRIPTS DE TERCEROS HASTA INTERACCIÓN ────────────────────────
+// Scripts pesados de terceros (chat, analytics, etc.) no cargan hasta que el
+// usuario interactúa (scroll, click, touch, keydown). Ahorra segundos en LCP.
+add_action( 'wp_footer', function () {
+    if ( is_admin() ) return;
+    ?>
+<script id="sky-defer-thirdparty">
+    (function () {
+        var loaded = false;
+        function loadDeferred() {
+            if (loaded) return;
+            loaded = true;
+
+            document.querySelectorAll('script[data-sky-defer]').forEach(function (script) {
+                var s = document.createElement('script');
+                if (script.src) s.src = script.src;
+                if (script.type) s.type = script.type;
+                if (script.textContent) s.textContent = script.textContent;
+                script.parentNode.replaceChild(s, script);
+            });
+
+            ['scroll', 'click', 'touchstart', 'keydown'].forEach(function (evt) {
+                window.removeEventListener(evt, loadDeferred, { passive: true });
+            });
+        }
+
+        ['scroll', 'click', 'touchstart', 'keydown'].forEach(function (evt) {
+            window.addEventListener(evt, loadDeferred, { passive: true, once: true });
+        });
+
+        // Fallback: cargar después de 5 segundos si no hay interacción
+        setTimeout(loadDeferred, 5000);
+    })();
+</script>
+<?php
+}, 30 );
+
+
+// ── E2. ENDPOINT AJAX PARA CARGA DIFERIDA DE SECCIONES ──────────────────────
+// Permite cargar secciones pesadas vía AJAX después del renderizado inicial.
+// Uso en templates:
+//   <div data-lazy-section data-lazy-src="<?php echo admin_url('admin-ajax.php?action=sky_lazy_section&section=posts_recientes'); ?>"
+class="sky-loading">
+// <div style="min-height:300px"></div>
+// </div>
+add_action( 'wp_ajax_sky_lazy_section', 'skynet_lazy_section_callback' );
+add_action( 'wp_ajax_nopriv_sky_lazy_section', 'skynet_lazy_section_callback' );
+
+function skynet_lazy_section_callback() {
+$section = isset( $_GET['section'] ) ? sanitize_text_field( $_GET['section'] ) : '';
+
+// Añade aquí las secciones que quieras cargar de forma diferida
+switch ( $section ) {
+case 'posts_recientes':
+$query = new WP_Query( [
+'posts_per_page' => 6,
+'post_status' => 'publish',
+] );
+if ( $query->have_posts() ) {
+while ( $query->have_posts() ) {
+$query->the_post();
+get_template_part( 'template-parts/content', 'card' );
+}
+wp_reset_postdata();
+}
+break;
+
+case 'sidebar_widgets':
+dynamic_sidebar( 'sidebar-1' );
+break;
+
+case 'comentarios':
+if ( ! empty( $_GET['post_id'] ) ) {
+$post_id = absint( $_GET['post_id'] );
+$comments = get_comments( [ 'post_id' => $post_id ] );
+wp_list_comments( [ 'style' => 'ol' ], $comments );
+}
+break;
+
+default:
+// Sección no reconocida
+echo '<!-- sky: sección no definida -->';
+break;
+}
+
+wp_die();
+}
+
+
+// ╔═══════════════════════════════════════════════════════════════════════════╗
+// ║ PARTE F — OPTIMIZACIÓN DE wp-config.php (REFERENCIA) ║
+// ╚═══════════════════════════════════════════════════════════════════════════╝
+// Estas líneas van en wp-config.php, NO aquí. Se incluyen como referencia.
+//
+// define( 'CONCATENATE_SCRIPTS', true ); // Concatenar scripts en admin
+// define( 'COMPRESS_CSS', true ); // Comprimir CSS
+// define( 'COMPRESS_SCRIPTS', true ); // Comprimir JS
+
+
+// ╔═══════════════════════════════════════════════════════════════════════════╗
+// ║ PARTE G — OPCIONES COMENTADAS (activar según necesidad) ║
+// ╚═══════════════════════════════════════════════════════════════════════════╝
+
+// ── G1. JQUERY EN EL FOOTER ──────────────────────────────────────────────────
+// Mover jQuery al pie de página ahorra ~610ms de bloqueo.
+// PRECAUCIÓN: algunos plugins pueden romperse. Activar y probar.
+/*
+add_action( 'wp_enqueue_scripts', function () {
+if ( ! is_admin() ) {
+wp_deregister_script( 'jquery' );
+wp_register_script(
+'jquery',
+includes_url( '/js/jquery/jquery.min.js' ),
+[],
+'3.7.1',
+true
+);
+wp_enqueue_script( 'jquery' );
+}
+}, 99 );
+*/
+
+
+// ── G2. GOOGLE FONTS — CARGA NO BLOQUEANTE ──────────────────────────────────
+// Si Blocksy carga Google Fonts de forma bloqueante, activar esta versión
+// que usa media="print" + onload.
+/*
+add_action( 'wp_head', function () {
+?>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap"
+    media="print" onload="this.media='all'">
+<noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap">
+</noscript>
+<?php
+}, 1 );
+*/

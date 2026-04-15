@@ -2788,8 +2788,10 @@ class Actualidad_Noticias_Ultra
     public function render_noticias()
     {
         $q = new WP_Query([
-            'post_type' => 'noticia',
-            'posts_per_page' => 6
+            'post_type'      => 'noticia',
+            'posts_per_page' => -1,
+            'orderby'        => 'date',
+            'order'          => 'DESC',
         ]);
 
         ob_start();
@@ -2799,18 +2801,26 @@ class Actualidad_Noticias_Ultra
             $q->the_post();
 
             $terms = get_the_terms(get_the_ID(), 'categoria_noticia');
-            $cat = ($terms && !is_wp_error($terms))
+            $cat_all     = ($terms && !is_wp_error($terms))
                 ? implode(', ', wp_list_pluck($terms, 'name'))
                 : 'General';
+            // Categoría primaria para el badge (excluye "Actualidad" si hay otras)
+            $primary_cat = 'General';
+            if ($terms && !is_wp_error($terms)) {
+                $non_generic = array_filter($terms, fn($t) => $t->name !== 'Actualidad');
+                $primary_cat = $non_generic
+                    ? reset($non_generic)->name
+                    : $terms[0]->name;
+            }
 
             $img = get_the_post_thumbnail_url(get_the_ID(), 'full')
                 ?: 'https://via.placeholder.com/800x600/0a2e4e/00d4ff?text=Noticia';
             ?>
-            <div class="news-ultra-card" data-category="<?= esc_attr($cat) ?>">
+            <div class="news-ultra-card" data-category="<?= esc_attr($cat_all) ?>">
                 <img src="<?= esc_url($img) ?>" class="news-ultra-img" alt="<?= esc_attr(get_the_title()) ?>">
 
                 <div class="news-ultra-overlay">
-                    <span class="u-badge"><?= esc_html($cat) ?></span>
+                    <span class="u-badge" data-cat="<?= esc_attr($primary_cat) ?>"><?= esc_html($primary_cat) ?></span>
                     <h3><?= esc_html(get_the_title()) ?></h3>
                     <p><?= esc_html(wp_trim_words(get_the_content(), 18)) ?></p>
 

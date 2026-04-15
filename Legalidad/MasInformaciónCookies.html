@@ -555,7 +555,7 @@
             <header class="ski-doc-hero">
                 <div class="ski-badge">Documento legal</div>
                 <h1>Más Información de Cookies</h1>
-                <p class="ski-meta">Última actualización: marzo 2025 &nbsp;·&nbsp; Skynet Systems</p>
+                <p class="ski-meta">Última actualización: marzo <span id="ski-year-hero"></span> &nbsp;·&nbsp; Skynet Systems</p>
             </header>
 
             <!-- Tabla de contenidos -->
@@ -766,6 +766,8 @@
             const year = new Date().getFullYear();
             const yearElement = document.getElementById('year-footer');
             if (yearElement) yearElement.textContent = year;
+            const heroSpan = document.getElementById('ski-year-hero');
+            if (heroSpan) heroSpan.textContent = year;
 
             const canvas = document.getElementById('ski-network-canvas');
             if (!canvas) return;

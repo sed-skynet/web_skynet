@@ -39,6 +39,7 @@ while (have_posts()):
         color: #fff;
         font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
         padding: 60px 24px 100px;
+        margin-top: 24px;
     }
 
     /* ── Container ──────────────────────────────── */
@@ -176,6 +177,56 @@ while (have_posts()):
     }
     .news-section-body p:last-child { margin-bottom: 0; }
 
+    /* ── Headings inside body ───────────────────── */
+    .news-section-body h2 {
+        font-size: 22px;
+        font-weight: 800;
+        color: #ffffff;
+        margin: 32px 0 14px;
+        line-height: 1.25;
+    }
+    .news-section-body h3 {
+        font-size: 18px;
+        font-weight: 700;
+        color: rgba(224,242,255,.9);
+        margin: 26px 0 12px;
+        line-height: 1.3;
+    }
+
+    /* ── Strong / bold ──────────────────────────── */
+    .news-section-body strong,
+    .news-section-body b {
+        color: #ffffff;
+        font-weight: 700;
+    }
+
+    /* ── Lists ──────────────────────────────────── */
+    .news-section-body ul,
+    .news-section-body ol {
+        margin: 0 0 18px 0;
+        padding-left: 24px;
+    }
+    .news-section-body li {
+        font-size: 16px;
+        line-height: 1.65;
+        color: rgba(224,242,255,.75);
+        margin-bottom: 8px;
+    }
+    .news-section-body li strong { color: #ffffff; }
+
+    /* ── Links ──────────────────────────────────── */
+    .news-section-body a {
+        color: var(--accent-light);
+        text-decoration: underline;
+        text-decoration-color: rgba(59,198,231,.35);
+        text-underline-offset: 3px;
+        transition: color .2s ease, text-decoration-color .2s ease;
+    }
+    .news-section-body a:hover {
+        color: #ffffff;
+        text-decoration-color: rgba(255,255,255,.5);
+    }
+
     /* ── Conclusion ─────────────────────────────── */
     .news-section-conclusion {
         padding: 28px;
@@ -284,14 +335,16 @@ while (have_posts()):
                             <div class="news-section">
                                 <h2 class="news-section-title">Análisis</h2>
                                 <div class="news-section-body">
-                                    <p><?= nl2br(esc_html($content)) ?></p>
+                                    <?= wp_kses_post($content) ?>
                                 </div>
                             </div>
 
                         <?php elseif ($type === 'conclusion'): ?>
                             <div class="news-section news-section-conclusion">
                                 <h2 class="news-section-title">Conclusión</h2>
-                                <p><?= nl2br(esc_html($content)) ?></p>
+                                <div class="news-section-body">
+                                    <?= wp_kses_post($content) ?>
+                                </div>
                             </div>
 
                         <?php elseif ($content): ?>
@@ -299,7 +352,7 @@ while (have_posts()):
                             <div class="news-section">
                                 <h2 class="news-section-title"><?= esc_html($type) ?></h2>
                                 <div class="news-section-body">
-                                    <p><?= nl2br(esc_html($content)) ?></p>
+                                    <?= wp_kses_post($content) ?>
                                 </div>
                             </div>
 

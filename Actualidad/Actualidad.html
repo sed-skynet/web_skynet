@@ -618,6 +618,64 @@
                 padding-top: 38px;
             }
         }
+
+        /* ── Paginación ─────────────────────────────────────────────── */
+        #pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 52px;
+            padding-bottom: 12px;
+        }
+
+        .page-btn {
+            padding: 10px 16px;
+            min-width: 44px;
+            border-radius: 11px;
+            border: 1px solid rgba(255, 255, 255, .15);
+            background: rgba(255, 255, 255, .08);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .2s ease;
+            text-align: center;
+            font-family: inherit;
+        }
+
+        .page-btn:hover:not(:disabled):not(.ellipsis) {
+            background: rgba(255, 255, 255, .18);
+            border-color: rgba(255, 255, 255, .35);
+            transform: translateY(-2px);
+        }
+
+        .page-btn.active {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            border-color: transparent;
+            box-shadow: 0 4px 16px rgba(43, 144, 227, .45);
+        }
+
+        .page-btn:disabled {
+            opacity: .3;
+            cursor: default;
+        }
+
+        .page-btn.ellipsis {
+            background: transparent;
+            border-color: transparent;
+            cursor: default;
+        }
+
+        .prev-btn, .next-btn {
+            padding: 10px 20px;
+        }
+
+        @media (max-width: 576px) {
+            .prev-btn, .next-btn { padding: 10px 14px; font-size: 13px; }
+            .page-btn { min-width: 38px; padding: 9px 12px; }
+        }
     </style>
 </head>
 
@@ -657,37 +715,131 @@
                 [actualidad_noticias]
             </div>
         </div>
+
+        <div id="pagination"></div>
         <script>
+            /* ── Filtro de categorías + Paginación unificados ────────────── */
             function normalizeCategory(str) {
-                return str
-                    .toLowerCase()
-                    .normalize("NFD")
-                    .replace(/[\u0300-\u036f]/g, "")
-                    .replace(/\s+/g, '-')
-                    .trim();
+                return str.trim().toLowerCase()
+                    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                    .replace(/\s+/g, '-');
             }
 
-        </script>
-
-        <script>
             document.addEventListener('DOMContentLoaded', () => {
 
-                const tabs = document.querySelectorAll('.tab');
-                const cards = document.querySelectorAll('.news-ultra-card');
-                const filterWrap = document.querySelector('.category-filter');
-                const filterToggle = document.getElementById('categoryFilterToggle');
+                const ITEMS_PER_PAGE = 9;
+                let activeCat   = 'todo';
+                let currentPage = 1;
+
+                const tabs          = document.querySelectorAll('.tab');
+                const filterWrap    = document.querySelector('.category-filter');
+                const filterToggle  = document.getElementById('categoryFilterToggle');
                 const filterCurrent = document.getElementById('filterCurrent');
 
-                if (!tabs.length || !cards.length) return;
+                /* --- Devuelve las cards que coinciden con la categoría activa --- */
+                function matchingCards() {
+                    return Array.from(document.querySelectorAll('.news-ultra-card'))
+                        .filter(card => {
+                            if (activeCat === 'todo') return true;
+                            const cats = (card.dataset.category || '')
+                                .split(',').map(c => normalizeCategory(c));
+                            return cats.includes(activeCat);
+                        });
+                }
 
+                /* --- Muestra la página indicada -------------------------------- */
+                function showPage(page) {
+                    currentPage = page;
+                    const filtered = matchingCards();
+                    const total    = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+                    const start    = (page - 1) * ITEMS_PER_PAGE;
+                    const visible  = new Set(filtered.slice(start, start + ITEMS_PER_PAGE));
+
+                    document.querySelectorAll('.news-ultra-card').forEach(c => {
+                        const show = visible.has(c);
+                        c.style.display = show ? '' : 'none';
+                        if (show) c.style.animation = 'fadeInUp .4s ease both';
+                    });
+
+                    renderPagination(page, total);
+                }
+
+                /* --- Renderiza los botones de paginación ----------------------- */
+                function renderPagination(current, total) {
+                    const el = document.getElementById('pagination');
+                    if (!el) return;
+                    if (total <= 1) { el.innerHTML = ''; return; }
+
+                    /* Genera la secuencia de páginas con ellipsis */
+                    const seq = [];
+                    for (let i = 1; i <= total; i++) {
+                        if (i === 1 || i === total ||
+                            (i >= current - 2 && i <= current + 2)) {
+                            seq.push(i);
+                        } else if (seq[seq.length - 1] !== '…') {
+                            seq.push('…');
+                        }
+                    }
+
+                    let html = `<button class="page-btn prev-btn"
+                                    ${current === 1 ? 'disabled' : ''}
+                                    data-page="${current - 1}">‹ Anterior</button>`;
+
+                    seq.forEach(p => {
+                        if (p === '…') {
+                            html += `<span class="page-btn ellipsis">…</span>`;
+                        } else {
+                            html += `<button class="page-btn ${p === current ? 'active' : ''}"
+                                         data-page="${p}">${p}</button>`;
+                        }
+                    });
+
+                    html += `<button class="page-btn next-btn"
+                                 ${current === total ? 'disabled' : ''}
+                                 data-page="${current + 1}">Siguiente ›</button>`;
+
+                    el.innerHTML = html;
+
+                    el.querySelectorAll('button[data-page]').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const p = parseInt(btn.dataset.page);
+                            if (!isNaN(p)) {
+                                showPage(p);
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                            }
+                        });
+                    });
+                }
+
+                /* --- Tabs de categoría ---------------------------------------- */
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        tabs.forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
+
+                        const text = tab.textContent.trim();
+                        activeCat   = normalizeCategory(text);
+                        currentPage = 1;
+
+                        if (filterCurrent) filterCurrent.textContent = text;
+
+                        if (window.innerWidth <= 576 && filterWrap) {
+                            filterWrap.classList.remove('open');
+                            filterToggle?.setAttribute('aria-expanded', 'false');
+                        }
+
+                        showPage(1);
+                    });
+                });
+
+                /* --- Menú móvil ------------------------------------------------ */
                 if (filterToggle) {
                     filterToggle.addEventListener('click', () => {
                         filterWrap.classList.toggle('open');
-                        const expanded = filterWrap.classList.contains('open');
-                        filterToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+                        filterToggle.setAttribute('aria-expanded',
+                            filterWrap.classList.contains('open') ? 'true' : 'false');
                     });
-
-                    document.addEventListener('click', (e) => {
+                    document.addEventListener('click', e => {
                         if (!filterWrap.contains(e.target)) {
                             filterWrap.classList.remove('open');
                             filterToggle.setAttribute('aria-expanded', 'false');
@@ -695,40 +847,8 @@
                     });
                 }
 
-                tabs.forEach(tab => {
-                    tab.addEventListener('click', () => {
-
-                        tabs.forEach(t => t.classList.remove('active'));
-                        tab.classList.add('active');
-
-                        const selectedText = tab.textContent.trim();
-                        const selected = normalizeCategory(selectedText);
-
-                        if (filterCurrent) {
-                            filterCurrent.textContent = selectedText;
-                        }
-
-                        cards.forEach(card => {
-                            const rawCats = card.dataset.category || '';
-                            const cardCats = rawCats
-                                .split(',')
-                                .map(c => normalizeCategory(c));
-
-                            if (selected === 'todo' || cardCats.includes(selected)) {
-                                card.style.display = '';
-                                card.style.animation = 'fadeInUp .4s ease both';
-                            } else {
-                                card.style.display = 'none';
-                            }
-                        });
-
-                        if (window.innerWidth <= 576 && filterWrap) {
-                            filterWrap.classList.remove('open');
-                            filterToggle?.setAttribute('aria-expanded', 'false');
-                        }
-                    });
-                });
-
+                /* --- Inicializar ---------------------------------------------- */
+                showPage(1);
             });
         </script>
 

@@ -607,7 +607,7 @@
             <header class="skc-doc-hero">
                 <div class="skc-badge">Documento legal</div>
                 <h1>Política de Cookies</h1>
-                <p class="skc-meta">Última actualización: marzo 2025 &nbsp;·&nbsp; Skynet Systems</p>
+                <p class="skc-meta">Última actualización: marzo <span id="skc-year-hero"></span> &nbsp;·&nbsp; Skynet Systems</p>
             </header>
 
             <!-- Tabla de contenidos -->
@@ -770,6 +770,15 @@
         </div><!-- /.skc-page-wrap -->
     </div><!-- /.skc-root -->
 
+    <script>
+        (function () {
+            const year = new Date().getFullYear();
+            const heroSpan = document.getElementById('skc-year-hero');
+            if (heroSpan) heroSpan.textContent = year;
+            const footerSpan = document.getElementById('year');
+            if (footerSpan) footerSpan.textContent = year;
+        })();
+    </script>
     <script>
         (function () {
             const canvas = document.getElementById('skc-network-canvas');

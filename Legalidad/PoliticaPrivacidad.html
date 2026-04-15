@@ -204,6 +204,8 @@
             padding: clamp(24px, 3vw, 34px);
             margin-bottom: clamp(36px, 5vh, 60px);
             animation: skd-fadeInUp .9s ease .15s both;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         .skd-toc-title {
@@ -263,6 +265,8 @@
             position: relative;
             overflow: hidden;
             animation: skd-fadeInUp .7s ease both;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         .skd-section::before {
@@ -558,7 +562,8 @@
             <header class="skd-doc-hero">
                 <div class="skd-badge">Documento legal</div>
                 <h1>Política de Protección de Datos</h1>
-                <p class="skd-meta">Última actualización: marzo 2025 &nbsp;·&nbsp; Skynet Systems</p>
+                <p class="skd-meta">Última actualización: marzo <span id="skd-year-hero"></span> &nbsp;·&nbsp; Skynet
+                    Systems</p>
             </header>
 
             <!-- Tabla de contenidos -->
@@ -637,7 +642,7 @@
                         </tr>
                         <tr>
                             <td>Domicilio social</td>
-                            <td>Carril Condomina, 5. Murcia</td>
+                            <td>Carril Condomina, 3. Murcia</td>
                         </tr>
                         <tr>
                             <td>Correo-e</td>
@@ -676,7 +681,8 @@
                 <h2 id="skd-h3">¿Cuál es la legitimación para el tratamiento de sus datos personales?</h2>
                 <p>La base legal para el tratamiento de datos de las finalidades <strong>a)</strong> y
                     <strong>b)</strong> es el <strong>consentimiento</strong> que se solicita al Usuario para
-                    suministrarle información comercial acerca de los servicios de Skynet Systems SLU.</p>
+                    suministrarle información comercial acerca de los servicios de Skynet Systems SLU.
+                </p>
                 <p>La base legal para el tratamiento de datos de la finalidad <strong>c)</strong> es poner a disposición
                     del Usuario (cliente) la documentación exigida por la <strong>Ley de Prevención de Riesgos
                         Laborales</strong> (art. 22.3 y 23), como parte de la relación contractual existente, así como
@@ -727,7 +733,7 @@
                         </tr>
                         <tr>
                             <td>Dirección postal</td>
-                            <td>Carril Condomina 5, Murcia</td>
+                            <td>Carril Condomina 3, Murcia</td>
                         </tr>
                         <tr>
                             <td>Dirección electrónica</td>
@@ -807,12 +813,22 @@
             </section>
 
             <footer class="skd-doc-footer">
-                © 2025 Skynet Systems &nbsp;·&nbsp; Todos los derechos reservados &nbsp;·&nbsp; v1.0
+                © <span id="skd-year-footer"></span> Skynet Systems &nbsp;·&nbsp; Todos los derechos reservados
+                &nbsp;·&nbsp; v1.0
             </footer>
 
         </div><!-- /.skd-page-wrap -->
     </div><!-- /.skd-root -->
 
+    <script>
+        (function () {
+            const year = new Date().getFullYear();
+            const heroSpan = document.getElementById('skd-year-hero');
+            if (heroSpan) heroSpan.textContent = year;
+            const footerSpan = document.getElementById('skd-year-footer');
+            if (footerSpan) footerSpan.textContent = year;
+        })();
+    </script>
     <script>
         (function () {
             const canvas = document.getElementById('skd-network-canvas');
