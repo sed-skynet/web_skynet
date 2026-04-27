@@ -91,12 +91,10 @@ add_action( 'init', function () {
 } );
 
 
-// ── 5. DESENCOLAR CF7, JQUERY UI Y JQUERY MIGRATE EN PÁGINAS SIN FORMULARIO ─
-// servicios-it no tiene formulario de contacto; CF7 + swv suman ~7 KiB innecesarios.
-// jQuery UI core (~6.6 KiB) y jQuery Migrate (~4.5 KiB) tampoco se usan allí.
-// Ajusta el slug de la página si fuera diferente a 'servicios-it'.
+// ── 5. DESENCOLAR RECURSOS INNECESARIOS EN SERVICIOS IT ─
+// servicios-it usa un popup de telefono propio, sin Contact Form 7.
 add_action( 'wp_enqueue_scripts', function () {
-    if ( is_page( 'servicios-it' ) ) {
+    if ( is_page( [ 'servicios-it', 'soluciones-tic', 'desarrollo', 'comunicacion-web', 'ciberseguridad' ] ) ) {
         // Contact Form 7
         wp_dequeue_script( 'contact-form-7' );
         wp_dequeue_style( 'contact-form-7' );

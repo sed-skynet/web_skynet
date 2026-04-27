@@ -24,8 +24,39 @@ class Actualidad_Noticias_Ultra
         add_action('admin_enqueue_scripts', [$this, 'admin_assets']);
         add_action('admin_head', [$this, 'inject_admin_block_styles']);
         add_action('init', [$this, 'register_taxonomy']);
+        add_filter('use_block_editor_for_post_type', [$this, 'use_classic_editor_for_noticias'], 10, 2);
+        add_filter('template_include', [$this, 'noticia_template']);
+        add_filter('preview_post_link', [$this, 'redirect_preview_to_editor_pro'], 10, 2);
 
     }
+    public function use_classic_editor_for_noticias($use_block_editor, $post_type)
+    {
+        if ($post_type === 'noticia') {
+            return false;
+        }
+
+        return $use_block_editor;
+    }
+
+    public function redirect_preview_to_editor_pro($preview_link, $post)
+    {
+        if ($post->post_type === 'noticia') {
+            return admin_url('edit.php?post_type=noticia&page=editar-noticia-pro&post_id=' . $post->ID . '&autopreview=1');
+        }
+        return $preview_link;
+    }
+
+    public function noticia_template($template)
+    {
+        if (is_singular('noticia') || (is_preview() && get_post_type() === 'noticia')) {
+            $custom = plugin_dir_path(__FILE__) . 'single-noticia.php';
+            if (file_exists($custom)) {
+                return $custom;
+            }
+        }
+        return $template;
+    }
+
     public function register_taxonomy()
     {
         register_taxonomy('categoria_noticia', 'noticia', [
@@ -159,6 +190,11 @@ class Actualidad_Noticias_Ultra
             ? implode(', ', wp_list_pluck($terms, 'name'))
             : 'Actualidad';
         $blocks = $is_edit ? get_post_meta($post_id, '_news_blocks', true) : [];
+        // Fallback: si no hay bloques del editor pro pero sí hay post_content
+        // (guardado desde el editor clásico), creamos un bloque inicial.
+        if ($is_edit && empty($blocks) && $post && !empty(trim($post->post_content))) {
+            $blocks = [['type' => 'desarrollo', 'content' => $post->post_content]];
+        }
         $existing_pdf_id = $is_edit ? get_post_meta($post_id, '_pdf_doc', true) : null;
         $existing_pdf_url = $existing_pdf_id ? wp_get_attachment_url($existing_pdf_id) : null;
 
@@ -1501,6 +1537,11 @@ class Actualidad_Noticias_Ultra
                                 return !target.closest('textarea, input, select, button');
                             }
                         });
+
+                        // Auto-abrir preview si viene desde el editor clásico
+                        if (new URLSearchParams(window.location.search).get('autopreview') === '1') {
+                            document.getElementById('btn-preview').click();
+                        }
                     });
                 </script>
             </form>
@@ -1712,7 +1753,8 @@ class Actualidad_Noticias_Ultra
             'post_type' => 'noticia',
             'posts_per_page' => -1,
             'orderby' => 'date',
-            'order' => 'DESC'
+            'order' => 'DESC',
+            'post_status' => ['publish', 'draft'],
         ]);
         ?>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -2815,6 +2857,15 @@ class Actualidad_Noticias_Ultra
 
             $img = get_the_post_thumbnail_url(get_the_ID(), 'full')
                 ?: 'https://via.placeholder.com/800x600/0a2e4e/00d4ff?text=Noticia';
+
+            $news_blocks  = get_post_meta(get_the_ID(), '_news_blocks', true) ?: [];
+            $preview_text = '';
+            foreach ($news_blocks as $b) {
+                if ($b['type'] !== 'image' && !empty($b['content'])) {
+                    $preview_text = wp_trim_words(wp_strip_all_tags($b['content']), 18);
+                    break;
+                }
+            }
             ?>
             <div class="news-ultra-card" data-category="<?= esc_attr($cat_all) ?>">
                 <img src="<?= esc_url($img) ?>" class="news-ultra-img" alt="<?= esc_attr(get_the_title()) ?>">
@@ -2822,7 +2873,7 @@ class Actualidad_Noticias_Ultra
                 <div class="news-ultra-overlay">
                     <span class="u-badge" data-cat="<?= esc_attr($primary_cat) ?>"><?= esc_html($primary_cat) ?></span>
                     <h3><?= esc_html(get_the_title()) ?></h3>
-                    <p><?= esc_html(wp_trim_words(get_the_content(), 18)) ?></p>
+                    <p><?= esc_html($preview_text) ?></p>
 
                     <a href="<?= esc_url(get_permalink()) ?>" class="news-read-more">
                         Leer noticia →
@@ -3004,8 +3055,15 @@ class Actualidad_Noticias_Ultra
 
     public function save_meta($post_id)
     {
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
 
-        if (isset($_POST['categoria'])) {
+        // Si el guardado viene del editor clásico (no del editor pro), sincronizar
+        // post_content → _news_blocks para que el editor pro lo pueda mostrar.
+        $from_classic = !isset($_POST['crear_noticia_admin_nonce']) && !isset($_POST['editar_noticia_admin_nonce']);
+        if ($from_classic && isset($_POST['content']) && trim($_POST['content']) !== '') {
+            update_post_meta($post_id, '_news_blocks', [
+                ['type' => 'desarrollo', 'content' => wp_kses_post($_POST['content'])],
+            ]);
         }
 
         if (isset($_POST['pdf_docs'])) {

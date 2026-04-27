@@ -25,6 +25,11 @@
             </p>
 
         </header>
+
+        <div class="qs-photos" aria-hidden="true">
+            <img src="https://skynet-sys.es/wp-content/uploads/2026/04/Oficina1.png" alt="Equipo Skynet Systems trabajando" loading="lazy">
+            <img src="https://skynet-sys.es/wp-content/uploads/2026/04/Oficina5.png" alt="Sala de reuniones Skynet Systems" loading="lazy">
+        </div>
     </div>
 
     <style>
@@ -147,6 +152,32 @@
             color: var(--color-text-muted);
             opacity: .86;
             font-style: italic;
+        }
+
+        /* Fotos */
+        #quienes-somos .qs-photos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin-top: 2.5rem;
+        }
+
+        #quienes-somos .qs-photos img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+        }
+
+        @media (max-width: 600px) {
+            #quienes-somos .qs-photos {
+                grid-template-columns: 1fr;
+            }
+
+            #quienes-somos .qs-photos img {
+                height: 180px;
+            }
         }
 
         /* Responsive */

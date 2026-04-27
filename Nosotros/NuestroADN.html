@@ -17,6 +17,10 @@
                 seguras.
             </p>
         </header>
+        <div class="cultura-photo" aria-hidden="true">
+            <img src="https://skynet-sys.es/wp-content/uploads/2026/04/Oficina2.png" alt="Ambiente colaborativo Skynet Systems" loading="lazy">
+        </div>
+
         <div class="grid-cultura" role="region" aria-label="Cultura, metodología y servicios">
             <!-- Intro -->
 
@@ -146,6 +150,26 @@
             line-height: 1.65;
             font-size: 1.12rem;
             text-align: center;
+        }
+
+        /* Foto */
+        #cultura .cultura-photo {
+            margin: 1.5rem auto 2rem;
+            max-width: 900px;
+        }
+
+        #cultura .cultura-photo img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+        }
+
+        @media (max-width: 680px) {
+            #cultura .cultura-photo img {
+                height: 180px;
+            }
         }
 
         /* Grid */

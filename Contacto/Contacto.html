@@ -36,6 +36,24 @@
         max-width: 100%;
     }
 
+    .contacto-photo {
+        margin: 2rem 0;
+    }
+
+    .contacto-photo img {
+        width: 100%;
+        height: 240px;
+        object-fit: cover;
+        border-radius: 20px;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+    }
+
+    @media (max-width: 640px) {
+        .contacto-photo img {
+            height: 170px;
+        }
+    }
+
     .cf7-contact-form .consent-field input[type="checkbox"] {
         flex: 0 0 auto;
         margin-top: 4px;
@@ -103,6 +121,10 @@
                     <p>info@skynet-sys.es</p>
                 </div>
             </div>
+        </div>
+
+        <div class="contacto-photo" aria-hidden="true">
+            <img src="https://skynet-sys.es/wp-content/uploads/2026/04/Oficina3.png" alt="Oficina Skynet Systems" loading="lazy">
         </div>
 
         <div class="map-section">

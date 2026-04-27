@@ -295,6 +295,26 @@
             /* ← antes 240px */
         }
 
+        /* Foto */
+        #pilares-glass .pilares-photo {
+            margin: 2rem auto 0;
+            max-width: 960px;
+        }
+
+        #pilares-glass .pilares-photo img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+        }
+
+        @media (max-width: 640px) {
+            #pilares-glass .pilares-photo img {
+                height: 180px;
+            }
+        }
+
         /* Accesibilidad */
         @media (prefers-reduced-motion: reduce) {
             #pilares-glass .card-anim {
@@ -372,6 +392,10 @@
         </div>
         <div class="boton-cta">
             <a href="/contacto">Agenda una llamada</a>
+        </div>
+
+        <div class="pilares-photo" aria-hidden="true">
+            <img src="https://skynet-sys.es/wp-content/uploads/2026/04/Oficina4.png" alt="Espacio de trabajo Skynet Systems" loading="lazy">
         </div>
     </div>
     <script>
