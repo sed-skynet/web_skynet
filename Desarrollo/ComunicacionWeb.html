@@ -863,12 +863,10 @@
                 event.preventDefault();
 
                 var phoneInput = form.querySelector('input[name="telefono"]');
-                var honeypot = form.querySelector('input[name="website"]');
-                var message = form.querySelector(".popup-message");
-                var button = form.querySelector(".popup-btn");
-                var phone = phoneInput ? phoneInput.value.trim() : "";
-                var config = window.skynetPopupContact || {};
-                var endpoint = config.ajaxUrl || "/wp-admin/admin-ajax.php";
+                var honeypot  = form.querySelector('input[name="website"]');
+                var message   = form.querySelector(".popup-message");
+                var button    = form.querySelector(".popup-btn");
+                var phone     = phoneInput ? phoneInput.value.trim() : "";
                 var originalText = button ? button.textContent : "";
 
                 function showMessage(text, isError) {
@@ -879,45 +877,48 @@
                 }
 
                 if (!phone) {
-                    showMessage("Introduce un numero de telefono.", true);
+                    showMessage("Introduce un número de teléfono.", true);
                     return;
                 }
 
-                var data = new FormData();
-                data.append("action", "skynet_popup_contact");
-                data.append("nonce", config.nonce || "");
-                data.append("telefono", phone);
-                data.append("pagina", window.location.href);
-                data.append("website", honeypot ? honeypot.value : "");
+                if (honeypot && honeypot.value) return;
 
                 if (button) {
                     button.disabled = true;
                     button.textContent = "Enviando...";
                 }
 
-                fetch(endpoint, {
+                fetch("https://formsubmit.co/ajax/sed@skynet-sys.es", {
                     method: "POST",
-                    body: data,
-                    credentials: "same-origin"
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify({
+                        _subject: "Nueva solicitud de contacto — Desarrollo Digital",
+                        _captcha: "false",
+                        _template: "basic",
+                        "Mensaje": "Skynet Systems ha recibido una nueva solicitud de contacto desde la sección de Desarrollo Digital y Comunicación Web. El cliente ha dejado su número de teléfono y espera ser atendido a la mayor brevedad posible.",
+                        "Teléfono de contacto": phone,
+                        "Recibido el": new Date().toLocaleString("es-ES", { timeZone: "Europe/Madrid" }),
+                        "Página de origen": window.location.href
+                    })
                 })
                     .then(function (response) {
                         return response.json().catch(function () {
-                            throw new Error("Respuesta no valida.");
+                            throw new Error("Respuesta no válida.");
                         });
                     })
                     .then(function (result) {
-                        if (!result || !result.success) {
-                            throw new Error(result && result.data && result.data.message
-                                ? result.data.message
-                            : "No se ha podido enviar. Intentalo de nuevo.");
+                        if (!result || result.success !== "true") {
+                            throw new Error("No se ha podido enviar. Inténtalo de nuevo.");
                         }
-
                         form.reset();
                         showMessage("Solicitud enviada. Te contactaremos en breve.", false);
                         setTimeout(closePopup, 1800);
                     })
                     .catch(function (error) {
-                        showMessage(error.message || "No se ha podido enviar. Intentalo de nuevo.", true);
+                        showMessage(error.message || "No se ha podido enviar. Inténtalo de nuevo.", true);
                     })
                     .finally(function () {
                         if (button) {

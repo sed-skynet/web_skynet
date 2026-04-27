@@ -156,22 +156,24 @@ if (!function_exists('skynet_handle_popup_contact_request')) {
             );
         }
 
-        $recipient = 'info@skynet-sys.es';
-        $subject = '=?UTF-8?B?' . base64_encode('Solicitud de informacion desde popup') . '?=';
-        $body = "Nueva solicitud de informacion:\n\n";
-        $body .= "Telefono: {$phone}\n";
-        $body .= "Pagina: {$page}\n";
-        $body .= "Fecha: " . current_time('mysql') . "\n";
-        $body .= $ip ? "IP: {$ip}\n" : '';
+        $payload = [
+            '_subject' => 'Solicitud de informacion desde popup',
+            'telefono' => $phone,
+            'pagina'   => $page,
+            'fecha'    => current_time('mysql'),
+            'ip'       => $ip ?: 'desconocida',
+        ];
 
-        $headers = implode("\r\n", [
-            'From: Formulario Skynet <info@skynet-sys.es>',
-            'Reply-To: info@skynet-sys.es',
-            'Content-Type: text/plain; charset=UTF-8',
-            'X-Mailer: PHP/' . PHP_VERSION,
+        $response = wp_remote_post('https://formsubmit.co/ajax/info@skynet-sys.es', [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Accept'       => 'application/json',
+            ],
+            'body'    => wp_json_encode($payload),
+            'timeout' => 15,
         ]);
 
-        $sent = mail($recipient, $subject, $body, $headers);
+        $sent = !is_wp_error($response) && wp_remote_retrieve_response_code($response) === 200;
 
         if (!$sent) {
             wp_send_json_error(
